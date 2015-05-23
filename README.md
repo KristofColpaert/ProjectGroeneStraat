@@ -1,5 +1,7 @@
 # Project Groene Straat
 
+De basic connection settings voor de website.
+
 ## Webserver
 
 * Link: http://groenestraat.azurewebsites.net
