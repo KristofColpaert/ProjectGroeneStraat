@@ -79,3 +79,34 @@ Example:
 	endif;
 ?>
 ```
+
+**Volledige lijst van Template Tags en hun parameters op: http://codex.wordpress.org/Template_Tags**
+
+# Customizing the loop
+
+The opening discussion of Loop flow of control mentioned that the main workhorse for data selection is the get_posts() method of the WP_Query object. In most cases, if you want to build a custom Loop (display the pages you want to display), you will build your own WP_Query object and reference it explicitly.
+
+**Dus: ophalen data gebeurt door de klasse WP_Query. WordPress voorziet voor ons een instantie van die klasse die alles voor ons automatisch regelt. Willen we toch dingen customizen (bv 5 posts per pagina, of enkel posts van die categorie), dan moeten we een eigen instantie aanmaken van WP_Query en daarop queries sturen.**
+
+## Using the WP_Query Object
+
+Once WordPress is handed a URL to parse by the web server, it goed to work disassembling the tokens in that URL and converting them into parameters for a database query. Here's a bit more detail on what happens when manipulating your own WP_Query.
+
+WP_Query is a class defined in WordPress that makes it easy to create your own custom Loops. Custom Loops can be used anywhere in your theme template files to display different types of content; they must build on separate instances of a WP_Query variable.
+
+When you creqte a new WP_Query objectm it's instantiated with some default function for building queries, executing the query to get posts, and parsing parameters out of a URL. However, you can use these built-in object methods to construct your own parameter strings, creating custom loops that extract whatever particular content you need for that point in your Loop.
+
+The following is an example of a custom Loop displaying the five most recent posts on your website:
+
+```
+<?php
+	$myPosts = new WP_Query('posts_per_page=5');
+	while($myPosts->have_posts)
+		$myPosts->the_post();
+		//Do something
+	endwhile;
+?>
+```
+
+**Dus: om zelf te kiezen wat we willen weergeven op de pagina, gebruiken we niet zoals bij het bovenstaande voorbeeld de globale instantie van WP_Query, maar maken we een eigen instantie aan met een query. De methodes have_posts() en the_post() worden dan ook opgeroepen op dat eigen object. Een overzicht van alle parameters die we kunnen meegeven aan is te vinden op http://codex.wordpress.org/Class_Reference/WP_Query#Parameters.**
+
