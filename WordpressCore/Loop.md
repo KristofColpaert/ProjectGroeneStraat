@@ -20,3 +20,10 @@ The next example features the only required elements for the Loop to function pr
 	endif;
 ?>
 ```
+
+This is the Loop in its simplest form. If you're wondering how the output from the database query got handed to this simple Loop when there are no variables passed as parameters in this example, the answer lies in the global variable $wp_query, which is an instance of WP_QUERY that is referenced by the functions in the simple Loop.
+
+Note that by the time this default Loop is called, WordPress has already called the get_posts() method within the default query object to build the list of appropriate content for the URL being viewed and the Loop in this case is being charged with displaying that list of posts.
+
+**Dus: WordPress zorgt er in de achtergrond al voor dat juiste data wordt opgehaald op basis van de url. Wat we hier doen is gewoon de content weergeven.**
+
