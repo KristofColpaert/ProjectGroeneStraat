@@ -47,3 +47,35 @@ the_post();
 
 Next, the the_post() function is called to load all of the post data. This function must be called inside your loo for the post data to be set correctly. Calling the_post() in turn calls the setup_postdata() function to set up the per-post metadata such as the author and tags of the content you are displaying in the Loop, as well as the content of the post itself. This data is assigned to a global variable each time through the Loop iteration. Specifically calling the_post() advances to the next post in the list.
 
+# Template Tags
+
+PHP functions used in your WordPress theme templates to display Loop content are called template tags. These tags are used to display specific pieces of data about your website and content. This allows you to customize how and where content is displayed on your website.
+
+The most commonly usd templates are: 
+# the_permalink(): displays the URL of the post.
+# the_title(): displays the title of the post.
+# the_ID(): displays the unique ID of the post. 
+# the_content(): diplays the full content of the post.
+# the_excerpt(): displays the excerpt of the post. If the Excerpt field is filled out on the Post edit screenm that will be used. If not, WordPress wil auto-generate a short excerpt from your post content.
+# the_time(): displays the date/time your post was published.
+# the_author(): displays the author of the post.
+# the_tags(): displays the tags attached to the post.
+# the_category(): displays the categories assigned to the post.
+# edit_post_link(): displays an edit link that is shown only if you are logged in and allowed to edit the post.
+# comment_form(): displays a complete commenting form for your post.
+
+Example:
+
+``` 
+<?php
+	if(have_posts())
+		while(have_posts())
+			the_post():
+			?>
+			<a href="<?php the_permalink(); ?>"><?php the_title(); ?></a>
+			<?php
+				the_content();
+		endwhile;
+	endif;
+?>
+```
