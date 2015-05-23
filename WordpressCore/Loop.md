@@ -110,3 +110,52 @@ The following is an example of a custom Loop displaying the five most recent pos
 
 **Dus: om zelf te kiezen wat we willen weergeven op de pagina, gebruiken we niet zoals bij het bovenstaande voorbeeld de globale instantie van WP_Query, maar maken we een eigen instantie aan met een query. De methodes have_posts() en the_post() worden dan ook opgeroepen op dat eigen object. Een overzicht van alle parameters die we kunnen meegeven aan is te vinden op http://codex.wordpress.org/Class_Reference/WP_Query#Parameters.**
 
+## Using query_posts()
+
+The query_posts() method is an alternative for a WP_Query object and is used to easily modify the content returned for the default WordPress Loop. Specifically, you can modify the content returned after the default database query has executed, fine-tune the query parameters, and re-excecute the query using query_posts(). 
+
+Explicitly calling query_posts() overwrites the original post content extracted for the Loop. This means any content you were excpecting to be returned before using query_posts() will not be returned. For example, if the URL passed to WordPress is for a category page at http://example.com/category/zombie/, none of the zombie category posts will be in the post list after query_posts() has been called unless one is in the five most recent posts. You explicitly overwrite the query parameters established by the URL parsing and default processing when you pass the query string to query_posts().
+
+To avaid losing your original Loop content, you can save the parsed query parameters by using the $query_string global variable:
+
+```
+//Initialize the global query_string variable
+global $query_string;
+
+//Keep original Loop content and change the sort order
+query_posts($query_string . "&orderby=title&order=ASC");
+```
+In the preceding example, you would still see all of your zombie category posts, but they woul be ordered alphabetically by ascending title. This technique is used to modify the orginal Loop content without losing that original content.
+
+## Reseting a query
+
+To avoid problems, always reset the query after you customized the Loop:
+* Use *wp_reset_postdata()* after you made a custom instance of WP_Query.
+* Use *wp_reset_query()* after you used query_posts().
+
+```
+$myPosts = new WP_Query('posts_per_page=1&orderby=rand');
+while($myPosts->have_posts())
+	$myPosts->the_post();
+	//Do something
+endwhile;
+wp_reset_postdata();
+```
+
+Or
+
+```
+query_posts('posts_per_page=5');
+if(have_posts())
+	while(have_posts())
+		the_post();
+		//Do something
+	endwhile;
+endif;
+wp_reset_query();
+```
+
+## Nested loops
+
+Nested Loops can be created inside your theme templates using a combination of the main Loop and seperate WP_Query instances. For example, you can create a nested Loop to display related posts based on post tags. The following is an example of creating a nested Loop inside the main Loop to display related posts based on tags:
+
