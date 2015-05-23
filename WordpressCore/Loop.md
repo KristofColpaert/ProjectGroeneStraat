@@ -27,3 +27,23 @@ Note that by the time this default Loop is called, WordPress has already called 
 
 **Dus: WordPress zorgt er in de achtergrond al voor dat juiste data wordt opgehaald op basis van de url. Wat we hier doen is gewoon de content weergeven.**
 
+Let's break this example down to look at the different parts of the Loop:
+
+```
+if(have_posts())
+```
+
+This line checks if any postst of pages are going to be displayed on the current page you are viewing. If posts of pages exist, the next line will execute:
+
+``` 
+while(have_posts())
+```
+
+The preceding while statement starts the Loop, essentially looping through all posts and pages to be displayed on the page until ther are no more. The have_posts() function simply checks to see if the list of posts being processed is exhausted, or had no entries to begin with.
+
+```
+the_post();
+```
+
+Next, the the_post() function is called to load all of the post data. This function must be called inside your loo for the post data to be set correctly. Calling the_post() in turn calls the setup_postdata() function to set up the per-post metadata such as the author and tags of the content you are displaying in the Loop, as well as the content of the post itself. This data is assigned to a global variable each time through the Loop iteration. Specifically calling the_post() advances to the next post in the list.
+
