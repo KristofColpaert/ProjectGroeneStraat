@@ -10,7 +10,7 @@ The Loop selects posts form the MySQL database, based on a set of parameters, an
 
 The next example features the only required elements for the Loop to function properly:
 
-`
+
 <?php
 	if(have_posts());
 		while(have_posts())
@@ -19,4 +19,3 @@ The next example features the only required elements for the Loop to function pr
 		endwhile;
 	endif;
 ?>
-`
