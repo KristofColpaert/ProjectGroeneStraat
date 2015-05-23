@@ -12,6 +12,7 @@ De basic connection settings voor de website.
 
 ## MySQL-server
 
+* Host: http://groenestraat.cloudapp.net/
 * Root user: root
 * Root password: Groenestraat123
 * PHPMyAdmin: http://groenestraat.cloudapp.net/phpmyadmin/
