@@ -217,3 +217,16 @@ Along with access to global variables, there is a set of WordPress functions to 
 * wp_list_pages(): Displays a list of all pages as links.
 	* You can also use the wp_page_menu() function to generate a page menu. There are several advantages to this page listing function. The first is a new show_home parameter allowing a Home link to automatically be added to the list of pages. This function also wraps a custom `<div>` around your menu, the class of which you can set. The following is an example of the function: `<?php wp_page_menu('show_home=1&menu_class=my-menu&sort_column=menu_order'); ?>`
 * wp_list_categories(): Displays a list of all categories as links.
+* wp_tag_cloud(): Displays a cloud from all tags.
+* get_permaelink(): Returns the permalink of the post in the parameter.
+* next_post_link(): Link to display previous posts.
+* previous_post_link(): Link to display next posts.
+* get_post(): Displays the post with the id in the parameter.
+	* No matter how you return the results, however, this invocation of get_post() returns the raw content from the WordPress database. Filters and processing normally done within the loop won't be applied to the returned content. The solution is to use the setup_postdata() function in conjunction with get_post() to set up your global pot data and template tags for use with your post: ```	<?php
+		$my_id = 1031;
+		$myPost = get_post($my_id);
+		setup_postdata($myPost);
+		the_title();
+	?>
+	```
+* the_author_meta: Display meta data about the author of a post.
