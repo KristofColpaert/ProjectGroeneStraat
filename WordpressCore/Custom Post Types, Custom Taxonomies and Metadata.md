@@ -38,3 +38,27 @@ The register_post_type() function accepts two parameters:
 There are many different arguments available when registering your custom post type. It's important to understand these arguments to know what's available. 
 
 **Overzicht van alle argumenten is te vinden in het boek op pagina 129.**
+
+```
+<?php 
+add_action('init', 'prowp_register_my_post_types');
+
+function prowp_register_my_post_types()
+{
+  register_post_type('products',
+    array(
+      'labels' => array(
+        'name' => 'Products'
+      ),
+      'public' => true
+    )
+  );
+}
+?>
+```
+
+### Setting post type labels
+
+When creating a custom post type in WordPress, several text strings are shown throughout the WordPress admin dashboard for your post type. These text string are typically a link, button or extra information about the post type. By default, the term "post" is used for non-hierarchical post types and "page" for hierarchical post types.
+
+Now, for example, you'll notice the text "Add New Post" at the top of the page when you add a now item of your custom post type. Setting the *labels* argument when registering your custom post type, will allow you to define exactly what is shown.
