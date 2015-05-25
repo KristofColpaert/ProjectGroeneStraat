@@ -146,3 +146,93 @@ As with custom post types, you can set a variety of different arguments when reg
 
 **Zie pagina 142 en verder voor een overzicht van alle mogelijke argumenten bij custom taxonomies.**
 
+### Setting custom taxonomy labels
+
+Similar to creating a custom post type in WordPress, custom taxonomies feature several text strings that are shown throughout the WordPress admin dashboard for your taxonomy. These text strings are typically a link, button, or extra information about the custom taxonomy. By default, the term "Tag" is used for non-hierarchical taxonomies and "Category" for hierarchical taxonomies.
+
+**Zie pagina 144 en verder voor een overzicht van alle mogelijke labels.**
+
+### Using your custom taxonomy
+
+As with custom post types, there are several methods that let you work with your custom taxonomies:
+
+* wp_tag_cloud(): displays a tag cloud showing your custom taxonomy terms.
+* Custom WP_Query: customize him to only display items for a specific taxonomy term.
+* get_the_term_list(): displays taxonomy terms assigned to a post.
+* get_terms(): retrieve an array with your taxonomy values.
+
+## Metadata
+
+In this chapter, you've learned how to create custom post types to add to the basic content types managed by WordPress, and custom taxonomies to organize and collect those content types. This chapter wraps up with a look at extending the content management descriptors of a post with custom metadata.
+
+### What is metadata? 
+
+Metadata in WordPress refers to additional pieces of data attached to a post. For example, your products custom post type might need a price stored with each Product entered. The price could be stored as metadata and easily displayed on the Product detail page.
+
+WordPress adds a custom fields meta box on the post-editing screen by default. If a custom post type has the custom-fields value defined for the supports argument, this meta box will also appear.
+
+### Adding metadata
+
+WordPress features a simple function to add new post metadata called add_post_meta().
+
+```
+<?php add_post_meta($post_id, $meta_key, $meta_value, $unique); ?>
+```
+
+This function accepts the following parameters:
+
+* $post_id: the ID of the post to add metadata.
+* $meta_key: the name of the metadata field.
+* $meta_value: the value of the metadata field.
+* $unique: a value identifying whether or not the key should be unique. The default value is false.
+
+### Updating metadata
+
+You can also update metadata using the update_post_meta() function:
+
+```
+<?php update_post_meta($post_id, $meta_key, $meta_value, $prev_value ); ?>
+```
+
+This function accepts the following parameters:
+
+* $post_id: the ID of the post to update metadata.
+* $meta_key: the name of the metadata field.
+* $meta_value: the value of the metadata field.
+* $prev_value: The old value of the metadata field to update. This is to differentiate between several fields with the same key and is an optional field.
+
+### Deleting metadata
+
+To delete post metadata, you'll use the delete_post_meta() function.
+
+```
+<?php delete_post_meta($post_id, $meta_key, $meta_value); ?>
+```
+
+This function accepts the following parameters:
+
+* $post_id: the ID of the post to delete metadata.
+* $meta_key: the name of the metadata field.
+* $meta_value: the value of the metadata field. This is to differentiate between several fields with the same kay and is an optional field.
+
+### Retrieving metadata
+
+WordPress makes it easy to retrieve post metadata for display or use in other code. A good place to use this code is within a Loop to display custom metadata for a particular piece of content. 
+
+To retrieve metadata, you'll use the get_post_meta() function:
+
+```
+<?php $meta_values = get_post_meta($post_id, $key, $single); ?>
+```
+
+This function accepts the following parameters:
+
+* $post_id: the ID of the post to retrieve metadata for.
+* $meta_key: the name of the metadata field.
+* $single: a value identifying whether to return a single meta value field (true) or return an array of values (false). By default, this parameter is set to false.
+
+Another powerfull function for retrieving post metadata is the get_post_custom() function. This function returns a multidimensional array of all metadata for a particular post.
+
+```
+<?php get_post_custom($post_id); ?>
+```
