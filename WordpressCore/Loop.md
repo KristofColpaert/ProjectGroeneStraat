@@ -159,3 +159,50 @@ wp_reset_query();
 
 Nested Loops can be created inside your theme templates using a combination of the main Loop and seperate WP_Query instances. For example, you can create a nested Loop to display related posts based on post tags. The following is an example of creating a nested Loop inside the main Loop to display related posts based on tags:
 
+```
+<?php
+	if ( have_posts() )
+		while ( have_posts() ) 
+			the_post();
+			//loop content (template tags, html, etc)?>
+			<h1><a href="<?php the_permalink(); ?>"><?php the_title();?></a></h1> 
+			<?php 
+				the_content();
+				$tags = wp_get_post_terms( get_the_ID() );
+
+				if ( $tags ) {	
+					echo 'Related Posts';
+					$tagcount = count( $tags );
+
+					for ( $i = 0; $i < $tagcount; $i++ ) {
+						$tagIDs[$i] = $tags[$i]->term_id; 
+					}
+					
+					$args=array(
+						'tag__in' => $tagIDs,
+						'post__not_in' => array( $post->ID ),
+						'posts_per_page' => 5, 
+						'ignore_sticky_posts' => 1
+					);
+					$relatedPosts = new WP_Query( $args ); 
+
+					if( $relatedPosts->have_posts() ) {
+						//loop through related posts based on the tag 
+						while ( $relatedPosts->have_posts() ) :
+							$relatedPosts->the_post(); ?>
+							<p><a href="<?php the_permalink(); ?>">
+							<?php the_title(); ?></a></p> 
+							<?php
+						endwhile; 
+					}
+				}
+		endwhile;
+endif; 
+?>
+```
+
+## Advanced Queries
+
+You can also perform more advanced queries in your Loops, based on custom parameters.
+
+**Zie boek pagina 99 en verder. Dit is vooral belangrijk wanneer we gaan werken met onze custom post types en wanneer we moeten zoeken op andere parameters zoals straatnaam.**
