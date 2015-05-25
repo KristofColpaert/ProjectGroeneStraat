@@ -51,7 +51,8 @@ Next, the the_post() function is called to load all of the post data. This funct
 
 PHP functions used in your WordPress theme templates to display Loop content are called template tags. These tags are used to display specific pieces of data about your website and content. This allows you to customize how and where content is displayed on your website.
 
-The most commonly usd templates are: 
+The most commonly used templates are: 
+
 * the_permalink(): displays the URL of the post.
 * the_title(): displays the title of the post.
 * the_ID(): displays the unique ID of the post. 
@@ -206,3 +207,13 @@ endif;
 You can also perform more advanced queries in your Loops, based on custom parameters.
 
 **Zie boek pagina 99 en verder. Dit is vooral belangrijk wanneer we gaan werken met onze custom post types en wanneer we moeten zoeken op andere parameters zoals straatnaam.**
+
+# Working outside the Loop
+
+There are times when you'll want to access generic post information, or to maninpulate some information about the currently displayed post outside of the Loop. WordPress provides some functions to operate on sets of posts for even finner-grain control over post display. 
+
+Along with access to global variables, there is a set of WordPress functions to return generic information that's not specific to a single post, or the post currently displayed:
+
+* wp_list_pages(): Displays a list of all pages as links.
+	* You can also use the wp_page_menu() function to generate a page menu. There are several advantages to this page listing function. The first is a new show_home parameter allowing a Home link to automatically be added to the list of pages. This function also wraps a custom `<div>` around your menu, the class of which you can set. The following is an example of the function: `<?php wp_page_menu('show_home=1&menu_class=my-menu&sort_column=menu_order'); ?>`
+* wp_list_categories(): Displays a list of all categories as links.
