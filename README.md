@@ -16,3 +16,5 @@ De basic connection settings voor de website.
 * Root user: root
 * Root password: Groenestraat123
 * PHPMyAdmin: http://groenestraat.cloudapp.net/phpmyadmin/
+
+**Problemen met MySQL: in file */etc/mysql.conf.d/mysqld.cnf* binding doen naar het private interne IP-adres van de server via: *100.113.10.50*.**
