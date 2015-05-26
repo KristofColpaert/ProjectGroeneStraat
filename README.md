@@ -5,6 +5,7 @@ De basic connection settings voor de website.
 ## Webserver
 
 * Link: http://groenestraat.azurewebsites.net
+* Eigenlijke site: http://groenestraat.azurewebsites.net/abcdefghij
 * Hostname (FTP): ftp://waws-prod-am2-025.ftp.azurewebsites.windows.net
 * Username (FTP): groenestraat\groenestraat
 * Password (FTP): Groenestraat123
