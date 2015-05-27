@@ -25,6 +25,17 @@
 		$args = array(
 			'public' => true,
 			'has_archive' => true,
+			'capability_type' => 'projects',
+			'capabilities' => array(
+				'publish_posts' => 'publish_projects',
+				'edit_posts' => 'edit_project',
+				'edit_others_posts' => 'edit_others_projects',
+				'delete_posts' => 'delete_projects',
+				'read_private_posts' => 'read_private_projects',
+				'edit_post' => 'edit_project',
+				'delete_post' => 'delete_project',
+				'read_post' => 'read_project'
+			),
 			'labels' => array(
 				'name' => 'Projecten',
 				'singular_name' => 'Project',
