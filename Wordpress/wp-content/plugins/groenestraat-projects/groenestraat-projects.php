@@ -86,7 +86,9 @@
 	// Add the location metabox
 	function add_location_metaboxes()
 	{
-		add_meta_box('projectsLocation', 'Locatiegegevens', 'location_metaboxes_callback', 'Projecten', 'normal', 3);
+		global $post;
+
+		add_meta_box('projectsLocation', 'Locatiegegevens', 'location_metaboxes_callback', $post->post_type, 'normal', 'high');
 	}
 
 	// Generate the HTML for the metabox
@@ -155,7 +157,7 @@
 	function show_custom_featured_imagebox()
 	{
 	    remove_meta_box('postimagediv', 'Projecten', 'side');
-	    remove_meta_box('projectsParent', 'projecten', 'normal');
+	    remove_meta_box('projectsParent', 'Projecten', 'normal');
 	    add_meta_box('postimagediv', __('Hoofdingsafbeelding'), 'post_thumbnail_meta_box', 'Projecten', 'normal', 'high');
 	}
 
