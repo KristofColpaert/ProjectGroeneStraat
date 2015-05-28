@@ -2,7 +2,7 @@
 	/*
 	Plugin Name: Groenestraat Projects
 	Plugin URI: http://www.groenestraat.be
-	Description: This plugin adds the project and project post custom post types to your WordPress installation.
+	Description: This plugin adds the project and project post custom post types to your WordPress installation. Capabilities for all kinds of roles are also set.
 	Version: 1.0
 	Author: Kristof Colpaert
 	Author URI: http://www.groenestraat.be
@@ -19,7 +19,23 @@
 	add_action('do_meta_boxes', 'show_custom_featured_imagebox');
 	add_action('admin_init', 'add_capability');
 
-	// Register the custom projects post type
+
+	/*
+	** Install the custom post type
+	*/
+
+	// Install the custom post type for projects and add a category
+
+	function prowp_install()
+	{
+		wp_create_category('Projectartikels');
+	}
+
+	/*
+	** Register the custom post type for projects
+	*/
+
+	// Register the custom post type
 	function prowp_register_projects()
 	{
 		$args = array(
@@ -63,10 +79,14 @@
 		register_post_type('projecten', $args);
 	}
 
+	/*
+	** Provide metaboxes for the custom post type
+	*/
+
 	// Add the location metabox
 	function add_location_metaboxes()
 	{
-		add_meta_box('projectsLocation', 'Locatiegegevens', 'location_metaboxes_callback', 'Projecten', 'normal', 'default');
+		add_meta_box('projectsLocation', 'Locatiegegevens', 'location_metaboxes_callback', 'Projecten', 'normal', 3);
 	}
 
 	// Generate the HTML for the metabox
@@ -134,10 +154,16 @@
 	// Show the custom featured imagebox
 	function show_custom_featured_imagebox()
 	{
-	    remove_meta_box( 'postimagediv', 'Projecten', 'side' );
+	    remove_meta_box('postimagediv', 'Projecten', 'side');
+	    remove_meta_box('projectsParent', 'projecten', 'normal');
 	    add_meta_box('postimagediv', __('Hoofdingsafbeelding'), 'post_thumbnail_meta_box', 'Projecten', 'normal', 'high');
 	}
 
+	/*
+	** Add capabilities for all kinds of roles in WordPress
+	*/
+
+	// Add capabilities to roles.
 	function add_capability() 
 	{
 	    $roleAuthor = get_role('author');
