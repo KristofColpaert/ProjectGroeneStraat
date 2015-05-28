@@ -2,8 +2,7 @@
 	/*
 	Plugin Name: Groenestraat Projects
 	Plugin URI: http://www.groenestraat.be
-	Description: This plugin adds the project and project post custom post types
-	to your WordPress installation.
+	Description: This plugin adds the project and project post custom post types to your WordPress installation.
 	Version: 1.0
 	Author: Kristof Colpaert
 	Author URI: http://www.groenestraat.be
@@ -18,12 +17,27 @@
 	add_action('init', 'prowp_register_projects');
 	add_action('save_post', 'save_location_metaboxes', 1, 2);
 	add_action('do_meta_boxes', 'show_custom_featured_imagebox');
+	add_action('admin_init', 'add_capability');
 
 	// Register the custom projects post type
 	function prowp_register_projects()
 	{
 		$args = array(
 			'public' => true,
+			'capability_type' => 'projecten',
+			'capabilities' => array(
+				'publish_posts' => 'publish_projecten',
+				'edit_posts' => 'edit_projecten',
+				'edit_others_posts' => 'edit_others_projecten',
+				'delete_posts' => 'delete_projecten',
+				'delete_others_posts' => 'delete_others_projecten',
+				'read_private_posts' => 'read_private_projecten',
+				'edit_post' => 'edit_project',
+				'delete_post' => 'delete_project',
+				'read_post' => 'read_project',
+				'edit_published_posts' => 'edit_published_projecten',
+				'delete_published_posts' => 'delete_published_projecten'
+			),
 			'has_archive' => true,
 			'labels' => array(
 				'name' => 'Projecten',
@@ -42,6 +56,7 @@
 			'rewrite' => array('slug' => 'project'),
 			'supports' => array('title', 'editor', 'thumbnail'),
 			'menu_icon' => 'dashicons-format-aside',
+			'menu_position' => 5,
 			'register_meta_box_cb' => 'add_location_metaboxes'
 		);
 
@@ -119,8 +134,29 @@
 	// Show the custom featured imagebox
 	function show_custom_featured_imagebox()
 	{
-		echo "hier";
 	    remove_meta_box( 'postimagediv', 'Projecten', 'side' );
 	    add_meta_box('postimagediv', __('Hoofdingsafbeelding'), 'post_thumbnail_meta_box', 'Projecten', 'normal', 'high');
+	}
+
+	function add_capability() 
+	{
+	    $roleAuthor = get_role('author');
+	    $roleAdministrator = get_role('administrator');
+
+	    $roleAuthor->add_cap('delete_projecten');
+	    $roleAuthor->add_cap('delete_published_projecten');
+	    $roleAuthor->add_cap('edit_projecten');
+	    $roleAuthor->add_cap('edit_published_projecten');
+	    $roleAuthor->add_cap('publish_projecten');
+	    $roleAuthor->add_cap('read_project');
+
+	    $roleAdministrator->add_cap('delete_project');
+	    $roleAdministrator->add_cap('delete_projecten');
+	    $roleAdministrator->add_cap('delete_published_projecten');
+	    $roleAdministrator->add_cap('edit_project');
+	    $roleAdministrator->add_cap('edit_projecten');
+	    $roleAdministrator->add_cap('edit_published_projecten');
+	    $roleAdministrator->add_cap('publish_projecten');
+	    $roleAdministrator->add_cap('reat_project');
 	}
 ?>
