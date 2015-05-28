@@ -11,24 +11,22 @@
 	*/
 
 	// Install the plugin when activated
-	register_activation_hook(__FILE__, 'prowp_install');
+	register_activation_hook(__FILE__, 'prowp_project_install');
 
 	// Add actions
 	add_action('init', 'prowp_register_projects');
 	add_action('save_post', 'save_location_metaboxes', 1, 2);
 	add_action('do_meta_boxes', 'show_custom_featured_imagebox');
-	add_action('admin_init', 'add_capability');
-
 
 	/*
 	** Install the custom post type
 	*/
 
 	// Install the custom post type for projects and add a category
-
-	function prowp_install()
+	function prowp_project_install()
 	{
 		wp_create_category('Projectartikels');
+		add_project_capability();
 	}
 
 	/*
@@ -166,7 +164,7 @@
 	*/
 
 	// Add capabilities to roles.
-	function add_capability() 
+	function add_project_capability() 
 	{
 	    $roleAuthor = get_role('author');
 	    $roleAdministrator = get_role('administrator');
@@ -185,6 +183,6 @@
 	    $roleAdministrator->add_cap('edit_projecten');
 	    $roleAdministrator->add_cap('edit_published_projecten');
 	    $roleAdministrator->add_cap('publish_projecten');
-	    $roleAdministrator->add_cap('reat_project');
+	    $roleAdministrator->add_cap('read_project');
 	}
 ?>
