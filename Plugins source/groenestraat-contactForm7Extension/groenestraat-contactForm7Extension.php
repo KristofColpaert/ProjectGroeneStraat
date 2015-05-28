@@ -1,13 +1,13 @@
 <?php
 /*
-Plugin Name: Contact Form 7
-Plugin URI: http://contactform7.com/
-Description: Just another contact form plugin. Simple but flexible.
-Author: Takayuki Miyoshi
-Author URI: http://ideasilo.wordpress.com/
-Text Domain: contact-form-7
+Plugin Name: Groenestraat Contact Form 7 Extension
+Plugin URI: http://www.groenestraat.be
+Description: Contact form plugin, based on Contact Form 7.
+Author: Takayuki Miyoshi, Kristof Colpaert
+Author URI: http://www.groenestraat.be
+Text Domain: prowp-plugin
 Domain Path: /languages/
-Version: 4.1.2
+Version: 1.0
 */
 
 /*  Copyright 2007-2015 Takayuki Miyoshi (email: takayukister at gmail.com)
@@ -58,11 +58,11 @@ if ( ! defined( 'WPCF7_USE_PIPE' ) ) {
 }
 
 if ( ! defined( 'WPCF7_ADMIN_READ_CAPABILITY' ) ) {
-	define( 'WPCF7_ADMIN_READ_CAPABILITY', 'edit_posts' );
+	define( 'WPCF7_ADMIN_READ_CAPABILITY', 'manage_options' );
 }
 
 if ( ! defined( 'WPCF7_ADMIN_READ_WRITE_CAPABILITY' ) ) {
-	define( 'WPCF7_ADMIN_READ_WRITE_CAPABILITY', 'publish_pages' );
+	define( 'WPCF7_ADMIN_READ_WRITE_CAPABILITY', 'manage_options' );
 }
 
 if ( ! defined( 'WPCF7_VERIFY_NONCE' ) ) {
