@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 	/*
 	Plugin Name: Groenestraat Ads
 	Plugin URI: http://www.groenestraat.be
@@ -96,8 +96,8 @@
 		$zoekertjeBeschrijving = get_post_meta($post->ID, '_zoekertjeBeschrijving', true);
 		
 		// Echo out the field
-		echo '<label class="zoekertjeLabel" for="zoekertjeName">Naam</label>';
-    	echo '<input id="zoekertjeName" type="text" name="_adName" value="' . $zoekertjeName  . '" class="widefat" />';
+		//echo '<label class="zoekertjeLabel" for="zoekertjeName">Naam</label>';
+    	//echo '<input id="zoekertjeName" type="text" name="_adName" value="' . $zoekertjeName  . '" class="widefat" />';
 
     	echo '<label for="zoekertjeLabel">Locatie</label>';
     	echo '<input id="zoekertjeLocatie" type="text" name="_adLocation" value="' . $zoekertjeLocatie . '" class="widefat" />';    
