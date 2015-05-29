@@ -16,7 +16,7 @@
 	// Add actions
 	//Onderstaande code zal ervoor zorgen dat er een nieuw menu-item wordt toegevoegd. Init is altijd verplicht (zal zorgen dat uw custom post type geïnitialiseerd is)
 	add_action('init', 'prowp_register_events');
-	add_action('do_meta_boxes', 'hide_project_metabox');
+	add_action('do_meta_boxes', 'hide_project_metabox_event');
 
 	//Opslaan
 	add_action('save_post', 'save_event_metaboxes', 1, 2); 
@@ -24,7 +24,6 @@
 	// Install the custom post type for projects and add a category
 	function prowp_event_install()
 	{
-		wp_create_category('Projectartikels');
 		add_event_capability();
 	}
 
@@ -57,7 +56,7 @@
 				'edit_others_posts' => 'edit_others_events',
 				'delete_posts' => 'delete_events',
 				'delete_others_posts' => 'delete_others_events',
-				'read_private_posts' => 'read_private_evetns',
+				'read_private_posts' => 'read_private_events',
 				'edit_post' => 'edit_event',
 				'delete_post' => 'delete_event',
 				'read_post' => 'read_event',
@@ -92,9 +91,7 @@
 		echo '<input type="hidden" name="eventmeta_noncename" id="eventmeta_noncename" value="' . 
 		wp_create_nonce( plugin_basename(__FILE__) ) . '" />';
 		
-		$eventName = get_post_meta($post->ID, '_eventName', true);
 		$eventTime = get_post_meta($post->ID, '_eventTime', true);
-		//echo($eventTime);
 		$eventLocation = get_post_meta($post->ID, '_eventLocation', true);
 		$eventMoreInfo= get_post_meta($post->ID, '_eventMoreInfo', true);
 		
@@ -114,13 +111,16 @@
 		
 		// verify this came from the our screen and with proper authorization,
 		// because save_post can be triggered at other times
-		if ( !wp_verify_nonce( $_POST['eventmeta_noncename'], plugin_basename(__FILE__) )) {
-		return $post->ID;
+		if ( !wp_verify_nonce( $_POST['eventmeta_noncename'], plugin_basename(__FILE__) )) 
+		{
+			return $post->ID;
 		}
 
 		// Is the user allowed to edit the post or page?
 		if ( !current_user_can( 'edit_post', $post->ID ))
+		{
 			return $post->ID;
+		}
 
 		// OK, we're authenticated: we need to find and save the data
 		// We'll put it into an array to make it easier to loop though.
@@ -156,13 +156,11 @@
 			{
 				delete_post_meta($post->ID, $key); // Delete if blank
 			}
-
 		}
-
 	}
 
 	// Hide the project metabox from the screen
-	function hide_project_metabox()
+	function hide_project_metabox_event()
 	{
 		remove_meta_box('projectsParent', 'Events', 'normal');
 	}
