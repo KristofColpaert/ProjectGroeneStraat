@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 	/*
 	Plugin Name: Groenestraat Events
 	Plugin URI: http://www.groenestraat.be
@@ -20,6 +20,24 @@
 
 	//Opslaan
 	add_action('save_post', 'save_event_metaboxes', 1, 2); 
+
+
+	add_filter( 'template_include', 'include_template_function', 1 );
+	function include_template_function( $template_path ) {
+    	if ( get_post_type() == 'Eventen' ) {
+           if ( is_single() )
+	   {
+            		// checks if the file exists in the theme first,
+            		// otherwise serve the file from the plugin
+            	if ( $theme_file = locate_template( array ( 'single-Eventen.php' ) ) ) {
+            	    $template_path = $theme_file;
+            	} else {
+               	 $template_path = plugin_dir_path( __FILE__ ) . '/single-Eventen.php';
+            	}
+           }
+    	}
+    	return $template_path;
+	}
 
 	// Install the custom post type for projects and add a category
 	function prowp_event_install()
