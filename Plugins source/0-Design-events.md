@@ -2,7 +2,7 @@
 
 ## Data van een event
 
-Projecten hebben:
+Events hebben:
 * Title (default WordPress)
 * _eventLocation (via get_post_meta())
 * _eventMoreInfo (via get_post_meta())
