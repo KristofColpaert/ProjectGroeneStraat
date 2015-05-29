@@ -1,0 +1,32 @@
+#logged_user{
+    height: 100%;
+    width: auto;
+    display: block;
+    padding: 5px 0px 5px 15px;
+    float: right;
+    color: #a2a1a9;
+}
+#logged_user:hover{
+    color: #69686e;
+}
+#logged_user img{
+    margin-right: 10px;
+    margin-top:10px; 
+}
+#logged_user p{
+    float: left;
+    font-size:1.2em;
+    
+    text-decoration: none;
+    text-transform: uppercase;
+    padding: 15px 0;
+}
+
+.menu div{
+    float: right;
+}
+.small-arrow{
+    padding-left: 10px;
+    padding-top: 12px;
+    width: 15px;
+}

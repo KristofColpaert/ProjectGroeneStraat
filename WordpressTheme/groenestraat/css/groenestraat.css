@@ -1,0 +1,552 @@
+@import url("reset.css");
+
+@font-face 
+{
+    font-family: 'Lane';
+    src:url('../font/LANENAR_.ttf') format('truetype');
+}
+
+/*
+green = #00cd00;
+lightgray = #f8f7f7;
+gray = #a2a1a9;
+darkgray = #69686e
+*/
+
+body
+{
+    background-color: #f8f7f7;
+    font-size:0.625em;
+    font-family: "Lane", "Arial", sans-serif;
+}
+
+h1
+{
+    font-size:3.8em;
+    text-transform: uppercase;
+    font-weight: lighter;
+    line-height: 2em;
+}
+
+h2
+{
+    font-size:2.4em;
+    text-transform: uppercase;
+    font-weight: lighter;
+    line-height: 2em;
+}
+
+h3
+{
+    font-size:2em;
+    text-transform: uppercase;
+    font-weight: lighter;
+    line-height: 2em;
+}
+
+p
+{
+    font-size:1.7em;
+    line-height: 1.35em;
+}
+
+a
+{
+    transition: background-color 0.25s ease;
+    font-size:1.6em;
+}
+
+header
+{
+    background-image: url("../img/header.png");
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    width:100%;
+    background-color: #cccccc;
+    height: 420px;
+}
+
+header nav
+{
+    border-top:2px solid #00cd00;
+    width: 100%;
+    height: 65px;
+    background-color: #f8f7f7;
+}
+
+header img
+{
+    float: left;
+}
+
+header .menu
+{
+    float:right;
+}
+
+.button
+{
+    color: #a2a1a9;
+    border: 1px solid #a2a1a9;
+    background-color: #f8f7f7;
+    text-decoration: none;
+    font-size:1.7em;
+    padding:10px 20px;
+    text-transform: uppercase;
+}
+
+ img 
+{
+    max-width:100%;
+    height:auto;
+}
+
+
+
+
+.button:hover
+{
+    color: #f8f7f7;
+    background-color: #a2a1a9;
+}
+
+.menu ul 
+{
+    height: 100%;
+    
+}
+.basic-menu-item
+{
+    list-style-type: none;
+    display: inline;
+    float:left;
+}
+
+.basic-menu-item a 
+{
+    display: block;
+    color: #a2a1a9;;
+    text-decoration: none;
+    font-size:1.7em;
+    padding:24px 20px;
+}
+
+.basic-menu-item a:hover
+{
+    color:#f8f7f7;
+    background-color: #00cd00;
+}
+
+.aanmelden
+{
+    list-style: none;
+    float:left;
+    display: inline;
+    border: 1px solid #00cd00;
+    text-transform: uppercase;
+    margin: 19px;
+}
+.aanmelden a{
+     display: block;
+    color: #a2a1a9;;
+    text-decoration: none;
+    font-size:1.7em;
+    padding:5px 25px 3px 25px;
+}
+.aanmelden a:hover{
+     color:#f8f7f7;
+    background-color: #00cd00;
+}
+.clear
+{
+    clear:both;
+}
+
+.calender
+{
+    font-size:0.85em;
+    width: 94%;
+    padding:2%;
+    height: 65px;
+    background-color: #ffffff;
+    margin-bottom: 2%;
+}
+
+.calender .calender-image
+{
+    position: relative;
+    text-align: left;
+}
+.calender .calender-image img
+{
+    position: absolute;
+    top:0;
+    z-index: 9;
+}
+.calender .calender-image em
+{
+    position: absolute;
+    z-index: 99999;
+    font-size:3em;
+    float: left;
+    top:10px;
+}
+
+.calender strong
+{
+    font-size:0.9em;
+}
+
+.calender img
+{
+    display: block;
+    float:left;
+    width: 50px;
+    height: 40px;
+}
+
+.recent
+{
+    width: 100%;
+    min-height: 325px;
+}
+
+.recent-item
+{
+    float:left;
+    /*width:100vw;*/
+    width:23.33333%;
+    padding:5%;
+    height: 100%;
+    text-align: center;
+    background-color: #f8f7f7;
+}
+
+.recent-item h1
+{
+    color: #69686e;
+    margin-bottom: 10px;
+}
+
+.recent-item p
+{
+    color: #a2a1a9;
+    margin-bottom: 40px;
+}
+
+.mnav
+{
+    display: none;
+}
+
+.wrapper
+{
+min-width: 100%;
+}
+
+#mobile-nav
+{
+    display: none;
+    width: 250px;
+    height: 100%;
+    background-color: #333333;
+    position: absolute;
+    top:0;
+    left: 0;
+}
+
+.home-title
+{
+    width: 100%;
+    height: 175px;
+    text-align: center;
+    vertical-align: middle;
+    background-color: #f8f7f7;
+}
+
+.home-title>h1
+{
+    line-height: 175px;
+    font-size: 5em;
+}
+
+.recent-artikel
+{
+    width: 100%;
+    height: 50vw;
+    background-color:red;
+}
+
+.recent-artikel .artikel-img
+{
+    float:left;
+    width: 65%;
+    height: 100%;
+    background-color: yellow;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: left left;
+    overflow: hidden;
+}
+
+.recent-artikel .artikel-msg
+{
+    float:right;
+    width: 35%;
+    height: 100%;
+    background-color: black;
+}
+
+.artikel-msg .msg-item
+{
+    /*
+    width: 96%;
+    height: 21%;
+    */
+    
+    width:100%;
+    height: 25%;
+    background-color: #a2a1a9;
+   /* padding:2%; */
+}
+
+.msg-item:hover
+{
+    background-color: #ffffff;
+}
+
+.recent-projects
+{
+    background-color: #000;
+    width: 100%;
+    height: 200px;
+}
+
+.project-item
+{
+    
+}
+
+.recent-zoekertjes
+{
+    width:100%;
+    min-height: 250px;
+    padding-bottom: 100px;
+    background-color: #f8f7f7;
+}
+
+.recent-zoekertjes .zoekertje-item
+{
+    float:left;
+    width: 21.333333%;
+    margin:0 4%;
+    padding: 2%;
+    min-height: 175px;
+    background-color: #ffffff;
+}
+
+.zoekertje-item div p
+{
+    float:left;
+}
+
+.zoekertje-item div a
+{
+    text-decoration: none;
+    color: #00cd00;
+    float:right;
+}
+
+.zoekertje-item div
+{
+    margin-top:15px;
+}
+
+footer
+{
+    width: 100%;
+    height: 100%;
+}
+
+.footer-partners
+{
+    background-color: #a2a1a9;
+    width:100%;
+    height: 200px;
+}
+
+.footer-content
+{
+    background-color: #69686e;
+    width:100%;
+    min-height: 500px;
+}
+
+/* FOOTER */
+
+.footer-sitemap, .footer-logo, .footer-links
+{
+    float:left;
+    width: 21.333333%;
+    margin:8% 4%;
+    padding: 2%;
+    min-height: 150px;
+}
+
+.footer-sitemap ul li, .footer-links ul li
+{
+    list-style-type: square;
+    width: 100%;
+}
+
+.footer-sitemap ul li a, .footer-links ul li a
+{
+    display: block;
+    color: #ffffff;
+    font-size:1.7em;
+    text-decoration: none;
+}
+
+.footer-sitemap ul li a:hover, .footer-links ul li a:hover
+{
+    text-decoration: underline;
+}
+
+/*
+
+.menu ul 
+{
+    height: 100%;
+    
+}
+.menu ul li
+{
+    list-style-type: none;
+    display: inline;
+    float:left;
+}
+
+.menu ul li a 
+{
+    display: block;
+    color: #a2a1a9;;
+    text-decoration: none;
+    font-size:1.7em;
+    padding:24px 20px;
+}
+
+
+*/
+
+/* MEDIA QUERIES */
+/* vanaf bepaalde breedte titels automatisch laten zien*/
+
+
+
+@media (max-width: 480px) 
+{
+    /*
+    img 
+    {
+        display: block;
+        max-width:100%;
+        height:auto;
+        margin: auto 0;
+    }
+    */
+}
+
+@media (max-width: 530px) 
+{
+    .recent-item
+    {
+        float:left;
+        width: 90%;
+        height: 100%;
+        padding: 5%;
+    }
+}
+@media (max-width: 840px) 
+{
+    .recent-item
+    {
+        float:left;
+        width: 90%;
+        height: 90%;
+        padding: 5%;
+    }
+    .home-title>h1
+    {
+        line-height: 175px;
+        font-size: 3.8em;
+    }
+    
+    .recent-zoekertjes .zoekertje-item
+    {
+        float:left;
+        width: 70%;
+        margin:5% 10%;
+        padding:5%;
+        height: 150px;
+        background-color: #ffffff;
+        text-align: center;
+    }
+    .zoekertje-item div a, .zoekertje-item div p
+    {
+        text-align: center;
+        float:none;
+    }
+    .zoekertje-item div p
+    {
+        margin-bottom: 15px;
+    }
+    .recent-artikel .artikel-img
+    {
+        float:left;
+        width: 100%;
+        height: 100%;
+        background-color: yellow;
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-position: center center;
+        
+    }
+    .recent-artikel .artikel-msg
+    {
+        display: none;
+    }
+}
+@media (max-width: 925px) 
+{
+    .logo
+    {
+        float:none;
+        position: static;
+    }
+    .menu
+    {
+        visibility: hidden;
+    }
+    .mnav
+    {
+        display: block;
+    }
+}
+
+@media (max-width: 1165px) 
+{
+    .calender
+    {
+        text-align: right;
+    }
+    .footer-sitemap, .footer-logo, .footer-links
+    {
+        float:left;
+        width: 70%;
+        margin:10% 10%;
+        padding:5%;
+        min-height: 250px;
+    }
+    
+}
