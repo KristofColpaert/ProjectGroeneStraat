@@ -14,31 +14,31 @@
 * Bij Extra Velden zullen we nu onze velden gaan aanmaken. 
 * Klik op "Voeg een nieuwe gebruikersveld toe. 
 * Toevoegen velden.
-* Geslacht
-      Tonen: Tekstbox veld
-      Opties: Man,Vrouw
-      Laat op registratie zien: true
-      Verplicht veld: true
-* Straat
-      Tonen: T
-      Opties: Leeg
-      Laat op registratie zien: true
-      Verplicht veld: false
-* Gemeente
-      Tonen: Tekstbox veld
-      Opties: Leeg
-      Laat op registratie zien: true
-      Verplicht veld: false
-* Postcode
-      Tonen: Tekstbox veld
-      Opties: Leeg
-      Laat op registratie zien: true
-      Verplicht veld: false
-* Telefoon
-      Tonen: Tekstbox veld
-      Opties: Leeg
-      Laat op registratie zien: true
-      Verplicht veld: false
+    * Geslacht
+          Tonen: Tekstbox veld
+          Opties: Man,Vrouw
+          Laat op registratie zien: true
+          Verplicht veld: true
+    * Straat
+          Tonen: T
+          Opties: Leeg
+          Laat op registratie zien: true
+          Verplicht veld: false
+    * Gemeente
+          Tonen: Tekstbox veld
+          Opties: Leeg
+          Laat op registratie zien: true
+          Verplicht veld: false
+    * Postcode
+          Tonen: Tekstbox veld
+          Opties: Leeg
+          Laat op registratie zien: true
+          Verplicht veld: false
+    * Telefoon
+          Tonen: Tekstbox veld
+          Opties: Leeg
+          Laat op registratie zien: true
+          Verplicht veld: false
 * Vink onder Admin Meldinginstelling, Admin Melding optie 2 (Stuur de beheerder geen e-mail wanneer een nieuwe gebruiker door de beheerder is aangemaakt) aan. 
 * Vink Aangepaste Admin Melding aan. 
 
