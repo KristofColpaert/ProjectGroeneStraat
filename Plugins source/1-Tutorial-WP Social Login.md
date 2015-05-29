@@ -6,7 +6,7 @@ De voorlopige gegevens die wij gebruikten in onze testomgeving zijn de volgende.
 
 ## Google+
 
-* **Application ID:** 734426593917-prl6nnsmgpj2r6u6hcgkckf05ca58bh8.apps.googleusercontent.com
+* **Application ID:** `734426593917-prl6nnsmgpj2r6u6hcgkckf05ca58bh8.apps.googleusercontent.com`
 * **Secret:** PEdjio4fSyKDf2aiGO_DvvR0
 
 ## Twitter
