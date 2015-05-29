@@ -97,13 +97,13 @@
 		
 		// Echo out the field
 		echo '<label class="zoekertjeLabel" for="zoekertjeName">Naam</label>';
-    	echo '<input id="zoekertjeName" type="text" name="_zoekertjeName" value="' . $zoekertjeName  . '" class="widefat" />';
+    	echo '<input id="zoekertjeName" type="text" name="_adName" value="' . $zoekertjeName  . '" class="widefat" />';
 
     	echo '<label for="zoekertjeLabel">Locatie</label>';
-    	echo '<input id="zoekertjeLocatie" type="text" name="_zoekertjeLocatie" value="' . $zoekertjeLocatie . '" class="widefat" />';    
+    	echo '<input id="zoekertjeLocatie" type="text" name="_adLocation" value="' . $zoekertjeLocatie . '" class="widefat" />';    
 
   		echo '<label for="zoekertjeLabel">Meer info</label>';
-    	echo '<textarea id="zoekertjeBeschrijving" type="text" name="_zoekertjeBeschrijving" class="widefat" >' .  $zoekertjeBeschrijving . '</textarea>';
+    	echo '<textarea id="zoekertjeBeschrijving" type="text" name="_adDescription" class="widefat" >' .  $zoekertjeBeschrijving . '</textarea>';
 	}
 
 
@@ -126,9 +126,9 @@
 		// OK, we're authenticated: we need to find and save the data
 		// We'll put it into an array to make it easier to loop though.
 		
-		$events_meta['_zoekertjeName'] = $_POST['_zoekertjeName'];
-		$events_meta['_zoekertjeLocatie'] = $_POST['_zoekertjeLocatie'];
-		$events_meta['_zoekertjeBeschrijving'] = $_POST['_zoekertjeBeschrijving'];
+		$events_meta['_adName'] = $_POST['_adName'];
+		$events_meta['_adLocation'] = $_POST['_adLocation'];
+		$events_meta['_adDescription'] = $_POST['_adDescription'];
 		
 		// Add values of $events_meta as custom fields
 		foreach ($events_meta as $key => $value) 
