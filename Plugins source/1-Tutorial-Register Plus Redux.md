@@ -41,5 +41,6 @@
           * Verplicht veld: false
 * Vink onder Admin Meldinginstelling, Admin Melding optie 2 (Stuur de beheerder geen e-mail wanneer een nieuwe gebruiker door de beheerder is aangemaakt) aan. 
 * Vink Aangepaste Admin Melding aan. 
+* Op het einde klikt u op "Sla Veranderingen Op".
 
 
