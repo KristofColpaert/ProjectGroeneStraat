@@ -1,38 +1,32 @@
 <?php
- /*Template Name: New Template
- */
+/* 
+ * Template to display a single event.
+ *
+ * @package Groenestraat
+ * @subpackage groenestraat
+ * @since Groenestraat 1.0
+*/
 
 get_header(); ?>
-<div id="primary">
-    <div id="content" role="main">
+<article>
     <?php
-    global $post;
-    $mypost = array( 'post_type' => 'ads', 'p' => $post->ID,);
-    $loop = new WP_Query( $mypost );
+        global $post;
+        $mypost = array('post_type' => 'ads', 'p' => $post->ID);
+        $loop = new WP_Query($mypost);
+
+        while($loop->have_posts()) : $loop->the_post;
+            echo the_titel() . '<br />';
+
+            $meta = get_post_custom($mypost->ID);
+            $adName = $meta['_adName'][0];
+            $adLocation = $meta['_adLocation'][0];
+            $adDescription = $meta['_adDescription'][0];
+
+            echo "<strong>Straat: </strong>" . $adName . "<br />";
+            echo "<strong>Postcode: </strong>" . $adLocation . "<br />";
+            echo "<strong>Gemeente: </strong>" . $adDescription . "<br />";
+        endwhile;
     ?>
-    <?php while ( $loop->have_posts() ) : $loop->the_post();?>
-
-        <article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
-            <header class="entry-header">
-                <!-- Display Title and Author Name -->
-                <strong>Title: </strong><?php the_title(); ?><br />
-
-            <?php
-                $meta = get_post_custom($mypost->ID);
-                $addLocation = $meta['_zoekertjeLocatie'][0];
-                $addBeschrijving= $meta['_zoekertjeBeschrijving'][0];
-
-                echo "<strong>Locatie: </strong>" . $addLocation . "<br />";
-                echo "<strong>Beschrijving: </strong>" . $addBeschrijving . "<br />";
-            ?>
-
-            </header>
-            <!-- Display movie review contents -->
-            <div class="entry-content"><?php the_content(); ?></div>
-        </article>
- 
-    <?php endwhile; ?>
-    </div>
-</div>
+</article>
 <?php wp_reset_query(); ?>
 <?php get_footer(); ?>

@@ -2,7 +2,7 @@
 	/*
 	Plugin Name: Groenestraat Projects
 	Plugin URI: http://www.groenestraat.be
-	Description: This plugin adds the project and project post custom post types to your WordPress installation. Capabilities for all kinds of roles are also set.
+	Description: This plugin adds the project and project post custom post types to your WordPress installation.
 	Version: 1.0
 	Author: Kristof Colpaert
 	Author URI: http://www.groenestraat.be
@@ -10,19 +10,17 @@
 	License: GPLv2
 	*/
 
-	// Install the plugin when activated
+	/*
+	** Installation and actions
+	*/
+
 	register_activation_hook(__FILE__, 'prowp_project_install');
 
-	// Add actions
 	add_action('init', 'prowp_register_projects');
 	add_action('save_post', 'save_location_metaboxes', 1, 2);
 	add_action('do_meta_boxes', 'show_custom_featured_imagebox');
 
-	/*
-	** Install the custom post type
-	*/
-
-	// Install the custom post type for projects and add a category
+	// The method installs a custom category and applies the new capabilities.
 	function prowp_project_install()
 	{
 		wp_create_category('Projectartikels');
@@ -33,7 +31,6 @@
 	** Register the custom post type for projects
 	*/
 
-	// Register the custom post type
 	function prowp_register_projects()
 	{
 		$args = array(
@@ -81,7 +78,6 @@
 	** Provide metaboxes for the custom post type
 	*/
 
-	// Add the location metabox
 	function add_location_metaboxes()
 	{
 		global $post;
@@ -89,7 +85,6 @@
 		add_meta_box('projectsLocation', 'Locatiegegevens', 'location_metaboxes_callback', $post->post_type, 'normal', 'high');
 	}
 
-	// Generate the HTML for the metabox
 	function location_metaboxes_callback()
 	{
 		global $post;
@@ -98,19 +93,20 @@
    		echo '<input type="hidden" name="eventmeta_noncename" id="eventmeta_noncename" value="' .
     	wp_create_nonce( plugin_basename(__FILE__) ) . '" />';
 
-    	// Get the original data if it has already been entered
     	$locationStreet = get_post_meta($post->ID, '_locationStreet', true);
     	$locationCity = get_post_meta($post->ID, '_locationCity', true);
     	$locationZipcode = get_post_meta($post->ID, '_locationZipcode', true);
+
     	echo '<label class="projectLabel" for="locationStreet">Straatnaam van het project</label>';
     	echo '<input id="locationStreet" type="text" name="_locationStreet" value="' . $locationStreet  . '" class="widefat" />';
+
     	echo '<label for="locationCity">Gemeente van het project</label>';
     	echo '<input id="locationCity" type="text" name="_locationCity" value="' . $locationCity . '" class="widefat" />';
+
     	echo '<label for="locationZipcode">Postcode van het project</label>';
     	echo '<input id="locationZipcode" type="text" name="_locationZipcode" value="' . $locationZipcode . '" class="widefat" />';
 	}
 
-	// Save the metabox data
 	function save_location_metaboxes($post_id, $post)
 	{
 		if(!wp_verify_nonce($_POST['eventmeta_noncename'], plugin_basename(__FILE__)))
@@ -151,7 +147,6 @@
 		}
 	}
 
-	// Show the custom featured imagebox
 	function show_custom_featured_imagebox()
 	{
 	    remove_meta_box('postimagediv', 'Projects', 'side');
@@ -163,7 +158,6 @@
 	** Add capabilities for all kinds of roles in WordPress
 	*/
 
-	// Add capabilities to roles.
 	function add_project_capability() 
 	{
 	    $roleAuthor = get_role('author');

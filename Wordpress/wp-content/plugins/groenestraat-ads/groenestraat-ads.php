@@ -10,42 +10,44 @@
 	License: GPLv2
 	*/
 
-	// Install the plugin when activated
+	/*
+	** Installation and actions
+	*/
+
 	register_activation_hook(__FILE__, 'prowp_ad_install');
 
-	// Add actions
-	//Onderstaande code zal ervoor zorgen dat er een nieuw menu-item wordt toegevoegd. Init is altijd verplicht (zal zorgen dat uw custom post type geïnitialiseerd is)
-	add_action('init', 'prowp_register_zoekertjes');
+	add_action('init', 'prowp_register_ads');
 	add_action('do_meta_boxes', 'hide_project_metabox_ad');
-
-	//opslaan
 	add_action('save_post', 'save_ad_metaboxes', 1, 2); 
 
+	// The method applies the new capabilities
 	function prowp_ad_install()
 	{
 		add_ad_capability();
+		flush_rewrite_rules();
 	}
 
+	/*
+	** Register the custom post type for events
+	*/
 
-	// Register the custom projects post type
-	function prowp_register_zoekertjes()
+	function prowp_register_ads()
 	{
 		$labels = array(
-			'name' => 'Zoekertjes',
-			'singular_name' => 'Zoekertje',
-			'add_new' => 'Nieuw Zoekertje Toevoegen',
-			'add_new_item' => 'Nieuw Zoekertje Toevoegen',
-			'edit_item' => 'Zoekertje bewerken',
-			'new_item' => 'Nieuw Zoekertje',
-			'all_items' => 'Alle Zoekertjes',
-			'view_item' => 'Zoekertje weergeven',
-			'search_items' => 'Zoek Zoekertjes',
-			'not_found' => 'Er werden geen Zoekertjes gevonden',
-			'not_found_in_trash' => 'Er werden geen Zoekertjes gevonden in de prullenbak',
-			'menu_name' => 'Zoekertjes'
+			'name' => 'Ads',
+			'singular_name' => 'Ad',
+			'add_new' => 'Nieuw Ad toevoegen',
+			'add_new_item' => 'Nieuw Ad toevoegen',
+			'edit_item' => 'Ad bewerken',
+			'new_item' => 'Nieuw Ad',
+			'all_items' => 'Alle Ads',
+			'view_item' => 'Ad weergeven',
+			'search_items' => 'Zoek Ads',
+			'not_found' => 'Er werden geen Ads gevonden',
+			'not_found_in_trash' => 'Er werden geen Ads gevonden in de prullenbak',
+			'menu_name' => 'Ads'
 		);
 
-		//een array van argumenten
 		$args = array(
 			'labels' => $labels,
 			'public' => true,
@@ -63,7 +65,7 @@
 				'edit_published_posts' => 'edit_published_ads',
 				'delete_published_posts' => 'delete_published_ads'
 			),
-			'has-archive' => true,
+			'has_archive' => true,
 			'menu_icon' => 'dashicons-search',
 			'menu_position' => 9,
 			'supports' => array('title'),
@@ -71,103 +73,92 @@
 			'register_meta_box_cb' => 'add_ad_metaboxes'
 		);
 
-		//het registreren van een nieuwe custom type
 		register_post_type('ads', $args);
 	}
 
-	// Add the Zoekertjes Meta Boxes
+	/*
+	** Provide metaboxes for the custom post type
+	*/
+
 	function add_ad_metaboxes() 
 	{
-		global $post; 
+		global $post;
 
-    	add_meta_box('wpt_ads_location', 'Zoekertjegegevens', 'ad_metaboxes_callback', $post->post_type, 'normal', 'high');
+    	add_meta_box('wpt_events_location', 'Zoekertjegegegevens', 'ad_metaboxes_callback', $post->post_type, 'normal', 'high');
 	}
 
-	// The Zoekertjes Metabox
-	function ad_metaboxes_callback() {
+	function ad_metaboxes_callback() 
+	{
 		global $post;
 		
 		// Noncename needed to verify where the data originated
 		echo '<input type="hidden" name="eventmeta_noncename" id="eventmeta_noncename" value="' . 
 		wp_create_nonce( plugin_basename(__FILE__) ) . '" />';
 		
-		$zoekertjeName = get_post_meta($post->ID, '_zoekertjeName', true);
-		$zoekertjeLocatie = get_post_meta($post->ID, '_zoekertjeLocatie', true);
-		$zoekertjeBeschrijving = get_post_meta($post->ID, '_zoekertjeBeschrijving', true);
+		$adName = get_post_meta($post->ID, '_adName', true);
+		$adLocation = get_post_meta($post->ID, '_adLocation', true);
+		$adDescription = get_post_meta($post->ID, '_adDescription', true);
 		
-		// Echo out the field
-		echo '<label class="zoekertjeLabel" for="zoekertjeName">Naam</label>';
-    	echo '<input id="zoekertjeName" type="text" name="_adName" value="' . $zoekertjeName  . '" class="widefat" />';
+		echo '<label class="adName" for="adName">Naam</label><br />';
+    	echo '<input id="adName" type="text" name="_adName" value="' . $adName . '" class="widefat"><br />';    
 
-    	echo '<label for="zoekertjeLabel">Locatie</label>';
-    	echo '<input id="zoekertjeLocatie" type="text" name="_adLocation" value="' . $zoekertjeLocatie . '" class="widefat" />';    
+    	echo '<label for="adLocation">Locatie van het zoekertje</label>';
+    	echo '<input id="adLocation" type="text" name="_adLocation" value="' . $adLocation . '" class="widefat" />';
 
-  		echo '<label for="zoekertjeLabel">Meer info</label>';
-    	echo '<textarea id="zoekertjeBeschrijving" type="text" name="_adDescription" class="widefat" >' .  $zoekertjeBeschrijving . '</textarea>';
+    	echo '<label for="adDescription">Beschrijving van het zoekertje</label>';
+    	echo '<input id="adDescription" type="text" name="_adDescription" value="' . $adDescription . '" class="widefat" />';
 	}
 
-
-	// Save the Metabox Data
-	function save_ad_metaboxes($post_id, $post) {
-		
-		// verify this came from the our screen and with proper authorization,
-		// because save_post can be triggered at other times
+	function save_ad_metaboxes($post_id, $post) 
+	{
 		if ( !wp_verify_nonce( $_POST['eventmeta_noncename'], plugin_basename(__FILE__) )) 
 		{
 			return $post->ID;
 		}
 
-		// Is the user allowed to edit the post or page?
 		if ( !current_user_can( 'edit_post', $post->ID ))
 		{
 			return $post->ID;
 		}
 
-		// OK, we're authenticated: we need to find and save the data
-		// We'll put it into an array to make it easier to loop though.
-		
 		$events_meta['_adName'] = $_POST['_adName'];
 		$events_meta['_adLocation'] = $_POST['_adLocation'];
 		$events_meta['_adDescription'] = $_POST['_adDescription'];
 		
-		// Add values of $events_meta as custom fields
 		foreach ($events_meta as $key => $value) 
 		{ 
-		// Cycle through the $events_meta array!
 			if( $post->post_type == 'revision' )
 			{
 				return;
 			}
 
-			// Don't store custom data twice
 			$value = implode(',', (array)$value); 
-			// If $value is an array, make it a CSV (unlikely)
 
 			if(get_post_meta($post->ID, $key, FALSE)) 
 			{ 
-				// If the custom field already has a value
 				update_post_meta($post->ID, $key, $value);
 			} 
 			else 
 			{ 
-				// If the custom field doesn't have a value
 				add_post_meta($post->ID, $key, $value);
 			}
 
 			if(!$value)
 			{
-				delete_post_meta($post->ID, $key); // Delete if blank
+				delete_post_meta($post->ID, $key);
 			}
 		}
 	}
 
-	// Hide the project metabox from the screen
 	function hide_project_metabox_ad()
 	{
 		remove_meta_box('projectsParent', 'Ads', 'normal');
 	}
 
-	// Add capabilities to roles.
+	/*
+	** Add capabilities for all kinds of roles in WordPress
+	*/
+
 	function add_ad_capability() 
 	{
 	    $roleAuthor = get_role('author');
@@ -188,6 +179,6 @@
 	    $roleAdministrator->add_cap('edit_ads');
 	    $roleAdministrator->add_cap('edit_published_ads');
 	    $roleAdministrator->add_cap('publish_ads');
-	    $roleAdministrator->add_cap('read_ad');
+	    $roleAdministrator->add_cap('read_ads');
 	}
 ?>

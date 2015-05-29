@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 	/*
 	Plugin Name: Groenestraat Events
 	Plugin URI: http://www.groenestraat.be
@@ -10,42 +10,26 @@
 	License: GPLv2
 	*/
 
-	// Install the plugin when activated
+	/*
+	** Installation and actions
+	*/
+
 	register_activation_hook(__FILE__, 'prowp_event_install');
 
-	// Add actions
-	//Onderstaande code zal ervoor zorgen dat er een nieuw menu-item wordt toegevoegd. Init is altijd verplicht (zal zorgen dat uw custom post type geïnitialiseerd is)
 	add_action('init', 'prowp_register_events');
 	add_action('do_meta_boxes', 'hide_project_metabox_event');
-
-	//Opslaan
 	add_action('save_post', 'save_event_metaboxes', 1, 2); 
 
-
-	add_filter( 'template_include', 'include_template_function', 1 );
-	function include_template_function( $template_path ) {
-    	if ( get_post_type() == 'events' ) {
-           if ( is_single() )
-	   {
-            		// checks if the file exists in the theme first,
-            		// otherwise serve the file from the plugin
-            	if ( $theme_file = locate_template( array ( 'single-events.php' ) ) ) {
-            	    $template_path = $theme_file;
-            	} else {
-               	 $template_path = plugin_dir_path( __FILE__ ) . '/single-events.php';
-            	}
-           }
-    	}
-    	return $template_path;
-	}
-
-	// Install the custom post type for projects and add a category
+	// The method applies the new capabilities
 	function prowp_event_install()
 	{
 		add_event_capability();
 	}
 
-	// Register the custom projects post type
+	/*
+	** Register the custom post type for events
+	*/
+
 	function prowp_register_events()
 	{
 		$labels = array(
@@ -63,7 +47,6 @@
 			'menu_name' => 'Events'
 		);
 
-		//een array van argumenten
 		$args = array(
 			'labels' => $labels,
 			'public' => true,
@@ -89,20 +72,22 @@
 			'register_meta_box_cb' => 'add_event_metaboxes'
 		);
 
-		//het registreren van een nieuwe custom type
 		register_post_type('events', $args);
 	}
 
-	// Add the Events Meta Boxes
-	function add_event_metaboxes() {
+	/*
+	** Provide metaboxes for the custom post type
+	*/
+
+	function add_event_metaboxes() 
+	{
 		global $post;
 
     	add_meta_box('wpt_events_location', 'Eventgegegevens', 'event_metaboxes_callback', $post->post_type, 'normal', 'high');
 	}
 
-	// The Event Location Metabox
-
-	function event_metaboxes_callback() {
+	function event_metaboxes_callback() 
+	{
 		global $post;
 		
 		// Noncename needed to verify where the data originated
@@ -113,7 +98,6 @@
 		$eventLocation = get_post_meta($post->ID, '_eventLocation', true);
 		$eventMoreInfo= get_post_meta($post->ID, '_eventMoreInfo', true);
 		
-		// Echo out the field
 		echo '<label class="eventTime" for="eventTime">Datum</label><br />';
     	echo '<input id="eventTime" type="date" name="_eventTime" value="' . $eventTime . '" class="eventTime"><br />';    
 
@@ -124,66 +108,56 @@
     	echo '<input id="eventMoreInfo" type="text" name="_eventMoreInfo" value="' . $eventMoreInfo . '" class="widefat" />';
 	}
 
-	// Save the Metabox Data
-	function save_event_metaboxes($post_id, $post) {
-		
-		// verify this came from the our screen and with proper authorization,
-		// because save_post can be triggered at other times
+	function save_event_metaboxes($post_id, $post) 
+	{
 		if ( !wp_verify_nonce( $_POST['eventmeta_noncename'], plugin_basename(__FILE__) )) 
 		{
 			return $post->ID;
 		}
 
-		// Is the user allowed to edit the post or page?
 		if ( !current_user_can( 'edit_post', $post->ID ))
 		{
 			return $post->ID;
 		}
 
-		// OK, we're authenticated: we need to find and save the data
-		// We'll put it into an array to make it easier to loop though.
 		$events_meta['_eventLocation'] = $_POST['_eventLocation'];
 		$events_meta['_eventMoreInfo'] = $_POST['_eventMoreInfo'];
 		$events_meta["_eventTime"] = $_POST['_eventTime'];
 		
-		// Add values of $events_meta as custom fields
 		foreach ($events_meta as $key => $value) 
 		{ 
-		// Cycle through the $events_meta array!
 			if( $post->post_type == 'revision' )
 			{
 				return;
 			}
 
-			// Don't store custom data twice
 			$value = implode(',', (array)$value); 
-			// If $value is an array, make it a CSV (unlikely)
 
 			if(get_post_meta($post->ID, $key, FALSE)) 
 			{ 
-				// If the custom field already has a value
 				update_post_meta($post->ID, $key, $value);
 			} 
 			else 
 			{ 
-				// If the custom field doesn't have a value
 				add_post_meta($post->ID, $key, $value);
 			}
 
 			if(!$value)
 			{
-				delete_post_meta($post->ID, $key); // Delete if blank
+				delete_post_meta($post->ID, $key);
 			}
 		}
 	}
 
-	// Hide the project metabox from the screen
 	function hide_project_metabox_event()
 	{
 		remove_meta_box('projectsParent', 'Events', 'normal');
 	}
 
-	// Add capabilities to roles.
+	/*
+	** Add capabilities for all kinds of roles in WordPress
+	*/
+
 	function add_event_capability() 
 	{
 	    $roleAuthor = get_role('author');
