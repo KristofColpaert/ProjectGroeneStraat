@@ -38,7 +38,7 @@
 	{
 		$args = array(
 			'public' => true,
-			'capability_type' => 'projecten',
+			'capability_type' => 'projects',
 			'capabilities' => array(
 				'publish_posts' => 'publish_projecten',
 				'edit_posts' => 'edit_projecten',
@@ -74,7 +74,7 @@
 			'register_meta_box_cb' => 'add_location_metaboxes'
 		);
 
-		register_post_type('projecten', $args);
+		register_post_type('projects', $args);
 	}
 
 	/*
@@ -154,9 +154,9 @@
 	// Show the custom featured imagebox
 	function show_custom_featured_imagebox()
 	{
-	    remove_meta_box('postimagediv', 'Projecten', 'side');
-	    remove_meta_box('projectsParent', 'Projecten', 'normal');
-	    add_meta_box('postimagediv', __('Hoofdingsafbeelding'), 'post_thumbnail_meta_box', 'Projecten', 'normal', 'high');
+	    remove_meta_box('postimagediv', 'Projects', 'side');
+	    remove_meta_box('projectsParent', 'Projects', 'normal');
+	    add_meta_box('postimagediv', __('Hoofdingsafbeelding'), 'post_thumbnail_meta_box', 'Projects', 'normal', 'high');
 	}
 
 	/*
