@@ -19,3 +19,8 @@ De basic connection settings voor de website.
 * PHPMyAdmin: http://groenestraat.cloudapp.net/phpmyadmin/
 
 **Problemen met MySQL: in file */etc/mysql.conf.d/mysqld.cnf* binding doen naar het private interne IP-adres van de server via: *100.113.10.50*.**
+
+## Logingegevens
+
+* Login admin: admin / Groenestraat123
+* Login gebruiker: rodric / Groenestraat123
