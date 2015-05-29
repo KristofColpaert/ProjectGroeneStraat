@@ -1,6 +1,6 @@
 # Tutorial Register Plus Redux 
 
-# Stappenplan configureren Register Plus Redux
+## Configuratie
 
 1. Vink Autologin gebruiker aan.
 2. Vink bij Profiel velden volgende waarden aan. 
