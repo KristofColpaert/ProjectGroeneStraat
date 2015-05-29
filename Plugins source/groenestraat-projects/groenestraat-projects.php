@@ -175,6 +175,7 @@
 	    $roleAuthor->add_cap('edit_published_projecten');
 	    $roleAuthor->add_cap('publish_projecten');
 	    $roleAuthor->add_cap('read_project');
+	    $roleAuthor->add_cap('edit_project');
 
 	    $roleAdministrator->add_cap('delete_project');
 	    $roleAdministrator->add_cap('delete_projecten');

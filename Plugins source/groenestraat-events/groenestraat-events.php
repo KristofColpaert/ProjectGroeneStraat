@@ -179,6 +179,7 @@
 	    $roleAuthor->add_cap('edit_published_events');
 	    $roleAuthor->add_cap('publish_events');
 	    $roleAuthor->add_cap('read_event');
+	    $roleAuthor->add_cap('edit_event');
 
 	    $roleAdministrator->add_cap('delete_event');
 	    $roleAdministrator->add_cap('delete_events');
