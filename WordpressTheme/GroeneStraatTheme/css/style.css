@@ -15,6 +15,7 @@ darkgray = #69686e
 
 body
 {
+    background-color: #f8f7f7;
     font-size:0.625em;
     font-family: "Lane", "Arial", sans-serif;
 }
@@ -79,13 +80,6 @@ header img
     float: left;
 }
 
-
-img 
-{
-    max-width:100%;
-    height:auto;
-}
-
 header .menu
 {
     float:right;
@@ -102,18 +96,28 @@ header .menu
     text-transform: uppercase;
 }
 
+ img 
+{
+    max-width:100%;
+    height:auto;
+}
+
+/*
 .aanmelden
 {
+    float:left;
+    display: inline-block;
     color: #00cd00;
     border: 1px solid #00cd00;
     background-color: #f8f7f7;
     text-decoration: none;
     font-size:1.7em;
     margin: 0;
-    padding:10px 20px;
+    
     text-transform: uppercase;
+    margin-top: 25px;
 }
-
+*/
 .button:hover
 {
     color: #f8f7f7;
@@ -154,32 +158,51 @@ header .menu
 
 .calender
 {
-    font-size:0.9em;
-    width: 100%;
-    height: 20%;
+    font-size:0.85em;
+    width: 94%;
+    padding:2%;
+    height: 65px;
     background-color: #ffffff;
+    margin-bottom: 2%;
+}
+
+.calender .calender-image
+{
+    position: relative;
+    text-align: left;
+}
+.calender .calender-image img
+{
+    position: absolute;
+    top:0;
+    z-index: 9;
+}
+.calender .calender-image em
+{
+    position: absolute;
+    z-index: 99999;
+    font-size:3em;
+    float: left;
+    top:10px;
+}
+
+.calender strong
+{
+    font-size:0.9em;
 }
 
 .calender img
 {
     display: block;
     float:left;
-    width:80px;
-}
-
-.calender .calender-content
-{
-    background-color: green;
-    float: right;
-    
-    height: 100%;
+    width: 50px;
+    height: 40px;
 }
 
 .recent
 {
     width: 100%;
-    height: 290px;
-    background-color: black;
+    min-height: 325px;
 }
 
 .recent-item
@@ -350,11 +373,82 @@ footer
 {
     background-color: #69686e;
     width:100%;
-    height: 500px;
+    min-height: 500px;
 }
+
+/* FOOTER */
+
+.footer-sitemap, .footer-logo, .footer-links
+{
+    float:left;
+    width: 21.333333%;
+    margin:8% 4%;
+    padding: 2%;
+    min-height: 150px;
+}
+
+.footer-sitemap ul li, .footer-links ul li
+{
+    list-style-type: square;
+    width: 100%;
+}
+
+.footer-sitemap ul li a, .footer-links ul li a
+{
+    display: block;
+    color: #ffffff;
+    font-size:1.7em;
+    text-decoration: none;
+}
+
+.footer-sitemap ul li a:hover, .footer-links ul li a:hover
+{
+    text-decoration: underline;
+}
+
+/*
+
+.menu ul 
+{
+    height: 100%;
+    
+}
+.menu ul li
+{
+    list-style-type: none;
+    display: inline;
+    float:left;
+}
+
+.menu ul li a 
+{
+    display: block;
+    color: #a2a1a9;;
+    text-decoration: none;
+    font-size:1.7em;
+    padding:24px 20px;
+}
+
+
+*/
 
 /* MEDIA QUERIES */
 /* vanaf bepaalde breedte titels automatisch laten zien*/
+
+
+
+@media (max-width: 480px) 
+{
+    /*
+    img 
+    {
+        display: block;
+        max-width:100%;
+        height:auto;
+        margin: auto 0;
+    }
+    */
+}
 
 @media (max-width: 530px) 
 {
@@ -368,11 +462,6 @@ footer
 }
 @media (max-width: 840px) 
 {
-    .home-title>h1
-    {
-        line-height: 175px;
-        font-size: 3.8em;
-    }
     .recent-item
     {
         float:left;
@@ -380,13 +469,19 @@ footer
         height: 90%;
         padding: 5%;
     }
+    .home-title>h1
+    {
+        line-height: 175px;
+        font-size: 3.8em;
+    }
+    
     .recent-zoekertjes .zoekertje-item
     {
         float:left;
         width: 70%;
         margin:5% 10%;
         padding:5%;
-        min-height: 150px;
+        height: 150px;
         background-color: #ffffff;
         text-align: center;
     }
@@ -430,4 +525,21 @@ footer
     {
         display: block;
     }
+}
+
+@media (max-width: 1165px) 
+{
+    .calender
+    {
+        text-align: right;
+    }
+    .footer-sitemap, .footer-logo, .footer-links
+    {
+        float:left;
+        width: 70%;
+        margin:10% 10%;
+        padding:5%;
+        min-height: 250px;
+    }
+    
 }
