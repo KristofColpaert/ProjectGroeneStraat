@@ -1,6 +1,6 @@
 # Events weergeven voor designers
 
-## Data van een project
+## Data van een event
 
 Projecten hebben:
 * Title (default WordPress)
