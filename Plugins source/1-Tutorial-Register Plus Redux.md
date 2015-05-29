@@ -2,9 +2,9 @@
 
 ## Configuratie
 
-1. Vink Autologin gebruiker aan.
-2. Vink bij Profiel velden volgende waarden aan. 
-      1.Voornaam
+* Vink Autologin gebruiker aan.
+* Vink bij Profiel velden volgende waarden aan. 
+      * Voornaam
 ⋅⋅2.Achternaam
 3. Vink Verander wachtwoord aan.
 ⋅⋅1. Dwing nieuwe gebruikers het wachtwoord te veranderen tijdens registratie.. moet u aanvinken
