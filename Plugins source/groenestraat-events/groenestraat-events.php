@@ -24,15 +24,15 @@
 
 	add_filter( 'template_include', 'include_template_function', 1 );
 	function include_template_function( $template_path ) {
-    	if ( get_post_type() == 'Eventen' ) {
+    	if ( get_post_type() == 'events' ) {
            if ( is_single() )
 	   {
             		// checks if the file exists in the theme first,
             		// otherwise serve the file from the plugin
-            	if ( $theme_file = locate_template( array ( 'single-Eventen.php' ) ) ) {
+            	if ( $theme_file = locate_template( array ( 'single-events.php' ) ) ) {
             	    $template_path = $theme_file;
             	} else {
-               	 $template_path = plugin_dir_path( __FILE__ ) . '/single-Eventen.php';
+               	 $template_path = plugin_dir_path( __FILE__ ) . '/single-events.php';
             	}
            }
     	}
