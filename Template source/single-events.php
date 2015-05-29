@@ -6,28 +6,29 @@ get_header(); ?>
 <div id="primary">
     <div id="content" role="main">
     <?php
-    $mypost = array( 'post_type' => 'events',);
+    global $post;
+    $mypost = array( 'post_type' => 'events', 'p' => $post->ID,);
     $loop = new WP_Query( $mypost );
     ?>
     <?php while ( $loop->have_posts() ) : $loop->the_post();?>
+
         <article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
             <header class="entry-header">
                 <!-- Display Title and Author Name -->
                 <strong>Title: </strong><?php the_title(); ?><br />
 
-			<?php
-				$meta = get_post_custom($mypost->ID);
+            <?php
+                $meta = get_post_custom($mypost->ID);
+                
+                $eventTime = $meta['_eventTime'][0];
+                $eventLocation = $meta['_eventLocation'][0];
+                $eventMoreInfo= $meta['_eventMoreInfo'][0];
 
-				//$eventName = $meta['_eventName'][0];
-				$eventTime = $meta['_eventTime'][0];
-				$eventLocation = $meta['_eventLocation'][0];
-				$eventMoreInfo= $meta['_eventMoreInfo'][0];
-
-				//echo "<strong>Name: </strong>" . $eventName . "<br />";
-				echo "<strong>Datum: </strong>" . $eventTime . "<br />";
-				echo "<strong>Locatie: </strong>" . $eventLocation . "<br />";
-				echo "<strong>Meer info: </strong>" . $eventMoreInfo . "<br />";
-			?>
+                //echo "<strong>Name: </strong>" . $eventName . "<br />";
+                echo "<strong>Datum: </strong>" . $eventTime . "<br />";
+                echo "<strong>Locatie: </strong>" . $eventLocation . "<br />";
+                echo "<strong>Meer info: </strong>" . $eventMoreInfo . "<br />";
+            ?>
 
             </header>
             <!-- Display movie review contents -->
