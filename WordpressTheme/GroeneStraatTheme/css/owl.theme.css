@@ -4,7 +4,6 @@
 */
 
 .owl-theme .owl-controls{
-	margin-top: 10px;
 	text-align: center;
 }
 
@@ -45,13 +44,13 @@
 	display: block;
 	width: 12px;
 	height: 12px;
-	margin: 5px 7px;
+	margin: 20px 7px;
 	filter: Alpha(Opacity=50);/*IE7 fix*/
 	opacity: 0.5;
 	-webkit-border-radius: 20px;
 	-moz-border-radius: 20px;
 	border-radius: 20px;
-	background: #869791;
+	background: #ffffff;
 }
 
 .owl-theme .owl-controls .owl-page.active span,

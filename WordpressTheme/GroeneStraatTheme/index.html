@@ -5,16 +5,10 @@
     <title>Groene Straat - Home</title>
     <link rel="icon" href="img/favicon.ico" type="image/x-icon" />
     <link rel="stylesheet" href="css/style.css" media="all" />
-
-    <!-- Important Owl stylesheet -->
     <link rel="stylesheet" href="css/owl.carousel.css">
-    <!-- Default Theme -->
     <link rel="stylesheet" href="css/owl.theme.css">
-    <!--  jQuery 1.7+  -->
     <script src="js/jquery-1.9.1.min.js"></script>
-    <!-- Include js plugin -->
     <script src="js/owl.carousel.js"></script>
-    
 </head>
 <body>
     <header>
@@ -22,7 +16,7 @@
             <section id="mobile-nav"></section>
             <div class="wrapper">
                 <img src="img/mobile.png" class="mnav" width="65" height="65" alt="" title="" />
-                <a href="#"><img src="img/logo.png" class="logo" width="390" height="65" alt="" title="" /></a>
+                <a href="#"><img src="img/logo.svg" class="logo" width="400" height="65" alt="" title="" /></a>
             </div>
             <section class="menu">
                 <ul>
@@ -109,25 +103,50 @@
         <h1>Projecten</h1>
     </section>
     <section class="recent-projects">
-        
-            
-
-    <div id="owl-demo">
-              
-      <div class="item"><img src="assets/owl1.jpg" alt="Owl Image"></div>
-      <div class="item"><img src="assets/owl2.jpg" alt="Owl Image"></div>
-      <div class="item"><img src="assets/owl3.jpg" alt="Owl Image"></div>
-      <div class="item"><img src="assets/owl4.jpg" alt="Owl Image"></div>
-      <div class="item"><img src="assets/owl5.jpg" alt="Owl Image"></div>
-      <div class="item"><img src="assets/owl6.jpg" alt="Owl Image"></div>
-      <div class="item"><img src="assets/owl7.jpg" alt="Owl Image"></div>
-      <div class="item"><img src="assets/owl8.jpg" alt="Owl Image"></div>
-     
-    </div>
-
-
-        
-        
+        <div id="recent-projects-slider">
+            <div class="item fade">
+                <div class="overlay">
+                    <h1>Vlindertuin in de bosstraat</h1>
+                </div>
+                <img src="assets/owl2.jpg" alt="Owl Image">
+            </div>
+            <div class="item fade">
+                <div class="overlay">
+                    <h1>Vlindertuin in de bosstraat</h1>
+                </div>
+                <img src="assets/owl3.jpg" alt="Owl Image">
+            </div>
+            <div class="item fade">
+                <div class="overlay">
+                    <h1>Vlindertuin in de bosstraat</h1>
+                </div>
+                <img src="assets/owl4.jpg" alt="Owl Image">
+            </div>
+            <div class="item fade">
+                <div class="overlay">
+                    <h1>Vlindertuin in de bosstraat</h1>
+                </div>
+                <img src="assets/owl5.jpg" alt="Owl Image">
+            </div>
+            <div class="item fade">
+                <div class="overlay">
+                    <h1>Vlindertuin in de bosstraat</h1>
+                </div>
+                <img src="assets/owl6.jpg" alt="Owl Image">
+            </div>
+            <div class="item fade">
+                <div class="overlay">
+                    <h1>Vlindertuin in de bosstraat</h1>
+                </div>
+                <img src="assets/owl7.jpg" alt="Owl Image">
+            </div>
+            <div class="item fade">
+                <div class="overlay">
+                    <h1>Vlindertuin in de bosstraat</h1>
+                </div>
+                <img src="assets/owl8.jpg" alt="Owl Image">
+            </div>
+        </div>        
     </section>    
     <section class="home-title">
         <h1>Zoekertjes</h1>
@@ -164,9 +183,24 @@ Werkt op benzine.</p><br/>
         <section class="clear"></section>
     </section>
     <footer>
-        <section class="footer-partners"></section>
+        <section class="footer-partners">
+            <div id="partners-slider">
+                <div class="item"><img src="img/partner-example.jpg" alt="partner"></div>
+                <div class="item"><img src="img/partner-example.jpg" alt="partner"></div>
+                <div class="item"><img src="img/partner-example.jpg" alt="partner"></div>
+                <div class="item"><img src="img/partner-example.jpg" alt="partner"></div>
+                <div class="item"><img src="img/partner-example.jpg" alt="partner"></div>
+                <div class="item"><img src="img/partner-example.jpg" alt="partner"></div>
+                <div class="item"><img src="img/partner-example.jpg" alt="partner"></div>
+                <div class="item"><img src="img/partner-example.jpg" alt="partner"></div>
+                <div class="item"><img src="img/partner-example.jpg" alt="partner"></div>
+                <div class="item"><img src="img/partner-example.jpg" alt="partner"></div>
+                <div class="item"><img src="img/partner-example.jpg" alt="partner"></div>
+                <div class="item"><img src="img/partner-example.jpg" alt="partner"></div>
+            </div>       
+        </section>
         <section class="footer-content">
-            <section class="footer-sitemap">
+            <section class="footer-sitemap" style="background-color:black">
                 <ul>
                     <li><a href="#">sitemap item link</a></li>
                     <li><a href="#">sitemap item link</a></li>
@@ -194,10 +228,10 @@ Werkt op benzine.</p><br/>
                     <li><a href="#">sitemap item link</a></li>
                 </ul>
             </section>
-            <section class="footer-logo">
+            <section class="footer-logo" style="background-color:black">
                 <img src="img/logo_large.svg" width="500" height="500" alt="" title="" />
             </section>
-            <section class="footer-links">
+            <section class="footer-links" style="background-color:black">
                 <ul>
                     <li><a href="#">gebruikersvoorwaarden</a></li>
                     <li><a href="#">gebruikersvoorwaarden</a></li>
@@ -225,17 +259,11 @@ Werkt op benzine.</p><br/>
             <section class="clear"></section>
         </section>
     </footer>
-    
     <script>
-    
         
-
-    $(document).ready(function() {
-     
-      $("#owl-demo").owlCarousel({
-     
-          autoPlay: 3000, //Set AutoPlay to 3 seconds
-     
+    $(document).ready(function() 
+    { 
+      $("#recent-projects-slider").owlCarousel({
             items : 5,
             itemsDesktop : [1199,3],
             itemsDesktopSmall : [979,3],
@@ -243,15 +271,33 @@ Werkt op benzine.</p><br/>
             responsive: true,
             autoHeight : false,
             pagination : false,
-            paginationNumbers: false
-        
-     
+            paginationNumbers: false,
+            stopOnHover: true,
+            mouseDrag: true,
+            touchDrag: true
       });
-     
+        
+      $("#partners-slider").owlCarousel({
+            autoPlay: 5000,
+            items : 5,
+            itemsDesktop : [1199,3],
+            itemsDesktopSmall : [979,3],
+            navigation : false,
+            responsive: true,
+            autoHeight : false,
+            rewindNav : true,
+            scrollPerPage : false,
+            stopOnHover: true,
+            mouseDrag: true,
+            touchDrag: true
+      });
     });
         
-    
+    $('#recent-projects-slider .item').hover(
+            function () { $(this).find('.overlay').fadeIn(300); },
+            function () { $(this).find('.overlay').fadeOut(200); }
+    );
+        
     </script>
-    
 </body>
 </html>
