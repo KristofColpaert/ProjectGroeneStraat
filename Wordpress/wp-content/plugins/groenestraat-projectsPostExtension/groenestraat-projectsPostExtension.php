@@ -1,38 +1,40 @@
 <?php
 	/*
-	Plugin Name: Groenestraat Projects Post Extension
+	Plugin Name: Groenestraat Projecten Uitbreiding
 	Plugin URI: http://www.groenestraat.be
-	Description: This plugin adds a custom metabox to the built-in Post type. In this metabox, users can choose whether or not they want to assign the post to a specific project they are a member of.
+	Description: Deze plugin zorgt ervoor dat berichten, events en zoekertjes kunnen toegekend worden aan een project (of aan de algemene site).
 	Version: 1.0
-	Author: Kristof Colpaert
+	Author: Rodric Degroote, Kristof Colpaert
 	Author URI: http://www.groenestraat.be
 	Text Domain: prowp-plugin
 	License: GPLv2
 	*/
 
-	// Add actions
-	add_action('load-post.php', 'post_metaboxes_setup');
-	add_action('load-post-new.php', 'post_metaboxes_setup');
-	add_action('save_post', 'post_metaboxes_save', 1, 2);
+	/*
+		Add actions
+	*/
+	add_action('load-post.php', 'parentproject_metaboxes_setup');
+	add_action('load-post-new.php', 'parentproject_metaboxes_setup');
+	add_action('save_post', 'parentproject_metaboxes_save', 1, 2);
 
-	// Method to setup the metaboxes that we want to show on the screen
-	function post_metaboxes_setup() 
+	/*
+		Set up parent project metaboxes
+	*/
+
+	function parentproject_metaboxes_setup() 
 	{
-	  add_action('add_meta_boxes', 'post_metaboxes_add');
+	  add_action('add_meta_boxes', 'parentproject_metaboxes_add');
 	}
 
-	// Create metaboxes to show on the screen
-	function post_metaboxes_add() 
+	function parentproject_metaboxes_add() 
 	{
 		global $post; 
 
-	  	add_meta_box('projectsParent', 'Project', 'post_metaboxes_callback', $post->post_type, 'normal', 'high');
+	  	add_meta_box('parentproject', 'Project', 'parentproject_metaboxes_callback', $post->post_type, 'normal', 'high');
 	}
 
-	// Display the post metabox
-	function post_metaboxes_callback( $object, $box ) 
+	function parentproject_metaboxes_callback( $object, $box ) 
 	{ 
-		// Get projects
 		$parents = get_posts(
 			array(
 				'post_type' => 'projecten',
@@ -46,8 +48,8 @@
 		{
 			global $post; 
 
-			$postParentId = get_post_meta($post->ID, '_projectParentId', true);
-			echo '<select name="_projectParentId" class="widefat">';
+			$postParentId = get_post_meta($post->ID, '_parentProjectId', true);
+			echo '<select name="_parentProjectId" class="widefat">';
 			echo '<option value="0">Geen Project</option>';
 
 			foreach($parents as $parent)
@@ -57,13 +59,10 @@
 			echo '</select>';
 		}
 
-	  	// Noncename needed to verify where the data originated
-   		echo '<input type="hidden" name="eventmeta_noncename" id="eventmeta_noncename" value="' .
-    	wp_create_nonce( plugin_basename(__FILE__) ) . '" />';
-
+   		echo '<input type="hidden" name="eventmeta_noncename" id="eventmeta_noncename" value="' . wp_create_nonce( plugin_basename(__FILE__) ) . '" />';
 	}
 
-	function post_metaboxes_save($post_id, $post)
+	function parentproject_metaboxes_save($post_id, $post)
 	{
 		if(!wp_verify_nonce($_POST['eventmeta_noncename'], plugin_basename(__FILE__)))
 		{
@@ -75,9 +74,11 @@
 			return $post->ID;
 		}
 
-		$events_meta['_projectParentId'] = $_POST['_projectParentId'];
+		print_r($_POST);
 
-		if($events_meta['_projectParentId'] != 0)
+		$events_meta['_parentProjectId'] = $_POST['_parentProjectId'];
+
+		if($events_meta['_parentProjectId'] != 0)
 		{
 			$category = get_category_by_slug('projectartikels'); 
   			$categoryId = $category->term_id;
