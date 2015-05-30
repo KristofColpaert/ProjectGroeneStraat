@@ -1,6 +1,6 @@
 <?php
 	/*
-		Plugin Name: Groenestraat Projecten
+		Plugin Name: Groenestraat Events
 		Plugin URI: http://www.groenestraat.be
 		Description: Deze plugin voegt het Events custom post type toe. 
 		Version: 1.0
