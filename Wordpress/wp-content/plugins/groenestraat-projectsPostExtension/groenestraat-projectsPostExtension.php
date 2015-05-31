@@ -74,8 +74,6 @@
 			return $post->ID;
 		}
 
-		print_r($_POST);
-
 		$events_meta['_parentProjectId'] = $_POST['_parentProjectId'];
 
 		if($events_meta['_parentProjectId'] != 0)
