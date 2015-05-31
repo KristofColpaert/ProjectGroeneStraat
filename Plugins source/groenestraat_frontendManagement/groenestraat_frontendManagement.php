@@ -11,4 +11,5 @@
 	*/
 
 	include_once('groenestraat_frontendManagement_new_project.php');
+	include_once('groenestraat_frontendManagement_edit_project.php');
 ?>
