@@ -10,6 +10,7 @@
 		$projectZipcode = $meta['_projectZipcode'][0];
 		?>
 			<h1><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h1>
+			<p>Hoofdbericht: <?php the_content() ?></p>
 			<p>Straat: <?php echo $projectStreet; ?></p>
 			<p>Gemeente: <?php echo $projectCity; ?></p>
 			<p>Postcode: <?php echo $projectZipcode; ?></p>
