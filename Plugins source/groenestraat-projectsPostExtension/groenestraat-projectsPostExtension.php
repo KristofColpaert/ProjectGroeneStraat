@@ -64,7 +64,7 @@
 
 	function parentproject_metaboxes_save($post_id, $post)
 	{
-		if(!wp_verify_nonce($_POST['eventmeta_noncename'], plugin_basename(__FILE__)))
+		if(!isset( $_POST['eventmeta_noncename'] ) || !wp_verify_nonce($_POST['eventmeta_noncename'], plugin_basename(__FILE__)))
 		{
 			return $post->ID;
 		}

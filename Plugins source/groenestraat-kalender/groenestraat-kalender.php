@@ -2,19 +2,33 @@
 	/*
 		Plugin Name: Groenestraat Persoonlijke Kalender
 		Plugin URI: http://www.groenestraat.be
-		Description: Deze plugin voegt een persoonlijke kalender custom post type toe. 
+		Description: Deze plugin voegt een persoonlijke kalender page toe.
 		Version: 1.0
 		Author: Rodric Degroote, Kristof Colpaert
 		Author URI: http://www.groenestraat.be
 		Text Domain: prowp-plugin
 		License: GPLv2		
 	*/
-	
+
 	/*
-		Add actions
+		Install plugin
 	*/
-	
-	add_action('init', 'prowp_register_kalender');
+
+	register_activation_hook(__FILE__, 'prowp_personal_calendar_install');
+
+	function prowp_personal_calendar_install()
+	{
+		$content = '[personal_calendar]';
+		$args = array(
+			'post_title' => 'Kalender',
+			'post_content' => $content,
+			'post_name' => 'kalender',
+			'post_status' => 'publish', 
+			'post_type' => 'page',
+			'ping_status' => 'closed'
+		);
+		wp_insert_post($args);
+	}
 
 	/*
 		Add shortcode
@@ -42,14 +56,9 @@
 			$events[] = $event;
 		}
 
-
 		?>
 			<link href='<?php echo plugins_url('fullcalendar.css', __FILE__); ?>' rel='stylesheet' />
 			<link href='<?php echo plugins_url('fullcalendar.print.css', __FILE__); ?>' rel='stylesheet' media='print' />
-
-			<!--<script src='<?php echo plugins_url('lib/moment.min.js', __FILE__); ?>'></script>
-			<script src='<?php echo plugins_url('lib/jquery.min.js', __FILE__); ?>'</script>
-			<script src='<?php echo plugins_url('fullcalendar.min.js', __FILE__); ?>'</script>-->
 
 			<script src='http://fullcalendar.io/js/fullcalendar-2.1.1/lib/moment.min.js'></script>
 			<script src='http://fullcalendar.io/js/fullcalendar-2.1.1/lib/jquery.min.js'></script>
@@ -62,20 +71,20 @@
 					$('#calendar').fullCalendar({
 						defaultDate: new Date(),
 						editable: true,
-						eventLimit: true, // allow "more" link when too many events
+						eventLimit: true,
 						events: [
-								<?php 
-									foreach($events as $event)
-									{
-										?>
-											{
-												title: '<?php echo $event->post_title; ?>',
-												start: '<?php echo $event->eventTime; ?>',
-												url: '<?php echo get_permalink($event->ID); ?>'
-											},
-										<?php
-									}
-								?>
+							<?php 
+								foreach($events as $event)
+								{
+									?>
+										{
+											title: '<?php echo $event->post_title; ?>',
+											start: '<?php echo $event->eventTime; ?>',
+											url: '<?php echo get_permalink($event->ID); ?>'
+										},
+									<?php
+								}
+							?>
 						]
 					});
 					
