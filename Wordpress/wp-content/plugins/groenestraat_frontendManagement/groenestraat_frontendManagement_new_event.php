@@ -13,7 +13,7 @@
 
 	function show_new_event_form()
 	{
-		if(current_user_can('publish_events'))
+		if(current_user_can('publish_posts'))
 		{
 			?>
 				
@@ -30,7 +30,42 @@
 						wp_editor($content, $editor_id, $settings);
 					?>
 
-					<label for="eventParent">
+					<label for="parentProjectId">Project waartoe het event behoort</label>
+					<br />
+					<select id="parentProjectId" name="parentProjectId">
+						<option value="0">Geen project</option>
+						<?php
+							$parents = get_posts(
+								array(
+									'post_type' => 'projecten',
+									'orderby' => 'title',
+									'order' => 'ASC',
+									'numberposts' => -1
+								)
+							);
+
+							if(!empty($parents))
+							{
+								foreach($parents as $parent)
+								{
+									?>
+										<option value="<?php echo $parent-ID; ?>"><?php echo $parent->post_title; ?></option>
+									<?php
+								}
+							}
+						?>
+					</select>
+					<br />
+
+					<label for="eventTime">Datum van het event</label>
+					<br />
+					<input id="eventTime" name="eventTime" type="date" />
+					<br />
+
+					<label for="eventLocation">Locatie van het event</label>
+					<input id="eventLocation" name="eventLocation" type="text" />
+
+					<input id="eventPublish" name="eventPublish" type="submit" value="Publiceer" />
 				</form>
 
 			<?php
@@ -41,6 +76,70 @@
 			?>
 				<p>U hebt geen toegang tot de gevraagde pagina. Ga terug naar <a href="<?php echo home_url(); ?>">Home</a>.</p>
 			<?php
+		}
+	}
+
+	function save_new_event_form()
+	{
+		if(isset($_POST['eventPublish']))
+		{
+			if(!empty($_POST['eventTitle']) && 
+				!empty($_POST['eventDescription']) &&
+				!empty($_POST['parentProjectId']) &&
+				!empty($_POST['eventTime']) &&
+				!empty($_POST['eventLocation'])
+				)
+			{
+				$eventTitle = $_POST['eventTitle'];
+				$eventDescription = $_POST['eventDescription'];
+				$parentProjectId = $_POST['parentProjectId'];
+				$eventTime = $_POST['eventTime'];
+				$eventLocation = $_POST['eventLocation'];
+
+				if(null == get_page_by_title($eventTitle))
+				{
+					$slug = str_replace(" ", "-", $eventTitle);
+					$current_user = wp_get_current_user();
+
+					$args = array(
+						'comment_status' => 'closed',
+						'ping_status' => 'closed',
+						'post_author' => $current_user->ID,
+						'post_name' => $slug,
+						'post_title' => $eventTitle,
+						'post_content' => $eventDescription,
+						'post_status' => 'publish',
+						'post_type' => 'events'
+					);
+
+					$postId = wp_insert_post($args, false);
+
+					if($parentProjectId != 0)
+					{
+						add_post_meta($postId, '_parentProjectId', $parentProjectId);
+					}
+					add_post_meta($postId, '_eventTime', $eventTime);
+					add_post_meta($postId, '_eventLocation', $eventLocation);
+
+					?>
+						<p>Uw event werd correct toegevoegd. Ga er <a href="<?php echo esc_url(get_permalink($postId)); ?>">meteen</a> naartoe.</p>
+					<?php
+				}
+
+				else
+				{
+					?>
+						<p>Helaas, er bestaat reeds een project met deze titel.</p>
+					<?php
+				}
+			}
+
+			else
+			{
+				?>
+					<p>Gelieve alle gegevens correct in te voeren.</p>
+				<?php
+			}
 		}
 	}
 ?>

@@ -57,7 +57,7 @@
 			'public' => true,
 			'has_archive' => true,
 			'rewrite' => array('slug' => 'events'),
-			'supports' => array('title'),
+			'supports' => array('title', 'editor'),
 			'taxonomies' => array('category'),
 			'menu_icon' => 'dashicons-calendar-alt',
 			'menu_position' => 7,
@@ -87,16 +87,12 @@
 		
 		$eventTime = get_post_meta($post->ID, '_eventTime', true);
 		$eventLocation = get_post_meta($post->ID, '_eventLocation', true);
-		$eventMoreInfo= get_post_meta($post->ID, '_eventMoreInfo', true);
 		
 		echo '<label class="eventTime" for="eventTime">Datum</label><br />';
     	echo '<input id="eventTime" type="date" name="_eventTime" value="' . $eventTime . '" class="widefat"><br />';    
 
     	echo '<label for="eventLocation">Locatie van het event</label>';
     	echo '<input id="eventLocation" type="text" name="_eventLocation" value="' . $eventLocation . '" class="widefat" />';
-
-    	echo '<label for="eventMoreInfo">Meer info</label>';
-    	echo '<textarea id="eventMoreInfo" rows=10 name="_eventMoreInfo" class="widefat">' . $eventMoreInfo . '</textarea>';
 	}
 	
 	function save_events_metaboxes($post_id, $post) 
@@ -112,7 +108,6 @@
 		}
 
 		$events_meta['_eventLocation'] = $_POST['_eventLocation'];
-		$events_meta['_eventMoreInfo'] = $_POST['_eventMoreInfo'];
 		$events_meta['_eventTime'] = $_POST['_eventTime'];
 		
 		foreach ($events_meta as $key => $value) 
