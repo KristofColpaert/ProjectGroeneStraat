@@ -27,7 +27,6 @@
 	
 	add_action('init', 'prowp_register_projecten');
 	add_action('save_post', 'save_projecten_metaboxes', 1, 2);
-	add_action('do_meta_boxes', 'hide_parentproject_metaboxes');
 
 	/*
 		Register the custom post type for projecten
@@ -135,14 +134,5 @@
 				delete_post_meta($post->ID, $key);
 			}
 		}
-	}
-
-	/*
-		Hide the parent project metaboxes
-	*/
-
-	function hide_parentproject_metaboxes()
-	{
-		remove_meta_box('parentproject', 'Projecten', 'normal');
 	}
 ?>

@@ -16,37 +16,47 @@
 
 	function show_new_project_form()
 	{
-		?>
-			<form action="<?php $_SERVER['REQUEST_URI']; ?>" method="POST" enctype="multipart/form-data">
-				<label for="projectTitle">Titel van het project</label>
-				<input id="projectTitle" name="projectTitle" type="text" />
+		if(current_user_can('publish_posts'))
+		{
+			?>
+				<form action="<?php $_SERVER['REQUEST_URI']; ?>" method="POST" enctype="multipart/form-data">
+					<label for="projectTitle">Titel van het project</label>
+					<input id="projectTitle" name="projectTitle" type="text" />
 
-				<label for="projectDescription">Beschrijving van het project</label>
-				<?php 
-					$settings = array('textarea_name' => 'projectDescription');
-					$content = '';
-					$editor_id = 'projectDescription';
+					<label for="projectDescription">Beschrijving van het project</label>
+					<?php 
+						$settings = array('textarea_name' => 'projectDescription');
+						$content = '';
+						$editor_id = 'projectDescription';
 
-					wp_editor($content, $editor_id, $settings);
-				?>
+						wp_editor($content, $editor_id, $settings);
+					?>
 
-				<label for="projectStreet">Straat van het project</label>
-				<input id="projectStreet" name="projectStreet" type="text"/>
+					<label for="projectStreet">Straat van het project</label>
+					<input id="projectStreet" name="projectStreet" type="text"/>
 
-				<label for="projectCity">Gemeente van het project</label>
-				<input id="projectCity" name="projectCity" type="text" />
+					<label for="projectCity">Gemeente van het project</label>
+					<input id="projectCity" name="projectCity" type="text" />
 
-				<label for="projectZipcode">Postcode van het project</label>
-				<input id="projectZipcode" name="projectZipcode" type="text" />
+					<label for="projectZipcode">Postcode van het project</label>
+					<input id="projectZipcode" name="projectZipcode" type="text" />
 
-				<label for="projectFeaturedImage">Stel een hoofdingsafbeelding in</label>
-				<input id="projectFeaturedImage" name="projectFeaturedImage" type="file" accept="image/x-png, image/gif, image/jpeg" />
+					<label for="projectFeaturedImage">Stel een hoofdingsafbeelding in</label>
+					<input id="projectFeaturedImage" name="projectFeaturedImage" type="file" accept="image/x-png, image/gif, image/jpeg" />
 
-				<br />
-				
-				<input id="projectPublish" name="projectPublish" type="submit" value="Publiceer" />
-			</form>
-		<?php
+					<br />
+					
+					<input id="projectPublish" name="projectPublish" type="submit" value="Publiceer" />
+				</form>
+			<?php
+		}
+
+		else 
+		{
+			?>
+				<p>U hebt geen toegang tot de gevraagde pagina. Ga terug naar <a href="<?php echo home_url(); ?>">Home</a>.</p>
+			<?php
+		}
 	}
 
 	function save_new_project_form()
@@ -89,7 +99,7 @@
 				    }
 				}
 				?>
-					<p>Uw project werd correct toegevoegd. Ga er <a href="<?php echo esc_url(get_permalink($postId)); ?>">meteen</a> naartoe.
+					<p>Uw project werd correct toegevoegd. Ga er <a href="<?php echo esc_url(get_permalink($postId)); ?>">meteen</a> naartoe.</p>
 				<?php
 			}
 

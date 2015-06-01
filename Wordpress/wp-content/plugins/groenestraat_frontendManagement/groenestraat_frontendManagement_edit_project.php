@@ -21,7 +21,7 @@
 			$current_user = wp_get_current_user();
 			$project = get_post($_GET['project'], OBJECT);
 
-			if($project != null && $current_user->ID == $project->post_author && current_user_can('edit_published_posts'))
+			if($project != null && ($current_user->ID == $project->post_author || current_user_can('manage_options')) && current_user_can('edit_published_posts'))
 			{
 				?>
 					<form action="<?php $_SERVER['REQUEST_URI']; ?>" method="POST" enctype="multipart/form-data">
@@ -57,7 +57,7 @@
 
 						<input id="projectId" name="projectId" type="hidden" value="<?php echo $project->ID; ?>" />
 						
-						<input id="projectPublish" name="projectPublish" type="submit" value="Bewerk" />
+						<input id="projectEdit" name="projectEdit" type="submit" value="Bewerk" />
 					</form>
 				<?php
 			}
@@ -65,7 +65,7 @@
 			else
 			{
 				?>
-					<p>Dit project bestaat niet, of u hebt geen toegang tot de gevraagde pagina. Ga terug naar <a href="<?php echo home_url(); ?>">Home</a>.
+					<p>Dit project bestaat niet, of u hebt geen toegang tot de gevraagde pagina. Ga terug naar <a href="<?php echo home_url(); ?>">Home</a>.</p>
 				<?php
 			}
 		}
@@ -73,7 +73,7 @@
 
 	function save_edit_project_form()
 	{
-		if(isset($_POST['projectPublish']))
+		if(isset($_POST['projectEdit']))
 		{
 			$projectId = $_POST['projectId'];
 			$projectTitle = $_POST['projectTitle'];
@@ -108,7 +108,7 @@
 					}
 				}
 				?>
-					<p>Uw project werd correct gewijzigd. Ga er <a href="<?php echo esc_url(get_permalink($postId)); ?>">meteen</a> naartoe.
+					<p>Uw project werd correct gewijzigd. Ga er <a href="<?php echo esc_url(get_permalink($postId)); ?>">meteen</a> naartoe.</p>
 				<?php
 			}
 

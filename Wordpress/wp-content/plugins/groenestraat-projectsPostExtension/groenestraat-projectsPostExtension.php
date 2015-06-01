@@ -30,7 +30,7 @@
 	{
 		global $post; 
 
-	  	add_meta_box('parentproject', 'Project', 'parentproject_metaboxes_callback', $post->post_type, 'normal', 'high');
+	  	add_meta_box('parentproject', 'Project', 'parentproject_metaboxes_callback', 'post', 'normal', 'high');
 	}
 
 	function parentproject_metaboxes_callback( $object, $box ) 
@@ -54,12 +54,12 @@
 
 			foreach($parents as $parent)
 			{
-				printf('<option value="%s"%s>%s</option', esc_attr($parent->ID), selected($parent->ID, $postParentId, false), esc_html($parent->post_title));
+				printf('<option value="%s"%s>%s</option>', esc_attr($parent->ID), selected($parent->ID, $postParentId, false), esc_html($parent->post_title));
 			}
 			echo '</select>';
 		}
 
-   		echo '<input type="hidden" name="eventmeta_noncename" id="eventmeta_noncename" value="' . wp_create_nonce( plugin_basename(__FILE__) ) . '" />';
+   		echo '<input type="hidden" name="eventmeta_noncename" id="eventmeta_noncename" value="' . wp_create_nonce(plugin_basename(__FILE__)) . '" />';
 	}
 
 	function parentproject_metaboxes_save($post_id, $post)
