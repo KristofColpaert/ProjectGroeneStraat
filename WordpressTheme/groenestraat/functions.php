@@ -3,6 +3,9 @@
 function script_enqueue(){
     wp_enqueue_style('groenestraat',get_template_directory_uri().'/css/groenestraat.css', array(), '1.0.0', 'all');
     wp_enqueue_style('groenestraat_edit',get_template_directory_uri().'/css/edit.css', array(), '1.0.0', 'all');
+    wp_enqueue_style('owl-carousel-css',get_template_directory_uri().'/css/owl.carousel.css', array(), '1.0.0', 'all');
+    wp_enqueue_script('jquery-min', get_stylesheet_directory_uri() . '/js/jquery-1.9.1.min.js', array( 'jquery' ));
+    wp_enqueue_script('owl-carousel-js', get_stylesheet_directory_uri() . '/js/owl.carousel.min.js', array( 'jquery' ));
 }
 add_action('wp_enqueue_scripts', 'script_enqueue');     
 
@@ -29,21 +32,14 @@ function add_login_logout_link($items, $args) {
 
         ob_end_clean(); 
 
-        $items .= '<li class="aanmelden"><a href="'.wp_login_url(get_site_url()).'">AANMELDEN</a></li>';
+        $items .= '<li class="aanmelden"><a href="'.get_home_url().'/?page_id=29">AANMELDEN</a></li>';
     }
 
     return $items;
 
 }
-//REDIRECT TO CUSTOM LOGIN PAGE//
-function redirect_login_page() {
-    $login_page  = home_url( '/login/' );
-    $page_viewed = basename($_SERVER['REQUEST_URI']);
- 
-    if( $page_viewed == "wp-login.php" && $_SERVER['REQUEST_METHOD'] == 'GET') {
-        wp_redirect($login_page);
-        exit;
-    }
-}
-add_action('init','redirect_login_page');
-?>
+
+
+
+//////////////////////////////////////////////////////////////////
+

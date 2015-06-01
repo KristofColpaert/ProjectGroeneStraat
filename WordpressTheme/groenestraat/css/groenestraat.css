@@ -271,62 +271,157 @@ min-width: 100%;
     font-size: 5em;
 }
 
-.recent-artikel
+/* RECENT */
+
+.recent
 {
     width: 100%;
-    height: 50vw;
-    background-color:red;
+    min-height: 300px;
 }
 
-.recent-artikel .artikel-img
+.recent-item
 {
     float:left;
-    width: 65%;
+    width:23.33333%;
+    padding:5%;
     height: 100%;
-    background-color: yellow;
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-position: left left;
+    text-align: center;
+    background-color: #f8f7f7;
+}
+
+.recent-item h1
+{
+    color: #69686e;
+    margin-bottom: 10px;
+}
+
+.recent-item p
+{
+    color: #a2a1a9;
+    margin-bottom: 40px;
+}
+
+.calender
+{
+    font-size:0.85em;
+    width: 94%;
+    padding:2%;
+    height: 40px;
+    background-color: #ffffff;
+    margin-bottom: 2%;
+}
+
+.calender .calender-image
+{
+    position: relative;
+    text-align: left;
+}
+.calender .calender-image img
+{
+    position: absolute;
+    top:0;
+    z-index: 1;
+}
+.calender .calender-image em
+{
+    position: absolute;
+    top:10px;
+    z-index: 2;
+    font-size:3em;
+}
+
+.calender strong
+{
+    font-size:0.9em;
+}
+
+.calender img
+{
+    display: block;
+    float:left;
+    width: 50px;
+    height: 40px;
+}
+
+/* ARTIKELS */
+/* 
+
+todo: fix 1-2px red border???? 
+
+*/
+
+.recent-artikel
+{
+    position: relative;
+    background-color: red;
+}
+
+.artikel-info
+{
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 35%;
+    height: 100%;
+}
+
+.artikel-item
+{
+    width: 88%;
+    height: 25%;
+    padding: 0 6%;
+    background-color:#a2a1a9;
     overflow: hidden;
 }
 
-.recent-artikel .artikel-msg
+.artikel-item:hover, #active
 {
-    float:right;
-    width: 35%;
-    height: 100%;
-    background-color: black;
+    background-color:#ffffff;
 }
 
-.artikel-msg .msg-item
-{
-    /*
-    width: 96%;
-    height: 21%;
-    */
-    
-    width:100%;
-    height: 25%;
-    background-color: #a2a1a9;
-   /* padding:2%; */
-}
-
-.msg-item:hover
-{
-    background-color: #ffffff;
-}
+/* PROJECTS */
 
 .recent-projects
 {
-    background-color: #000;
+    background-color: #fff;
     width: 100%;
-    height: 200px;
+    min-height: 150px;
 }
 
-.project-item
+#recent-projects-slider .item
 {
-    
+    position: relative;
+    text-align: center;
+    color: #ffffff;
 }
+
+#recent-projects-slider .item h1
+{
+    line-height: 100%;
+    font-size: 5em;
+    text-transform: lowercase;
+}
+
+#recent-projects-slider .item .overlay
+{
+    position: absolute;
+    top: 0;
+    left: 0;
+    padding: 6% 3%;
+    width: 94%;
+    height: 88%;
+    display: none;
+    background-image: url(../img/greenfilter.png);
+    background-repeat: repeat;
+}
+
+#recent-projects-slider .item img
+{
+    width: 100%;
+    height: auto;
+}
+
+/* ZOEKERTJES */
 
 .recent-zoekertjes
 {
@@ -363,6 +458,8 @@ min-width: 100%;
     margin-top:15px;
 }
 
+/* FOOTER */
+
 footer
 {
     width: 100%;
@@ -373,7 +470,16 @@ footer
 {
     background-color: #a2a1a9;
     width:100%;
-    height: 200px;
+    min-height: 150px;
+}
+
+#partners-slider .item img
+{
+    display: block;
+    width: 100%;
+    height: auto;
+    -webkit-filter: grayscale(1);
+    filter: grayscale(1);
 }
 
 .footer-content
@@ -383,8 +489,6 @@ footer
     min-height: 500px;
 }
 
-/* FOOTER */
-
 .footer-sitemap, .footer-logo, .footer-links
 {
     float:left;
@@ -392,6 +496,13 @@ footer
     margin:8% 4%;
     padding: 2%;
     min-height: 150px;
+}
+
+.footer-logo img
+{
+    width: 300px;
+    margin: auto auto;
+    display: block;
 }
 
 .footer-sitemap ul li, .footer-links ul li
@@ -413,50 +524,15 @@ footer
     text-decoration: underline;
 }
 
-/*
-
-.menu ul 
-{
-    height: 100%;
-    
-}
-.menu ul li
-{
-    list-style-type: none;
-    display: inline;
-    float:left;
-}
-
-.menu ul li a 
-{
-    display: block;
-    color: #a2a1a9;;
-    text-decoration: none;
-    font-size:1.7em;
-    padding:24px 20px;
-}
-
-
-*/
-
 /* MEDIA QUERIES */
-/* vanaf bepaalde breedte titels automatisch laten zien*/
 
-
-
-@media (max-width: 480px) 
+@media (max-width: 375px) 
 {
-    /*
-    img 
+    nav .logo
     {
-        display: block;
-        max-width:100%;
-        height:auto;
-        margin: auto 0;
+        margin-top:3%;
     }
-    */
 }
-
 @media (max-width: 530px) 
 {
     .recent-item
@@ -469,38 +545,6 @@ footer
 }
 @media (max-width: 840px) 
 {
-    .recent-item
-    {
-        float:left;
-        width: 90%;
-        height: 90%;
-        padding: 5%;
-    }
-    .home-title>h1
-    {
-        line-height: 175px;
-        font-size: 3.8em;
-    }
-    
-    .recent-zoekertjes .zoekertje-item
-    {
-        float:left;
-        width: 70%;
-        margin:5% 10%;
-        padding:5%;
-        height: 150px;
-        background-color: #ffffff;
-        text-align: center;
-    }
-    .zoekertje-item div a, .zoekertje-item div p
-    {
-        text-align: center;
-        float:none;
-    }
-    .zoekertje-item div p
-    {
-        margin-bottom: 15px;
-    }
     .recent-artikel .artikel-img
     {
         float:left;
@@ -517,23 +561,39 @@ footer
         display: none;
     }
 }
-@media (max-width: 925px) 
+@media (max-width: 910px) 
 {
-    .logo
+    .recent-item
     {
+        float:left;
+        width: 90%;
+        height: 90%;
+        padding: 5%;
+    }
+    .recent-zoekertjes .zoekertje-item
+    {
+        float:left;
+        width: 70%;
+        margin:0 10% 5% 10%;
+        padding:5%;
+        height: 150px;
+        background-color: #ffffff;
+        text-align: center;
+    }
+    .zoekertje-item div a, .zoekertje-item div p
+    {
+        text-align: center;
         float:none;
-        position: static;
+    }
+    .zoekertje-item div p
+    {
+        margin-bottom: 15px;
     }
     .menu
     {
         visibility: hidden;
     }
-    .mnav
-    {
-        display: block;
-    }
 }
-
 @media (max-width: 1165px) 
 {
     .calender
@@ -548,5 +608,4 @@ footer
         padding:5%;
         min-height: 250px;
     }
-    
 }

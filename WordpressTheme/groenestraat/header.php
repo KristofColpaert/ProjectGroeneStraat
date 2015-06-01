@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Groene Straat - Home</title>
-    <link rel="icon" href="<?php bloginfo('template_directory'); ?>/images/favicon.ico" type="image/x-icon" />
+    <link rel="icon" href="<?php bloginfo('template_directory'); ?>/img/favicon.ico" type="image/x-icon" />
     <?php wp_head(); ?>
 </head>
 <body>
