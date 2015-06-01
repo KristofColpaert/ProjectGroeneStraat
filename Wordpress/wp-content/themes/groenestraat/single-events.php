@@ -2,21 +2,40 @@
 	/*
 		Check if user has completed the form to add Event to his personal calendar
 	*/
-
+	global $post;
 	$user_id = get_current_user_id();
 	$meta_key = "_eventCalendar ";
 
+	//ophalen data uit database
+	$value = get_user_meta($user_id, $meta_key);
+	$meta_val = $post->ID;
+
+	//Juiste value instellen
+	if(in_array($meta_val, $value))
+	{
+		$waarde = "Verwijderen uit kalender";
+	}
+	else
+	{
+		$waarde = "Toevoegen aan kalender";
+	}
+
+
 	if(isset($_POST["eventID"])){
 		$meta_value = $_POST["eventID"];
-
-		//ophalen data uit database
-		$value = get_user_meta($user_id, $meta_key);
 
 		//controle of aangeklikt event al in database (of in kalender) zit
 		if (!in_array($meta_value, $value)) 
 		{
 	    	add_user_meta($user_id, $meta_key, $meta_value);
+	    	$waarde = "Verwijderen uit kalender";
 		}
+		else
+		{
+			delete_user_meta($user_id, $meta_key, $meta_value );
+			$waarde = "Toevoegen aan kalender";
+		}
+		
 	}
 ?>
 
@@ -42,22 +61,15 @@
 			Form to add event to personal calendar.
 		*/
 
-		if(in_array($eventID, $value))
-		{
-			$hide = "hidden=hidden";
-		}
-		else
-		{
-			$hide = "";
-		}
 		?>
 
 		<form method="post" action="<?php echo get_permalink(); ?>" >
 			<h1><?php the_title(); ?></h1>
+			<!--<h3><?php echo $eventID; ?></h3>-->
 			<p name="_eventTime">Tijdstip: <?php echo $eventTime; ?></p>
 			<p>Location: <?php echo $eventLocation; ?></p>
 			<p>Meer info: <?php echo $eventMoreInfo; ?></p>
-			<input type="submit" value="Toevoegen aan calender" <?php echo $hide ?> />
+			<input type="submit" value="<?php echo $waarde; ?>" />
 
 			<input type="hidden" name="eventID" value="<?php echo $eventID; ?>" />
 		</form>
