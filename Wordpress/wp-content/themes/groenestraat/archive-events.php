@@ -17,6 +17,9 @@
 			<hr />
 		<?php
 	endwhile;
+
+	previous_posts_link();
+	next_posts_link();
 	
 	get_footer();
 ?>

@@ -2,6 +2,7 @@
 	get_header();
 
 	global $post;
+	global $query_string;
 
 	while(have_posts()) : the_post();
 		$meta = get_post_meta($post->ID);
@@ -17,6 +18,9 @@
 			<hr />
 		<?php
 	endwhile;
+
+	previous_posts_link();
+	next_posts_link();
 	
 	get_footer();
 ?>
