@@ -530,7 +530,7 @@ footer
 
 /* MEDIA QUERIES */
 
-@media (max-width: 375px) 
+@media (max-width: 375px)
 {
     nav .logo
     {
@@ -616,20 +616,48 @@ footer
 
 /* OVERZICHT PROJECTEN */
 
-.projecten-overzicht
+.container
 {
-    background-color: #999999;
-   
     width: 100%;
-    height: 1500px;
+    min-height: 500px;
 }
 
-.project-item h2, .project-item p
+.projecten-menu
 {
-    color:#ffffff;
+    width: 100%;
+    height: 40px;
+    background-color: #00cd00;
+    text-transform: lowercase;
+    overflow: hidden;
+    transition: all 2s;
 }
 
-.projecten-overzicht a
+.projecten-menu ul
+{
+    margin-top: 12px;
+    float:right;
+}
+
+.projecten-menu ul li
+{
+    display: block;
+    float:left;
+}
+
+.projecten-menu li a
+{
+    padding: 15px 20px;
+    font-size:1.6em;
+    font-weight: bolder;
+}
+
+.projecten-menu li a:hover
+{
+    background-color: #ffffff;
+    color:#00cd00;
+}
+
+.container a
 {
     font-size:none;
     text-decoration: none;
@@ -639,20 +667,113 @@ footer
 
 .project-item
 {
+    position: relative;
     word-wrap: break-word;
     float: left;
     width: 29.33333333%;
-    height: 20vw;
+    height: 40vh;
     padding: 2%;
     background-color: #cccccc;
+    text-align: left;
+    opacity: 0.9;
+}
+
+.project-item .info
+{
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 95%;
+    padding:3%;
+    height: 15vh;
+    background-color: #fff;
+    background: url("../img/blackfilter.png") repeat;
 }
 
 .project-item:hover
 {
-    background-color: #000;
+    opacity: 1.0;
 }
 
-.fix
+.navigate-menu
 {
-    margin-bottom: 10%;
+    width:100%;
+    height: 100px;
+    background-color: #00cd00;;
+}
+
+.navigate-menu a
+{
+    padding:10px 20px;
+    background-color: #ffffff;
+    color:#00cd00;
+}
+
+@media (max-width: 1000px) 
+{
+    .project-item
+    {
+        width: 46%;
+    }
+}
+
+@media (max-width: 650px) 
+{
+    .project-item
+    {
+        width: 96%;
+    }
+}
+
+/* SINGLE PROJECTEN */
+
+.main
+{
+    float:left;
+    width:75%;
+    min-height: 750px;
+    background-color: red;
+}
+
+.project-image
+{
+    position: relative;
+    background-size: cover;
+    background-image: url("../img/IMG_2727.jpg");
+    background-position: center center;
+    width:100%;
+    height: 50vh;
+    color: #fff;
+}
+
+.project-image strong
+{
+    font-size:0.5em;
+    text-transform: lowercase;
+}
+
+.project-image .project-info
+{
+    position: absolute;
+    bottom: 0;
+    left:0;
+    width: 100%;
+    height: 20%;
+    background: url("../img/blackfilter.png") repeat;
+}
+
+.main .item
+{
+    width: 90%;
+    margin: 5%;
+    height: 35vh;
+    background-color: yellow;
+}
+
+.sidebar
+{
+    float:right;
+    width:25%;
+    height: 100vh;
+    background-color: blue;
 }

@@ -8,6 +8,7 @@ function script_enqueue(){
     wp_enqueue_script('jquery-min', get_stylesheet_directory_uri() . '/js/jquery-1.9.1.min.js', array( 'jquery' ));
     wp_enqueue_script('owl-carousel-js', get_stylesheet_directory_uri() . '/js/owl.carousel.min.js', array( 'jquery' ));
     wp_enqueue_script('switchery-js', get_stylesheet_directory_uri() . '/js/switchery.min.js', array( 'jquery' ));
+    wp_enqueue_script('validation', get_stylesheet_directory_uri() . '/js/livevalidation_standalone.compressed.js', array( 'jquery' ));
 }
 add_action('wp_enqueue_scripts', 'script_enqueue');     
 

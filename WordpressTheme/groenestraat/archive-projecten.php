@@ -1,6 +1,12 @@
 <?php get_header(); ?>
 
-	<section class="projecten-overzicht">
+	<section class="container">
+	<section class="projecten-menu">
+		<ul>
+			<li><a href="#">Nieuw project</a></li>
+			<li><a href="#">Mijn projecten</a></li>
+		</ul>
+	</section>
 
 	<?php
 
@@ -17,18 +23,35 @@
 
 		?>
 			<a href="<?php the_permalink(); ?>">
-				<section class="project-item" id="project">				
-					<h2><?php the_title(); ?></h2>
+				<section class="project-item">				
 					<?php 
-						if ( has_post_thumbnail() ) { 
-							the_post_thumbnail();
+						if (has_post_thumbnail()) 
+						{ 
+							?>
+								<script> 
+									var e = document.getElementsByClassName("project-item")['<?php echo $index; ?>'];
+									e.style["background-image"] = "url('<?php echo wp_get_attachment_url(get_post_thumbnail_id($post->ID)); ?>')";
+									e.style["background-size"] = "cover";
+								</script>
+							<?php
 						} 
+						else
+						{
+							?>
+							<script> 
+									var e = document.getElementsByClassName("project-item")['<?php echo $index; ?>'];
+									e.style["background-image"] = "url('<?php echo bloginfo('template_directory'); ?>/img/project-example.png')";
+									e.style["background-size"] = "cover";
+							</script>
+							<?php
+						}
 						?>
-						<?php the_content(); ?>
+						<section class="info">
+							<h1><?php the_title(); ?></h1>
+							<p><?php echo $projectCity . " " . $projectZipcode; ?></p>
+						</section>
 				</section>
-
-					<?php 
-						//echo "<script> document.getElementsByClassName('project-item')[" . $index . "].backgroundImage = url('img/')";
+					<?php
 						$index++;
 					?>
 			</a>
@@ -36,14 +59,22 @@
 	
 	endwhile;
 
-	//previous_posts_link();
-	//next_posts_link();
-
 	?>
 
 	</section>
 	<section class="clear"></section>
-	<!--<section class="fix"></section>-->
+	
+	<section class="navigate-menu">
+	<?php
+
+	previous_posts_link();
+	next_posts_link();
+
+	?>
+
+	
+	</section>
+	
 
 <?php
 	get_footer();
