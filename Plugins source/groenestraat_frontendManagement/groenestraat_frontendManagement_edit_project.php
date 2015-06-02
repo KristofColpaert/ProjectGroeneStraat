@@ -69,6 +69,13 @@
 				<?php
 			}
 		}
+
+		else
+		{
+			?>
+				<p>Dit project bestaat niet, of u hebt geen toegang tot de gevraagde pagina. Ga terug naar <a href="<?php echo home_url(); ?>">Home</a>.</p>
+			<?php
+		}
 	}
 
 	function save_edit_project_form()

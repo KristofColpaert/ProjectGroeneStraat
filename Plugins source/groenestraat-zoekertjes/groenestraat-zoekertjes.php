@@ -56,7 +56,7 @@
 			'public' => true,
 			'has_archive' => true,
 			'rewrite' => array('slug' => 'zoekertjes'),
-			'supports' => array('title'),
+			'supports' => array('title', 'editor'),
 			'taxonomies' => array('category'),
 			'menu_icon' => 'dashicons-search',
 			'menu_position' => 8,
@@ -84,18 +84,14 @@
 		
 		echo '<input type="hidden" name="eventmeta_noncename" id="eventmeta_noncename" value="' . wp_create_nonce( plugin_basename(__FILE__) ) . '" />';
 		
-		$adName = get_post_meta($post->ID, '_adName', true);
+		$adPrice = get_post_meta($post->ID, '_adPrice', true);
 		$adLocation = get_post_meta($post->ID, '_adLocation', true);
-		$adDescription = get_post_meta($post->ID, '_adDescription', true);
 		
-		echo '<label class="adName" for="adName">Naam</label><br />';
-    	echo '<input id="adName" type="text" name="_adName" value="' . $adName . '" class="widefat"><br />';    
+		echo '<label class="adPrice" for="adPrice">Prijs van het zoekertje</label><br />';
+    	echo '<input id="adPrice" type="text" name="_adPrice" value="' . $adPrice . '" class="widefat"><br />';    
 
     	echo '<label for="adLocation">Locatie van het zoekertje</label>';
     	echo '<input id="adLocation" type="text" name="_adLocation" value="' . $adLocation . '" class="widefat" />';
-
-    	echo '<label for="adDescription">Beschrijving van het zoekertje</label>';
-    	echo '<textarea id="adDescription" rows=10 name="_adDescription" class="widefat">' . $adDescription . '</textarea>';
 	}
 	
 	function save_zoekertjes_metaboxes($post_id, $post)
@@ -110,9 +106,8 @@
 			return $post->ID;
 		}
 
-		$events_meta['_adName'] = $_POST['_adName'];
+		$events_meta['_adPrice'] = $_POST['_adPrice'];
 		$events_meta['_adLocation'] = $_POST['_adLocation'];
-		$events_meta['_adDescription'] = $_POST['_adDescription'];
 		
 		foreach ($events_meta as $key => $value) 
 		{ 

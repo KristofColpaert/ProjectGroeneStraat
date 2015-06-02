@@ -68,7 +68,6 @@
 			<script>
 
 				$(document).ready(function() {
-					console.log("hier");
 					$('#calendar').fullCalendar({
 						defaultDate: new Date(),
 						editable: true,

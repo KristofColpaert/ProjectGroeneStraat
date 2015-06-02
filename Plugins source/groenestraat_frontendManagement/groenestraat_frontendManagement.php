@@ -15,4 +15,9 @@
 	include_once('groenestraat_frontendManagement_delete_project.php');
 
 	include_once('groenestraat_frontendManagement_new_event.php');
+	include_once('groenestraat_frontendManagement_edit_event.php');
+	include_once('groenestraat_frontendManagement_delete_event.php');
+
+	include_once('groenestraat_frontendManagement_new_zoekertje.php');
+	include_once('groenestraat_frontendManagement_edit_zoekertje.php');
 ?>
