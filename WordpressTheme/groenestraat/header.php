@@ -8,7 +8,6 @@
     <?php wp_head(); ?>
 </head>
 <body>
-
     <header>
         <nav>
             <a href="<?php echo get_site_url(); ?>"><img src="<?php bloginfo('template_directory'); ?>/img/logo.png" class="logo" width="400" height="65" alt="" title="" /></a>
@@ -16,8 +15,8 @@
                  <ul>
                 <li class="basic-menu-item"><a href="<?php echo get_site_url(); ?>/artikels">Artikels</a></li>
                 <li class="basic-menu-item"><a href="<?php echo get_site_url(); ?>/projecten">Projecten</a></li>
-                    <li class="basic-menu-item"><a href="<?php echo get_site_url(); ?>/Events">Events</a></li>
-                     <li class="basic-menu-item"><a href="<?php echo get_site_url(); ?>/Zoekertjes">Zoekertjes</a></li>
+                    <li class="basic-menu-item"><a href="<?php echo get_site_url(); ?>/events">Events</a></li>
+                     <li class="basic-menu-item"><a href="<?php echo get_site_url(); ?>/zoekertjes">Zoekertjes</a></li>
                      
                 <?php
                    

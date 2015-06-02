@@ -95,15 +95,15 @@
       });
         
       $("#partners-slider").owlCarousel({
-            autoPlay: 5000,
+            autoPlay: 3800,
             items : 5,
             itemsDesktop : [1199,3],
             itemsDesktopSmall : [979,3],
             navigation : false,
             responsive: true,
             autoHeight : false,
-            rewindNav : true,
-            scrollPerPage : false,
+            pagination : false,
+            paginationNumbers: false,
             stopOnHover: true,
             mouseDrag: true,
             touchDrag: true
