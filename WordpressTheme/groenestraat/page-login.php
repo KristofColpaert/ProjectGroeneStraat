@@ -31,12 +31,12 @@ $args = array(
 ); 
     wp_login_form($args);
 } else { // If logged in:
-    header('Location: '.get_home_url());
+    header('Location: '.get_site_url());
 }
 
 ?>
     <section class="form-bottom-links">
-         <a href="<?php echo wp_lostpassword_url( get_bloginfo('url') ); ?>" title="Wachtwoord vergeten">Wachtwoord vergeten</a><br>
+         <a href="<?php echo get_site_url(); ?>/forgot" title="Wachtwoord vergeten">Wachtwoord vergeten</a><br>
     <a href="<?php echo site_url()."/registreren"; ?>" title="Registreren">Registreren</a>
     </section>
    

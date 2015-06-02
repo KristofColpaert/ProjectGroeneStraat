@@ -11,7 +11,7 @@ if (!is_user_logged_in()) {
        do_action( 'wordpress_social_login' );
         ?><hr align=center/>
     
-<form name="registerform" id="registerform" action="http://groenestraat.azurewebsites.net/abcdefghij/wp-login.php?action=register" method="post" novalidate="novalidate">
+<form name="registerform" id="registerform" action="<?php echo get_site_url(); ?>/wp-login.php?action=register" method="post" novalidate="novalidate">
 	   <input class="textbox" type="text" name="first_name" id="first_name" class="input" value="" placeholder="Voornaam"/><br/>
         <input class="textbox" type="text" name="last_name" id="last_name" class="input" value="" placeholder="Achternaam"/><br/>
         <input class="textbox" type="text" name="user_login" id="user_login" class="input" value="" size="20" placeholder="Gebruikersnaam"/><br/>

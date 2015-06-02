@@ -14,7 +14,11 @@
 	global $query_string;
 	$index = 0;
 
-	while(have_posts()) : the_post();
+	$orig_query = $wp_query;
+	$paged = (get_query_var('paged')) ? get_query_var('paged') : 1;
+	$wp_query = new WP_Query(array('post_type' => 'projecten', 'posts_per_page' => 9, 'paged' => $paged));
+
+	while($wp_query->have_posts()) : $wp_query->the_post();
 
 		$meta = get_post_meta($post->ID);
 		$projectStreet = $meta['_projectStreet'][0];
@@ -58,6 +62,7 @@
 	<?php
 	
 	endwhile;
+	$wp_query = $orig_query;
 
 	?>
 

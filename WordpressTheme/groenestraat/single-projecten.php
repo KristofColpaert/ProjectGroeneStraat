@@ -7,19 +7,7 @@
 	<section class="container" style="background-color:#ccc">
 
 		<section class="main">
-			<section class="item"></section>
-			<section class="item"></section>
-			<section class="item"></section>
-			<section class="item"></section>
-			<section class="item"></section>
-			<section class="item"></section>
-			<section class="item"></section>
-			<section class="item"></section>
-			<section class="item"></section>
-			<section class="item"></section>
-		</section>
-		<section class="sidebar"></section>
-
+		
 	<?php
 
 	global $post;
@@ -46,6 +34,39 @@
 		info.appendChild(h1);
 
 		</script>
+
+		<?php
+
+			echo "number = " . $post->ID;
+
+		?>
+
+		<?php
+			$args = array(
+				'posts_per_page' => 9,
+				'post_type' => 'projecten'
+			);
+
+			$my_query = new WP_Query($args);
+			//print_r($my_query);
+
+			while($my_query->have_posts()) : $my_query->the_post();
+				/*
+				$meta = get_post_meta($post->ID);
+				$projectStreet = $meta['_projectStreet'][0];
+				$projectCity = $meta['_projectCity'][0];
+				$projectZipcode = $meta['_projectZipcode'][0];
+*/
+			?>
+
+				<section class="item">
+					<h1><?php echo the_title(); ?></h1>
+
+				</section>
+
+			<?php
+			endwhile;
+		?>
 		
 		<!--
 		<?php the_post_thumbnail(); ?>
@@ -55,6 +76,9 @@
 		<p>Gemeente: <?php echo $projectCity; ?></p>
 		<p>Postcode: <?php echo $projectZipcode; ?></p>
 		-->
+
+		</section>
+		<section class="sidebar"></section>
 
 		<?php
 	endwhile;

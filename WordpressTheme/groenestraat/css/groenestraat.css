@@ -683,7 +683,7 @@ footer
     position: absolute;
     bottom: 0;
     left: 0;
-    width: 95%;
+    width: 94%;
     padding:3%;
     height: 15vh;
     background-color: #fff;
@@ -730,9 +730,9 @@ footer
 .main
 {
     float:left;
-    width:75%;
+    width:70%;
     min-height: 750px;
-    background-color: red;
+    background-color: #ccc;
 }
 
 .project-image
@@ -764,16 +764,17 @@ footer
 
 .main .item
 {
-    width: 90%;
+    width: 84%;
     margin: 5%;
-    height: 35vh;
-    background-color: yellow;
+    padding: 3%;
+    height: 30vh;
+    background-color: #ffffff;
 }
 
 .sidebar
 {
     float:right;
-    width:25%;
+    width:30%;
     height: 100vh;
-    background-color: blue;
+    background-color: #999;
 }
