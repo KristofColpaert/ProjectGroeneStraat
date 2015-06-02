@@ -13,10 +13,10 @@
 	//Verzenden mail
 	if(isset($_POST["Verzenden"]))
 	{
-		add_action('plugins_loaded', 'sendMail');
+		add_action('plugins_loaded', 'register_sendmail');
 	}
 
-	function sendMail()
+	function register_sendmail()
 	{
 		//mail verzenden
 		$onderwerp = $_POST["Onderwerp"];
@@ -62,10 +62,10 @@
 
 	function register_nieuwsbrief() 
 	{
-		add_menu_page( 'Nieuwsbrief', 'Nieuwsbrief', 'manage_options', 'Nieuwsbrief', 'Nieuwsbrief_page', 'dashicons-search', 80);
+		add_menu_page( 'Nieuwsbrief', 'Nieuwsbrief', 'manage_options', 'Nieuwsbrief', 'add_nieuwsbrief_metaboxes', 'dashicons-search', 80);
 	}
 
-	function Nieuwsbrief_page(){
+	function add_nieuwsbrief_metaboxes(){
 		?>
 
 		<form method="post" action="<?php echo get_permalink(); ?>" >
