@@ -24,8 +24,8 @@ function prowpt_memberinformatie()
 			$user = get_userdata($userid);
 			$usermeta = get_user_meta($userid);
 
-			echo '<strong>Gebruikersnaam: </strong><label>'. $user->user_login .'</label><br />';
-			echo '<strong>E-mail: </strong><label>'. $user->user_email  .'</label><br />';
+			echo '<strong>Gebruikersnaam: </strong><label>'. $user->user_login . '</label><br />';
+			echo '<strong>E-mail: </strong><label>'. $user->user_email  . '</label><br />';
 			if($usermeta['rpr_straat'][0] != "" || $usermeta['rpr_postcode'][0] != "" || $usermeta['rpr_gemeente'][0] != "")
 			{
 				echo '<strong>Adres: </strong><label>'. $usermeta['rpr_straat'][0] . ', ' . $usermeta['rpr_postcode'][0] . ' ' . $usermeta['rpr_gemeente'][0] . '</label><br />';
@@ -39,4 +39,3 @@ function prowpt_memberinformatie()
 }
 
 ?>
-
