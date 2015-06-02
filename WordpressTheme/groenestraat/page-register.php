@@ -38,7 +38,7 @@ if (!is_user_logged_in()) {
 </p>	
 	<br class="clear" />
 	<input type="hidden" name="redirect_to" value="http://groenestraat.azurewebsites.net/abcdefghij/wp-admin/" />
-	<input type="submit" name="wp-submit" id="wp-submit" class="button button-primary button-large" value="Registreren" />
+	<input type="submit" name="wp-submit" id="wp-submit" class="button" value="Registreren" />
 </form>
  <section class="form-bottom-links">      
     <a href="<?php echo site_url()."/login"; ?>" title="Aanmelden">Al een account? meld je aan.</a>

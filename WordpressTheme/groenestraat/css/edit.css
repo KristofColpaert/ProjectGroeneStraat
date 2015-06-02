@@ -33,10 +33,12 @@
     width: 15px;
 }
 .centered-form{
-    padding: 5vh 0vh 5vh 0vh;
+    padding: 15vh 0vh 15vh 0vh;
     min-width: 20vw;
     width: 320px;
     max-width: 90vw;
+    min-height: 50vh;
+    vertical-align: middle;
     margin: 5px auto;
 }
 
@@ -58,7 +60,7 @@
 #loginform #wp-submit{
     font-size: 1.3em;
 }
-#wp-submit{
+.form-button, #wp-submit{
     display: block;
     margin: 0 auto;
     background-color: #00cd00;
@@ -68,7 +70,7 @@
     padding: 5px 15px 5px 15px;
     font-size: 2em;
 }
-#wp-submit:hover{
+.form-button, #wp-submit:hover{
     background-color: #f8f7f7;
     border: 1px solid #00cd00;
     border-radius: 3px;
@@ -193,6 +195,15 @@ textarea.LV_invalid_field:active {
     color:#E74C3C
 }
 
+
+/*************FORGOT*************/
+#forgot{
+    height: 50vh;
+    padding-top: 30vh;
+}
+body{
+    background-color:#FFF;
+}
 
 
 

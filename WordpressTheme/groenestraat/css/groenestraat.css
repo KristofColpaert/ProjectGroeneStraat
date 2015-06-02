@@ -40,8 +40,9 @@ h3
 {
     font-size:2em;
     text-transform: uppercase;
-    font-weight: lighter;
+    font-weight: 600;
     line-height: 2em;
+    color: #69686e;
 }
 
 p
@@ -683,13 +684,19 @@ footer
     position: absolute;
     bottom: 0;
     left: 0;
-    width: 94%;
-    padding:3%;
+    width: 100%;
     height: 15vh;
     background-color: #fff;
     background: url("../img/blackfilter.png") repeat;
 }
-
+.info h1{
+    font-size: 3em;
+    line-height: 1em;
+    padding: 3% 3% 0% 3%;
+}
+.info p{
+    padding-left: 3%;
+}
 .project-item:hover
 {
     opacity: 1.0;

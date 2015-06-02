@@ -18,8 +18,9 @@
                 <li class="basic-menu-item"><a href="<?php echo get_site_url(); ?>/projecten">Projecten</a></li>
                     <li class="basic-menu-item"><a href="<?php echo get_site_url(); ?>/Events">Events</a></li>
                      <li class="basic-menu-item"><a href="<?php echo get_site_url(); ?>/Zoekertjes">Zoekertjes</a></li>
+                     
                 <?php
-                    
+                   
                 if ( is_user_logged_in() ) 
                 { 
                     $userstring = $current_user->user_firstname." ".$current_user->user_lastname;

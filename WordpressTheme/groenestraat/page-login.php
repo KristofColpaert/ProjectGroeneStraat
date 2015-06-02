@@ -49,7 +49,7 @@ $args = array(
     $("#rememberme").addClass('js-switch');
     var elems = Array.prototype.slice.call(document.querySelectorAll('.js-switch'));
     elems.forEach(function(html) {
-        var switchery = new Switchery(html, {color:'#00cd00', secondaryColor:'#E74C3C', size:'small'});
+        var switchery = new Switchery(html, {color:'#00cd00', size:'small'});
     });
    
 
