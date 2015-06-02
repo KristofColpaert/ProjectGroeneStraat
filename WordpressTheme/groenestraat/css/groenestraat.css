@@ -58,12 +58,16 @@ a
 
 header
 {
+    width:100%;
+    background-color: #cccccc;
+}
+
+.header-image
+{
     background-image: url("../img/header.png");
     background-position: center center;
     background-repeat: no-repeat;
     background-size: cover;
-    width:100%;
-    background-color: #cccccc;
     height: 420px;
 }
 
@@ -608,4 +612,47 @@ footer
         padding:5%;
         min-height: 250px;
     }
+}
+
+/* OVERZICHT PROJECTEN */
+
+.projecten-overzicht
+{
+    background-color: #999999;
+   
+    width: 100%;
+    height: 1500px;
+}
+
+.project-item h2, .project-item p
+{
+    color:#ffffff;
+}
+
+.projecten-overzicht a
+{
+    font-size:none;
+    text-decoration: none;
+    color: #ffffff;
+    font-size:1em;
+}
+
+.project-item
+{
+    word-wrap: break-word;
+    float: left;
+    width: 29.33333333%;
+    height: 20vw;
+    padding: 2%;
+    background-color: #cccccc;
+}
+
+.project-item:hover
+{
+    background-color: #000;
+}
+
+.fix
+{
+    margin-bottom: 10%;
 }

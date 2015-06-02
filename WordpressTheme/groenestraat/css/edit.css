@@ -1,3 +1,5 @@
+@import("http://fortawesome.github.io/Font-Awesome/assets/font-awesome/css/font-awesome.css");
+
 #logged_user{
     height: 100%;
     width: auto;
@@ -30,3 +32,104 @@
     padding-top: 12px;
     width: 15px;
 }
+.centered-form{
+    padding: 5vh 0vh 5vh 0vh;
+    min-width: 20vw;
+    width: 320px;
+    max-width: 90vw;
+    margin: 5px auto;
+}
+
+#loginform{
+    min-height: 30vh;
+    text-align: center;
+    padding: 2vh 0vh 2vh 0vh;
+}
+#user_login,#user_pass, .textbox{
+    margin: 5px 0px;
+    width: 95%;
+    height: 35px;
+    padding: 0 5px 0 5px;
+    font-size: 1.5em;
+    border: 1px solid #a2a1a9;
+    border-radius: 8px;
+}
+
+#loginform #wp-submit{
+    font-size: 1.3em;
+}
+#wp-submit{
+    display: block;
+    margin: 0 auto;
+    background-color: #00cd00;
+    border: 1px solid transparent;
+    border-radius: 3px;
+    color: #f8f7f7;
+    padding: 5px 15px 5px 15px;
+    font-size: 2em;
+}
+#wp-submit:hover{
+    background-color: #f8f7f7;
+    border: 1px solid #00cd00;
+    border-radius: 3px;
+    color: #00cd00;
+    cursor: pointer;
+}
+#loginform .login-remember{
+    font-weight: 800;
+    text-align: center;
+    margin: 15px;
+}
+.wp-social-login-connect-with{
+    display: none;
+}
+
+.wp-social-login-provider-list{
+    padding: 2vh 0vh 2vh 0vh;
+    min-width: 20vw;
+    width: 300px;
+    max-width: 90vw;
+    margin: 0 auto;
+    text-align: center;
+}
+.wp-social-login-provider{
+    margin: 10px 0;
+    display: block;
+    border-radius: 20px;
+    padding: 10px;
+    background-position: 15px center;
+    color: #FFF;
+    font-family: sans-serif;
+}
+
+.wp-social-login-provider-facebook{
+    background-color: #3B5998;
+}
+.wp-social-login-provider-twitter{
+    background-color: #4099FF;
+}
+.wp-social-login-provider-google{
+    background-color: #d34836;
+}
+.wp-social-login-provider-facebook:hover{
+    background-color: #334d84;
+}
+.wp-social-login-provider-twitter:hover{
+    background-color: #3988e3;
+}
+.wp-social-login-provider-google:hover{
+    background-color: #ad3f31;
+}
+
+.center-radio{
+    margin: 10px 0;
+    text-align: center;
+    font-size: 1.5em;
+}
+
+
+
+
+
+
+

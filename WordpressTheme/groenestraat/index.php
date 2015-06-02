@@ -3,5 +3,5 @@
 
 
 
-<?php get_gooter(); ?>
+<?php get_footer(); ?>
 

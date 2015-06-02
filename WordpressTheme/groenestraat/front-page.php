@@ -1,15 +1,16 @@
 <?php get_header(); ?>
-
+    
+    <section class="header-image"></section>
 	<section class="recent">
         <section class="recent-item">
             <h1>Projecten</h1>
             <p>Projecten brengen mensen samen die werken naar een speciefiek doel, zoals werken naar een specifiek doel, zoals bijvoorbeeld een gezamelijke moestijn op het einde van hun straat</p>
-            <a href="#" class="button">Projecten &#62;</a>
+            <a href="<?php home_url(); ?>projecten" class="button">Projecten &#62;</a>
         </section>
         <section class="recent-item">
             <h1>Artikels</h1>
             <p>Lees & schrijf artikels (on)afhankelijk van een bepaald project. Deel eigen ervaringen & help ons naar een groenere toekomst.</p>
-            <a href="#" class="button">Artikels &#62;</a>
+            <a href="<?php home_url(); ?>artikels" class="button">Artikels &#62;</a>
             </section>
         <section class="recent-item">
             <h1>Events</h1>
@@ -40,7 +41,7 @@
                     <p>Initiatie bomen planten <br/><strong>25 mei om 14:00</strong></p>
                 </section>
             </section><br/><br/>
-            <a href="#" class="button">Events &#62;</a>
+            <a href="<?php home_url(); ?>events" class="button">Events &#62;</a>
         </section>
     </section>
 

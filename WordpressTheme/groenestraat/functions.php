@@ -32,7 +32,7 @@ function add_login_logout_link($items, $args) {
 
         ob_end_clean(); 
 
-        $items .= '<li class="aanmelden"><a href="'.get_home_url().'/?page_id=29">AANMELDEN</a></li>';
+        $items .= '<li class="aanmelden"><a href="'.get_home_url().'/login">AANMELDEN</a></li>';
     }
 
     return $items;
@@ -43,3 +43,25 @@ function add_login_logout_link($items, $args) {
 
 //////////////////////////////////////////////////////////////////
 
+function wsl_use_fontawesome_icons( $provider_id, $provider_name, $authenticate_url )
+{
+    ?>
+        <a 
+           rel           = "nofollow"
+           href          = "<?php echo $authenticate_url; ?>"
+           data-provider = "<?php echo $provider_id ?>"
+           class         = "wp-social-login-provider wp-social-login-provider-<?php echo strtolower( $provider_id ); ?>" 
+         >
+            <span>
+                <i class="fa fa-<?php echo strtolower( $provider_id ); ?>"></i> Log in met <?php echo $provider_name; ?>
+            </span>
+        </a>
+    <?php
+}
+  
+add_filter( 'wsl_render_auth_widget_alter_provider_icon_markup', 'wsl_use_fontawesome_icons', 10, 3 );
+
+function custom_theme_setup() {
+	add_theme_support( 'post-thumbnails');
+}
+add_action( 'after_setup_theme', 'custom_theme_setup' );
