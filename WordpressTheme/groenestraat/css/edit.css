@@ -125,9 +125,36 @@
     margin: 10px 0;
     text-align: center;
     font-size: 1.5em;
+    font-weight: 600;
+    color: #69686e;
 }
-
-
+.form-bottom-links{
+    width: 100%;
+    text-align: center;
+}
+.form-bottom-links a{
+    margin-top: 10px;
+    display: block;
+    padding:1px;
+    font-weight: 600;
+    font-size: 1.3em;
+    color: #69686e;
+}
+.form-line{
+    margin: 10px 0 10px 0;
+    height: 30px;
+}
+.checkbox-label a{
+    font-size: 1em;
+    color: #69686e;
+}
+.checkbox-label{
+    width: 80%;
+    float: right;
+    font-size: 1.5em;
+    font-weight: 600;
+    color: #69686e;
+}
 
 
 

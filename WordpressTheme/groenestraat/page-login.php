@@ -35,16 +35,25 @@ $args = array(
 }
 
 ?>
-    <a href="<?php echo wp_lostpassword_url( get_bloginfo('url') ); ?>" title="Wachtwoord vergeten">Wachtwoord vergeten</a>
-    <a href="<?php  ?>" title="Lost Password">Lost Password</a>
+    <section class="form-bottom-links">
+         <a href="<?php echo wp_lostpassword_url( get_bloginfo('url') ); ?>" title="Wachtwoord vergeten">Wachtwoord vergeten</a><br>
+    <a href="<?php echo site_url()."/registreren"; ?>" title="Registreren">Registreren</a>
+    </section>
+   
     </div>
+
+
 <script>
     $("#user_login").attr('placeholder','Gebruikersnaam');
      $("#user_pass").attr('placeholder','Wachtwoord');
+    $("#rememberme").addClass('js-switch');
+    var elems = Array.prototype.slice.call(document.querySelectorAll('.js-switch'));
+    elems.forEach(function(html) {
+        var switchery = new Switchery(html, {color:'#00cd00', secondaryColor:'#E74C3C', size:'small'});
+    });
    
 
 </script>
-
 
 <?php 
 get_footer();
