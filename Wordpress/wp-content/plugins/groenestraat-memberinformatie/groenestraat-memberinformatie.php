@@ -11,7 +11,7 @@
 	*/
 	
 	/*
-		Add actions
+		Add Shortcodes
 	*/
 
 add_shortcode('member_informatie','prowpt_memberinformatie');
@@ -25,15 +25,20 @@ function prowpt_memberinformatie()
 			$usermeta = get_user_meta($userid);
 
 			echo '<strong>Gebruikersnaam: </strong><label>'. $user->user_login . '</label><br />';
-			echo '<strong>E-mail: </strong><label>'. $user->user_email  . '</label><br />';
-			if($usermeta['rpr_straat'][0] != "" || $usermeta['rpr_postcode'][0] != "" || $usermeta['rpr_gemeente'][0] != "")
+
+			if(get_user_meta($user->ID, "rpr_gegevens", true) == 0)
 			{
-				echo '<strong>Adres: </strong><label>'. $usermeta['rpr_straat'][0] . ', ' . $usermeta['rpr_postcode'][0] . ' ' . $usermeta['rpr_gemeente'][0] . '</label><br />';
+				echo '<strong>E-mail: </strong><label>'. $user->user_email  . '</label><br />';
+				if($usermeta['rpr_straat'][0] != "" || $usermeta['rpr_postcode'][0] != "" || $usermeta['rpr_gemeente'][0] != "")
+				{
+					echo '<strong>Adres: </strong><label>'. $usermeta['rpr_straat'][0] . ', ' . $usermeta['rpr_postcode'][0] . ' ' . $usermeta['rpr_gemeente'][0] . '</label><br />';
+				}
+				if($usermeta['rpr_telefoon'][0] != "")
+				{
+					echo '<strong>Telefoon: </strong><label>'. $usermeta['rpr_telefoon'][0]  .'</label><br />';
+				}
 			}
-			if($usermeta['rpr_telefoon'][0] != "")
-			{
-				echo '<strong>Telefoon: </strong><label>'. $usermeta['rpr_telefoon'][0]  .'</label><br />';
-			}
+
 			echo get_avatar($userid); 
 	}
 }
