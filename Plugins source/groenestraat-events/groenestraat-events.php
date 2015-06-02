@@ -87,9 +87,13 @@
 		
 		$eventTime = get_post_meta($post->ID, '_eventTime', true);
 		$eventLocation = get_post_meta($post->ID, '_eventLocation', true);
-		
+		$eventEndTime = get_post_meta($post->ID, '_eventEndTime', true);
+
 		echo '<label class="eventTime" for="eventTime">Datum</label><br />';
     	echo '<input id="eventTime" type="date" name="_eventTime" value="' . $eventTime . '" class="widefat"><br />';    
+
+		echo '<label class="eventEndTime" for="eventEndTime">Einddatum</label><br />';
+    	echo '<input id="eventEndTime" type="date" name="_eventEndTime" value="' . $eventEndTime . '" class="widefat"><br />';  
 
     	echo '<label for="eventLocation">Locatie van het event</label>';
     	echo '<input id="eventLocation" type="text" name="_eventLocation" value="' . $eventLocation . '" class="widefat" />';
@@ -109,7 +113,8 @@
 
 		$events_meta['_eventLocation'] = $_POST['_eventLocation'];
 		$events_meta['_eventTime'] = $_POST['_eventTime'];
-		
+		$events_meta['_eventEndTime'] = $_POST['_eventEndTime'];
+
 		foreach ($events_meta as $key => $value) 
 		{ 
 			if($post->post_type == 'revision')

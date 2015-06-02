@@ -53,6 +53,7 @@
 		{
 			$event= get_post($val, OBJECT);
 			$event->eventTime = get_post_meta($event->ID, '_eventTime')[0];
+			$event->eventEndTime = get_post_meta($event->ID, '_eventEndTime')[0];
 			$events[] = $event;
 		}
 
@@ -80,6 +81,7 @@
 										{
 											title: '<?php echo $event->post_title; ?>',
 											start: '<?php echo $event->eventTime; ?>',
+											end: '<?php echo $event->eventEndTime; ?>',
 											url: '<?php echo get_permalink($event->ID); ?>'
 										},
 									<?php

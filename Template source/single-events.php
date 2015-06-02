@@ -52,8 +52,8 @@
 	while(have_posts()) : the_post();
 		$meta = get_post_meta($post->ID);
 		$eventTime = $meta['_eventTime'][0];
+		$eventEndTime = $meta['_eventEndTime'][0];
 		$eventLocation = $meta['_eventLocation'][0];
-		$eventMoreInfo = $meta['_eventMoreInfo'][0];
 		$eventID = $post->ID;
 		$value = get_user_meta($user_id, $meta_key);
 
@@ -65,10 +65,10 @@
 
 		<form method="post" action="<?php echo get_permalink(); ?>" >
 			<h1><?php the_title(); ?></h1>
-			<!--<h3><?php echo $eventID; ?></h3>-->
-			<p name="_eventTime">Tijdstip: <?php echo $eventTime; ?></p>
+			<p><?php the_content(); ?></p>
+			<p name="_eventTime">Startdatum: <?php echo $eventTime; ?></p>
+			<p name="_eventEndTime">Einddatum: <?php echo $eventEndTime; ?></p>
 			<p>Location: <?php echo $eventLocation; ?></p>
-			<p>Meer info: <?php echo $eventMoreInfo; ?></p>
 			<input type="submit" value="<?php echo $waarde; ?>" />
 
 			<input type="hidden" name="eventID" value="<?php echo $eventID; ?>" />
