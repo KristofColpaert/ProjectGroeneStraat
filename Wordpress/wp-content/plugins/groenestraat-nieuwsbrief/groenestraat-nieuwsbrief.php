@@ -62,7 +62,7 @@
 
 	function register_nieuwsbrief() 
 	{
-		add_menu_page( 'Nieuwsbrief', 'Nieuwsbrief', 'manage_options', 'Nieuwsbrief', 'add_nieuwsbrief_metaboxes', 'dashicons-search', 80);
+		add_menu_page( 'Nieuwsbrief', 'Nieuwsbrief', 'manage_options', 'Nieuwsbrief', 'add_nieuwsbrief_metaboxes', 'dashicons-feedback', 81);
 	}
 
 	function add_nieuwsbrief_metaboxes(){
