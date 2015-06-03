@@ -53,43 +53,80 @@
 
     <section class="recent-artikel">
         <section class="artikel-side">
-            <h1>Project Title</h1>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+            <h1></h1><p></p>
         </section>
 	    <section class="artikel-info">
 	    	<section class="artikel-item" id="active">
-	    		<h1>Title 1</h1>
-	    		<p>"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+	    		<h1></h1><p></p>
 	    	</section>
 	    	<section class="artikel-item">
-	    		<h1>Title 2</h1>
-	    		<p>"Lorem ipsum dolor sit amet, consectetur adipiscing elit..</p>
+	    		<h1></h1><p></p>
 	    	</section>
 	    	<section class="artikel-item">
-	    		<h1>Title 3</h1>
-	    		<p>"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+	    		<h1></h1><p></p>
 	    	</section>
 	    	<section class="artikel-item">
-	    		<h1>Title 4</h1>
-	    		<p>"Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+	    		<h1></h1><p></p>
 	    	</section>
 	    </section>
 	</section>
 
     <script>
 
-        var length =document.getElementsByClassName('artikel-item').length;
+        var length = document.getElementsByClassName('artikel-item').length;
+        var data = 
+        [
+            {
+                "titel": "Titel 1",
+                "info": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua",
+                "image": "/img/artikel-example1.png",
+                "url": "http//www.google.com"
+            },
+            {
+                "titel": "Titel 2",
+                "info": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore",
+                "image": "/img/artikel-example2.png",
+                "url": "http//www.google.com"
+            },
+            {
+                "titel": "Titel 3",
+                "info": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut",
+                "image": "/img/artikel-example3.png",
+                "url": "http//www.google.com"
+            },
+            {
+                "titel": "Titel 4",
+                "info": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor",
+                "image": "/img/artikel-example4.png",
+                "url": "http//www.google.com"
+            }
+        ]
 
-        /* waarom werkt tees niet? 
-        for(var i=0;i<length;i++)
+        parseData(data);
+
+        var index = 0;
+        var timer = setInterval(function () { 
+
+            replace(index);
+
+            index++;
+            if(index > 3) { index = 0; }
+
+        }, 3000);
+
+        function parseData(data) 
         {
-            document.getElementsByClassName('artikel-item')[i].addEventListener('click', function() { replace(i); });
-            console.log(i);
+            for(var i=0;i<data.length;i++) 
+            {
+                var e = document.getElementsByClassName('artikel-item')[i];
+                e.getElementsByTagName('h1')[0].innerHTML = data[i].titel;
+                e.getElementsByTagName('p')[0].innerHTML = data[i].info;   
+            }
         }
-        */
-
+ 
         function replace(newId)
         {
+            index = newId;
             for(var i=0;i<length;i++)
             {
                 var currentItem = document.getElementsByClassName('artikel-item')[i];
@@ -101,13 +138,9 @@
                     chosen.setAttribute('id', 'active');
 
                     var info = document.getElementsByClassName('artikel-side')[0];
-                    var h1 = info.getElementsByTagName('h1')[0];
-                    var p = info.getElementsByTagName('p')[0];
-
-                    h1.innerHTML = chosen.getElementsByTagName('h1')[0].innerHTML;
-                    p.innerHTML = chosen.getElementsByTagName('p')[0].innerHTML;
-
-                    return;
+                    info.getElementsByTagName('h1')[0].innerHTML = data[newId].titel;
+                    info.getElementsByTagName('p')[0].innerHTML = data[newId].info;
+                    document.getElementsByClassName('recent-artikel')[0].style["background-image"] = "url('<?php echo bloginfo('template_directory'); ?>" + data[newId].image + "')";
                 }
             }
         }
@@ -117,7 +150,8 @@
         document.getElementsByClassName('artikel-item')[2].addEventListener('click', function() { replace(2); });
         document.getElementsByClassName('artikel-item')[3].addEventListener('click', function() { replace(3); });
         
-        //script by koen
+        //fancy slider by koen van crombrugge
+
     </script>
 
     <section class="home-title">
