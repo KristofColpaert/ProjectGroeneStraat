@@ -19,7 +19,7 @@
 		if(current_user_can('publish_posts'))
 		{
 			?>
-				<form action="<?php $_SERVER['REQUEST_URI']; ?>" method="POST" enctype="multipart/form-data">
+				<form class='createForm' action="<?php $_SERVER['REQUEST_URI']; ?>" method="POST" enctype="multipart/form-data">
 					<label for="projectTitle">Titel van het project</label>
 					<input id="projectTitle" name="projectTitle" type="text" />
 

@@ -15,9 +15,9 @@
 	function prowp_frontendlayout_install()
 	{
 		makeShortcodePage('Kalender','[personal_calendar]','kalender','publish','page','closed');
-		//makeShortcodePage('Delete event','[personal_calendar]','kalender','publish','page','closed');
-		//makeShortcodePage('Delete zoekertje','[personal_calendar]','kalender','publish','page','closed');
-		//makeShortcodePage('Delete project','[personal_calendar]','kalender','publish','page','closed');
+		makeShortcodePage('Delete event','[delete_event]','delete event','publish','page','closed');
+		makeShortcodePage('Delete zoekertje','[delete_zoekertje]','delete zoekertje','publish','page','closed');
+		makeShortcodePage('Delete project','[delete_project]','delete project','publish','page','closed');
 	}
 
 	function makeShortcodePage($title,$content,$post_name,$post_status,$post_type,$ping_status)
