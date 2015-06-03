@@ -14,7 +14,7 @@
 	function show_new_event_form()
 	{
 		?>
-			<script src="//code.jquery.com/jquery-1.10.2.js"></script>
+			
 			<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
 			<link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
 
@@ -31,10 +31,10 @@
 			?>
 				
 				<form class="createForm" action="<?php $_SERVER['REQUEST_URI']; ?>" method="POST" enctype="multipart/form-data">
-					<label for="eventTitle">Titel van het event</label>
-					<input id="eventTitle" name="eventTitle" type="text" />
+					
+					<input class="textbox" id="eventTitle" name="eventTitle" type="text" placeholder="Titel" />
 
-					<label for="eventDescription">Beschrijving van het event</label>
+					<label for="eventDescription">Beschrijving</label><br \>
 					<?php
 						$settings = array('textarea_name' => 'eventDescription');
 						$content = ''; 
@@ -45,7 +45,7 @@
 
 					<label for="parentProjectId">Project waartoe het event behoort</label>
 					<br />
-					<select id="parentProjectId" name="parentProjectId">
+					<select class="input combobox" id="parentProjectId" name="parentProjectId">
 						<option value="0">Geen project</option>
 						<?php
 							$parents = get_posts(
@@ -68,22 +68,15 @@
 							}
 						?>
 					</select>
-					<br />
+				
 
-					<label for="eventTime">Datum van het event</label>
-					<br />
-					<input id="eventTime" readonly name="eventTime" type="text" />
-					<br />
+					
+					<input class="textbox" id="eventTime" readonly name="eventTime" type="text" placeholder="Datum start"/>
+					<input class="textbox" id="eventEndTime" readonly name="eventEndTime" type="text" placeholder="Datum einde" />
+					
+					<input class="textbox" id="eventLocation" name="eventLocation" type="text" placeholder="Locatie" />
 
-					<label for="eventEndTime">Datum van het einde van het event</label>
-					<br />
-					<input id="eventEndTime" readonly name="eventEndTime" type="text" />
-					<br />
-
-					<label for="eventLocation">Locatie van het event</label>
-					<input id="eventLocation" name="eventLocation" type="text" />
-
-					<input id="eventPublish" name="eventPublish" type="submit" value="Publiceer" />
+					<input id="eventPublish" name="eventPublish" class="form-button" type="submit" value="Publiceer" />
 				</form>
 
 			<?php

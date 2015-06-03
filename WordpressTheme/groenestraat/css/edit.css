@@ -50,11 +50,11 @@
     text-align: center;
     padding: 2vh 0vh 2vh 0vh;
 }
-#user_login,#user_pass, .textbox{
-    margin: 5px 0px;
-    width: 95%;
+#user_login,#user_pass, .textbox, .input{
+    margin: 10px auto;
+    width: 100%;
     height: 35px;
-    padding: 0 5px 0 5px;
+    padding: 0 5px;
     font-size: 1.5em;
     border: 1px solid #a2a1a9;
     border-radius: 8px;
@@ -85,26 +85,36 @@
     text-align: center;
     margin: 15px;
 }
+#loginform label{
+    text-align: left;
+    font-weight: 600;
+    color: #69686e;
+}
+.forgetmenot label{
+    margin-left: 40%;
+    margin-bottom: 15px;
+    font-weight: 600;
+    color: #69686e;
+}
 .wp-social-login-connect-with{
     display: none;
 }
 
 .wp-social-login-provider-list{
     padding: 2vh 0vh 2vh 0vh;
-    min-width: 20vw;
-    width: 300px;
-    max-width: 90vw;
+    width: 100%
     margin: 0 auto;
     text-align: center;
 }
 .wp-social-login-provider{
-    margin: 10px 0;
+    margin: 10px auto;
     display: block;
     border-radius: 20px;
     padding: 10px;
     background-position: 15px center;
     color: #FFF;
     font-family: sans-serif;
+    max-width: 80%;
 }
 
 .wp-social-login-provider-facebook{
@@ -202,3 +212,97 @@ textarea.LV_invalid_field:active {
     height: 20vh;
 }
 
+/*   FORGOT PASSWORD */
+.login h1 a {
+            background-image: url(../img/logo_large.png);
+            padding-bottom: 5px;
+    }
+
+.submit #wp-submit{
+    width: 90%;
+    font-size: 1em;
+    float: none;
+    padding: 0px 5px;
+    font-weight: 600;
+    
+}
+#resetpassform #wp-submit{
+    font-size: 0.9em;
+}
+#nav{
+    color: transparent;
+}
+#nav a{
+    color: #69686e !important;
+    display: block;
+    text-align: center;
+}
+#backtoblog a{
+    display: block;
+    text-align: center;
+}
+.message{
+    font-weight: 600;
+    color: #69686e;
+}
+#login_error{
+    border-left: 4px solid #E74C3C !important;
+    font-size: 1.5em;
+    font-weight: 600;
+    color: #69686e;
+    margin: 10px 0px;
+}
+#lostpasswordform label, #resetpassform label{
+    font-size: 1em;
+     font-weight: 600;
+    color: #69686e;
+}
+.description{
+    font-weight: 600;
+    color: #69686e;
+}
+.login .message{
+    border-left: 4px solid #00cd00;
+    margin: 10px 0px;
+}
+
+
+
+
+/**********NIEUWPROJECT***********/
+#primary{
+    padding: 5vh 0;
+    background-color: #69686e;
+}
+.contentwrapper{
+    margin: 0 auto;
+    min-width: 50vw;
+    width: 800px;
+    max-width: 80vw;
+    padding: 2vw;
+    background-color: #f8f7f7;
+}
+.createForm label{
+    display: block;
+    font-size: 2em;
+    padding: 0px 0;
+    margin-top: 10px;
+}
+
+#projectFeaturedImage{
+    padding: 10px 0;
+}
+.createForm .form-button{
+    width: 100%;
+}
+#eventTime, #eventEndTime{
+    
+    width: 46.5%;
+    float:left;
+}
+#eventEndTime{
+    margin-left: 3.5%;
+}
+.combobox:hover{
+    cursor: pointer;
+}

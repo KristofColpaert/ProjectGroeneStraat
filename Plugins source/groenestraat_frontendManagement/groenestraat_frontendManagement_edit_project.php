@@ -26,9 +26,9 @@
 				?>
 					<form class="createForm" action="<?php $_SERVER['REQUEST_URI']; ?>" method="POST" enctype="multipart/form-data">
 						<label for="projectTitle">Titel van het project</label>
-						<input id="projectTitle" name="projectTitle" type="text" value="<?php echo $project->post_title; ?>"/>
+						<input class="textbox" id="projectTitle" name="projectTitle" type="text" value="<?php echo $project->post_title; ?>"/>
 
-						<label for="projectDescription">Beschrijving van het project</label>
+						<label for="projectDescription">Beschrijving</label><br \>
 						<?php 
 							$settings = array('textarea_name' => 'projectDescription');
 							$content = $project->post_content;
@@ -42,22 +42,21 @@
 						?>
 
 						<label for="projectStreet">Straat van het project</label>
-						<input id="projectStreet" name="projectStreet" type="text" value="<?php echo $projectStreet; ?>"/>
+						<input class="textbox" id="projectStreet" name="projectStreet" type="text" value="<?php echo $projectStreet; ?>"/>
 
 						<label for="projectCity">Gemeente van het project</label>
-						<input id="projectCity" name="projectCity" type="text" value="<?php echo $projectCity; ?>"/>
+						<input class="textbox" id="projectCity" name="projectCity" type="text" value="<?php echo $projectCity; ?>"/>
 
 						<label for="projectZipcode">Postcode van het project</label>
-						<input id="projectZipcode" name="projectZipcode" type="text" value="<?php echo $projectZipcode; ?>"/>
+						<input class="textbox" id="projectZipcode" name="projectZipcode" type="text" value="<?php echo $projectZipcode; ?>"/>
 
 						<label for="projectFeaturedImage">Stel een hoofdingsafbeelding in</label>
 						<input id="projectFeaturedImage" name="projectFeaturedImage" type="file" accept="image/x-png, image/gif, image/jpeg" />
 
-						<br />
 
 						<input id="projectId" name="projectId" type="hidden" value="<?php echo $project->ID; ?>" />
 						
-						<input id="projectEdit" name="projectEdit" type="submit" value="Bewerk" />
+						<input id="projectEdit" class="form-button" name="projectEdit" type="submit" value="Bewerk" />
 					</form>
 				<?php
 			}

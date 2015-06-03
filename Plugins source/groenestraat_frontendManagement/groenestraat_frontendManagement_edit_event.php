@@ -23,9 +23,9 @@
 				?>
 					<form class="createForm" action="<?php $_SERVER['REQUEST_URI']; ?>" method="POST" enctype="multipart/form-data">
 						<label for="eventTitle">Titel van het event</label>
-						<input id="eventTitle" name="eventTitle" type="text" value="<?php echo $event->post_title; ?>" />
+						<input class="textbox" id="eventTitle" name="eventTitle" type="text" value="<?php echo $event->post_title; ?>" />
 						
-						<label for="eventDescription">Beschrijving van het event</label>
+						<label for="eventDescription">Beschrijving</label><br \>
 						<?php
 							$settings = array('textarea_name' => 'eventDescription');
 							$content = $event->post_content; 
@@ -41,7 +41,7 @@
 
 						<label for="parentProjectId">Project waartoe het event behoort</label>
 						<br />
-						<select id="parentProjectId" name="parentProjectId">
+						<select class="input combobox" id="parentProjectId" name="parentProjectId">
 							<option value="0">Geen project</option>
 							<?php
 								$parents = get_posts(
@@ -64,22 +64,22 @@
 						</select>
 						<br />
 
-						<label for="eventTime">Datum van het event</label>
+						<label for="eventTime">Van</label>
 						<br />
-						<input id="eventTime" name="eventTime" type="date" value="<?php echo $eventTime; ?>" />
+						<input class="textbox" id="eventTime" name="eventTime" type="date" value="<?php echo $eventTime; ?>" />
 						<br />
 
-						<label for="eventEndTime">Datum van het einde van het event</label>
+						<label  for="eventEndTime">Tot</label>
 						<br />
-						<input id="eventEndTime" name="eventEndTime" type="date" value="<?php echo $eventEndTime; ?>" />
+						<input class="textbox" id="eventEndTime" name="eventEndTime" type="date" value="<?php echo $eventEndTime; ?>" />
 						<br />
 
 						<label for="eventLocation">Locatie van het event</label>
-						<input id="eventLocation" name="eventLocation" type="text" value="<?php echo $eventLocation; ?>" />
+						<input class="textbox" id="eventLocation" name="eventLocation" type="text" value="<?php echo $eventLocation; ?>" />
 						
 						<input id="eventId" name="eventId" type="hidden" value="<?php echo $event->ID; ?>" />
 
-						<input id="eventEdit" name="eventEdit" type="submit" value="Bewerk" />
+						<input class="form-button" id="eventEdit" name="eventEdit" type="submit" value="Bewerk" />
 					</form>
 				<?php
 			}

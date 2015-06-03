@@ -17,10 +17,10 @@
 		{
 			?>
 				<form class="createForm" action="<?php $_SERVER['REQUEST_URI'] ?>" method="POST" enctype="multipart/form-data">
-					<label for="adTitle">Titel van het zoekertje</label>
-					<input id="adTitle" name="adTitle" type="text" />
+					
+					<input class="textbox" id="adTitle" name="adTitle" type="text" placeholder="Titel" />
 
-					<label for="adDescription">Beschrijving van het zoekertje</label>
+					<label for="adDescription">Beschrijving</label><br \>
 					<?php
 						$settings = array('textarea_name' => 'adDescription');
 						$content = ''; 
@@ -31,7 +31,7 @@
 
 					<label for="parentProjectId">Project waartoe het zoekertje behoort</label>
 					<br />
-					<select id="parentProjectId" name="parentProjectId">
+					<select class="textbox combobox" id="parentProjectId" name="parentProjectId">
 						<option value="0">Geen project</option>
 						<?php
 							$parents = get_posts(
@@ -56,13 +56,10 @@
 					</select>
 					<br />
 
-					<label for="adPrice">Prijs van het zoekertje</label>
-					<input id="adPrice" name="adPrice" type="text" />
+					<input class="textbox" id="adPrice" name="adPrice" type="text" placeholder="Prijs" />
+					<input class="textbox" id="adLocation" name="adLocation" type="text" placeholder="Locatie" />
 
-					<label for="adLocation">Locatie van het zoekertje</label>
-					<input id="adLocation" name="adLocation" type="text" />
-
-					<input id="adPublish" name="adPublish" type="submit" value="Publiceer" />
+					<input id="adPublish" name="adPublish" type="submit" value="Publiceer" class="form-button" />
 				</form>
 			<?php
 		}

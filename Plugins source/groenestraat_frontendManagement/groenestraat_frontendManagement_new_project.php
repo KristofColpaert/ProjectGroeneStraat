@@ -20,10 +20,9 @@
 		{
 			?>
 				<form class="createForm" action="<?php $_SERVER['REQUEST_URI']; ?>" method="POST" enctype="multipart/form-data">
-					<label for="projectTitle">Titel van het project</label>
-					<input id="projectTitle" name="projectTitle" type="text" />
+					<input id="projectTitle" class="textbox" name="projectTitle" type="text" placeholder="Titel"/>
 
-					<label for="projectDescription">Beschrijving van het project</label>
+					<label for="projectDescription">Beschrijving</label><br \>
 					<?php 
 						$settings = array('textarea_name' => 'projectDescription');
 						$content = '';
@@ -32,21 +31,21 @@
 						wp_editor($content, $editor_id, $settings);
 					?>
 
-					<label for="projectStreet">Straat van het project</label>
-					<input id="projectStreet" name="projectStreet" type="text"/>
-
-					<label for="projectCity">Gemeente van het project</label>
-					<input id="projectCity" name="projectCity" type="text" />
-
-					<label for="projectZipcode">Postcode van het project</label>
-					<input id="projectZipcode" name="projectZipcode" type="text" />
-
-					<label for="projectFeaturedImage">Stel een hoofdingsafbeelding in</label>
-					<input id="projectFeaturedImage" name="projectFeaturedImage" type="file" accept="image/x-png, image/gif, image/jpeg" />
-
-					<br />
 					
-					<input id="projectPublish" name="projectPublish" type="submit" value="Publiceer" />
+					<input class="textbox" id="projectStreet" name="projectStreet" type="text" placeholder="Straat"/>
+
+					
+					<input class="textbox" id="projectCity" name="projectCity" type="text" placeholder="Gemeente"/>
+
+					
+					<input class="textbox" id="projectZipcode" name="projectZipcode" type="text" placeholder="Postcode" />
+
+					<label for="projectFeaturedImage">Afbeelding</label>
+                    
+                        <input id="projectFeaturedImage" name="projectFeaturedImage" type="file" accept="image/x-png, image/gif, image/jpeg" />
+					
+
+					<input class="form-button" id="projectPublish" name="projectPublish" type="submit" value="Publiceer" />
 				</form>
 			<?php
 		}

@@ -15,8 +15,7 @@
 	function prowp_frontendlayout_install()
 	{
 		//kalender aanmaken
-		makeShortcodePage('Kalender','[personal_calendar]','kalender','publish','page','closed');
-
+		
 		//delete action
 		makeShortcodePage('Verwijder event','[delete_event]','verwijder event','publish','page','closed');
 		makeShortcodePage('Verwijder zoekertje','[delete_zoekertje]','verwijder zoekertje','publish','page','closed');

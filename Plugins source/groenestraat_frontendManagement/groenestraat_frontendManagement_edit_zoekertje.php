@@ -22,10 +22,10 @@
 			{
 				?>
 					<form class="createForm" action="<?php $_SERVER['REQUEST_URI']; ?>" method="POST" enctype="multipart/form-data">
-						<label for="adTitle">Titel van het zoekertje</label>
-						<input id="adTitle" name="adTitle" type="text" value="<?php echo $zoekertje->post_title; ?>" />
+						<label for="adTitle">Titel</label>
+						<input class="textbox" id="adTitle" name="adTitle" type="text" value="<?php echo $zoekertje->post_title; ?>" />
 						
-						<label for="adDescription">Beschrijving van het zoekertje</label>
+						<label for="adDescription">Beschrijving</label><br \>
 						<?php
 							$settings = array('textarea_name' => 'adDescription');
 							$content = $zoekertje->post_content; 
@@ -41,7 +41,7 @@
 
 						<label for="parentProjectId">Project waartoe het zoekertje behoort</label>
 						<br />
-						<select id="parentProjectId" name="parentProjectId">
+						<select class="input combobox" id="parentProjectId" name="parentProjectId">
 							<option value="0">Geen project</option>
 							<?php
 								$parents = get_posts(
@@ -64,19 +64,19 @@
 						</select>
 						<br />
 
-						<label for="adPrice">Prijs van het zoekertje</label>
-						<br />
-						<input id="adPrice" name="adPrice" type="text" value="<?php echo $adPrice; ?>" />
-						<br />
+						<label for="adPrice">Prijs</label>
+						
+						<input class="textbox" id="adPrice" name="adPrice" type="text" value="<?php echo $adPrice; ?>" />
+						
 
-						<label for="adLocation">Locatie van het zoekertje</label>
-						<br />
-						<input id="adLocation" name="adLocation" type="text" value="<?php echo $adLocation; ?>" />
-						<br />
+						<label for="adLocation">Locatie</label>
+						
+						<input class="textbox" id="adLocation" name="adLocation" type="text" value="<?php echo $adLocation; ?>" />
+						
 						
 						<input id="zoekertjeId" name="zoekertjeId" type="hidden" value="<?php echo $zoekertje->ID; ?>" />
 
-						<input id="zoekertjeEdit" name="zoekertjeEdit" type="submit" value="Bewerk" />
+						<input id="zoekertjeEdit" class="form-button" name="zoekertjeEdit" type="submit" value="Bewerk" />
 					</form>
 				<?php
 			}
