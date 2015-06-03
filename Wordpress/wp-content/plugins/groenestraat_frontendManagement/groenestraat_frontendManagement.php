@@ -10,6 +10,26 @@
 		License: GPLv2		
 	*/
 
+		register_activation_hook(__FILE__, 'prowp_personal_calendar_install');
+
+	function prowp_personal_calendar_install()
+	{
+		makeShortcodePage('Kalender','[personal_calendar]','kalender','publish','page','closed');
+	}
+
+	function makeShortcodePage($title,$content,$post_name,$post_status,$post_type,$ping_status)
+	{
+		$args = array(
+			'post_title' => $title,
+			'post_content' => $content,
+			'post_name' => $post_name,
+			'post_status' => $post_status, 
+			'post_type' => $post_type,
+			'ping_status' => $ping_status
+		);
+		wp_insert_post($args);
+	}
+
 	include_once('groenestraat_frontendManagement_new_project.php');
 	include_once('groenestraat_frontendManagement_edit_project.php');
 	include_once('groenestraat_frontendManagement_delete_project.php');
@@ -20,4 +40,5 @@
 
 	include_once('groenestraat_frontendManagement_new_zoekertje.php');
 	include_once('groenestraat_frontendManagement_edit_zoekertje.php');
+	include_once('groenestraat_frontendManagement_delete_zoekertje.php');
 ?>
