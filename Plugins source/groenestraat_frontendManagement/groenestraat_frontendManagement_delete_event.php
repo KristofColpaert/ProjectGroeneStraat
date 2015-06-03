@@ -22,7 +22,7 @@
 			{
 				?>
 					<p>Bent u zeker dat u het event <strong><a href="<?php echo $event->guid; ?>"><?php echo $event->post_title; ?></a></strong> wilt verwijderen?</p>
-					<form action="<?php $_SERVER['REQUEST_URI']; ?>" method="POST" enctype="multipart/form-data">
+					<form class="createForm" action="<?php $_SERVER['REQUEST_URI']; ?>" method="POST" enctype="multipart/form-data">
 						<input id="eventId" name="eventId" type="hidden" value="<?php echo $event->ID; ?>" />
 						<input id="eventDelete" name="eventDelete" type="submit" value="Verwijder" />
 					</form>

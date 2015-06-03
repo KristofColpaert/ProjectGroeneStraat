@@ -21,7 +21,7 @@
 			if($event != null && ($current_user->ID == $event->post_author || current_user_can('manage_options')) && current_user_can('edit_published_posts'))
 			{
 				?>
-					<form action="<?php $_SERVER['REQUEST_URI']; ?>" method="POST" enctype="multipart/form-data">
+					<form class="createForm" action="<?php $_SERVER['REQUEST_URI']; ?>" method="POST" enctype="multipart/form-data">
 						<label for="eventTitle">Titel van het event</label>
 						<input id="eventTitle" name="eventTitle" type="text" value="<?php echo $event->post_title; ?>" />
 						

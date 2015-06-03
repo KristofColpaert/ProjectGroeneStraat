@@ -30,7 +30,7 @@
 		{
 			?>
 				
-				<form action="<?php $_SERVER['REQUEST_URI']; ?>" method="POST" enctype="multipart/form-data">
+				<form class="createForm" action="<?php $_SERVER['REQUEST_URI']; ?>" method="POST" enctype="multipart/form-data">
 					<label for="eventTitle">Titel van het event</label>
 					<input id="eventTitle" name="eventTitle" type="text" />
 

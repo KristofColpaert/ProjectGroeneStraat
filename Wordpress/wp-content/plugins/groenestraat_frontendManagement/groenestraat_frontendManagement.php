@@ -14,10 +14,24 @@
 
 	function prowp_frontendlayout_install()
 	{
+		//kalender aanmaken
 		makeShortcodePage('Kalender','[personal_calendar]','kalender','publish','page','closed');
-		makeShortcodePage('Delete event','[delete_event]','delete event','publish','page','closed');
-		makeShortcodePage('Delete zoekertje','[delete_zoekertje]','delete zoekertje','publish','page','closed');
-		makeShortcodePage('Delete project','[delete_project]','delete project','publish','page','closed');
+
+		//delete action
+		makeShortcodePage('Verwijder event','[delete_event]','verwijder event','publish','page','closed');
+		makeShortcodePage('Verwijder zoekertje','[delete_zoekertje]','verwijder zoekertje','publish','page','closed');
+		makeShortcodePage('Verwijder project','[delete_project]','verwijder project','publish','page','closed');
+		
+		//new action
+		makeShortcodePage('Nieuw event','[new_event]','nieuw event','publish','page','closed');
+		makeShortcodePage('Nieuw zoekertje','[new_zoekertje]','nieuw zoekertje','publish','page','closed');
+		makeShortcodePage('Nieuw project','[new_project]','nieuw project','publish','page','closed');
+	
+		//update action
+		makeShortcodePage('Bewerk event','[edit_event]','bewerk event','publish','page','closed');
+		makeShortcodePage('Bewerk zoekertje','[edit_zoekertje]','bewerk zoekertje','publish','page','closed');
+		makeShortcodePage('Bewerk project','[edit_project]','bewerk project','publish','page','closed');
+
 	}
 
 	function makeShortcodePage($title,$content,$post_name,$post_status,$post_type,$ping_status)

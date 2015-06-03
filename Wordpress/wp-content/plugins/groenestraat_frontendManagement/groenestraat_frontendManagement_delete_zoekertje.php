@@ -22,7 +22,7 @@
 			{
 				?>
 					<p>Bent u zeker dat u het zoekertje <strong><a href="<?php echo $event->guid; ?>"><?php echo $zoekertje->post_title; ?></a></strong> wilt verwijderen?</p>
-					<form action="<?php $_SERVER['REQUEST_URI']; ?>" method="POST" enctype="multipart/form-data">
+					<form class="createForm" action="<?php $_SERVER['REQUEST_URI']; ?>" method="POST" enctype="multipart/form-data">
 						<input id="zoekertjeId" name="zoekertjeId" type="hidden" value="<?php echo $zoekertje->ID; ?>" />
 						<input id="zoekertjeDelete" name="zoekertjeDelete" type="submit" value="Verwijder" />
 					</form>
