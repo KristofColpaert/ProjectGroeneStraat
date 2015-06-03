@@ -69,7 +69,7 @@
 			
 			<script>
 			<?php
-				if(wp_get_current_user()->ID > 1)
+				if(wp_get_current_user()->ID > 0)
 				{
 					//logged in
 			?>
