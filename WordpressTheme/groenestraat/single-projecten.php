@@ -1,7 +1,18 @@
-<?php get_header(); ?>
+<?php 
+	get_header(); 
+	global $post;
+?>
 
 	<section class="project-image">
-		<section class="project-info"></section>
+		<section class="project-info">
+
+			<!-- Kristof zijn toevoegingen -->
+			<form method="POST" id="projectMemberForm">
+				<input id="projectMemberId" name="projectMemberId" type="hidden" value="<?php echo get_current_user_id(); ?>" />
+				<input id="projectMemberProjectId" name="projectMemberProjectId" type="hidden" value="<?php echo $post->ID; ?>" />
+				<input id="projectMemberSubmit" name="projectMemberSubmit" type="submit" value="Inschrijven" />
+			</form>
+		</section>
 	</section>
 
 	<section class="container" style="background-color:#ccc">
@@ -9,8 +20,6 @@
 		<section class="main">
 		
 	<?php
-
-	global $post;
 
 	while(have_posts()) : the_post();
 		$meta = get_post_meta($post->ID);
@@ -30,8 +39,10 @@
 		h1.innerHTML = "<?php the_title(); ?>";
 		var strong = document.createElement("strong");
 		strong.innerHTML = "&#160; <?php echo $adresInfo ?>";
+
 		h1.appendChild(strong);
 		info.appendChild(h1);
+
 
 		</script>
 
@@ -56,7 +67,7 @@
 				$projectStreet = $meta['_projectStreet'][0];
 				$projectCity = $meta['_projectCity'][0];
 				$projectZipcode = $meta['_projectZipcode'][0];
-*/
+				*/
 			?>
 
 				<section class="item">
