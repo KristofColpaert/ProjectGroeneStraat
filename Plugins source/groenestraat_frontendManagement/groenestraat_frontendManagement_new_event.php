@@ -13,6 +13,19 @@
 
 	function show_new_event_form()
 	{
+		?>
+			<script src="//code.jquery.com/jquery-1.10.2.js"></script>
+			<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+			<link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+
+			<script>
+			  	$(document).ready(function() {
+					$('#eventTime').datepicker();
+					$('#eventEndTime').datepicker();
+				});
+			</script>
+		<?php
+
 		if(current_user_can('publish_posts'))
 		{
 			?>
@@ -59,12 +72,12 @@
 
 					<label for="eventTime">Datum van het event</label>
 					<br />
-					<input id="eventTime" name="eventTime" type="date" />
+					<input id="eventTime" readonly name="eventTime" type="text" />
 					<br />
 
 					<label for="eventEndTime">Datum van het einde van het event</label>
 					<br />
-					<input id="eventEndTime" name="eventEndTime" type="date" />
+					<input id="eventEndTime" readonly name="eventEndTime" type="text" />
 					<br />
 
 					<label for="eventLocation">Locatie van het event</label>

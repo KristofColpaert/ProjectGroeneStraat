@@ -13,6 +13,19 @@
 
 	function show_new_event_form()
 	{
+		?>
+			<script src="//code.jquery.com/jquery-1.10.2.js"></script>
+			<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+			<link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+
+			<script>
+			  	$(document).ready(function() {
+					$('#eventTime').datepicker();
+					$('#eventEndTime').datepicker();
+				});
+			</script>
+		<?php
+
 		if(current_user_can('publish_posts'))
 		{
 			?>
@@ -49,7 +62,7 @@
 								foreach($parents as $parent)
 								{
 									?>
-										<option value="<?php echo $parent-ID; ?>"><?php echo $parent->post_title; ?></option>
+										<option value="<?php echo $parent->ID; ?>"><?php echo $parent->post_title; ?></option>
 									<?php
 								}
 							}
@@ -59,7 +72,12 @@
 
 					<label for="eventTime">Datum van het event</label>
 					<br />
-					<input id="eventTime" name="eventTime" type="date" />
+					<input id="eventTime" readonly name="eventTime" type="text" />
+					<br />
+
+					<label for="eventEndTime">Datum van het einde van het event</label>
+					<br />
+					<input id="eventEndTime" readonly name="eventEndTime" type="text" />
 					<br />
 
 					<label for="eventLocation">Locatie van het event</label>
@@ -87,13 +105,15 @@
 				!empty($_POST['eventDescription']) &&
 				!empty($_POST['parentProjectId']) &&
 				!empty($_POST['eventTime']) &&
-				!empty($_POST['eventLocation'])
+				!empty($_POST['eventLocation']) &&
+				!empty($_POST['eventEndTime'])
 				)
 			{
 				$eventTitle = $_POST['eventTitle'];
 				$eventDescription = $_POST['eventDescription'];
 				$parentProjectId = $_POST['parentProjectId'];
 				$eventTime = $_POST['eventTime'];
+				$eventEndTime = $_POST['eventEndTime'];
 				$eventLocation = $_POST['eventLocation'];
 
 				if(null == get_page_by_title($eventTitle))
@@ -119,6 +139,7 @@
 						add_post_meta($postId, '_parentProjectId', $parentProjectId);
 					}
 					add_post_meta($postId, '_eventTime', $eventTime);
+					add_post_meta($postId, '_eventEndTime', $eventEndTime);
 					add_post_meta($postId, '_eventLocation', $eventLocation);
 
 					?>
@@ -129,7 +150,7 @@
 				else
 				{
 					?>
-						<p>Helaas, er bestaat reeds een project met deze titel.</p>
+						<p>Helaas, er bestaat reeds een event met deze titel.</p>
 					<?php
 				}
 			}

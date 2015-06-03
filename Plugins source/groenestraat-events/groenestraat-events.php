@@ -10,6 +10,10 @@
 		License: GPLv2		
 	*/
 
+	?>
+
+	<?php
+
 	/*
 		Install plugin
 	*/
@@ -81,6 +85,21 @@
 	
 	function events_metaboxes_callback()
 	{
+
+	?>
+		<script src="//code.jquery.com/jquery-1.10.2.js"></script>
+		<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+		<link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+
+		<script>
+		  	$(document).ready(function() {
+					$('#eventTime').datepicker();
+					$('#eventEndTime').datepicker();
+			});
+		</script>
+
+		<?php
+
 		global $post;
 		
 		echo '<input type="hidden" name="eventmeta_noncename" id="eventmeta_noncename" value="' . wp_create_nonce( plugin_basename(__FILE__) ) . '" />';
@@ -90,10 +109,10 @@
 		$eventEndTime = get_post_meta($post->ID, '_eventEndTime', true);
 
 		echo '<label class="eventTime" for="eventTime">Datum</label><br />';
-    	echo '<input id="eventTime" type="date" name="_eventTime" value="' . $eventTime . '" class="widefat"><br />';    
+    	echo '<input id="eventTime" readonly type="text" name="_eventTime" value="' . $eventTime . '" class="widefat"><br />';    
 
 		echo '<label class="eventEndTime" for="eventEndTime">Einddatum</label><br />';
-    	echo '<input id="eventEndTime" type="date" name="_eventEndTime" value="' . $eventEndTime . '" class="widefat"><br />';  
+    	echo '<input id="eventEndTime" readonly type="text" name="_eventEndTime" value="' . $eventEndTime . '" class="widefat"><br />';  
 
     	echo '<label for="eventLocation">Locatie van het event</label>';
     	echo '<input id="eventLocation" type="text" name="_eventLocation" value="' . $eventLocation . '" class="widefat" />';
@@ -101,6 +120,7 @@
 	
 	function save_events_metaboxes($post_id, $post) 
 	{
+
 		if (!isset( $_POST['eventmeta_noncename'] ) || !wp_verify_nonce($_POST['eventmeta_noncename'], plugin_basename(__FILE__))) 
 		{
 			return $post->ID;
@@ -110,6 +130,8 @@
 		{
 			return $post->ID;
 		}
+
+		if($_POST['_eventTime'])
 
 		$events_meta['_eventLocation'] = $_POST['_eventLocation'];
 		$events_meta['_eventTime'] = $_POST['_eventTime'];
@@ -151,7 +173,6 @@
 
 	function parentproject_metaboxes_callback_events( $object, $box ) 
 	{ 
-		echo 'hier';
 		$parents = get_posts(
 			array(
 				'post_type' => 'projecten',
