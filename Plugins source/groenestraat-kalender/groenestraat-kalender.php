@@ -62,7 +62,8 @@
 			<link href='<?php echo plugins_url('fullcalendar.print.css', __FILE__); ?>' rel='stylesheet' media='print' />
 
 			<script src='http://fullcalendar.io/js/fullcalendar-2.1.1/lib/moment.min.js'></script>
-			<script src='http://fullcalendar.io/js/fullcalendar-2.1.1/lib/jquery.min.js'></script>
+			<!-- JQuery already loaded -->
+			<!--<script src='http://fullcalendar.io/js/fullcalendar-2.1.1/lib/jquery.min.js'></script>-->
 			<script src="http://fullcalendar.io/js/fullcalendar-2.1.1/lib/jquery-ui.custom.min.js"></script>
 			<script src='http://fullcalendar.io/js/fullcalendar-2.1.1/fullcalendar.min.js'></script>
 			<script>
@@ -93,19 +94,10 @@
 
 			</script>
 			<style>
-
-				body {
-					margin: 40px 10px;
-					padding: 0;
-					font-family: "Lucida Grande",Helvetica,Arial,Verdana,sans-serif;
-					font-size: 14px;
-				}
-
 				#calendar {
 					max-width: 900px;
 					margin: 0 auto;
 				}
-
 			</style>
 			<div id='calendar'></div>
 		<?php
