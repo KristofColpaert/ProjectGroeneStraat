@@ -10,11 +10,14 @@
 		License: GPLv2		
 	*/
 
-		register_activation_hook(__FILE__, 'prowp_personal_calendar_install');
+		register_activation_hook(__FILE__, 'prowp_frontendlayout_install');
 
-	function prowp_personal_calendar_install()
+	function prowp_frontendlayout_install()
 	{
 		makeShortcodePage('Kalender','[personal_calendar]','kalender','publish','page','closed');
+		//makeShortcodePage('Delete event','[personal_calendar]','kalender','publish','page','closed');
+		//makeShortcodePage('Delete zoekertje','[personal_calendar]','kalender','publish','page','closed');
+		//makeShortcodePage('Delete project','[personal_calendar]','kalender','publish','page','closed');
 	}
 
 	function makeShortcodePage($title,$content,$post_name,$post_status,$post_type,$ping_status)
