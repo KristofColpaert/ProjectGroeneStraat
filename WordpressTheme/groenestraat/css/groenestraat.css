@@ -65,7 +65,7 @@ header
 
 .header-image
 {
-    background-image: url("../img/header.png");
+    background-image: url("../img/header.jpg");
     background-position: center center;
     background-repeat: no-repeat;
     background-size: cover;
@@ -90,6 +90,12 @@ header .menu
     float:right;
 }
 
+ img 
+{
+    max-width:100%;
+    height:auto;
+}
+
 .button
 {
     color: #a2a1a9;
@@ -100,15 +106,6 @@ header .menu
     padding:10px 20px;
     text-transform: uppercase;
 }
-
- img 
-{
-    max-width:100%;
-    height:auto;
-}
-
-
-
 
 .button:hover
 {
@@ -152,6 +149,7 @@ header .menu
     text-transform: uppercase;
     margin: 19px;
 }
+
 .aanmelden a{
      display: block;
     color: #a2a1a9;;
@@ -159,106 +157,15 @@ header .menu
     font-size:1.7em;
     padding:5px 25px 3px 25px;
 }
+
 .aanmelden a:hover{
      color:#f8f7f7;
     background-color: #00cd00;
 }
+
 .clear
 {
     clear:both;
-}
-
-.calender
-{
-    font-size:0.85em;
-    width: 94%;
-    padding:2%;
-    height: 65px;
-    background-color: #ffffff;
-    margin-bottom: 2%;
-}
-
-.calender .calender-image
-{
-    position: relative;
-    text-align: left;
-}
-.calender .calender-image img
-{
-    position: absolute;
-    top:0;
-    z-index: 9;
-}
-.calender .calender-image em
-{
-    position: absolute;
-    z-index: 99999;
-    font-size:3em;
-    float: left;
-    top:10px;
-}
-
-.calender strong
-{
-    font-size:0.9em;
-}
-
-.calender img
-{
-    display: block;
-    float:left;
-    width: 50px;
-    height: 40px;
-}
-
-.recent
-{
-    width: 100%;
-    min-height: 325px;
-}
-
-.recent-item
-{
-    float:left;
-    /*width:100vw;*/
-    width:23.33333%;
-    padding:5%;
-    height: 100%;
-    text-align: center;
-    background-color: #f8f7f7;
-}
-
-.recent-item h1
-{
-    color: #69686e;
-    margin-bottom: 10px;
-}
-
-.recent-item p
-{
-    color: #a2a1a9;
-    margin-bottom: 40px;
-}
-
-.mnav
-{
-    display: none;
-}
-
-.wrapper
-{
-min-width: 100%;
-}
-
-#mobile-nav
-{
-    display: none;
-    width: 250px;
-    height: 100%;
-    background-color: #333333;
-    position: absolute;
-    top:0;
-    left: 0;
 }
 
 .home-title
@@ -270,7 +177,7 @@ min-width: 100%;
     background-color: #f8f7f7;
 }
 
-.home-title>h1
+.home-title h1
 {
     line-height: 175px;
     font-size: 5em;
@@ -281,7 +188,7 @@ min-width: 100%;
 .recent
 {
     width: 100%;
-    min-height: 300px;
+    min-height: 325px;
 }
 
 .recent-item
@@ -289,7 +196,7 @@ min-width: 100%;
     float:left;
     width:23.33333%;
     padding:5%;
-    height: 100%;
+    min-height: 320px;
     text-align: center;
     background-color: #f8f7f7;
 }
@@ -357,8 +264,14 @@ todo: fix 1-2px red border????
 
 .recent-artikel
 {
+    width:100%;
+    height: 100vh;
+    background-color: #f8f7f7;
+    background-image: url("../img/artikel-example1.png");
+    background-size: cover;
+    background-position: center center;
+    transition: background 0.25s ease;
     position: relative;
-    background-color: red;
 }
 
 .artikel-info
@@ -368,6 +281,7 @@ todo: fix 1-2px red border????
     right: 0;
     width: 35%;
     height: 100%;
+    background-color: black;
 }
 
 .artikel-item
@@ -381,7 +295,20 @@ todo: fix 1-2px red border????
 
 .artikel-item:hover, #active
 {
+    transition: background 0.25s ease;
     background-color:#ffffff;
+}
+
+.artikel-side
+{
+    color:#fff;
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    padding:0 2%;
+    width: 61%;
+    height: 20%;
+    background: url("../img/blackfilter.png") repeat;
 }
 
 /* PROJECTS */
@@ -416,8 +343,7 @@ todo: fix 1-2px red border????
     width: 94%;
     height: 88%;
     display: none;
-    background-image: url(../img/greenfilter.png);
-    background-repeat: repeat;
+    background: url("../img/greenfilter.png") repeat;
 }
 
 #recent-projects-slider .item img
@@ -431,7 +357,7 @@ todo: fix 1-2px red border????
 .recent-zoekertjes
 {
     width:100%;
-    min-height: 250px;
+    min-height: 200px;
     padding-bottom: 100px;
     background-color: #f8f7f7;
 }
@@ -473,9 +399,9 @@ footer
 
 .footer-partners
 {
-    background-color: #a2a1a9;
+    background-color: #fff;
     width:100%;
-    min-height: 150px;
+    min-height: 100px;
 }
 
 #partners-slider .item img
@@ -505,7 +431,7 @@ footer
 
 .footer-logo img
 {
-    width: 300px;
+    width: 225px;
     margin: auto auto;
     display: block;
 }
@@ -548,24 +474,6 @@ footer
         padding: 5%;
     }
 }
-@media (max-width: 840px) 
-{
-    .recent-artikel .artikel-img
-    {
-        float:left;
-        width: 100%;
-        height: 100%;
-        background-color: yellow;
-        background-repeat: no-repeat;
-        background-size: cover;
-        background-position: center center;
-        
-    }
-    .recent-artikel .artikel-msg
-    {
-        display: none;
-    }
-}
 @media (max-width: 910px) 
 {
     .recent-item
@@ -573,6 +481,7 @@ footer
         float:left;
         width: 90%;
         height: 90%;
+        min-height: 100%;
         padding: 5%;
     }
     .recent-zoekertjes .zoekertje-item
@@ -581,7 +490,7 @@ footer
         width: 70%;
         margin:0 10% 5% 10%;
         padding:5%;
-        height: 150px;
+        min-height: 150px;
         background-color: #ffffff;
         text-align: center;
     }
@@ -594,9 +503,20 @@ footer
     {
         margin-bottom: 15px;
     }
+    .artikel-info
+    {
+        display: none;
+    }
+    .artikel-side
+    {
+        width:96%;
+    }
+}
+@media (max-width: 1000px) 
+{
     .menu
     {
-        visibility: hidden;
+        display: none;
     }
 }
 @media (max-width: 1165px) 
@@ -627,7 +547,7 @@ footer
 {
     width: 100%;
     height: 40px;
-    background-color: #00cd00;
+    background-color: #333333;
     text-transform: lowercase;
     overflow: hidden;
     transition: all 2s;
@@ -655,7 +575,7 @@ footer
 .projecten-menu li a:hover
 {
     background-color: #ffffff;
-    color:#00cd00;
+    color:#333333;
 }
 
 .container a
@@ -706,14 +626,21 @@ footer
 {
     width:100%;
     height: 100px;
-    background-color: #00cd00;;
+    background-color: #333333;
 }
 
 .navigate-menu a
 {
+    position: relative;
+    top:43px;
+    left:43px;
+    text-transform: uppercase;
+    font-weight: bold;
+    margin-top:25px;
+    text-decoration: none;
     padding:10px 20px;
     background-color: #ffffff;
-    color:#00cd00;
+    color:#333333;
 }
 
 @media (max-width: 1000px) 
@@ -746,7 +673,7 @@ footer
 {
     position: relative;
     background-size: cover;
-    background-image: url("../img/IMG_2727.jpg");
+    background-image: url("../img/header.jpg");
     background-position: center center;
     width:100%;
     height: 50vh;
@@ -764,7 +691,8 @@ footer
     position: absolute;
     bottom: 0;
     left:0;
-    width: 100%;
+    width: 96%;
+    padding: 0 2%;
     height: 20%;
     background: url("../img/blackfilter.png") repeat;
 }
