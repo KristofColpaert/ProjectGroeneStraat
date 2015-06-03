@@ -66,8 +66,13 @@
 			<!--<script src='http://fullcalendar.io/js/fullcalendar-2.1.1/lib/jquery.min.js'></script>-->
 			<script src="http://fullcalendar.io/js/fullcalendar-2.1.1/lib/jquery-ui.custom.min.js"></script>
 			<script src='http://fullcalendar.io/js/fullcalendar-2.1.1/fullcalendar.min.js'></script>
+			
 			<script>
-
+			<?php
+				if(wp_get_current_user()->ID == 1)
+				{
+					//logged in
+			?>
 				$(document).ready(function() {
 					$('#calendar').fullCalendar({
 						defaultDate: new Date(),
@@ -75,6 +80,8 @@
 						eventLimit: true,
 						events: [
 							<?php 
+							if(count($events) > 0)
+							{
 								foreach($events as $event)
 								{
 									?>
@@ -86,12 +93,25 @@
 										},
 									<?php
 								}
+							}
+
 							?>
 						]
 					});
 					
 				});
 
+			<?php
+				}
+				else
+				{ 
+					?>
+					$(document).ready(function() {
+						$('#hidden').show();
+					});
+					<?php
+				}
+			?>
 			</script>
 			<style>
 				#calendar {
@@ -100,6 +120,7 @@
 				}
 			</style>
 			<div id='calendar'></div>
+			<p id='hidden' style="display:none"> Gelieve u aan te melden om deze pagina te bekijken. </p>
 		<?php
 	}
 ?>

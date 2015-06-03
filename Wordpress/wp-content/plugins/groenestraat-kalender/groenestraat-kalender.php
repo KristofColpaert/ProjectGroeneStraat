@@ -62,19 +62,26 @@
 			<link href='<?php echo plugins_url('fullcalendar.print.css', __FILE__); ?>' rel='stylesheet' media='print' />
 
 			<script src='http://fullcalendar.io/js/fullcalendar-2.1.1/lib/moment.min.js'></script>
-			<script src='http://fullcalendar.io/js/fullcalendar-2.1.1/lib/jquery.min.js'></script>
+			<!-- JQuery already loaded -->
+			<!--<script src='http://fullcalendar.io/js/fullcalendar-2.1.1/lib/jquery.min.js'></script>-->
 			<script src="http://fullcalendar.io/js/fullcalendar-2.1.1/lib/jquery-ui.custom.min.js"></script>
 			<script src='http://fullcalendar.io/js/fullcalendar-2.1.1/fullcalendar.min.js'></script>
+			
 			<script>
-
+			<?php
+				if(wp_get_current_user()->ID == 1)
+				{
+					//logged in
+			?>
 				$(document).ready(function() {
-					console.log("hier");
 					$('#calendar').fullCalendar({
 						defaultDate: new Date(),
 						editable: true,
 						eventLimit: true,
 						events: [
 							<?php 
+							if(count($events) > 0)
+							{
 								foreach($events as $event)
 								{
 									?>
@@ -86,29 +93,34 @@
 										},
 									<?php
 								}
+							}
+
 							?>
 						]
 					});
 					
 				});
 
+			<?php
+				}
+				else
+				{ 
+					?>
+					$(document).ready(function() {
+						$('#hidden').show();
+					});
+					<?php
+				}
+			?>
 			</script>
 			<style>
-
-				body {
-					margin: 40px 10px;
-					padding: 0;
-					font-family: "Lucida Grande",Helvetica,Arial,Verdana,sans-serif;
-					font-size: 14px;
-				}
-
 				#calendar {
 					max-width: 900px;
 					margin: 0 auto;
 				}
-
 			</style>
 			<div id='calendar'></div>
+			<p id='hidden' style="display:none"> Gelieve u aan te melden om deze pagina te bekijken. </p>
 		<?php
 	}
 ?>
