@@ -10,10 +10,6 @@
 		License: GPLv2		
 	*/
 
-	?>
-
-	<?php
-
 	/*
 		Install plugin
 	*/
