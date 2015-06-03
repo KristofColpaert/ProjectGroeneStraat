@@ -21,20 +21,19 @@
 		//mail verzenden
 		$onderwerp = $_POST["Onderwerp"];
 		$bijlage = $_POST["Bijlage"];
+
 		$users = get_users();
 		$ontvangers = array();
 
-		if(empty($onderwerp) || empty($bijlage) || empty($ontvangers))
+		if(empty($onderwerp) || empty($bijlage))
 		{
 			return;
 		}
 
 		$completeBijlage = "<body><h1>Nieuwsbrief</h1>" . $bijlage . "<br />" . "<p>Met vriendelijke groeten</p><br /><p>Groenestraat.be</p>";
 
-		// To send HTML mail, the Content-type header must be set
-		$headers = array("From: admin@groenestraat.be",
-		    "Reply-To: admin@groenestraat.be", "Content-Type: text/html; charset=UTF-8");
-		$headers = implode("\r\n", $headers);
+		$headers  = 'MIME-Version: 1.0' . "\r\n";
+		$headers .= 'Content-type: text/html; charset=UTF-8' . "\r\n";
 
 		foreach($users as $user)
 		{
@@ -48,11 +47,13 @@
 		if(wp_mail($ontvangers, $onderwerp, $completeBijlage, $headers))
 		{
 			//
+			echo "Verstuurd";
 
 		}
 		else
 		{
 			//
+			echo "Niet verstuurd";
 		}
 	}
 ?>
@@ -80,6 +81,5 @@
 		</form>
 
 		<?php
-		$paged = get_query_var( 'status', 1 );
 	}
 ?>
