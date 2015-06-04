@@ -129,4 +129,103 @@ $(document).ready(function()
 	        }
 	    });
 	}
+
+	/*
+		Add event to personal calendar
+	*/
+
+	checkEventMember();
+	$('#eventMemberSubmit').css('visibility', 'hidden');
+
+	$('#eventMemberForm').submit(function(e)
+	{
+		e.preventDefault();
+		makeEventMember();
+	});
+
+	function makeEventMember()
+	{
+		var tempUser_id = $('#eventMemberId').val();
+		var tempEvent_id = $('#eventMemberProjectId').val();
+
+		if($('#eventMemberSubmit').val() == 'Toevoegen aan persoonlijke kalender')
+		{
+			jQuery.ajax(
+		    {
+		        url : plugin.ajax_url,
+		        type : 'post',
+		        data : 
+		        {
+		            action : 'link_event_user',
+		            user_id : tempUser_id,
+		            event_id : tempEvent_id,
+		            todo : 'subscribe'
+		        },
+		        success : function(response)
+		        {
+		        	$('#eventMemberSubmit').val("Verwijderen uit persoonlijke kalender");
+		            return response;
+		        },
+		        error : function(error)
+		        {
+		            return 'failed';
+		        }
+		    });
+		}
+
+		else
+		{
+			jQuery.ajax(
+		    {
+		        url : plugin.ajax_url,
+		        type : 'post',
+		        data : 
+		        {
+		            action : 'link_event_user',
+		            user_id : tempUser_id,
+		            event_id : tempEvent_id,
+		            todo : 'unsubscribe'
+		        },
+		        success : function(response)
+		        {
+		        	$('#eventMemberSubmit').val('Toevoegen aan persoonlijke kalender');
+		            return response;
+		        },
+		        error : function(error)
+		        {
+		            return 'failed';
+		        }
+		    });
+		}
+	}
+
+	function checkEventMember()
+	{
+		var tempUser_id = $('#eventMemberId').val();
+		var tempEvent_id = $('#eventMemberProjectId').val();
+
+		jQuery.ajax(
+	    {
+	        url : plugin.ajax_url,
+	        type : 'post',
+	        data : 
+	        {
+	            action : 'check_event_user',
+	            user_id : tempUser_id,
+	            event_id : tempEvent_id
+	        },
+	        success : function(response)
+	        {
+	            if(response == 'true')
+	            {
+	            	$('#eventMemberSubmit').attr('value', 'Verwijderen uit persoonlijke kalender');
+	            }
+	            $('#eventMemberSubmit').css('visibility', 'visible');
+	        },
+	        error : function(error)
+	        {
+	            return 'failed';
+	        }
+	    });
+	}
 });

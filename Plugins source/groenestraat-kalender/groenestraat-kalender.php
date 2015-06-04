@@ -41,7 +41,7 @@
 	{
 
 		$user_id = get_current_user_id();
-		$meta_key = "_eventCalendar ";
+		$meta_key = "_eventCalendar";
 
 		//ophalen data uit database
 		$value = get_user_meta($user_id, $meta_key);
@@ -49,9 +49,10 @@
 		//alle events ophalen
 		 	//Eerst de titel uit de get_post();
 			//Dan de meta_data uit de get_meta_data();
+		$events = array();
 		foreach($value as $val)
 		{
-			$event= get_post($val, OBJECT);
+			$event = get_post($val, OBJECT);
 			$event->eventTime = get_post_meta($event->ID, '_eventTime')[0];
 			$event->eventEndTime = get_post_meta($event->ID, '_eventEndTime')[0];
 			$events[] = $event;
