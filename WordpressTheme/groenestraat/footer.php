@@ -102,8 +102,8 @@
             navigation : false,
             responsive: true,
             autoHeight : false,
-            rewindNav : true,
-            scrollPerPage : false,
+            pagination : false,
+            paginationNumbers: false,
             stopOnHover: true,
             mouseDrag: true,
             touchDrag: true

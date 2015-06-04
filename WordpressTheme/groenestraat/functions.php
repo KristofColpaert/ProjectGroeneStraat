@@ -9,15 +9,36 @@ function script_enqueue(){
     wp_enqueue_script('owl-carousel-js', get_stylesheet_directory_uri() . '/js/owl.carousel.min.js', array( 'jquery' ));
     wp_enqueue_script('switchery-js', get_stylesheet_directory_uri() . '/js/switchery.min.js', array( 'jquery' ));
     wp_enqueue_script('validation', get_stylesheet_directory_uri() . '/js/livevalidation_standalone.compressed.js', array( 'jquery' ));
-    wp_enqueue_script('plugins', get_stylesheet_directory_uri() . '/js/plugins.js', array('jquery'));
-    wp_localize_script('plugins', 'plugin', array('ajax_url' => admin_url('admin-ajax.php')));
 }
 add_action('wp_enqueue_scripts', 'script_enqueue');     
 
 
+function excerpt($limit) 
+{
+      $excerpt = explode(' ', get_the_excerpt(), $limit);
+      if (count($excerpt)>=$limit) {
+        array_pop($excerpt);
+        $excerpt = implode(" ",$excerpt).'...';
+      } else {
+        $excerpt = implode(" ",$excerpt);
+      } 
+      $excerpt = preg_replace('`\[[^\]]*\]`','',$excerpt);
+      return $excerpt;
+    }
 
-
-
+    function content($limit) {
+      $content = explode(' ', get_the_content(), $limit);
+      if (count($content)>=$limit) {
+        array_pop($content);
+        $content = implode(" ",$content).'...';
+      } else {
+        $content = implode(" ",$content);
+      } 
+      $content = preg_replace('/\[.+\]/','', $content);
+      $content = apply_filters('the_content', $content); 
+      $content = str_replace(']]>', ']]&gt;', $content);
+      return $content;
+}
 
 //////////////////////////////////////////////////////////////////
 

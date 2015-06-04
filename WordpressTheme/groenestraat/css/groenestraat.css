@@ -535,15 +535,15 @@ footer
     }
 }
 
-/* OVERZICHT PROJECTEN */
+/* LAYOUT OVERZICHT */
 
 .container
 {
     width: 100%;
-    min-height: 500px;
+    min-height: 100px;
 }
 
-.projecten-menu
+.sub-menu
 {
     width: 100%;
     height: 40px;
@@ -553,27 +553,48 @@ footer
     transition: all 2s;
 }
 
-.projecten-menu ul
+.sub-menu ul
 {
     margin-top: 12px;
     float:right;
 }
 
-.projecten-menu ul li
+.sub-menu ul li
 {
     display: block;
     float:left;
 }
 
-.projecten-menu li a
+.sub-menu li a
 {
     padding: 15px 20px;
     font-size:1.6em;
     font-weight: bolder;
 }
 
-.projecten-menu li a:hover
+.sub-menu li a:hover
 {
+    background-color: #ffffff;
+    color:#333333;
+}
+
+.navigate-menu
+{
+    width:100%;
+    height: 100px;
+    background-color: #333333;
+}
+
+.navigate-menu a
+{
+    position: relative;
+    top:43px;
+    left:43px;
+    text-transform: uppercase;
+    font-weight: bold;
+    margin-top:25px;
+    text-decoration: none;
+    padding:10px 20px;
     background-color: #ffffff;
     color:#333333;
 }
@@ -585,6 +606,8 @@ footer
     color: #ffffff;
     font-size:1em;
 }
+
+/* OVERZICHT PROJECTEN */
 
 .project-item
 {
@@ -622,27 +645,6 @@ footer
     opacity: 1.0;
 }
 
-.navigate-menu
-{
-    width:100%;
-    height: 100px;
-    background-color: #333333;
-}
-
-.navigate-menu a
-{
-    position: relative;
-    top:43px;
-    left:43px;
-    text-transform: uppercase;
-    font-weight: bold;
-    margin-top:25px;
-    text-decoration: none;
-    padding:10px 20px;
-    background-color: #ffffff;
-    color:#333333;
-}
-
 @media (max-width: 1000px) 
 {
     .project-item
@@ -659,15 +661,125 @@ footer
     }
 }
 
-/* SINGLE PROJECTEN */
+/* OVERZICHT EVENTS */
 
 .main
 {
     float:left;
     width:70%;
     min-height: 750px;
-    background-color: #ccc;
+    background-color: #f8f7f7;
+    padding-bottom: 5%;
 }
+
+.event-item
+{
+    float:left;
+    color: #333;
+    width: 86%;
+    margin: 5% 5% 0 5%;
+    padding: 2%;
+    min-height: 150px;
+    background-color: #ffffff;
+}
+
+.sidebar
+{
+    float: right;
+    width: 30%;
+    min-height: 100vh;
+}
+
+.sidebar .search
+{
+    width: 66%;
+    margin: 12%;
+    padding: 5%;
+    min-height: 100vh;
+    background-color: #ffffff;
+}
+
+.event-calendar
+{
+    float:left;
+    width:20%;
+    margin-right: 5%;
+    height: 100%;
+    text-align: center;
+    min-height: 175px;
+    background-size: cover;
+    background-image: url("../img/calendar.png");
+    background-position: center center;
+    color: #a2a1a9;
+}
+
+.event-calendar>h1
+{
+    position: relative;
+    top:30px;
+    font-size:6em;
+    line-height: 1.35em;
+}
+
+.event-calendar>h2
+{
+    position: relative;
+    top:30px;
+}
+
+.event-content
+{
+    float:right;
+    min-height: 150px;
+    width:75%;
+}
+
+.space-fix
+{
+    display: block;
+    margin-top: 5%;
+}
+
+@media (max-width: 1100px) 
+{
+    .main
+    {
+        float:none;
+        width:100%;
+    }
+    .sidebar
+    {
+        display: none;
+    }       
+}
+
+@media (max-width: 775px) 
+{
+    .event-item
+    {
+        float:left;
+        color: #333;
+        width: 80%;
+        margin: 5% 5% 0 5%;
+        padding: 5%;
+        min-height: 150px;
+        background-color: #ffffff;
+    }
+    .event-calendar
+    {
+        display: none;
+    }
+    .event-content
+    {
+        float:none;
+        min-height: 150px;
+        width:100%;
+    }
+}
+
+/* SINGLE PROJECTEN */
+
+
 
 .project-image
 {
@@ -695,21 +807,4 @@ footer
     padding: 0 2%;
     height: 20%;
     background: url("../img/blackfilter.png") repeat;
-}
-
-.main .item
-{
-    width: 84%;
-    margin: 5%;
-    padding: 3%;
-    height: 30vh;
-    background-color: #ffffff;
-}
-
-.sidebar
-{
-    float:right;
-    width:30%;
-    height: 100vh;
-    background-color: #999;
 }
