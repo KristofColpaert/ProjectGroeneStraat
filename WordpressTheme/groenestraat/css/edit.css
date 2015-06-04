@@ -51,13 +51,16 @@
     padding: 2vh 0vh 2vh 0vh;
 }
 #user_login,#user_pass, .textbox, .input{
+    font-family: "lane";
     margin: 10px auto;
-    width: 100%;
+    width: 96%;
     height: 35px;
-    padding: 0 5px;
-    font-size: 1.5em;
+    padding: 0 2%;
+    font-size: 1.7em;
     border: 1px solid #a2a1a9;
     border-radius: 8px;
+    font-weight: 600;
+    color: #69686e;
 }
 
 #loginform #wp-submit{
@@ -295,13 +298,22 @@ textarea.LV_invalid_field:active {
 .createForm .form-button{
     width: 100%;
 }
-#eventTime, #eventEndTime{
-    
+.date{
     width: 46.5%;
     float:left;
+    background-color: #FFF;
 }
-#eventEndTime{
-    margin-left: 3.5%;
+.date input{
+    padding-top: 2.5px;
+    width: 90%;
+    vertical-align: top;
+    background-color: transparent;
+    border: 0;
+    
+    height: 30px;
+}
+.date img{
+    padding: 2.5px;
 }
 .combobox:hover{
     cursor: pointer;
