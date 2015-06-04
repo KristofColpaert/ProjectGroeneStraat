@@ -631,6 +631,15 @@ footer
 
 /* OVERZICHT PROJECTEN */
 
+.no-post
+{
+    width:92%;
+    min-height: 150px;
+    padding:2%;
+    margin:2%;
+    background-color: #ffffff;
+}
+
 .project-item
 {
     position: relative;

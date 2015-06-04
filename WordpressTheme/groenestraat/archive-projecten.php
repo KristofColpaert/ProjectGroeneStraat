@@ -1,24 +1,48 @@
 <?php get_header(); ?>
 
 	<section class="container">
-	<section class="projecten-menu">
+	<section class="sub-menu">
 		<ul>
 			<li><a href="#">Nieuw project</a></li>
 			<li><a href="#">Mijn projecten</a></li>
 		</ul>
+		<section class="options">
+			<form action="<?php $_SERVER['PHP_SELF']; ?>" method="GET">
+				<input type="text" name="zoekveld" class="textbox" placeholder="Zoeken op projectnaam"><input type="submit" class="form-button" value="zoeken" name="zoeken">
+			</form>
+		</section>
 	</section>
 
 	<?php
 
 	global $post;
-	global $query_string;
 	$index = 0;
+	$keyword = '';
 
-	$orig_query = $wp_query;
+	if(isset($_GET['zoeken']))
+	{
+		if(isset($_GET['zoekveld']))
+		{
+			$keyword = $_GET['zoekveld'];
+		}
+		else
+		{
+			$keyword = 'phrase';
+		}
+	}
+
+	$orig_query = $my_query;
 	$paged = (get_query_var('paged')) ? get_query_var('paged') : 1;
-	$wp_query = new WP_Query(array('post_type' => 'projecten', 'posts_per_page' => 9, 'paged' => $paged));
+	$my_query = new WP_Query(
+		array(
+			'post_type' => 'projecten',
+			'paged' => $paged,
+			's' => $keyword,
+			'posts_per_page' => 9
+			)
+		);
 
-	while($wp_query->have_posts()) : $wp_query->the_post();
+	while($my_query->have_posts()) : $my_query->the_post();
 
 		$meta = get_post_meta($post->ID);
 		$projectStreet = $meta['_projectStreet'][0];
@@ -63,22 +87,28 @@
 	
 	endwhile;
 
+	if (!$my_query->have_posts())
+	{
+		?>
+			<section class="no-post">
+				<h2>Geen zoekresultaten op: <?php echo $keyword; ?></h2>
+			</section>
+		<?php
+	}
+
 	?>
 
 	</section>
 	<section class="clear"></section>
 	
 	<section class="navigate-menu">
-	<?php
+		<?php
 
-	previous_posts_link();
-	next_posts_link();
-	$wp_query = $orig_query;
+		previous_posts_link();
+		next_posts_link();
+		$my_query = $orig_query;
 
-	?>
-
+		?>
 	</section>
 	
-<?php
-	get_footer();
-?>
+<?php get_footer(); ?>
