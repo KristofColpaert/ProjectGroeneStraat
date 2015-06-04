@@ -45,21 +45,24 @@ function prowpt_persoonlijkeProjectenOverzicht()
 	global $post;
 
 	$projecten = array();
+	$subscriber = "_subscriberId";
 
 	if(is_user_logged_in())
 	{
 		//ingelogd 
 		//--> subscriber_id --> degene die zich hebben ingeschreven op een project.
 
-		//https://tommcfarlin.com/get-post-id-by-meta-value/
 		global $wpdb;
-		$results = $wpdb->get_results( "select post_id, meta_value from $wpdb->postmeta where meta_key = '_subscriberId'", ARRAY_A );
-
+		$results = $wpdb->get_results($wpdb->prepare( "SELECT post_id, meta_value FROM $wpdb->postmeta WHERE meta_key = %s", $subscriber), ARRAY_A);
+			
 		foreach($results as $result)
 		{
-			//voor iedere waarde met subscriberId zullen we het project gaan ophalen.
-			$projectId = $result['post_id'];
-			$projecten[] = get_post($projectId, OBJECT);
+			if($result["meta_value"] == get_current_user_id())
+			{
+				//voor iedere waarde met subscriberId zullen we het project gaan ophalen.
+				$projectId = $result['post_id'];
+				$projecten[] = get_post($projectId, OBJECT);
+			}
 		}
 
 		foreach($projecten as $project)

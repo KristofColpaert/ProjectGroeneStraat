@@ -9,90 +9,113 @@
 		Text Domain: prowp-plugin
 		License: GPLv2		
 	*/
-
-	//Verzenden mail
 	if(isset($_POST["Verzenden"]))
 	{
-		add_action('plugins_loaded', 'register_sendprojectmail');
+		add_action('plugins_loaded', 'register_sendMail_project_members');
 	}
 
-	function register_sendprojectmail()
+	function register_sendMail_project_members()
 	{
-		//mail verzenden
-		$onderwerp = $_POST["Onderwerp"];
-		$bijlage = $_POST["Bijlage"];
-		$SelectedProject = $_POST["_parentProjectId"];
-		$users = get_users();
-		$ontvangers = array();
-
-		if(empty($onderwerp) || empty($bijlage) || empty($ontvangers))
+		if(isset($_POST["Projecten"]) && isset($_POST["Onderwerp"]) && isset($_POST["Bericht"]))
 		{
-			return;
-		}
+			if(!empty($_POST["Projecten"]) && !empty($_POST["Onderwerp"]) && !empty($_POST["Bericht"]))
+			{
+				$selectedProjectId = $_POST["Projecten"];
+				$onderwerp = $_POST["Onderwerp"];
+				$bericht = $_POST["Bericht"];
 
-		$completeBijlage = "<body><h1>Nieuwsbrief</h1>" . $bijlage . "<br />" . "<p>Met vriendelijke groeten</p><br /><p>Groenestraat.be</p>";
-		$headers = array("From: admin@groenestraat.be",
-		    "Reply-To: admin@groenestraat.be", "Content-Type: text/html; charset=UTF-8");
-		$headers = implode("\r\n", $headers);
+				//leden ophalen die lid zijn van dat project
+				global $wpdb;
 
-		foreach($users as $user)
-		{
+				$subscriber = "_subscriberId";
+				//ophalen alle gebruikers die gesubscribed hebben op het geselecteerde project
+				$results = $wpdb->get_results($wpdb->prepare( "SELECT post_id, meta_key, meta_value FROM $wpdb->postmeta WHERE post_id = %d AND meta_key = %s", $selectedProjectId, $subscriber), ARRAY_A);
+			
+				print_r($results);
 
-		}
+				$headers  = 'MIME-Version: 1.0' . "\r\n";
+				$headers .= 'Content-type: text/html; charset=UTF-8' . "\r\n";
+
+				foreach($results as $result)
+				{
+					$id = $result['post_id'];
+					$postNaam = get_post($id, ARRAY_A)['post_title'];
+
+					$userId= $result['meta_value'];
+					$userEmail = get_userdata($userId)->user_email;
+
+					if(wp_mail($userEmail, $onderwerp, $bericht . $postNaam, $headers))
+					{
+							//echo "Verstuurd";
+
+					}
+					else
+					{		
+							//echo "Niet verstuurd";
+					}
+				}
+			}	
+		}		
 	}
-?>
-<?php
 
-	add_action('admin_menu', 'register_projectmail');
+	add_shortcode('mail_projectmembers', 'prowp_mail');
+	register_activation_hook(__FILE__, 'prowp_mailProjectmembers_install');
 
-	function register_projectmail() 
+	function prowp_mailProjectmembers_install()
 	{
-		add_menu_page( 'Mail', 'Mail', "delete_posts", 'Mail', 'add_mail_metaboxes', 'dashicons-email', 4);
+		//mail pagina aanmaken users
+		makeMailUserPage('Project members mailen','[mail_projectmembers]','project-mail-members','publish','page','closed');
 	}
 
-	function add_mail_metaboxes(){
-		?>
+	function makeMailUserPage($title,$content,$post_name,$post_status,$post_type,$ping_status)
+	{
+		$args = array(
+			'post_title' => $title,
+			'post_content' => $content,
+			'post_name' => $post_name,
+			'post_status' => $post_status, 
+			'post_type' => $post_type,
+			'ping_status' => $ping_status
+		);
+		wp_insert_post($args);
+	}
 
-		<form method="post" action="<?php echo get_permalink(); ?>" >
-					<h1>Verzend e-mail</h1>
-					<strong>Onderwerp: </strong><br />
-					<input type="text" name="Onderwerp" placeholder="Vul een onderwerp in" /><br />
+	function prowp_mail()
+	{
+		show_mail_projectmembers_form();
+	}
 
-					<strong>Bijlage: </strong><br />
-					<textarea name="Bijlage" style="width: 500px; height: 300px; resize: none">
-							
+	function show_mail_projectmembers_form()
+	{
+		//alle projecten ophalen en overlopen. Dan kijken of author_id = userId
+		if(is_user_logged_in())
+		{
+			?>
+				<form method="POST" class="createForm" action="<?php $_SERVER['REQUEST_URI']; ?>" method="POST" enctype="multipart/form-data">
+					<input type="text" name="Onderwerp" placeholder="Vul hier uw onderwerp in" /><br />
+					<select name="Projecten">
+						<?php
+							$args = array(
+		    					'post_author'    =>  get_current_user_id(),
+		    					'post_type' =>	'projecten'
+		    				);
+
+							//alle projecten waar hij lid van is 
+							$projecten = get_posts($args);
+							print_r($projecten);
+
+							foreach($projecten as $project)
+							{
+								print "<option value='".$project->ID."'>". $project->post_title. "</option>";
+							}
+						?>
+					</select><br />
+					<textarea name="Bericht">
 					</textarea><br />
 
-					<strong>Project: </strong><br />
-						<?php
-								$projecten = get_posts(
-									array(
-										'post_type' => 'projecten',
-										'orderby' => 'title',
-										'order' => 'ASC',
-										'numberposts' => -1
-									)
-								);
-
-								if(!empty($projecten))
-								{
-									global $post; 
-
-									$postParentId = get_post_meta($post->ID, '_parentProjectId', true);
-									echo '<select name="_parentProjectId">';
-									echo '<option value="0">Geen Project</option>';
-
-									foreach($projecten as $project)
-									{
-										printf('<option value="%s"%s>%s</option>', esc_attr($project->ID), selected($project->ID, $postParentId, false), esc_html($project->post_title));
-									}
-									echo '</select>';
-								}
-						?>
-					<br />
-					<input type="submit" value="Verzenden" name="Verzenden"/><br />	
-		</form>
-
-		<?php
+					<input type="submit" value="Verzenden" name="Verzenden" />
+				</form>
+			<?php
+		}
 	}
 ?>
