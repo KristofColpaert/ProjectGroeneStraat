@@ -7,11 +7,18 @@
 		<section class="project-info">
 
 			<!-- Kristof zijn toevoegingen -->
-			<form method="POST" id="projectMemberForm">
-				<input id="projectMemberId" name="projectMemberId" type="hidden" value="<?php echo get_current_user_id(); ?>" />
-				<input id="projectMemberProjectId" name="projectMemberProjectId" type="hidden" value="<?php echo $post->ID; ?>" />
-				<input id="projectMemberSubmit" name="projectMemberSubmit" type="submit" value="Inschrijven" />
-			</form>
+			<?php
+				if(is_user_logged_in() && $post->post_author != get_current_user_id())
+				{
+					?>
+						<form method="POST" id="projectMemberForm">
+							<input id="projectMemberId" name="projectMemberId" type="hidden" value="<?php echo get_current_user_id(); ?>" />
+							<input id="projectMemberProjectId" name="projectMemberProjectId" type="hidden" value="<?php echo $post->ID; ?>" />
+							<input id="projectMemberSubmit" name="projectMemberSubmit" type="submit" value="Inschrijven" />
+						</form>
+					<?php
+				}
+			?>
 		</section>
 	</section>
 

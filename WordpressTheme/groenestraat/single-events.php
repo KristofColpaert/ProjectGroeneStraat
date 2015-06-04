@@ -1,9 +1,4 @@
 <?php
-	global $post;
-?>
-
-<?php
-
 	/*
 		Code to view Event
 	*/
@@ -18,7 +13,6 @@
 		$eventEndTime = $meta['_eventEndTime'][0];
 		$eventLocation = $meta['_eventLocation'][0];
 		$eventID = $post->ID;
-		$value = get_user_meta($user_id, $meta_key);
 
 		/*
 			Form to add event to personal calendar.
@@ -32,13 +26,17 @@
 		<p>Location: <?php echo $eventLocation; ?></p>
 
 		<!-- Kristof zijn toevoegingen -->
-		<form method="POST" id="eventMemberForm">
-			<input id="eventMemberId" name="eventMemberId" type="hidden" value="<?php echo get_current_user_id(); ?>" />
-			<input id="eventMemberProjectId" name="eventMemberProjectId" type="hidden" value="<?php echo $post->ID; ?>" />
-			<input id="eventMemberSubmit" name="eventMemberSubmit" type="submit" value="Toevoegen aan persoonlijke kalender" />
-		</form>
-
-		<?php
+		<?php 
+			if($post->post_author != get_current_user_id() && is_user_logged_in())
+			{
+				?>
+					<form method="POST" id="eventMemberForm">
+						<input id="eventMemberId" name="eventMemberId" type="hidden" value="<?php echo get_current_user_id(); ?>" />
+						<input id="eventMemberProjectId" name="eventMemberProjectId" type="hidden" value="<?php echo $post->ID; ?>" />
+						<input id="eventMemberSubmit" name="eventMemberSubmit" type="submit" value="Toevoegen aan persoonlijke kalender" />
+					</form>
+				<?php
+			}
 	endwhile;
 	
 	get_footer();
