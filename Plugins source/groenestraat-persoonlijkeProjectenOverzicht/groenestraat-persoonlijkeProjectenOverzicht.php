@@ -14,7 +14,31 @@
 		Add Shortcodes
 	*/
 		
-	add_shortcode('persoonlijke_projecten_overzicht','prowpt_persoonlijkeProjectenOverzicht');
+	add_shortcode('persoonlijke_projecten','prowpt_persoonlijkeProjectenOverzicht');
+
+	register_activation_hook(__FILE__, 'prowp_persoonlijkeProjecten_install');
+
+	function prowp_persoonlijkeProjecten_install()
+	{
+		//Persoonlijke overzicht van projecten
+		makeShortcode('Persoonlijke projecten','[persoonlijke_projecten]','persoonlijke projecten','publish','page','closed');
+	}
+
+	function makeShortcode($title,$content,$post_name,$post_status,$post_type,$ping_status)
+	{
+		$args = array(
+			'post_title' => $title,
+			'post_content' => $content,
+			'post_name' => $post_name,
+			'post_status' => $post_status, 
+			'post_type' => $post_type,
+			'ping_status' => $ping_status
+		);
+		wp_insert_post($args);
+	}
+
+
+
 
 function prowpt_persoonlijkeProjectenOverzicht()
 {
