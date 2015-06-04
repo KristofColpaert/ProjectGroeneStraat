@@ -98,7 +98,7 @@
 
 							$projecten = $wpdb->get_results($wpdb->prepare( "SELECT * FROM $wpdb->posts 
 								WHERE post_author = %d AND post_type = %s", $postAuthor, $postType), ARRAY_A);
-							print_r($projecten);
+				
 							foreach($projecten as $project)
 							{
 								print "<option value='".$project["ID"]."'>". $project["post_title"]. "</option>";
