@@ -24,14 +24,11 @@
 				$onderwerp = $_POST["Onderwerp"];
 				$bericht = $_POST["Bericht"];
 
-				//leden ophalen die lid zijn van dat project
 				global $wpdb;
 
 				$subscriber = "_subscriberId";
 				//ophalen alle gebruikers die gesubscribed hebben op het geselecteerde project
 				$results = $wpdb->get_results($wpdb->prepare( "SELECT post_id, meta_key, meta_value FROM $wpdb->postmeta WHERE post_id = %d AND meta_key = %s", $selectedProjectId, $subscriber), ARRAY_A);
-			
-				print_r($results);
 
 				$headers  = 'MIME-Version: 1.0' . "\r\n";
 				$headers .= 'Content-type: text/html; charset=UTF-8' . "\r\n";
@@ -95,18 +92,16 @@
 					<input type="text" name="Onderwerp" placeholder="Vul hier uw onderwerp in" /><br />
 					<select name="Projecten">
 						<?php
-							$args = array(
-		    					'post_author'    =>  get_current_user_id(),
-		    					'post_type' =>	'projecten'
-		    				);
+							global $wpdb;
+							$postType = "projecten";
+							$postAuthor = get_current_user_id();
 
-							//alle projecten waar hij lid van is 
-							$projecten = get_posts($args);
+							$projecten = $wpdb->get_results($wpdb->prepare( "SELECT * FROM $wpdb->posts 
+								WHERE post_author = %d AND post_type = %s", $postAuthor, $postType), ARRAY_A);
 							print_r($projecten);
-
 							foreach($projecten as $project)
 							{
-								print "<option value='".$project->ID."'>". $project->post_title. "</option>";
+								print "<option value='".$project["ID"]."'>". $project["post_title"]. "</option>";
 							}
 						?>
 					</select><br />
