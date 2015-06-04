@@ -44,10 +44,9 @@ function prowpt_persoonlijkeProjectenOverzicht()
 {
 	global $post;
 
-	$userId = get_current_user_id();
 	$projecten = array();
 
-	if($userId > 0)
+	if(is_user_logged_in())
 	{
 		//ingelogd 
 		//--> subscriber_id --> degene die zich hebben ingeschreven op een project.
