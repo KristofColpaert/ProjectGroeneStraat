@@ -25,10 +25,10 @@
 			{
 				?>
 					<form class="createForm" action="<?php $_SERVER['REQUEST_URI']; ?>" method="POST" enctype="multipart/form-data">
-						<label for="projectTitle">Titel van het project</label>
+						<label for="projectTitle" class="normalize-text">Titel</label>
 						<input class="textbox" id="projectTitle" name="projectTitle" type="text" value="<?php echo $project->post_title; ?>"/>
 
-						<label for="projectDescription">Beschrijving</label><br \>
+						<label for="projectDescription" class="normalize-text">Beschrijving</label><br \>
 						<?php 
 							$settings = array('textarea_name' => 'projectDescription');
 							$content = $project->post_content;
@@ -41,16 +41,16 @@
 							$projectZipcode = get_post_meta($project->ID, '_projectZipcode')[0];
 						?>
 
-						<label for="projectStreet">Straat van het project</label>
+						<label for="projectStreet" class="normalize-text">Straat</label>
 						<input class="textbox" id="projectStreet" name="projectStreet" type="text" value="<?php echo $projectStreet; ?>"/>
 
-						<label for="projectCity">Gemeente van het project</label>
+						<label for="projectCity" class="normalize-text">Gemeente</label>
 						<input class="textbox" id="projectCity" name="projectCity" type="text" value="<?php echo $projectCity; ?>"/>
 
-						<label for="projectZipcode">Postcode van het project</label>
+						<label for="projectZipcode" class="normalize-text">Postcode</label>
 						<input class="textbox" id="projectZipcode" name="projectZipcode" type="text" value="<?php echo $projectZipcode; ?>"/>
 
-						<label for="projectFeaturedImage">Stel een hoofdingsafbeelding in</label>
+						<label for="projectFeaturedImage" class="normalize-text">Upload Hoofdigsafbeelding</label>
 						<input id="projectFeaturedImage" name="projectFeaturedImage" type="file" accept="image/x-png, image/gif, image/jpeg" />
 
 
@@ -64,7 +64,7 @@
 			else
 			{
 				?>
-					<p>Dit project bestaat niet, of u hebt geen toegang tot de gevraagde pagina. Ga terug naar <a href="<?php echo home_url(); ?>">Home</a>.</p>
+					<p class="error-message">Dit project bestaat niet, of u hebt geen toegang tot de gevraagde pagina. Ga terug naar <a href="<?php echo home_url(); ?>">Home</a>.</p>
 				<?php
 			}
 		}
@@ -72,7 +72,7 @@
 		else
 		{
 			?>
-				<p>Dit project bestaat niet, of u hebt geen toegang tot de gevraagde pagina. Ga terug naar <a href="<?php echo home_url(); ?>">Home</a>.</p>
+				<p class="error-message">Dit project bestaat niet, of u hebt geen toegang tot de gevraagde pagina. Ga terug naar <a href="<?php echo home_url(); ?>">Home</a>.</p>
 			<?php
 		}
 	}

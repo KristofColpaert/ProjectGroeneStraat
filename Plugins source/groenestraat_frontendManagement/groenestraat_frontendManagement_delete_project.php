@@ -23,10 +23,12 @@
 			if($project != null && $current_user->ID == $project->post_author && current_user_can('delete_published_posts'))
 			{
 				?>
-					<p>Bent u zeker dat u het project <strong><a href="<?php echo $project->guid; ?>"><?php echo $project->post_title; ?></a></strong> wilt verwijderen?</p>
+					<p class="alert-message normalize-text">Bent u zeker dat u het project <strong><a href="<?php echo $project->guid; ?>"><?php echo $project->post_title; ?></a></strong> wilt verwijderen?</p>
 					<form class="createForm" action="<?php $_SERVER['REQUEST_URI']; ?>" method="POST" enctype="multipart/form-data">
 						<input id="projectId" name="projectId" type="hidden" value="<?php echo $project->ID; ?>" />
-						<input id="projectDelete" name="projectDelete" type="submit" value="Verwijder" />
+						<input class="confirm-button" id="projectDelete" name="projectDelete" type="submit" value="Verwijder" />
+                        <a class="cancel-button" href="<?php echo $project->guid; ?>">Annuleer</a>
+                        <div class="clear"></div>
 					</form>
 				<?php
 			}

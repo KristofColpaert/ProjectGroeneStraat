@@ -21,10 +21,11 @@
 			if($event != null && ($current_user->ID == $event->event_author || current_user_can('manage_options')) && current_user_can('delete_published_posts'))
 			{
 				?>
-					<p>Bent u zeker dat u het event <strong><a href="<?php echo $event->guid; ?>"><?php echo $event->post_title; ?></a></strong> wilt verwijderen?</p>
+					<p class="alert-message normalize-text">Bent u zeker dat u het event <strong><a href="<?php echo $event->guid; ?>"><?php echo $event->post_title; ?></a></strong> wilt verwijderen?</p>
 					<form class="createForm" action="<?php $_SERVER['REQUEST_URI']; ?>" method="POST" enctype="multipart/form-data">
 						<input id="eventId" name="eventId" type="hidden" value="<?php echo $event->ID; ?>" />
-						<input id="eventDelete" name="eventDelete" type="submit" value="Verwijder" />
+						<input class="confirm-button" id="eventDelete" name="eventDelete" type="submit" value="Verwijder" />
+                        <a class="cancel-button" href="<?php echo $event->guid; ?>">Annuleren</a><div class="clear"></div>
 					</form>
 				<?php
 			}

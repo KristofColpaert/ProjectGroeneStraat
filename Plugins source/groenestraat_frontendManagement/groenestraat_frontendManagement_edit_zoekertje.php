@@ -25,7 +25,7 @@
 						<label for="adTitle">Titel</label>
 						<input class="textbox" id="adTitle" name="adTitle" type="text" value="<?php echo $zoekertje->post_title; ?>" />
 						
-						<label for="adDescription">Beschrijving</label><br \>
+						<label class="normalize-text" for="adDescription">Beschrijving</label><br \>
 						<?php
 							$settings = array('textarea_name' => 'adDescription');
 							$content = $zoekertje->post_content; 
@@ -39,10 +39,10 @@
 
 						?>
 
-						<label for="parentProjectId">Project waartoe het zoekertje behoort</label>
+						<label class="normalize-text" for="parentProjectId">Project waartoe het zoekertje behoort</label>
 						<br />
 						<select class="input combobox" id="parentProjectId" name="parentProjectId">
-							<option value="0">Geen project</option>
+							<option value="0" >Geen project</option>
 							<?php
 								$parents = get_posts(
 									array(
@@ -64,12 +64,12 @@
 						</select>
 						<br />
 
-						<label for="adPrice">Prijs</label>
+						<label for="adPrice" class="normalize-text">Prijs</label>
 						
 						<input class="textbox" id="adPrice" name="adPrice" type="text" value="<?php echo $adPrice; ?>" />
 						
 
-						<label for="adLocation">Locatie</label>
+						<label for="adLocation" class="normalize-text">Locatie</label>
 						
 						<input class="textbox" id="adLocation" name="adLocation" type="text" value="<?php echo $adLocation; ?>" />
 						
@@ -84,7 +84,7 @@
 			else
 			{
 				?>
-					<p>Dit zoekertje bestaat niet, of u hebt geen toegang tot de gevraagde pagina. Ga terug naar <a href="<?php echo home_url(); ?>">Home</a>.</p>
+					<p class="error-message">Dit zoekertje bestaat niet, of u hebt geen toegang tot de gevraagde pagina. Ga terug naar <a href="<?php echo home_url(); ?>">Home</a>.</p>
 				<?php
 			}
 		}
@@ -92,7 +92,7 @@
 		else
 		{
 			?>
-				<p>Dit event bestaat niet, of u hebt geen toegang tot de gevraagde pagina. Ga terug naar <a href="<?php echo home_url(); ?>">Home</a>.</p>
+				<p class="error-message">Dit event bestaat niet, of u hebt geen toegang tot de gevraagde pagina. Ga terug naar <a href="<?php echo home_url(); ?>">Home</a>.</p>
 			<?php
 		}
 	}

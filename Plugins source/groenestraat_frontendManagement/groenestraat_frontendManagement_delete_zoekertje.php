@@ -21,10 +21,12 @@
 			if($zoekertje != null && ($current_user->ID == $zoekertje->zoekertje_author || current_user_can('manage_options')) && current_user_can('delete_published_posts'))
 			{
 				?>
-					<p>Bent u zeker dat u het zoekertje <strong><a href="<?php echo $event->guid; ?>"><?php echo $zoekertje->post_title; ?></a></strong> wilt verwijderen?</p>
+					<p class="alert-message normalize-text">Bent u zeker dat u het zoekertje <strong><a href="<?php echo $event->guid; ?>"><?php echo $zoekertje->post_title; ?></a></strong> wilt verwijderen?</p>
 					<form class="createForm" action="<?php $_SERVER['REQUEST_URI']; ?>" method="POST" enctype="multipart/form-data">
 						<input id="zoekertjeId" name="zoekertjeId" type="hidden" value="<?php echo $zoekertje->ID; ?>" />
-						<input id="zoekertjeDelete" name="zoekertjeDelete" type="submit" value="Verwijder" />
+						<input id="zoekertjeDelete" class="confirm-button" name="zoekertjeDelete" type="submit" value="Verwijder" />
+                        <a class="cancel-button" href="<?php echo $event->guid; ?>">Annuleer</a>
+                        <div class="clear"></div>
 					</form>
 				<?php
 			}

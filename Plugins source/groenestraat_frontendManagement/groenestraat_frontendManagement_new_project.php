@@ -22,7 +22,7 @@
 				<form class="createForm" action="<?php $_SERVER['REQUEST_URI']; ?>" method="POST" enctype="multipart/form-data">
 					<input id="projectTitle" class="textbox" name="projectTitle" type="text" placeholder="Titel"/>
 
-					<label for="projectDescription">Beschrijving</label><br \>
+					<label for="projectDescription" class="normalize-text">Beschrijving</label><br \>
 					<?php 
 						$settings = array('textarea_name' => 'projectDescription');
 						$content = '';
@@ -53,7 +53,7 @@
 		else 
 		{
 			?>
-				<p>U hebt geen toegang tot de gevraagde pagina. Ga terug naar <a href="<?php echo home_url(); ?>">Home</a>.</p>
+				<p class="error-message">U hebt geen toegang tot de gevraagde pagina. Ga terug naar <a href="<?php echo home_url(); ?>">Home</a>.</p>
 			<?php
 		}
 	}
@@ -97,15 +97,14 @@
     					$newupload = insert_featured_image($file, $postId);
 				    }
 				}
-				?>
-					<p>Uw project werd correct toegevoegd. Ga er <a href="<?php echo esc_url(get_permalink($postId)); ?>">meteen</a> naartoe.</p>
-				<?php
+                header('Location: '.get_permalink($postId));
+				
 			}
 
 			else
 			{
 				?>
-					<p>Helaas, er bestaat reeds een project met deze titel.</p>
+					<p class="error-message">Helaas, er bestaat reeds een project met deze titel.</p>
 				<?php
 			}
 		}

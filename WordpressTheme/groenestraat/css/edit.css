@@ -56,7 +56,7 @@
     width: 96%;
     height: 35px;
     padding: 0 2%;
-    font-size: 1.7em;
+    font-size: 15px;
     border: 1px solid #a2a1a9;
     border-radius: 8px;
     font-weight: 600;
@@ -67,6 +67,9 @@
     font-size: 1.3em;
 }
 .form-button, #wp-submit{
+    font-family: "lane";
+    text-transform: uppercase;
+    font-weight: 600;
     display: block;
     margin: 15px auto;
     background-color: #00cd00;
@@ -274,7 +277,6 @@ textarea.LV_invalid_field:active {
 
 /**********NIEUWPROJECT***********/
 #primary{
-    padding: 5vh 0;
     background-color: #69686e;
 }
 .contentwrapper{
@@ -285,6 +287,7 @@ textarea.LV_invalid_field:active {
     padding: 2vw;
     background-color: #f8f7f7;
 }
+
 .createForm label{
     display: block;
     font-size: 2em;
@@ -298,23 +301,182 @@ textarea.LV_invalid_field:active {
 .createForm .form-button{
     width: 100%;
 }
+/* datepicker*/
 .date{
-    width: 46.5%;
-    float:left;
+    width: 44%;
     background-color: #FFF;
+    padding-right: 1% !important;
 }
 .date input{
     padding-top: 2.5px;
-    width: 90%;
+    width: 70%;
     vertical-align: top;
     background-color: transparent;
     border: 0;
-    
     height: 30px;
+    font-family: "lane";
 }
 .date img{
-    padding: 2.5px;
+    float:right;
+    height: 70%;
+    margin: 1.5% 0px 1.5% 1.5%;
+    box-shadow: 1px 1px 1px #a2a1a9;
+    -webkit-box-shadow: 1px 1px 1px #a2a1a9;
+    -moz-box-shadow: 1px 1px 1px #a2a1a9;
+}
+.combobox{
+    width: 100%;
+}
+.combobox option{
+    font-size: 1.2em;
+    font-weight: 800 !important;
+    color: #000;
+
 }
 .combobox:hover{
     cursor: pointer;
+}
+.left{
+    float: left;
+}
+.right{
+    float:right;
+}
+.ui-state-default{
+    background: #f8f7f7 !important;
+    color: #69686e !important;
+    border:0 !important;
+}
+.ui-state-default:hover{
+    background: #a2a1a9 !important;
+    color: #FFF !important;
+    font-weight: 600 !important;
+    border:0 !important;
+}
+.ui-state-highlight{
+    background: rgba(162, 161, 169, 0.50) !important;
+    color: #FFF !important;
+    border:0px !important;
+}
+.ui-datepicker{
+   padding: 0 !important;
+}
+.ui-widget-content{
+    border:0px solid #f8f7f7 !important;
+    background: #FFF !important;
+    
+}
+.ui-widget{
+    font-family: "lane" !important;
+    font-size: 1.4em !important;
+}
+.ui-widget-header{
+    background: #E74C3C !important;
+    color: #f8f7f7 !important;
+    border: 0 !important;
+}
+.ui-corner-all{
+    border-radius: 0px !important;
+}
+.ui-widget-header .ui-icon{
+    background-image: url(../img/arrow_white.png) !important;
+}
+.ui-icon-circle-triangle-e, .ui-icon-circle-triangle-w{
+    background-position: center center !important;
+    background-size: cover !important;
+}
+.ui-icon-circle-triangle-w{
+    -ms-transform: rotate(90deg); /* IE 9 */
+    -webkit-transform: rotate(90deg); /* Chrome, Safari, Opera */
+    transform: rotate(90deg);
+}
+.ui-icon-circle-triangle-e{
+    -ms-transform: rotate(-90deg); /* IE 9 */
+    -webkit-transform: rotate(-90deg); /* Chrome, Safari, Opera */
+    transform: rotate(-90deg);
+}
+.ui-datepicker .ui-datepicker-next span, .ui-datepicker .ui-datepicker-prev span{
+    top: 25% !important;
+    margin-top: -5px !important;
+}
+
+.ui-state-hover{
+    border: 0px !important;
+    background: transparent !important;
+    cursor:pointer; 
+}
+.normalize-text{
+    font-weight: 800 !important;
+    color: #69686e;
+}
+.error-message{
+    width: 98%;
+    border: 1px solid #E74C3C;
+    padding: 1%;
+    background-color: rgba(231, 76, 60, 0.2);
+    border-radius: 8px;
+    font-weight: 800;
+    color: #69686e;
+}
+.error-message a{
+    text-transform: uppercase;
+    font-size: 1em;
+    color: #69686e;
+}
+.labeldate{
+    width: 47.5%;
+}
+.alert-message a{
+    color: #69686e;
+    font-size: 1em;
+}
+.alert-message{
+    padding: 1%;
+}
+.confirm-button{
+    float: left;
+    font-family: "lane";
+    text-transform: uppercase;
+    font-weight: 600;
+    display: block;
+    margin: 15px 1%;
+    background-color: #E74C3C;
+    border: 1px solid transparent;
+    border-radius: 3px;
+    color: #f8f7f7;
+    padding: 5px 15px 5px 15px;
+    font-size: 1.2em;
+}
+.confirm-button:hover{
+    background-color: transparent;
+    border: 1px solid #E74C3C;
+    color: #E74C3C;
+    cursor: pointer;
+}
+.cancel-button{
+    float: left;
+    font-family: "lane";
+    text-transform: uppercase;
+    text-decoration: none;
+    font-weight: 600;
+    display: block;
+    margin: 15px 1%;
+    background-color: transparent;
+    border: 1px solid transparent;
+    border-radius: 3px;
+    color: #E74C3C;
+    padding: 5px 10px 5px 10px;
+    font-size: 1.2em;
+}
+.cancel-button:hover{
+    background-color:#E74C3C;
+    border: 1px solid transparent;
+    color: #FFF;
+}
+.cancel-button, .confirm-button{
+    line-height: 1em;
+}
+h1{
+    padding: 1%;
+    line-height: 1em !important;
 }

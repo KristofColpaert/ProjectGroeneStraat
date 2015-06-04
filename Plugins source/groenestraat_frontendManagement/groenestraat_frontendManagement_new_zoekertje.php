@@ -20,7 +20,7 @@
 					
 					<input class="textbox" id="adTitle" name="adTitle" type="text" placeholder="Titel" />
 
-					<label for="adDescription">Beschrijving</label><br \>
+					<label for="adDescription" class="normalize-text">Beschrijving</label><br \>
 					<?php
 						$settings = array('textarea_name' => 'adDescription');
 						$content = ''; 
@@ -29,7 +29,7 @@
 						wp_editor($content, $editor_id, $settings);
 					?>
 
-					<label for="parentProjectId">Project waartoe het zoekertje behoort</label>
+					<label for="parentProjectId" class="normalize-text">Project waartoe het zoekertje behoort</label>
 					<br />
 					<select class="textbox combobox" id="parentProjectId" name="parentProjectId">
 						<option value="0">Geen project</option>
@@ -67,7 +67,7 @@
 		else
 		{
 			?>
-				<p>U hebt geen toegang tot de gevraagde pagina. Ga terug naar <a href="<?php echo home_url(); ?>">Home</a>.</p>
+				<p class="error-message">U hebt geen toegang tot de gevraagde pagina. Ga terug naar <a href="<?php echo home_url(); ?>">Home</a>.</p>
 			<?php
 		}
 	}

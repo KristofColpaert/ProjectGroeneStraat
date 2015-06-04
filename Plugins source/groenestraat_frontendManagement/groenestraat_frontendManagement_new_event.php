@@ -20,8 +20,19 @@
 
 			<script>
 			  	$(document).ready(function() {
-					$('#eventTime').datepicker();
-					$('#eventEndTime').datepicker();
+					$('#eventTime').datepicker({
+                        showOn: "both",
+                        buttonImage: "<?php echo get_template_directory_uri() ?>/img/calendar_small.png",
+                        buttonImageOnly: true,
+                        nextText: ">"
+                    });
+					$('#eventEndTime').datepicker({
+                        showOn: "both",
+                        buttonImage: "<?php echo get_template_directory_uri() ?>/img/calendar_small.png",
+                        buttonImageOnly: true
+                    });
+                   
+                    
 				});
 			</script>
 		<?php
@@ -34,7 +45,7 @@
 					
 					<input class="textbox" id="eventTitle" name="eventTitle" type="text" placeholder="Titel" />
 
-					<label for="eventDescription">Beschrijving</label><br \>
+					<label for="eventDescription" class="normalize-text">Beschrijving</label><br \>
 					<?php
 						$settings = array('textarea_name' => 'eventDescription');
 						$content = ''; 
@@ -43,7 +54,7 @@
 						wp_editor($content, $editor_id, $settings);
 					?>
 
-					<label for="parentProjectId">Project waartoe het event behoort</label>
+					<label for="parentProjectId" class="normalize-text">Project waartoe het event behoort</label>
 					<br />
 					<select class="input combobox" id="parentProjectId" name="parentProjectId">
 						<option value="0">Geen project</option>
@@ -70,22 +81,26 @@
 					</select>
 				
 
+					<section class="date textbox left">
+                        <input id="eventTime" readonly name="eventTime" type="text" class="normalize-text" placeholder="Datum start"/>
+                    </section>
+					<section class="date textbox right">
+                    <input class="normalize-text" id="eventEndTime" readonly name="eventEndTime" type="text" placeholder="Datum einde" />             
+                    </section>
 					
-					<input class="textbox" id="eventTime" readonly name="eventTime" type="text" placeholder="Datum start"/>
-					<input class="textbox" id="eventEndTime" readonly name="eventEndTime" type="text" placeholder="Datum einde" />
 					
-					<input class="textbox" id="eventLocation" name="eventLocation" type="text" placeholder="Locatie" />
+					<input class="textbox normalize-text" id="eventLocation" name="eventLocation" type="text" placeholder="Locatie" />
 
-					<input id="eventPublish" name="eventPublish" class="form-button" type="submit" value="Publiceer" />
+					<input id="eventPublish" name="eventPublish" class="form-button"  type="submit" value="Publiceer" />
 				</form>
-
+         
 			<?php
 		}
 
 		else 
 		{
 			?>
-				<p>U hebt geen toegang tot de gevraagde pagina. Ga terug naar <a href="<?php echo home_url(); ?>">Home</a>.</p>
+				<p class="error-message">U hebt geen toegang tot de gevraagde pagina. Ga terug naar <a href="<?php echo home_url(); ?>">Home</a>.</p>
 			<?php
 		}
 	}
@@ -134,16 +149,16 @@
 					add_post_meta($postId, '_eventTime', $eventTime);
 					add_post_meta($postId, '_eventEndTime', $eventEndTime);
 					add_post_meta($postId, '_eventLocation', $eventLocation);
-
+                    header('Location: '.get_permalink($postId));
 					?>
-						<p>Uw event werd correct toegevoegd. Ga er <a href="<?php echo esc_url(get_permalink($postId)); ?>">meteen</a> naartoe.</p>
+						
 					<?php
 				}
 
 				else
 				{
 					?>
-						<p>Helaas, er bestaat reeds een event met deze titel.</p>
+						<p class="error-message">Helaas, er bestaat reeds een event met deze titel.</p>
 					<?php
 				}
 			}
@@ -151,7 +166,7 @@
 			else
 			{
 				?>
-					<p>Gelieve alle gegevens correct in te voeren.</p>
+					<p class="error-message">Gelieve alle gegevens correct in te voeren.</p>
 				<?php
 			}
 		}

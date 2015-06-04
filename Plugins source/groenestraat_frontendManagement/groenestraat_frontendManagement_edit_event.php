@@ -21,11 +21,31 @@
 			if($event != null && ($current_user->ID == $event->post_author || current_user_can('manage_options')) && current_user_can('edit_published_posts'))
 			{
 				?>
+                    <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+			<link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+
+			<script>
+			  	$(document).ready(function() {
+					$('#eventTime').datepicker({
+                        showOn: "both",
+                        buttonImage: "<?php echo get_template_directory_uri() ?>/img/calendar_small.png",
+                        buttonImageOnly: true,
+                        nextText: ">"
+                    });
+					$('#eventEndTime').datepicker({
+                        showOn: "both",
+                        buttonImage: "<?php echo get_template_directory_uri() ?>/img/calendar_small.png",
+                        buttonImageOnly: true
+                    });
+                   
+                    
+				});
+			</script>
 					<form class="createForm" action="<?php $_SERVER['REQUEST_URI']; ?>" method="POST" enctype="multipart/form-data">
-						<label for="eventTitle">Titel van het event</label>
+						<label for="eventTitle" class="normalize-text">Titel</label>
 						<input class="textbox" id="eventTitle" name="eventTitle" type="text" value="<?php echo $event->post_title; ?>" />
 						
-						<label for="eventDescription">Beschrijving</label><br \>
+						<label for="eventDescription" class="normalize-text">Beschrijving</label><br \>
 						<?php
 							$settings = array('textarea_name' => 'eventDescription');
 							$content = $event->post_content; 
@@ -39,7 +59,7 @@
 							$eventLocation = get_post_meta($event->ID, '_eventLocation')[0];
 						?>
 
-						<label for="parentProjectId">Project waartoe het event behoort</label>
+						<label for="parentProjectId" class="normalize-text">Project waartoe het event behoort</label>
 						<br />
 						<select class="input combobox" id="parentProjectId" name="parentProjectId">
 							<option value="0">Geen project</option>
@@ -63,18 +83,18 @@
 							?>
 						</select>
 						<br />
+                        <label  for="eventTime" class="normalize-text left labeldate">Van</label><label  for="eventEndTime" class="normalize-text right labeldate">Tot</label>
+                        <section class="date textbox left">
 
-						<label for="eventTime">Van</label>
-						<br />
-						<input class="textbox" id="eventTime" name="eventTime" type="date" value="<?php echo $eventTime; ?>" />
+                            <input id="eventTime" name="eventTime" readonly class="normalize-text" type="date" value="<?php echo $eventTime; ?>" />                   </section>
+
+                        <section class="date textbox right">
+						
+						
+                            <input id="eventEndTime" name="eventEndTime" readonly type="date" class="normalize-text" value="<?php echo $eventEndTime; ?>" /></section>
 						<br />
 
-						<label  for="eventEndTime">Tot</label>
-						<br />
-						<input class="textbox" id="eventEndTime" name="eventEndTime" type="date" value="<?php echo $eventEndTime; ?>" />
-						<br />
-
-						<label for="eventLocation">Locatie van het event</label>
+						<label for="eventLocation" class="normalize-text">Locatie</label>
 						<input class="textbox" id="eventLocation" name="eventLocation" type="text" value="<?php echo $eventLocation; ?>" />
 						
 						<input id="eventId" name="eventId" type="hidden" value="<?php echo $event->ID; ?>" />
@@ -87,7 +107,7 @@
 			else
 			{
 				?>
-					<p>Dit event bestaat niet, of u hebt geen toegang tot de gevraagde pagina. Ga terug naar <a href="<?php echo home_url(); ?>">Home</a>.</p>
+					<p class="error-message">Dit event bestaat niet, of u hebt geen toegang tot de gevraagde pagina. Ga terug naar <a href="<?php echo home_url(); ?>">Home</a>.</p>
 				<?php
 			}
 		}
@@ -95,7 +115,7 @@
 		else
 		{
 			?>
-				<p>Dit event bestaat niet, of u hebt geen toegang tot de gevraagde pagina. Ga terug naar <a href="<?php echo home_url(); ?>">Home</a>.</p>
+				<p class="error-message">Dit event bestaat niet, of u hebt geen toegang tot de gevraagde pagina. Ga terug naar <a href="<?php echo home_url(); ?>">Home</a>.</p>
 			<?php
 		}
 	}
