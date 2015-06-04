@@ -62,7 +62,6 @@
 	<?php
 	
 	endwhile;
-	$wp_query = $orig_query;
 
 	?>
 
@@ -74,6 +73,7 @@
 
 	previous_posts_link();
 	next_posts_link();
+	$wp_query = $orig_query;
 
 	?>
 
