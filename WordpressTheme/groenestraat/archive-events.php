@@ -1,54 +1,54 @@
 <?php 
 
 function getMonth($var)
-			{
-				switch ($var) 
-				{
-					case '01':
-						$string = 'JANUARI';
-						break;
-					case '02':
-						$string = 'FEBRUARI';
-						break;
-					case '03':
-						$string = 'MAART';
-						break;
-					case '04':
-						$string = 'APRIL';
-						break;
-					case '05':
-						$string = 'MEI';
-						break;
-					case '06':
-						$string = 'JUNI';
-						break;
-					case '07':
-						$string = 'JULI';
-						break;
-					case '08':
-						$string = 'AUGUSTUS';
-						break;
-					case '09':
-						$string = 'SEPTEMBER';
-						break;
-					case '10':
-						$string = 'OKTOBER';
-						break;
-					case '11':
-						$string = 'NOVEMBER';
-						break;
-					case '12':
-						$string = 'DECEMBER';
-						break;
-					default:
-						# code...
-						break;
-				}
-
-				return $string;
-			}
+	{
+		switch ($var) 
+		{
+		case '01':
+			$string = 'JANUARI';
+			break;
+		case '02':
+			$string = 'FEBRUARI';
+			break;
+		case '03':
+			$string = 'MAART';
+			break;
+		case '04':
+			$string = 'APRIL';
+			break;
+		case '05':
+			$string = 'MEI';
+			break;
+		case '06':
+			$string = 'JUNI';
+			break;
+		case '07':
+			$string = 'JULI';
+			break;
+		case '08':
+			$string = 'AUGUSTUS';
+			break;
+		case '09':
+			$string = 'SEPTEMBER';
+			break;
+		case '10':
+			$string = 'OKTOBER';
+			break;
+		case '11':
+			$string = 'NOVEMBER';
+			break;
+		case '12':
+			$string = 'DECEMBER';
+			break;
+		default:
+			# code...
+			break;
+		}
+		return $string;
+	}
 
 ?>
+
 <?php get_header(); ?>
 
 	<section class="container">
@@ -57,18 +57,24 @@ function getMonth($var)
 			<li><a href="#">Nieuw event</a></li>
 			<li><a href="#">Mijn events</a></li>
 		</ul>
+		<section class="options">
+			<form action="<?php $_SERVER['PHP_SELF']; ?>" method="GET">
+				<input type="text" name="zoekveld" class="textbox" placeholder="Zoeken op eventnaam"><input type="submit" class="form-button" value="zoeken" name="zoeken">
+			</form>
+		</section>
 	</section>
 	<section class="main">
 
 	<?php
+
 	global $post;
 	$keyword = '';
 
-		if(isset($_GET['submit']))
+		if(isset($_GET['zoeken']))
 		{
-			if(isset($_GET['search']))
+			if(isset($_GET['zoekveld']))
 			{
-				$keyword = $_GET['search'];
+				$keyword = $_GET['zoekveld'];
 			}
 			else
 			{
@@ -76,14 +82,15 @@ function getMonth($var)
 			}
 		}
 
-		$args = array(
-			'posts_per_page' => 6,
-			'post_type' => 'events',
-			's' => $keyword
-		);
-
-		$my_query = new WP_Query($args);
-		//print_r($my_query);
+		$orig_query = $my_query;
+		$paged = (get_query_var('paged')) ? get_query_var('paged') : 1;
+		$my_query = new WP_Query(
+			array(
+				'post_type' => 'events',
+				'posts_per_page' => 9,
+				's' => $keyword,
+				'paged' => $paged)
+			);
 
 		while($my_query->have_posts()) : $my_query->the_post();
 			$meta = get_post_meta($post->ID);
@@ -97,7 +104,7 @@ function getMonth($var)
 		?>
 
 		<a href="<?php the_permalink(); ?>">
-			<section class="event-item">
+			<section class="list-item">
 				<section class="event-calendar">
 					<h1><?php echo $day; ?></h1>
 					<h2><?php echo $month; ?></h2>
@@ -115,33 +122,41 @@ function getMonth($var)
 
 		endwhile;
 
-		if ($my_query->have_posts()){}
-			else
-			{
-				?> 
-				<section class="event-item">
+		if (!$my_query->have_posts())
+		{
+			?>
+				<section class="list-item">
 					<h2>Geen zoekresultaten op: <?php echo $keyword; ?></h2>
 				</section>
-				<?php
-			}
-
-	previous_posts_link();
-	next_posts_link();
-
-	?>
+			<?php
+		}
 		
+		?>
+
 	</section>
+
 	<section class="sidebar">
 		<section class="search">
 			<h1>Zoeken</h1>
 			<form action="<?php $_SERVER['PHP_SELF']; ?>" method="GET">
 				<p>
-					<input type="text" name="search" value=""><input type="submit" value="submit" name="submit">
+					<input type="text" name="zoekveld" class="textbox" placeholder="Zoeken op eventnaam"><input type="submit" class="form-button" value="zoeken" name="zoeken">
 				</p>
 			</form>
 		</section>
 	</section>
-	<section class="clear"></section>
-	
 
+	</section>
+	<section class="clear"></section>
+
+	<section class="navigate-menu">
+		<?php
+
+		previous_posts_link();
+		next_posts_link();
+		$my_query = $orig_query;
+
+		?>		
+	</section>
+	
 <?php get_footer(); ?>
