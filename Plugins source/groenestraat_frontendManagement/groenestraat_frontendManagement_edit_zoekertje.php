@@ -1,4 +1,7 @@
 <?php
+
+	include_once('helper.php');
+
 	/*
 		Shortcode plugin
 	*/
@@ -13,10 +16,18 @@
 
 	function show_edit_zoekertje_form()
 	{
-		if(isset($_GET['zoekertje']))
+		if(is_user_logged_in() && isset($_GET['zoekertje']))
 		{
 			$current_user = wp_get_current_user();
 			$zoekertje = get_post($_GET['zoekertje'], OBJECT);
+
+			if($zoekertje->post_type != 'zoekertjes')
+			{
+				?>
+					<p class="error-message">Dit event bestaat niet, of u hebt geen toegang tot de gevraagde pagina. Ga terug naar <a href="<?php echo home_url(); ?>">Home</a>.</p>
+				<?php
+				return;
+			}
 
 			if($zoekertje != null && ($current_user->ID == $zoekertje->post_author || current_user_can('manage_options')) && current_user_can('edit_published_posts'))
 			{
@@ -36,7 +47,6 @@
 							$parentProjectId = get_post_meta($zoekertje->ID, '_parentProjectId')[0];
 							$adPrice = get_post_meta($zoekertje->ID, '_adPrice')[0];
 							$adLocation = get_post_meta($zoekertje->ID, '_adLocation')[0];
-
 						?>
 
 						<label class="normalize-text" for="parentProjectId">Project waartoe het zoekertje behoort</label>
@@ -73,6 +83,8 @@
 						
 						<input class="textbox" id="adLocation" name="adLocation" type="text" value="<?php echo $adLocation; ?>" />
 						
+						<label for="adFeaturedImage" class="normalize-text">Afbeelding</label>
+                  		<input id="adFeaturedImage" name="adFeaturedImage" type="file" accept="image/x-png, image/gif, image/jpeg" />
 						
 						<input id="zoekertjeId" name="zoekertjeId" type="hidden" value="<?php echo $zoekertje->ID; ?>" />
 
@@ -103,7 +115,6 @@
 		{
 			if(!empty($_POST['adTitle']) && 
 				!empty($_POST['adDescription']) &&
-				!empty($_POST['parentProjectId']) &&
 				!empty($_POST['adPrice']) &&
 				!empty($_POST['adLocation']) &&
 				!empty($_POST['zoekertjeId'])
@@ -130,12 +141,30 @@
 
 					$postId = wp_update_post($args);
 
+
 					update_post_meta($postId, '_adTitle', $adTitle);
 					update_post_meta($postId, '_adPrice', $adPrice);
 					update_post_meta($postId, '_adLocation', $adLocation);
 					update_post_meta($postId, '_parentProjectId', $parentProjectId);
-                    header('Location: '.get_permalink($postId));
-					
+
+					if($_FILES['adFeaturedImage']['size'] != 0)
+					{
+						foreach ($_FILES as $file => $array) 
+						{
+	    					$newupload = insert_featured_image($file, $postId);
+					    }
+					}
+
+                   	?>
+						<img class="center" src="<?php echo get_template_directory_uri() ?>/img/ball.gif" />
+	                    <script>
+	                        $('.title').remove();
+	                    </script>
+	                    <h2 class="normalize-text center">Uw event wordt bewerkt</h2>
+					<?php
+
+					echo '<META HTTP-EQUIV="Refresh" Content="0; URL=' . esc_url(get_permalink($postId)) . '">'; 
+					exit;
 				}
 
 				else

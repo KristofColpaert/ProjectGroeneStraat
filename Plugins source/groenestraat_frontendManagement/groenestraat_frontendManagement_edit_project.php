@@ -16,10 +16,18 @@
 
 	function show_edit_project_form()
 	{
-		if(isset($_GET['project']))
+		if(is_user_logged_in() && isset($_GET['project']))
 		{
 			$current_user = wp_get_current_user();
 			$project = get_post($_GET['project'], OBJECT);
+
+			if($project->post_type != 'projecten')
+			{
+				?>
+					<p class="error-message">Dit project bestaat niet, of u hebt geen toegang tot de gevraagde pagina. Ga terug naar <a href="<?php echo home_url(); ?>">Home</a>.</p>
+				<?php
+				return;
+			}
 
 			if($project != null && ($current_user->ID == $project->post_author || current_user_can('manage_options')) && current_user_can('edit_published_posts'))
 			{
@@ -106,16 +114,24 @@
 				update_post_meta($postId, '_projectCity', $projectCity);
 				update_post_meta($postId, '_projectZipcode', $projectZipcode);
 
-				if($_FILES)
+				if($_FILES['projectFeaturedImage']['size'] != 0)
 				{
 					foreach($_FILES as $file => $array)
 					{
-                            $newupload = insert_featured_image($file, $postId);
-                      						
+                            $newupload = insert_featured_image($file, $postId); 						
 					}
 				}
-                header('Location: '.get_permalink($postId));
-				
+                
+				?>
+					<img class="center" src="<?php echo get_template_directory_uri() ?>/img/ball.gif" />
+	                <script>
+	                    $('.title').remove();
+	                </script>
+	                <h2 class="normalize-text center">Uw zoekertje wordt bewerkt</h2>
+				<?php
+
+				echo '<META HTTP-EQUIV="Refresh" Content="0; URL=' . esc_url(get_permalink($postId)) . '">'; 
+				exit;	
 			}
 
 			else

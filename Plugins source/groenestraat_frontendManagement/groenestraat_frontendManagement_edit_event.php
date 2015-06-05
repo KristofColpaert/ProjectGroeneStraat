@@ -1,4 +1,7 @@
 <?php
+	
+	include_once('helper.php');
+
 	/*
 		Shortcode plugin
 	*/
@@ -13,14 +16,22 @@
 
 	function show_edit_event_form()
 	{
-		if(isset($_GET['event']))
+		if(is_user_logged_in() && isset($_GET['event']))
 		{
 			$current_user = wp_get_current_user();
 			$event = get_post($_GET['event'], OBJECT);
 
-			if($event != null && ($current_user->ID == $event->post_author || current_user_can('manage_options')) && current_user_can('edit_published_posts'))
+			if($event->post_type != 'events')
 			{
 				?>
+					<p class="error-message">Dit zoekertje bestaat niet, of u hebt geen toegang tot de gevraagde pagina. Ga terug naar <a href="<?php echo home_url(); ?>">Home</a>.</p>
+				<?php
+				return;
+			}
+
+			if($event != null && ($current_user->ID == $event->post_author || current_user_can('manage_options')) && current_user_can('edit_published_posts'))
+			{
+                ?>
                     <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
 			<link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
 
@@ -57,6 +68,8 @@
 							$eventTime = get_post_meta($event->ID, '_eventTime')[0];
 							$eventEndTime = get_post_meta($event->ID, '_eventEndTime')[0];
 							$eventLocation = get_post_meta($event->ID, '_eventLocation')[0];
+
+							echo $eventTime;
 						?>
 
 						<label for="parentProjectId" class="normalize-text">Project waartoe het event behoort</label>
@@ -86,17 +99,20 @@
                         <label  for="eventTime" class="normalize-text left labeldate">Van</label><label  for="eventEndTime" class="normalize-text right labeldate">Tot</label>
                         <section class="date textbox left">
 
-                            <input id="eventTime" name="eventTime" readonly class="normalize-text" type="date" value="<?php echo $eventTime; ?>" />                   </section>
+                            <input id="eventTime" name="eventTime" readonly class="normalize-text" type="text" value="<?php echo $eventTime; ?>" />                   </section>
 
                         <section class="date textbox right">
 						
 						
-                            <input id="eventEndTime" name="eventEndTime" readonly type="date" class="normalize-text" value="<?php echo $eventEndTime; ?>" /></section>
+                            <input id="eventEndTime" name="eventEndTime" readonly type="text" class="normalize-text" value="<?php echo $eventEndTime; ?>" /></section>
 						<br />
 
 						<label for="eventLocation" class="normalize-text">Locatie</label>
 						<input class="textbox" id="eventLocation" name="eventLocation" type="text" value="<?php echo $eventLocation; ?>" />
 						
+						<label for="eventFeaturedImage" class="normalize-text">Afbeelding</label>
+                  		<input id="eventFeaturedImage" name="eventFeaturedImage" type="file" accept="image/x-png, image/gif, image/jpeg" />
+
 						<input id="eventId" name="eventId" type="hidden" value="<?php echo $event->ID; ?>" />
 
 						<input class="form-button" id="eventEdit" name="eventEdit" type="submit" value="Bewerk" />
@@ -159,8 +175,25 @@
 					update_post_meta($postId, '_eventEndTime', $eventEndTime);
 					update_post_meta($postId, '_eventLocation', $eventLocation);
 					update_post_meta($postId, '_parentProjectId', $parentProjectId);
-                    header('Location: '.get_permalink($postId));
-					
+                    
+                    if($_FILES['eventFeaturedImage']['size'] != 0)
+					{
+						foreach ($_FILES as $file => $array) 
+						{
+	    					$newupload = insert_featured_image($file, $postId);
+					    }
+					}
+
+					?>
+						<img class="center" src="<?php echo get_template_directory_uri() ?>/img/ball.gif" />
+	                    <script>
+	                        $('.title').remove();
+	                    </script>
+	                    <h2 class="normalize-text center">Uw zoekertje wordt bewerkt</h2>
+					<?php
+
+					echo '<META HTTP-EQUIV="Refresh" Content="0; URL=' . esc_url(get_permalink($postId)) . '">'; 
+					exit;				
 				}
 
 				else
