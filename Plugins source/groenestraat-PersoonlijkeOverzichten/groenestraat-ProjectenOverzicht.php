@@ -20,11 +20,10 @@
 
 	function prowp_persoonlijkeProjecten_install()
 	{
-		//Persoonlijke overzicht van projecten
-		makeShortcode('Persoonlijke projecten','[persoonlijke_projecten]','persoonlijke projecten','publish','page','closed');
+		makePersProjectenShortcode('Mijn projecten','[persoonlijke_projecten]','persoonlijke projecten','publish','page','closed');
 	}
 
-	function makeShortcode($title,$content,$post_name,$post_status,$post_type,$ping_status)
+	function makePersProjectenShortcode($title,$content,$post_name,$post_status,$post_type,$ping_status)
 	{
 		$args = array(
 			'post_title' => $title,
@@ -44,7 +43,6 @@ function prowpt_persoonlijkeProjectenOverzicht()
 {
 	global $post;
 
-	$projecten = array();
 	$subscriber = "_subscriberId";
 	$userId = get_current_user_id(); 
 
@@ -75,13 +73,27 @@ function prowpt_persoonlijkeProjectenOverzicht()
 		foreach($projecten as $project)
 		{
 			$projectAdminId = $project->post_author;
-			$title = $project->post_title;
 
-			print '<h1>' . $title . '</h1>';
-			if($userId == $projectAdminId)
+			$title = $project->post_title;
+			$omschrijving = $project->post_content;
+
+			$street = get_post_meta($project->ID, "_projectStreet")[0];
+			$city = get_post_meta($project->ID, "_projectCity")[0];
+			$zipcode = get_post_meta($project->ID, "_projectZipcode")[0];
+
+			if(!empty($street) && !empty($city) && !empty($zipcode))
 			{
-				print '<a href="'.site_url().'/bewerk-project?project='. $projectId .'">Bewerk project</a>';
+				print '<h1>' . $title . '</h1>';
+				print '<strong>Street: </strong> ' . $street . '<br />';
+				print '<strong>City: </strong> ' . $city . '<br />';;
+				print '<strong>Zipcode: </strong> ' . $zipcode . '<br />';;
+				print '<strong>Omschrijving: </strong><p>' . $omschrijving . '</p>';
+				if($userId == $projectAdminId)
+				{
+					print '<a href="'.site_url().'/bewerk-project?project='. $projectId .'">Bewerk project</a>';
+				}
 			}
+
 		}
 
 	}
