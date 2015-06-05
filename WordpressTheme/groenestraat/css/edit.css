@@ -1,37 +1,9 @@
 @import("http://fortawesome.github.io/Font-Awesome/assets/font-awesome/css/font-awesome.css");
 
-#logged_user{
-    height: 100%;
-    width: auto;
-    display: block;
-    padding: 5px 0px 5px 15px;
-    float: right;
-    color: #a2a1a9;
-}
-#logged_user:hover{
-    color: #69686e;
-}
-#logged_user img{
-    margin-right: 10px;
-    margin-top:10px; 
-}
-#logged_user p{
-    float: left;
-    font-size:1.2em;
-    
-    text-decoration: none;
-    text-transform: uppercase;
-    padding: 15px 0;
-}
-
 .menu div{
     float: right;
 }
-.small-arrow{
-    padding-left: 10px;
-    padding-top: 12px;
-    width: 15px;
-}
+
 .centered-form{
     padding: 5vh 5vh 5vh 5vh;
     min-width: 20vw;
@@ -530,3 +502,80 @@ fc-right{
     margin: 0 auto;
     text-align: center;
 }
+
+
+/* DROPDOWN HEADER */
+
+.click-nav {
+    margin:0px auto;
+    height: 65px;
+    min-width: 200px;
+}
+.click-nav ul {
+    position:relative;
+    font-weight:900;
+}
+.click-nav ul li {
+    position:relative;
+    list-style:none;
+    cursor:pointer;
+}
+.click-nav ul li ul {
+    position:absolute;
+    left:0;
+    right:0;
+}
+.click-nav ul .clicker {
+    position:relative;
+    background:#f8f7f7;
+    color:#FFF;
+}
+.click-nav ul .clicker:hover,.click-nav ul .active {
+    background:#eaeaea;
+}
+
+.click-nav ul li a {
+    transition:background-color 0.2s ease-in-out;
+    -webkit-transition:background-color 0.2s ease-in-out;
+    -moz-transition:background-color 0.2s ease-in-out;
+    display:block;
+    background:#FFF;
+    padding: 10px 5px;
+    height: 45px;
+    
+}
+.click-nav ul li a p{
+    text-transform: uppercase;
+    color: #69686e;
+    float: left;
+    display: block;
+    text-decoration:none;
+    font-size: 1.2em;
+    overflow: hidden;
+    white-space: nowrap;
+    padding: 10px 0px;
+    margin-left: 10px;
+}
+.click-nav ul li ul li a{
+    height: auto;
+    color: #69686e;
+    text-decoration: none;
+    display: block;
+    padding-left: 15px;
+}
+.click-nav img{
+    padding: 5px;
+    margin-left: 5px; 
+}
+.click-nav ul li a:hover {
+    background:#F2F2F2;
+}
+.small-arrow{
+    float:left;
+    display: block;
+    margin: 12px 10px;
+    width: 15px;
+}
+/* Fallbacks */
+.click-nav .no-js ul {display:none;}
+.click-nav .no-js:hover ul {display:block;}

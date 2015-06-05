@@ -13,10 +13,10 @@
             <a href="<?php echo get_site_url(); ?>"><img src="<?php bloginfo('template_directory'); ?>/img/logo.png" class="logo" width="400" height="65" alt="" title="" /></a>
             <section class="menu">
                  <ul>
-                <li class="basic-menu-item"><a href="<?php echo get_site_url(); ?>/artikels">Artikels</a></li>
-                <li class="basic-menu-item"><a href="<?php echo get_site_url(); ?>/projecten">Projecten</a></li>
-                    <li class="basic-menu-item"><a href="<?php echo get_site_url(); ?>/events">Events</a></li>
-                     <li class="basic-menu-item"><a href="<?php echo get_site_url(); ?>/zoekertjes">Zoekertjes</a></li>
+                <li class="basic-menu-item normalize-text"><a href="<?php echo get_site_url(); ?>/artikels">Artikels</a></li>
+                <li class="basic-menu-item normalize-text"><a href="<?php echo get_site_url(); ?>/projecten">Projecten</a></li>
+                    <li class="basic-menu-item normalize-text"><a href="<?php echo get_site_url(); ?>/events">Events</a></li>
+                     <li class="basic-menu-item normalize-text"><a href="<?php echo get_site_url(); ?>/zoekertjes">Zoekertjes</a></li>
                      
                 <?php
                    
@@ -26,7 +26,43 @@
                     get_currentuserinfo();
                      
                      
-    echo '<a id="logged_user" href="'.wp_logout_url(get_site_url()).'">'.get_avatar($current_user->user_email, 32).'<p>'.$userstring. '</p><img class="small-arrow" src="'.get_template_directory_uri().'/img/arrow_grey.png"/></a>';
+           ?>
+                     
+                    <div id="logged-user" class="click-nav">
+                      <ul class="no-js">
+                        <li>
+                          <a href="#" class="clicker">
+                              <?php echo get_avatar($current_user->user_email, 32); echo '<p>'.$userstring.'</p>'; ?>
+                                <img class="small-arrow" src="<?php echo get_template_directory_uri();?>/img/arrow_grey.png"/>
+                            </a>
+                          <ul>
+                            <li><a href="#">Profiel</a></li>
+                            <li><a href="#">Beheren</a></li>
+                            <li><a href="#">Privacy</a></li>
+                            <li><a href="#">Help</a></li>
+                            <li><a href="<?php echo wp_logout_url(get_site_url()); ?>">Afmelden</a></li>
+                          </ul>
+                        </li>
+                      </ul>
+                    </div>    
+                     <script>
+                        $(function () {
+                          $('.click-nav > ul').toggleClass('no-js js');
+                          $('.click-nav .js ul').hide();
+                          $('.click-nav .js').click(function(e) {
+                            $('.click-nav .js ul').slideToggle(100);
+                            $('.clicker').toggleClass('active');
+                            e.stopPropagation();
+                          });
+                          $(document).click(function() {
+                            if ($('.click-nav .js ul').is(':visible')) {
+                              $('.click-nav .js ul', this).slideUp();
+                              $('.clicker').removeClass('active');
+                            }
+                          });
+                        });
+                     </script>
+                <?php
    
                 }
                 else{
