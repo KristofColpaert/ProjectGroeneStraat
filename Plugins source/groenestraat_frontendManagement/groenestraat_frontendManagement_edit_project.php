@@ -110,18 +110,18 @@
 				{
 					foreach($_FILES as $file => $array)
 					{
-						$newupload = insert_featured_image($file, $postId);
+                            $newupload = insert_featured_image($file, $postId);
+                      						
 					}
 				}
-				?>
-					<p>Uw project werd correct gewijzigd. Ga er <a href="<?php echo esc_url(get_permalink($postId)); ?>">meteen</a> naartoe.</p>
-				<?php
+                header('Location: '.get_permalink($postId));
+				
 			}
 
 			else
 			{
 				?>
-					<p>Helaas, er bestaat reeds een project met deze titel.</p>
+					<p class="error-message">Helaas, er bestaat reeds een project met deze titel.</p>
 				<?php
 			}
 		}

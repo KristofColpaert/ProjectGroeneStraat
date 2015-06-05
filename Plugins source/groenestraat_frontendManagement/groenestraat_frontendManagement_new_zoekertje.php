@@ -113,23 +113,21 @@
 					}
 					add_post_meta($postId, '_adPrice', $adPrice);
 					add_post_meta($postId, '_adLocation', $adLocation);
-
-					?>
-						<p>Uw zoekertje werd correct toegevoegd. Ga er <a href="<?php echo esc_url(get_permalink($postId)); ?>">meteen</a> naartoe.</p>
-					<?php
+                    header('Location: '.get_permalink($postId));
+					
 				}
 
 				else
 				{
 					?>
-						<p>Helaas, er bestaat reeds een zoekertje met deze titel.</p>
+						<p class="error-message">Helaas, er bestaat reeds een zoekertje met deze titel.</p>
 					<?php
 				}
 			}
 			else
 			{
 				?>
-					<p>Gelieve alle gegevens correct in te voeren.</p>
+					<p class="error-message">Gelieve alle gegevens correct in te voeren.</p>
 				<?php
 			}
 		}

@@ -277,7 +277,7 @@ textarea.LV_invalid_field:active {
 
 /**********NIEUWPROJECT***********/
 #primary{
-    background-color: #69686e;
+    background-color: #a2a1a9;
 }
 .contentwrapper{
     margin: 0 auto;
@@ -469,14 +469,8 @@ textarea.LV_invalid_field:active {
     font-size: 1.2em;
 }
 .cancel-button:hover{
-    background-color:#E74C3C;
-    border: 1px solid transparent;
-    color: #FFF;
+    border: 1px solid #E74C3C;
 }
 .cancel-button, .confirm-button{
     line-height: 1em;
-}
-h1{
-    padding: 1%;
-    line-height: 1em !important;
 }

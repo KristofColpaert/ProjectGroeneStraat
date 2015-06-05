@@ -159,15 +159,14 @@
 					update_post_meta($postId, '_eventEndTime', $eventEndTime);
 					update_post_meta($postId, '_eventLocation', $eventLocation);
 					update_post_meta($postId, '_parentProjectId', $parentProjectId);
-					?>
-						<p>Uw event werd correct gewijzigd. Ga er <a href="<?php echo esc_url(get_permalink($postId)); ?>">meteen</a> naartoe.</p>
-					<?php
+                    header('Location: '.get_permalink($postId));
+					
 				}
 
 				else
 				{
 					?>
-						<p>Helaas, er bestaat reeds een event met deze titel.</p>
+						<p class="error-message">Helaas, er bestaat reeds een event met deze titel.</p>
 					<?php
 				}
 			}
@@ -175,7 +174,7 @@
 			else
 			{
 				?>
-					<p>Gelieve alle gegevens correct in te voeren.</p>
+					<p class="error-message">Gelieve alle gegevens correct in te voeren.</p>
 				<?php
 			}
 		}

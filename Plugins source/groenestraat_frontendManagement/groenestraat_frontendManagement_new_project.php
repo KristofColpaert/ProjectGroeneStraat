@@ -40,7 +40,7 @@
 					
 					<input class="textbox" id="projectZipcode" name="projectZipcode" type="text" placeholder="Postcode" />
 
-					<label for="projectFeaturedImage">Afbeelding</label>
+					<label for="projectFeaturedImage" class="normalize-text">Afbeelding</label>
                     
                         <input id="projectFeaturedImage" name="projectFeaturedImage" type="file" accept="image/x-png, image/gif, image/jpeg" />
 					
@@ -62,6 +62,7 @@
 	{
 		if(isset($_POST['projectPublish']))
 		{
+            if(!empty($_POST['projectTitle'])&&!empty($_POST['projectDescription'])&&!empty($_POST['projectStreet'])&&!empty($_POST['projectCity'])&&!empty($_POST['projectZipcode'])){
 			$projectTitle = $_POST['projectTitle'];
 			$projectDescription = $_POST['projectDescription'];
 			$projectStreet = $_POST['projectStreet'];
@@ -107,6 +108,12 @@
 					<p class="error-message">Helaas, er bestaat reeds een project met deze titel.</p>
 				<?php
 			}
+            }
+            else{
+                ?>
+					<p class="error-message">Gelieve alle gegevens correct in te voeren.</p>
+				<?php
+            }
 		}
 	}
 ?>
