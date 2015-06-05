@@ -130,6 +130,7 @@
 
 					$postId = wp_update_post($args);
 
+					update_post_meta($postId, '_adTitle', $adTitle);
 					update_post_meta($postId, '_adPrice', $adPrice);
 					update_post_meta($postId, '_adLocation', $adLocation);
 					update_post_meta($postId, '_parentProjectId', $parentProjectId);

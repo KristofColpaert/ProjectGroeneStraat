@@ -111,6 +111,7 @@
 					{
 						add_post_meta($postId, '_parentProjectId', $parentProjectId);
 					}
+					add_post_meta($postId, '_adTitle', $adTitle);
 					add_post_meta($postId, '_adPrice', $adPrice);
 					add_post_meta($postId, '_adLocation', $adLocation);
                     header('Location: '.get_permalink($postId));
