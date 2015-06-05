@@ -57,7 +57,7 @@
 			'public' => true,
 			'has_archive' => true,
 			'rewrite' => array('slug' => 'events'),
-			'supports' => array('title', 'editor'),
+			'supports' => array('title', 'editor', 'thumbnail'),
 			'taxonomies' => array('category'),
 			'menu_icon' => 'dashicons-calendar-alt',
 			'menu_position' => 7,

@@ -56,7 +56,7 @@
 			'public' => true,
 			'has_archive' => true,
 			'rewrite' => array('slug' => 'zoekertjes'),
-			'supports' => array('title', 'editor'),
+			'supports' => array('title', 'editor', 'thumbnail'),
 			'taxonomies' => array('category'),
 			'menu_icon' => 'dashicons-search',
 			'menu_position' => 8,
