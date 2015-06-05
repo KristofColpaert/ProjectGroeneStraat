@@ -3,7 +3,7 @@
 	<section class="container">
 	<section class="sub-menu">
 		<ul>
-			<li><a href="#">Nieuw project</a></li>
+			<li><a href="<?php echo get_site_url(); ?>/nieuw-project">Nieuw project</a></li>
 			<li><a href="#">Mijn projecten</a></li>
 		</ul>
 		<section class="options">

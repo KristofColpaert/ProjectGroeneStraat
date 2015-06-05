@@ -9,7 +9,7 @@ get_header();
     <section class="container">
     <section class="sub-menu">
         <ul>
-            <li><a href="#">Nieuw artikel</a></li>
+            <li><a href="<?php echo get_site_url(); ?>/nieuw-artikel">Nieuw artikel</a></li>
             <li><a href="#">Mijn artikels</a></li>
         </ul>
         <section class="options">
@@ -22,10 +22,6 @@ get_header();
 
     <?php
 
-/*
-    global $more;
-$more = 0;
-*/
     global $post;
     $keyword = '';
 

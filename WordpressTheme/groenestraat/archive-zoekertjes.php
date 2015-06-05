@@ -3,7 +3,7 @@
 	<section class="container">
 	<section class="sub-menu">
 		<ul>
-			<li><a href="#">Nieuw zoekertje</a></li>
+			<li><a href="<?php echo get_site_url(); ?>/nieuw-zoekertje">Nieuw zoekertje</a></li>
 			<li><a href="#">Mijn zoekertjes</a></li>
 		</ul>
 		<section class="options">
@@ -93,7 +93,7 @@
 
 		previous_posts_link();
 		next_posts_link();
-		
+
 		$my_query = $orig_query;
 
 		?>		

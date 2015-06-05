@@ -54,7 +54,7 @@ function getMonth($var)
 	<section class="container">
 	<section class="sub-menu">
 		<ul>
-			<li><a href="#">Nieuw event</a></li>
+			<li><a href="<?php echo get_site_url(); ?>/nieuw-event">Nieuw event</a></li>
 			<li><a href="#">Mijn events</a></li>
 		</ul>
 		<section class="options">
