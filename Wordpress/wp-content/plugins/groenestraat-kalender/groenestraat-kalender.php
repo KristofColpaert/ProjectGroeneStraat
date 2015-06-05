@@ -41,7 +41,7 @@
 	{
 
 		$user_id = get_current_user_id();
-		$meta_key = "_eventCalendar ";
+		$meta_key = "_eventCalendar";
 
 		//ophalen data uit database
 		$value = get_user_meta($user_id, $meta_key);
@@ -49,9 +49,10 @@
 		//alle events ophalen
 		 	//Eerst de titel uit de get_post();
 			//Dan de meta_data uit de get_meta_data();
+		$events = array();
 		foreach($value as $val)
 		{
-			$event= get_post($val, OBJECT);
+			$event = get_post($val, OBJECT);
 			$event->eventTime = get_post_meta($event->ID, '_eventTime')[0];
 			$event->eventEndTime = get_post_meta($event->ID, '_eventEndTime')[0];
 			$events[] = $event;
@@ -69,7 +70,7 @@
 			
 			<script>
 			<?php
-				if(wp_get_current_user()->ID > 0)
+				if(is_user_logged_in())
 				{
 					//logged in
 			?>
@@ -77,7 +78,8 @@
 					$('#calendar').fullCalendar({
 						defaultDate: new Date(),
 						editable: true,
-						eventLimit: true,
+						firstDay: 1,
+                		eventLimit: true, // allow "more" link when too many events
 						events: [
 							<?php 
 							if(count($events) > 0)
@@ -87,9 +89,15 @@
 									?>
 										{
 											title: '<?php echo $event->post_title; ?>',
-											start: '<?php echo $event->eventTime; ?>',
-											end: '<?php echo $event->eventEndTime; ?>',
-											url: '<?php echo get_permalink($event->ID); ?>'
+											<?php
+											$start = date_create($event->eventTime);
+											$end = date_create($event->eventEndTime);
+											$end->setTime(24, 00, 00);
+											print "start: '" . date_format($start, 'Y-m-d H:i:s') . "',";
+											print "end: '" . date_format($end, 'Y-m-d H:i:s') . "',";
+											?>
+											url: '<?php echo get_permalink($event->ID); ?>',
+											allDay: true,
 										},
 									<?php
 								}
