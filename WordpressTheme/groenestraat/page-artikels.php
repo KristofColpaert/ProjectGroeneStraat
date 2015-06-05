@@ -50,10 +50,6 @@ $more = 0;
                 's' => $keyword,
                 'paged' => $paged)
             );
-        /*
-        global $more;
-        $more = FALSE;
-        */
 
         while($my_query->have_posts()) : $my_query->the_post();
         ?>
