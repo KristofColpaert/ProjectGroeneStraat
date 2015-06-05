@@ -46,6 +46,7 @@ function prowpt_persoonlijkeProjectenOverzicht()
 
 	$projecten = array();
 	$subscriber = "_subscriberId";
+	$userId = get_current_user_id(); 
 
 	if(is_user_logged_in())
 	{
@@ -67,8 +68,14 @@ function prowpt_persoonlijkeProjectenOverzicht()
 
 		foreach($projecten as $project)
 		{
+			$projectAdminId = $project->post_author;
 			$title = $project->post_title;
+
 			print '<h1>' . $title . '</h1>';
+			if($userId == $projectAdminId)
+			{
+				print '<a href="'.site_url().'/bewerk-project?project='. $projectId .'">Bewerk project</a>';
+			}
 		}
 
 	}
