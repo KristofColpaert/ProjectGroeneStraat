@@ -474,3 +474,59 @@ textarea.LV_invalid_field:active {
 .cancel-button, .confirm-button{
     line-height: 1em;
 }
+
+/* CALENDAR */
+
+.fc-toolbar{
+    background-color: #E74C3C;
+    margin: 0 !important;
+    color: #FFF;
+}
+.fc .fc-toolbar > * > :first-child{
+    margin-left: .75em !important;
+}
+fc-right{
+    
+}
+.fc-state-default{
+    box-shadow: none !important;
+}
+.fc-today-button, .fc-prev-button, .fc-next-button{
+    top: 1em !important;
+    right: 1em !important;
+    background-image: none !important;
+    background-color: transparent !important;
+    color: #FFF !important;
+    font-size: 1.2em !important;
+}
+.fc-today-button{
+    border:0 !important;
+}
+.fc-prev-button, .fc-next-button{
+    
+    border: 1px solid #FFF !important;
+}
+.fc-today-button:hover, .fc-prev-button:hover, .fc-next-button:hover{
+    background-color: #FFF !important;
+    border: 1px solid #FFF !important;
+    color: #E74C3C !important;
+}
+.fc-state-disabled{
+    display: none !important;
+}
+.fc-day-number{
+    font-size: 3em !important;
+    font-weight: 600 !important;
+}
+.fc-future{
+    color: #69686e !important;
+}
+.fc-past{
+    color: #a2a1a9 !important;
+}
+
+.center{
+    display: block;
+    margin: 0 auto;
+    text-align: center;
+}
