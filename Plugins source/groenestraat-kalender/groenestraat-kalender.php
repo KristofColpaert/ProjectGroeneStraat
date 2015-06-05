@@ -70,7 +70,7 @@
 			
 			<script>
 			<?php
-				if(wp_get_current_user()->ID > 0)
+				if(is_user_logged_in())
 				{
 					//logged in
 			?>
@@ -78,7 +78,8 @@
 					$('#calendar').fullCalendar({
 						defaultDate: new Date(),
 						editable: true,
-						eventLimit: true,
+						firstDay: 1,
+                		eventLimit: true, // allow "more" link when too many events
 						events: [
 							<?php 
 							if(count($events) > 0)
@@ -88,9 +89,15 @@
 									?>
 										{
 											title: '<?php echo $event->post_title; ?>',
-											start: '<?php echo $event->eventTime; ?>',
-											end: '<?php echo $event->eventEndTime; ?>',
-											url: '<?php echo get_permalink($event->ID); ?>'
+											<?php
+											$start = date_create($event->eventTime);
+											$end = date_create($event->eventEndTime);
+											$end->setTime(24, 00, 00);
+											print "start: '" . date_format($start, 'Y-m-d H:i:s') . "',";
+											print "end: '" . date_format($end, 'Y-m-d H:i:s') . "',";
+											?>
+											url: '<?php echo get_permalink($event->ID); ?>',
+											allDay: true,
 										},
 									<?php
 								}
