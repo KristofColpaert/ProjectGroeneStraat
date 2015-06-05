@@ -10,7 +10,7 @@
 		License: GPLv2		
 	*/
 
-		register_activation_hook(__FILE__, 'prowp_frontendlayout_install');
+	register_activation_hook(__FILE__, 'prowp_frontendlayout_install');
 
 	function prowp_frontendlayout_install()
 	{

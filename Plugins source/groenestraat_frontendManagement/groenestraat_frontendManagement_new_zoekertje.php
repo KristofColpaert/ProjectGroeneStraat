@@ -1,4 +1,7 @@
 <?php
+
+	include_once('helper.php');
+
 	/*
 		Shortcode plugin
 	*/
@@ -13,7 +16,7 @@
 
 	function show_new_zoekertje_form()
 	{
-		if(current_user_can('publish_posts'))
+		if(is_user_logged_in() && current_user_can('publish_posts') && !isset($_POST['adPublish']))
 		{
 			?>
 				<form class="createForm" action="<?php $_SERVER['REQUEST_URI'] ?>" method="POST" enctype="multipart/form-data">
@@ -59,6 +62,9 @@
 					<input class="textbox" id="adPrice" name="adPrice" type="text" placeholder="Prijs" />
 					<input class="textbox" id="adLocation" name="adLocation" type="text" placeholder="Locatie" />
 
+					<label for="adFeaturedImage" class="normalize-text">Afbeelding</label>
+                  	<input id="adFeaturedImage" name="adFeaturedImage" type="file" accept="image/x-png, image/gif, image/jpeg" />
+
 					<input id="adPublish" name="adPublish" type="submit" value="Publiceer" class="form-button" />
 				</form>
 			<?php
@@ -78,7 +84,7 @@
 		{
 			if(!empty($_POST['adTitle']) &&
 				!empty($_POST['adDescription']) &&
-				!empty($_POST['parentProjectId']) &&
+				$_FILES &&
 				!empty($_POST['adPrice']) &&
 				!empty($_POST['adLocation'])
 				)
@@ -111,11 +117,27 @@
 					{
 						add_post_meta($postId, '_parentProjectId', $parentProjectId);
 					}
-					add_post_meta($postId, '_adTitle', $adTitle);
 					add_post_meta($postId, '_adPrice', $adPrice);
 					add_post_meta($postId, '_adLocation', $adLocation);
-                    header('Location: '.get_permalink($postId));
-					
+
+					if($_FILES)
+					{
+						foreach ($_FILES as $file => $array) 
+						{
+	    					$newupload = insert_featured_image($file, $postId);
+					    }
+					}
+
+					?>
+						<img class="center" src="<?php echo get_template_directory_uri() ?>/img/ball.gif" />
+	                    <script>
+	                        $('.title').remove();
+	                    </script>
+	                    <h2 class="normalize-text center">Uw zoekertje wordt aangemaakt</h2>
+					<?php
+
+					echo '<META HTTP-EQUIV="Refresh" Content="0; URL=' . esc_url(get_permalink($postId)) . '">'; 
+					exit;
 				}
 
 				else

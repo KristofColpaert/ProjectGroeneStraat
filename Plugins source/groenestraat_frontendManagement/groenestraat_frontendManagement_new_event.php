@@ -1,4 +1,7 @@
 <?php
+	
+	include_once('helper.php');
+
 	/*
 		Shortcode plugin
 	*/	
@@ -14,7 +17,6 @@
 	function show_new_event_form()
 	{
 		?>
-			
 			<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
 			<link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
 
@@ -37,7 +39,7 @@
 			</script>
 		<?php
 
-		if(current_user_can('publish_posts'))
+		if(is_user_logged_in() && current_user_can('publish_posts'))
 		{
 			?>
 				
@@ -78,8 +80,7 @@
 								}
 							}
 						?>
-					</select>
-				
+					</select>				
 
 					<section class="date textbox left">
                         <input id="eventTime" readonly name="eventTime" type="text" class="normalize-text" placeholder="Datum start"/>
@@ -88,8 +89,10 @@
                     <input class="normalize-text" id="eventEndTime" readonly name="eventEndTime" type="text" placeholder="Datum einde" />             
                     </section>
 					
-					
 					<input class="textbox normalize-text" id="eventLocation" name="eventLocation" type="text" placeholder="Locatie" />
+
+					<label for="eventFeaturedImage" class="normalize-text">Afbeelding</label>
+                  	<input id="eventFeaturedImage" name="eventFeaturedImage" type="file" accept="image/x-png, image/gif, image/jpeg" />
 
 					<input id="eventPublish" name="eventPublish" class="form-button"  type="submit" value="Publiceer" />
 				</form>
@@ -111,8 +114,8 @@
 		{
 			if(!empty($_POST['eventTitle']) && 
 				!empty($_POST['eventDescription']) &&
-				!empty($_POST['parentProjectId']) &&
 				!empty($_POST['eventTime']) &&
+				$_FILES &&
 				!empty($_POST['eventLocation']) &&
 				!empty($_POST['eventEndTime'])
 				)
@@ -149,10 +152,25 @@
 					add_post_meta($postId, '_eventTime', $eventTime);
 					add_post_meta($postId, '_eventEndTime', $eventEndTime);
 					add_post_meta($postId, '_eventLocation', $eventLocation);
-                    header('Location: '.get_permalink($postId));
-					?>
-						
+
+                   	if($_FILES)
+					{
+						foreach ($_FILES as $file => $array) 
+						{
+	    					$newupload = insert_featured_image($file, $postId);
+					    }
+					}
+
+                   	?>
+						<img class="center" src="<?php echo get_template_directory_uri() ?>/img/ball.gif" />
+	                    <script>
+	                        $('.title').remove();
+	                    </script>
+	                    <h2 class="normalize-text center">Uw event wordt aangemaakt</h2>
 					<?php
+
+					echo '<META HTTP-EQUIV="Refresh" Content="0; URL=' . esc_url(get_permalink($postId)) . '">'; 
+					exit;
 				}
 
 				else
