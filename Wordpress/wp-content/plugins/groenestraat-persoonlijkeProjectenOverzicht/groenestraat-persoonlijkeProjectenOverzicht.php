@@ -50,21 +50,27 @@ function prowpt_persoonlijkeProjectenOverzicht()
 
 	if(is_user_logged_in())
 	{
-		//ingelogd 
-		//--> subscriber_id --> degene die zich hebben ingeschreven op een project.
-
 		global $wpdb;
-		$results = $wpdb->get_results($wpdb->prepare( "SELECT post_id, meta_value FROM $wpdb->postmeta WHERE meta_key = %s", $subscriber), ARRAY_A);
+		//projecten ophalen waar hij op gesubscribed heeft.
+		$results = $wpdb->get_results($wpdb->prepare( "SELECT post_id, meta_value FROM $wpdb->postmeta WHERE meta_key = %s AND meta_value = %d", $subscriber, $userId), ARRAY_A);
 			
-		foreach($results as $result)
-		{
-			if($result["meta_value"] == get_current_user_id())
+			foreach($results as $result)
 			{
-				//voor iedere waarde met subscriberId zullen we het project gaan ophalen.
-				$projectId = $result['post_id'];
-				$projecten[] = get_post($projectId, OBJECT);
+					//voor iedere waarde met subscriberId zullen we het project gaan ophalen.
+					$projectId = $result['post_id'];
+					$projecten[] = get_post($projectId, OBJECT);
 			}
-		}
+
+		//projecten ophalen waar hij zelf auteur van is.
+		$post_type = "projecten";
+		$post_author = $userId;
+		$results = $wpdb->get_results($wpdb->prepare( "SELECT ID FROM $wpdb->posts WHERE post_type = %s AND post_author = %d ", $post_type, $post_author), ARRAY_A);
+
+			foreach($results as $result)
+			{
+					$projectId = $result['ID'];
+					$projecten[] = get_post($projectId, OBJECT);
+			}
 
 		foreach($projecten as $project)
 		{
