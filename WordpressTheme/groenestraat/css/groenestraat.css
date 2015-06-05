@@ -714,6 +714,29 @@ footer
     background-color: #ffffff;
 }
 
+.list-item>h1>a
+{
+    color:#333;
+}
+
+.list-item img
+{
+    margin:15px 0;
+}
+
+.list-item
+{
+    margin-bottom: 15px;
+}
+
+.list-item a.more-link
+{
+    border-radius: 5px;
+    background-color: red;
+    padding:10px 20px;
+    color: #00cd00;
+}
+
 .sidebar
 {
     float: right;

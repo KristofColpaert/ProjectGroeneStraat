@@ -16,7 +16,7 @@
 
 	function show_new_project_form()
 	{
-		if(current_user_can('publish_posts'))
+		if(is_user_logged_in() && current_user_can('publish_posts'))
 		{
 			?>
 				<form class="createForm" action="<?php $_SERVER['REQUEST_URI']; ?>" method="POST" enctype="multipart/form-data">
@@ -41,8 +41,7 @@
 					<input class="textbox" id="projectZipcode" name="projectZipcode" type="text" placeholder="Postcode" />
 
 					<label for="projectFeaturedImage" class="normalize-text">Afbeelding</label>
-                    
-                        <input id="projectFeaturedImage" name="projectFeaturedImage" type="file" accept="image/x-png, image/gif, image/jpeg" />
+                  	<input id="projectFeaturedImage" name="projectFeaturedImage" type="file" accept="image/x-png, image/gif, image/jpeg" />
 					
 
 					<input class="form-button" id="projectPublish" name="projectPublish" type="submit" value="Publiceer" />
@@ -98,8 +97,16 @@
     					$newupload = insert_featured_image($file, $postId);
 				    }
 				}
-                header('Location: '.get_permalink($postId));
+				?>
+					<img class="center" src="<?php echo get_template_directory_uri() ?>/img/ball.gif" />
+                    <script>
+                        $('.title').remove();
+                    </script>
+                    <h2 class="normalize-text center">Uw project wordt aangemaakt</h2>
+				<?php
 				
+				echo '<META HTTP-EQUIV="Refresh" Content="0; URL=' . esc_url(get_permalink($postId)) . '">'; 
+				exit;				
 			}
 
 			else
