@@ -106,8 +106,9 @@ header .menu
     height:auto;
 }
 
-.button
+.recent-item>.button
 {
+
     color: #a2a1a9;
     border: 1px solid #a2a1a9;
     background-color: #f8f7f7;
@@ -211,6 +212,13 @@ header .menu
     background-color: #f8f7f7;
 }
 
+.recent-item a
+{
+    text-decoration: none;
+    font-size:1em;
+    font:#333;
+}
+
 .recent-item h1
 {
     color: #69686e;
@@ -246,6 +254,7 @@ header .menu
 }
 .calender .calender-image em
 {
+    color:#333;
     position: absolute;
     top:10px;
     z-index: 2;
@@ -327,7 +336,8 @@ todo: fix 1-2px red border????
 {
     background-color: #fff;
     width: 100%;
-    min-height: 150px;
+    background-color: #a2a1a9;
+    word-wrap: break-word;
 }
 
 #recent-projects-slider .item
@@ -335,12 +345,13 @@ todo: fix 1-2px red border????
     position: relative;
     text-align: center;
     color: #ffffff;
+    overflow: hidden;
 }
 
 #recent-projects-slider .item h1
 {
     line-height: 100%;
-    font-size: 5em;
+    font-size: 3em;
     text-transform: lowercase;
 }
 

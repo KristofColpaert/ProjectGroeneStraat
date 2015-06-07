@@ -14,43 +14,36 @@
             </section>
         <section class="recent-item">
             <h1>Events</h1>
-            <section class="calender">
-                <section class="calender-image">
-                    <em>15</em>
-                    <img src="<?php bloginfo('template_directory'); ?>/img/calendar.png" width="65" height="55" alt="" title="" />
-                </section>
-                <section class="calender-content">
-                    <p>Initiatie bomen planten <br/><strong>25 mei om 14:00</strong></p>
-                </section>
-            </section>
-            <section class="calender">
-                <section class="calender-image">
-                    <em>15</em>
-                    <img src="<?php bloginfo('template_directory'); ?>/img/calendar.png" width="65" height="55" alt="" title="" />
-                </section>
-                <section class="calender-content">
-                    <p>Initiatie bomen planten <br/><strong>25 mei om 14:00</strong></p>
-                </section>
-            </section>
-            <section class="calender">
-                <section class="calender-image">
-                    <em>15</em>
-                    <img src="<?php bloginfo('template_directory'); ?>/img/calendar.png" width="65" height="55" alt="" title="" />
-                </section>
-                <section class="calender-content">
-                    <p>Initiatie bomen planten <br/><strong>25 mei om 14:00</strong></p>
-                </section>
-            </section><br/><br/>
+            <?php
+                    $my_query = new WP_Query(array('post_type' => 'events', 'posts_per_page' => 3));
+                    while($my_query->have_posts()) : $my_query->the_post();
+                        $meta = get_post_meta($post->ID);
+                        $eventTime = $meta['_eventTime'][0];
+                        $eventEndTime = $meta['_eventEndTime'][0];
+                        $day = explode("/", $eventTime)[1];
+            ?>
+                <a href="<?php the_permalink(); ?>">
+                    <section class="calender">
+                        <section class="calender-image">
+                            <em><?php echo $day; ?></em>
+                            <img src="<?php bloginfo('template_directory'); ?>/img/calendar.png" width="65" height="55" alt="" title="" />
+                        </section>
+                        <section class="calender-content">
+                            <p><?php the_title(); ?> <br/><strong><?php echo $eventTime . " - " . $eventEndTime; ?></strong></p>
+                        </section>
+                    </section>
+                </a>
+            <?php
+                endwhile;
+            ?>
+            <br/><br/>
             <a href="<?php echo get_site_url(); ?>/events" class="button">Events &#62;</a>
         </section>
     </section>
-
     <section class="clear"></section>
-
     <section class="home-title">
         <h1>Artikels</h1>
     </section>
-
     <section class="recent-artikel">
         <section class="artikel-side">
             <h1></h1><p></p>
@@ -70,37 +63,25 @@
 	    	</section>
 	    </section>
 	</section>
-
     <script>
-
         var length = document.getElementsByClassName('artikel-item').length;
         var data = 
         [
+            <?php
+                $my_query = new WP_Query(array('post_type' => 'post', 'posts_per_page' => 4));
+                while($my_query->have_posts()) : $my_query->the_post();
+            ?>
             {
-                "titel": "Titel 1",
-                "info": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua",
+                "titel": "<?php the_title(); ?>",
+                "info": "<?php echo excerpt(40); ?>",
                 "image": "/img/artikel-example1.png",
-                "url": "http//www.google.com"
+                "url": "<?php the_permalink(); ?>"
             },
-            {
-                "titel": "Titel 2",
-                "info": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore",
-                "image": "/img/artikel-example2.png",
-                "url": "http//www.google.com"
-            },
-            {
-                "titel": "Titel 3",
-                "info": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut",
-                "image": "/img/artikel-example3.png",
-                "url": "http//www.google.com"
-            },
-            {
-                "titel": "Titel 4",
-                "info": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor",
-                "image": "/img/artikel-example4.png",
-                "url": "http//www.google.com"
-            }
-        ]
+            <?php
+                endwhile;
+            ?>
+            {"fix": "fix"}
+        ];
 
         parseData(data);
 
@@ -116,7 +97,7 @@
 
         function parseData(data) 
         {
-            for(var i=0;i<data.length;i++) 
+            for(var i=0;i<(data.length)-1;i++) 
             {
                 var e = document.getElementsByClassName('artikel-item')[i];
                 e.getElementsByTagName('h1')[0].innerHTML = data[i].titel;
@@ -153,88 +134,51 @@
         //fancy slider by koen van crombrugge
 
     </script>
-
     <section class="home-title">
         <h1>Projecten</h1>
     </section>
-
     <section class="recent-projects">
         <div id="recent-projects-slider">
-            <div class="item fade">
-                <div class="overlay">
-                    <h1>Vlindertuin in de bosstraat</h1>
-                </div>
-                <img src="<?php bloginfo('template_directory'); ?>/img/owl1.jpg" alt="recent-project">
-            </div>
-           <div class="item fade">
-                <div class="overlay">
-                    <h1>Vlindertuin in de bosstraat</h1>
-                </div>
-                <img src="<?php bloginfo('template_directory'); ?>/img/owl1.jpg" alt="recent-project">
-            </div>
-            <div class="item fade">
-                <div class="overlay">
-                    <h1>Vlindertuin in de bosstraat</h1>
-                </div>
-                <img src="<?php bloginfo('template_directory'); ?>/img/owl1.jpg" alt="recent-project">
-            </div>
-           	<div class="item fade">
-                <div class="overlay">
-                    <h1>Vlindertuin in de bosstraat</h1>
-                </div>
-                <img src="<?php bloginfo('template_directory'); ?>/img/owl1.jpg" alt="recent-project">
-            </div>
-            <div class="item fade">
-                <div class="overlay">
-                    <h1>Vlindertuin in de bosstraat</h1>
-                </div>
-                <img src="<?php bloginfo('template_directory'); ?>/img/owl1.jpg" alt="recent-project">
-            </div>
-            <div class="item fade">
-                <div class="overlay">
-                    <h1>Vlindertuin in de bosstraat</h1>
-                </div>
-                <img src="<?php bloginfo('template_directory'); ?>/img/owl1.jpg" alt="recent-project">
-            </div>
-            <div class="item fade">
-                <div class="overlay">
-                    <h1>Vlindertuin in de bosstraat</h1>
-                </div>
-                <img src="<?php bloginfo('template_directory'); ?>/img/owl1.jpg" alt="recent-project">
-            </div>
+            <?php
+                $my_query = new WP_Query(array('post_type' => 'projecten', 'posts_per_page' => 10));
+                while($my_query->have_posts()) : $my_query->the_post();
+            ?>
+                <a href="<?php the_permalink(); ?>">
+                    <div class="item fade">
+                        <div class="overlay">
+                            <h1><?php the_title(); ?></h1>
+                        </div>
+                        <img src="<?php bloginfo('template_directory'); ?>/img/owl1.jpg" alt="recent-project">
+                    </div>
+                </a>
+            <?php
+                endwhile;
+            ?>
         </div>        
     </section>
-
     <section class="home-title">
         <h1>Zoekertjes</h1>
     </section>
-
     <section class="recent-zoekertjes">
-        <section class="zoekertje-item">
-            <h3>Bosmaaier</h3>
-            <p>Bosmaaier te leen gedurende 2 weken tijdens mijn verlof. Werkt op benzine.</p>
-           <div>
-                <p>Locatie: wevelgem</p>
-                <a href="#">Bekijk</a>
-            </div>
-        </section>
-        <section class="zoekertje-item">
-            <h3>Bosmaaier</h3>
-            <p>Bosmaaier te leen gedurende 2 weken tijdens mijn verlof. Werkt op benzine.</p>
-            <div>
-                <p>Locatie: wevelgem</p>
-                <a href="#">Bekijk</a>
-            </div>
-        </section>
-        <section class="zoekertje-item">
-            <h3>Bosmaaier</h3>
-            <p>Bosmaaier te leen gedurende 2 weken tijdens mijn verlof. Werkt op benzine.</p><br/>
-            <div>
-                <p>Locatie: wevelgem</p>
-                <a href="#">Bekijk</a>
-            </div>
-        </section>
+        <?php
+            $my_query = new WP_Query(array('post_type' => 'zoekertjes', 'posts_per_page' => 3));
+
+            while($my_query->have_posts()) : $my_query->the_post();
+                $meta = get_post_meta($post->ID);
+                $adLocation = $meta['_adLocation'][0];
+                $adPrice = $meta['_adPrice'][0];
+        ?>
+            <section class="zoekertje-item">
+                <h3><?php the_title(); ?></h3>
+                <p><?php echo excerpt(20); ?></p>
+                <div>
+                    <p>Locatie: <?php echo $adLocation; ?></p>
+                    <a href="<?php the_permalink(); ?>">Bekijk</a>
+                </div>
+            </section>
+        <?php
+            endwhile;
+        ?>
         <section class="clear"></section>
     </section>
-
 <?php get_footer(); ?>
