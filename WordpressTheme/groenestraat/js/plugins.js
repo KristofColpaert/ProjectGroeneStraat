@@ -228,4 +228,67 @@ $(document).ready(function()
 	        }
 	    });
 	}
+
+	/*
+		Accept articles in project
+	*/
+
+	$(document).on('click', '.projectArticleSubmit', function(e)
+	{
+		var targetId = e.target.id;
+	    var data = $('#' + targetId).attr('data');
+	    processArticle(data, 'add');
+	});
+
+	$(document).on('click', '.projectArticleDelete', function(e)
+	{
+		var targetId = e.target.id;
+	    var data = $('#' + targetId).attr('data');
+	    processArticle(data, 'delete');
+	});
+
+	checkNumberOfArticles();
+
+	function processArticle(tempArticleId, tempArticleAction)
+	{
+		jQuery.ajax(
+	    {
+	    	url : plugin.ajax_url,
+	    	type : 'post',
+	    	data : 
+	    	{
+	    		action : 'add_project_article',
+	    		articleId : tempArticleId,
+	    		articleAction : tempArticleAction
+	    	},
+	    	success : function(response)
+	    	{
+	    		$("#projectArticleContainer" + tempArticleId).animate(
+	    		{
+				    height: 'toggle'
+				}, 500, function() 
+				{
+					$("#projectArticleContainer" + tempArticleId).remove();
+					checkNumberOfArticles();
+				});
+	    	}
+	    });
+	}
+
+	function checkNumberOfArticles()
+	{
+		var number = $("#projectArticleMainContainer > article").length;
+
+		if(number == 0)
+		{
+			var data = '<p style="opacity:0">Alle artikels werden behandeld.</p>';
+			$("#projectArticleMainContainer").append(data);
+
+			$("#projectArticleMainContainer p").animate(
+			{
+				opacity: '100'
+			}, 5000, function()
+			{});
+		}
+	}
 });
