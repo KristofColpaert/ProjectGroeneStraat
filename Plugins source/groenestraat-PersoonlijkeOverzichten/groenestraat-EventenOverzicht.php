@@ -20,7 +20,7 @@
 
 	function prowp_persoonlijkeEventen_install()
 	{
-		//Persoonlijke overzicht van projecten
+		//Persoonlijke overzicht van events
 		makePersEventenShortcode('Persoonlijke events','[persoonlijke_events]','persoonlijke events','publish','page','closed');
 	}
 
@@ -65,9 +65,21 @@ function prowpt_persoonlijkeEventenOverzicht()
 		{
 			$eventAdminId = $event->post_author;
 			$title = $event->post_title;
+			$omschrijving = $event->post_content;
 
-			print '<h1>' . $title . '</h1>';
-			print '<a href="'.site_url().'/bewerk-event?event='. $eventId .'">Bewerk event</a>';
+			$eventTime = get_post_meta($event->ID, "_eventTime")[0];
+			$eventEndTime = get_post_meta($event->ID, "_eventEndTime")[0];
+			$eventLocation = get_post_meta($event->ID, "_eventLocation")[0];
+
+			if(!empty($title) && !empty($omschrijving) && !empty($eventTime) && !empty($eventEndTime) && !empty($eventLocation))
+			{
+				print '<h1>' . $title . '</h1>';
+				print '<strong>Startdatum: </strong> ' . $eventTime . '<br />';
+				print '<strong>Einddatum: </strong> ' . $eventEndTime . '<br />';;
+				print '<strong>Locatie: </strong> ' . $eventLocation . '<br />';;
+				print '<strong>Omschrijving: </strong><p>' . $omschrijving . '</p>';
+				print '<a href="'.site_url().'/bewerk-event?event='. $event->ID .'">Bewerk event</a>';
+			}
 		}
 
 	}

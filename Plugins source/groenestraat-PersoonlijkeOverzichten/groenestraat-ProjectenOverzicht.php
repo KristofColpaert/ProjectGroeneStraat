@@ -81,7 +81,7 @@ function prowpt_persoonlijkeProjectenOverzicht()
 			$city = get_post_meta($project->ID, "_projectCity")[0];
 			$zipcode = get_post_meta($project->ID, "_projectZipcode")[0];
 
-			if(!empty($street) && !empty($city) && !empty($zipcode))
+			if(!empty($title) && !empty($omschrijving) && !empty($street) && !empty($city) && !empty($zipcode))
 			{
 				print '<h1>' . $title . '</h1>';
 				print '<strong>Street: </strong> ' . $street . '<br />';
@@ -90,7 +90,7 @@ function prowpt_persoonlijkeProjectenOverzicht()
 				print '<strong>Omschrijving: </strong><p>' . $omschrijving . '</p>';
 				if($userId == $projectAdminId)
 				{
-					print '<a href="'.site_url().'/bewerk-project?project='. $projectId .'">Bewerk project</a>';
+					print '<a href="'.site_url().'/bewerk-project?project='. $project->ID .'">Bewerk project</a>';
 				}
 			}
 

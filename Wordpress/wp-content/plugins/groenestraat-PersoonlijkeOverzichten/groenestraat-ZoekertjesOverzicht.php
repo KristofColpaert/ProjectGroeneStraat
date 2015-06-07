@@ -60,10 +60,23 @@ function prowpt_persoonlijkeZoekertjesOverzicht()
 
 		foreach($zoekertjes as $zoekertje)
 		{
-			$title = $zoekertje->post_title;
+			$zoekertjeAdminId = $zoekertje->post_author;
 
-			print '<h1>' . $title . '</h1>';
-			print '<a href="'.site_url().'/bewerk-zoekertje?zoekertje='. $zoekertjesId .'">Bewerk zoekertje</a>';
+			$title = $zoekertje->post_title;
+			$omschrijving = $zoekertje->post_content;
+
+			$adPrice = get_post_meta($zoekertje->ID, "_adPrice")[0];
+			$adLocation = get_post_meta($zoekertje->ID, "_adLocation")[0];
+
+			if(!empty($title) && !empty($omschrijving) && !empty($adPrice) && !empty($adLocation))
+			{
+				print '<h1>' . $title . '</h1>';
+				print '<strong>Prijs: </strong> ' . $adPrice . '<br />';
+				print '<strong>Locatie: </strong> ' . $adLocation . '<br />';;
+				print '<strong>Omschrijving: </strong><p>' . $omschrijving . '</p>';
+
+				print '<a href="'.site_url().'/bewerk-zoekertje?zoekertje='. $zoekertje->ID .'">Bewerk zoekertje</a>';
+			}
 		}
 
 	}
