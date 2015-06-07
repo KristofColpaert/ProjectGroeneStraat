@@ -44,7 +44,7 @@ $args = array(
 
 
 <script>
-    $("#user_login").attr('placeholder','Gebruikersnaam');
+    $("#user_login").attr('placeholder','Emailadres');
      $("#user_pass").attr('placeholder','Wachtwoord');
     $("#rememberme").addClass('js-switch');
     var elems = Array.prototype.slice.call(document.querySelectorAll('.js-switch'));

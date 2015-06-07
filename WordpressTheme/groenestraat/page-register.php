@@ -18,7 +18,6 @@ get_header();
 <form name="registerform" id="registerform" action="<?php echo get_site_url(); ?>/wp-login.php?action=register" method="post" novalidate="novalidate">
 	   <input class="textbox" type="text" name="first_name" id="first_name" class="input" value="" placeholder="Voornaam"/><br/>
         <input class="textbox" type="text" name="last_name" id="last_name" class="input" value="" placeholder="Achternaam"/><br/>
-        <input class="textbox" type="text" name="user_login" id="user_login" class="input" value="" size="20" placeholder="Gebruikersnaam"/><br/>
         <input class="textbox" type="text" name="user_email" id="user_email" class="input" value="" size="25" placeholder="Email"/><br/>
         <input class="textbox" type="password" autocomplete="off" name="pass1" id="pass1" placeholder="Wachtwoord"/><br/>
         <input class="textbox" type="password" autocomplete="off" name="pass2" id="pass2" placeholder="Herhaal Wachtwoord"/><br/>
