@@ -16,7 +16,7 @@
 
 	function show_edit_event_form()
 	{
-		if(is_user_logged_in() && isset($_GET['event']))
+		if(is_user_logged_in() && isset($_GET['event']) && !isset($_POST['eventEdit']))
 		{
 			$current_user = wp_get_current_user();
 			$event = get_post($_GET['event'], OBJECT);
@@ -24,7 +24,7 @@
 			if($event->post_type != 'events')
 			{
 				?>
-					<p class="error-message">Dit zoekertje bestaat niet, of u hebt geen toegang tot de gevraagde pagina. Ga terug naar <a href="<?php echo home_url(); ?>">Home</a>.</p>
+					<p class="error-message">Dit event bestaat niet, of u hebt geen toegang tot de gevraagde pagina. Ga terug naar <a href="<?php echo home_url(); ?>">Home</a>.</p>
 				<?php
 				return;
 			}
@@ -82,7 +82,10 @@
 										'post_type' => 'projecten',
 										'orderby' => 'title',
 										'order' => 'ASC',
-										'numberposts' => -1
+										'numberposts' => -1,
+										'meta_key' => '_subscriberId',
+										'meta_value' => $current_user->ID,
+										'meta_operator' => '='
 									)
 								);
 
@@ -128,6 +131,9 @@
 			}
 		}
 
+		else if(isset($_POST['eventEdit']))
+		{}
+
 		else
 		{
 			?>
@@ -142,7 +148,6 @@
 		{
 			if(!empty($_POST['eventTitle']) && 
 				!empty($_POST['eventDescription']) &&
-				!empty($_POST['parentProjectId']) &&
 				!empty($_POST['eventTime']) &&
 				!empty($_POST['eventLocation']) &&
 				!empty($_POST['eventEndTime']) &&
@@ -175,6 +180,12 @@
 					update_post_meta($postId, '_eventEndTime', $eventEndTime);
 					update_post_meta($postId, '_eventLocation', $eventLocation);
 					update_post_meta($postId, '_parentProjectId', $parentProjectId);
+
+					if($parentProjectId != 0)
+					{
+						$tempCategory = get_category_by_slug('projectevents');
+						wp_set_post_categories($postId, array($tempCategory->term_id), true);
+					}
                     
                     if($_FILES['eventFeaturedImage']['size'] != 0)
 					{
@@ -193,7 +204,7 @@
 					<?php
 
 					echo '<META HTTP-EQUIV="Refresh" Content="0; URL=' . esc_url(get_permalink($postId)) . '">'; 
-					exit;				
+					return;		
 				}
 
 				else

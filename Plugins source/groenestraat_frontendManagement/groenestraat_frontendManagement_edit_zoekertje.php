@@ -16,7 +16,7 @@
 
 	function show_edit_zoekertje_form()
 	{
-		if(is_user_logged_in() && isset($_GET['zoekertje']))
+		if(is_user_logged_in() && isset($_GET['zoekertje']) && !isset($_POST['zoekertjeEdit']))
 		{
 			$current_user = wp_get_current_user();
 			$zoekertje = get_post($_GET['zoekertje'], OBJECT);
@@ -24,7 +24,7 @@
 			if($zoekertje->post_type != 'zoekertjes')
 			{
 				?>
-					<p class="error-message">Dit event bestaat niet, of u hebt geen toegang tot de gevraagde pagina. Ga terug naar <a href="<?php echo home_url(); ?>">Home</a>.</p>
+					<p class="error-message">Dit zoekertje bestaat niet, of u hebt geen toegang tot de gevraagde pagina. Ga terug naar <a href="<?php echo home_url(); ?>">Home</a>.</p>
 				<?php
 				return;
 			}
@@ -59,7 +59,10 @@
 										'post_type' => 'projecten',
 										'orderby' => 'title',
 										'order' => 'ASC',
-										'numberposts' => -1
+										'numberposts' => -1,
+										'meta_key' => '_subscriberId',
+										'meta_value' => $current_user->ID,
+										'meta_operator' => '='
 									)
 								);
 
@@ -67,7 +70,7 @@
 								{
 									foreach($parents as $parent)
 									{
-											printf('<option value="%s"%s>%s</option>', esc_attr($parent->ID), selected($parent->ID, $parentProjectId, false), esc_html($parent->post_title));	
+										printf('<option value="%s"%s>%s</option>', esc_attr($parent->ID), selected($parent->ID, $parentProjectId, false), esc_html($parent->post_title));	
 									}
 								}
 							?>
@@ -100,6 +103,9 @@
 				<?php
 			}
 		}
+
+		else if(isset($_POST['zoekertjeEdit']))
+		{}
 
 		else
 		{
@@ -141,11 +147,16 @@
 
 					$postId = wp_update_post($args);
 
-
 					update_post_meta($postId, '_adTitle', $adTitle);
 					update_post_meta($postId, '_adPrice', $adPrice);
 					update_post_meta($postId, '_adLocation', $adLocation);
 					update_post_meta($postId, '_parentProjectId', $parentProjectId);
+
+					if($parentProjectId != 0)
+					{
+						$tempCategory = get_category_by_slug('projectzoekertjes');
+						wp_set_post_categories($postId, array($tempCategory->term_id), true);
+					}
 
 					if($_FILES['adFeaturedImage']['size'] != 0)
 					{
@@ -160,11 +171,11 @@
 	                    <script>
 	                        $('.title').remove();
 	                    </script>
-	                    <h2 class="normalize-text center">Uw event wordt bewerkt</h2>
+	                    <h2 class="normalize-text center">Uw zoekertje wordt bewerkt</h2>
 					<?php
 
 					echo '<META HTTP-EQUIV="Refresh" Content="0; URL=' . esc_url(get_permalink($postId)) . '">'; 
-					exit;
+					return;
 				}
 
 				else

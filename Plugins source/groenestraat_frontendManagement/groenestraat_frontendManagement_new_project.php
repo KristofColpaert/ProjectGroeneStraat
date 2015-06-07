@@ -16,7 +16,7 @@
 
 	function show_new_project_form()
 	{
-		if(is_user_logged_in() && current_user_can('publish_posts'))
+		if(is_user_logged_in() && current_user_can('publish_posts') && !isset($_POST['projectPublish']))
 		{
 			?>
 				<form class="createForm" action="<?php $_SERVER['REQUEST_URI']; ?>" method="POST" enctype="multipart/form-data">
@@ -49,6 +49,9 @@
 			<?php
 		}
 
+		else if(isset($_POST['projectPublish']))
+		{}
+
 		else 
 		{
 			?>
@@ -61,66 +64,74 @@
 	{
 		if(isset($_POST['projectPublish']))
 		{
-            if(!empty($_POST['projectTitle'])&&!empty($_POST['projectDescription'])&&!empty($_POST['projectStreet'])&&!empty($_POST['projectCity'])&&!empty($_POST['projectZipcode'])){
-			$projectTitle = $_POST['projectTitle'];
-			$projectDescription = $_POST['projectDescription'];
-			$projectStreet = $_POST['projectStreet'];
-			$projectCity = $_POST['projectCity'];
-			$projectZipcode = $_POST['projectZipcode'];
+            if(!empty($_POST['projectTitle']) && 
+            	!empty($_POST['projectDescription']) &&
+            	!empty($_POST['projectStreet'])&& 
+            	$_FILES['projectFeaturedImage']['size'] > 0 &&
+            	!empty($_POST['projectCity'])&& 
+            	!empty($_POST['projectZipcode']))
+            {
+				$projectTitle = $_POST['projectTitle'];
+				$projectDescription = $_POST['projectDescription'];
+				$projectStreet = $_POST['projectStreet'];
+				$projectCity = $_POST['projectCity'];
+				$projectZipcode = $_POST['projectZipcode'];
 
-			if(null == get_page_by_title($projectTitle))
-			{
-				$slug = str_replace(" ", "-", $projectTitle);
-				$current_user = wp_get_current_user();
-
-				$args = array(
-					'comment_status' => 'closed',
-					'ping_status' => 'closed',
-					'post_author' => $current_user->ID,
-					'post_name' => $slug,
-					'post_title' => $projectTitle,
-					'post_content' => $projectDescription,
-					'post_status' => 'publish',
-					'post_type' => 'projecten'
-				);
-
-				$postId = wp_insert_post($args, false);
-
-				add_post_meta($postId, '_projectStreet', $projectStreet);
-				add_post_meta($postId, '_projectCity', $projectCity);
-				add_post_meta($postId, '_projectZipcode', $projectZipcode);
-
-				if($_FILES)
+				if(null == get_page_by_title($projectTitle))
 				{
-					foreach ($_FILES as $file => $array) 
-					{
-    					$newupload = insert_featured_image($file, $postId);
-				    }
-				}
-				?>
-					<img class="center" src="<?php echo get_template_directory_uri() ?>/img/ball.gif" />
-                    <script>
-                        $('.title').remove();
-                    </script>
-                    <h2 class="normalize-text center">Uw project wordt aangemaakt</h2>
-				<?php
-				
-				echo '<META HTTP-EQUIV="Refresh" Content="0; URL=' . esc_url(get_permalink($postId)) . '">'; 
-				exit;				
-			}
+					$slug = str_replace(" ", "-", $projectTitle);
+					$current_user = wp_get_current_user();
 
-			else
-			{
-				?>
-					<p class="error-message">Helaas, er bestaat reeds een project met deze titel.</p>
-				<?php
-			}
-            }
-            else{
-                ?>
+					$args = array(
+						'comment_status' => 'closed',
+						'ping_status' => 'closed',
+						'post_author' => $current_user->ID,
+						'post_name' => $slug,
+						'post_title' => $projectTitle,
+						'post_content' => $projectDescription,
+						'post_status' => 'publish',
+						'post_type' => 'projecten'
+					);
+
+					$postId = wp_insert_post($args, false);
+
+					add_post_meta($postId, '_projectStreet', $projectStreet);
+					add_post_meta($postId, '_projectCity', $projectCity);
+					add_post_meta($postId, '_projectZipcode', $projectZipcode);
+
+					if($_FILES['projectFeaturedImage']['size'] > 0)
+					{
+						foreach ($_FILES as $file => $array) 
+						{
+	    					$newupload = insert_featured_image($file, $postId);
+					    }
+					}
+					?>
+						<img class="center" src="<?php echo get_template_directory_uri() ?>/img/ball.gif" />
+	                    <script>
+	                        $('.title').remove();
+	                    </script>
+	                    <h2 class="normalize-text center">Uw project wordt aangemaakt</h2>
+					<?php
+					
+					echo '<META HTTP-EQUIV="Refresh" Content="0; URL=' . esc_url(get_permalink($postId)) . '">'; 
+					return;			
+				}
+
+				else
+				{
+					?>
+						<p class="error-message">Helaas, er bestaat reeds een project met deze titel.</p>
+					<?php
+				}
+	        }
+	        
+	        else
+	        {
+	            ?>
 					<p class="error-message">Gelieve alle gegevens correct in te voeren.</p>
 				<?php
-            }
+	        }
 		}
 	}
 ?>

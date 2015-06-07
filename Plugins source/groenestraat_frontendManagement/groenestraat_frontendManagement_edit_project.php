@@ -16,7 +16,7 @@
 
 	function show_edit_project_form()
 	{
-		if(is_user_logged_in() && isset($_GET['project']))
+		if(is_user_logged_in() && isset($_GET['project']) && !isset($_POST['projectEdit']))
 		{
 			$current_user = wp_get_current_user();
 			$project = get_post($_GET['project'], OBJECT);
@@ -77,6 +77,9 @@
 			}
 		}
 
+		else if(isset($_POST['projectEdit']))
+		{}
+
 		else
 		{
 			?>
@@ -89,55 +92,71 @@
 	{
 		if(isset($_POST['projectEdit']))
 		{
-			$projectId = $_POST['projectId'];
-			$projectTitle = $_POST['projectTitle'];
-			$projectDescription = $_POST['projectDescription'];
-			$projectStreet = $_POST['projectStreet'];
-			$projectCity = $_POST['projectCity'];
-			$projectZipcode = $_POST['projectZipcode'];
-
-			if(null == get_page_by_title($projectTitle))
+			if(!empty($_POST['projectId']) &&
+				!empty($_POST['projectTitle']) &&
+				!empty($_POST['projectDescription']) &&
+				!empty($_POST['projectStreet']) &&
+				!empty($_POST['projectCity']) &&
+				!empty($_POST['projectZipcode'])
+			)
 			{
-				$slug = str_replace(" ", "-", $projectTitle);
-				$current_user = wp_get_current_user();
+				$projectId = $_POST['projectId'];
+				$projectTitle = $_POST['projectTitle'];
+				$projectDescription = $_POST['projectDescription'];
+				$projectStreet = $_POST['projectStreet'];
+				$projectCity = $_POST['projectCity'];
+				$projectZipcode = $_POST['projectZipcode'];
 
-				$args = array(
-					'ID' => $projectId,
-					'post_name' => $slug,
-					'post_title' => $projectTitle,
-					'post_content' => $projectDescription
-				);
-
-				$postId = wp_update_post($args);
-
-				update_post_meta($postId, '_projectStreet', $projectStreet);
-				update_post_meta($postId, '_projectCity', $projectCity);
-				update_post_meta($postId, '_projectZipcode', $projectZipcode);
-
-				if($_FILES['projectFeaturedImage']['size'] != 0)
+				if(null == get_page_by_title($projectTitle))
 				{
-					foreach($_FILES as $file => $array)
-					{
-                            $newupload = insert_featured_image($file, $postId); 						
-					}
-				}
-                
-				?>
-					<img class="center" src="<?php echo get_template_directory_uri() ?>/img/ball.gif" />
-	                <script>
-	                    $('.title').remove();
-	                </script>
-	                <h2 class="normalize-text center">Uw zoekertje wordt bewerkt</h2>
-				<?php
+					$slug = str_replace(" ", "-", $projectTitle);
+					$current_user = wp_get_current_user();
 
-				echo '<META HTTP-EQUIV="Refresh" Content="0; URL=' . esc_url(get_permalink($postId)) . '">'; 
-				exit;	
+					$args = array(
+						'ID' => $projectId,
+						'post_name' => $slug,
+						'post_title' => $projectTitle,
+						'post_content' => $projectDescription
+					);
+
+					$postId = wp_update_post($args);
+
+					update_post_meta($postId, '_projectStreet', $projectStreet);
+					update_post_meta($postId, '_projectCity', $projectCity);
+					update_post_meta($postId, '_projectZipcode', $projectZipcode);
+
+					if($_FILES['projectFeaturedImage']['size'] != 0)
+					{
+						foreach($_FILES as $file => $array)
+						{
+	                            $newupload = insert_featured_image($file, $postId); 						
+						}
+					}
+	                
+					?>
+						<img class="center" src="<?php echo get_template_directory_uri() ?>/img/ball.gif" />
+		                <script>
+		                    $('.title').remove();
+		                </script>
+		                <h2 class="normalize-text center">Uw zoekertje wordt bewerkt</h2>
+					<?php
+
+					echo '<META HTTP-EQUIV="Refresh" Content="0; URL=' . esc_url(get_permalink($postId)) . '">'; 
+					return;	
+				}
+
+				else
+				{
+					?>
+						<p class="error-message">Helaas, er bestaat reeds een project met deze titel.</p>
+					<?php
+				}
 			}
 
 			else
 			{
 				?>
-					<p class="error-message">Helaas, er bestaat reeds een project met deze titel.</p>
+					<p class="error-message">Gelieve alle gegevens correct in te voeren.</p>
 				<?php
 			}
 		}

@@ -19,6 +19,43 @@
 	function prowp_projecten_install()
 	{
 		wp_create_category('Projectartikels');
+		initialize_projecten_capabilities();
+	}
+
+	function initialize_projecten_capabilities()
+	{
+		$roleAdministrator = get_role('administrator');
+		$roleAuthor = get_role('author');
+		$roleContributor = get_role('contributor');
+
+		$roleAdministrator->add_cap('publish_projecten');
+		$roleAdministrator->add_cap('edit_projecten');
+		$roleAdministrator->add_cap('edit_others_projecten');
+		$roleAdministrator->add_cap('delete_projecten');
+		$roleAdministrator->add_cap('delete_others_projecten');
+		$roleAdministrator->add_cap('read_private_projecten');
+		$roleAdministrator->add_cap('edit_project');
+		$roleAdministrator->add_cap('delete_project');
+		$roleAdministrator->add_cap('read_project');
+		$roleAdministrator->add_cap('edit_published_projecten');
+		$roleAdministrator->add_cap('delete_published_projecten');
+
+		$roleAuthor->add_cap('publish_projecten');
+		$roleAuthor->add_cap('edit_project');
+		$roleAuthor->add_cap('edit_projecten');
+		$roleAuthor->add_cap('edit_published_projecten');
+		$roleAuthor->add_cap('delete_projecten');
+		$roleAuthor->add_cap('delete_published_projecten');
+		$roleAuthor->add_cap('read_project');
+
+		$roleContributor->add_cap('publish_projecten');
+		$roleContributor->add_cap('edit_project');
+		$roleContributor->add_cap('edit_projecten');
+		$roleContributor->add_cap('edit_published_projecten');
+		$roleContributor->add_cap('delete_projecten');
+		$roleContributor->add_cap('delete_published_projecten');
+		$roleContributor->add_cap('read_project');
+		$roleContributor->add_cap('upload_files');
 	}
 	
 	/*
@@ -58,6 +95,19 @@
 			'menu_icon' => 'dashicons-carrot',
 			'menu_position' => 6,
 			'capability_type' => 'post',
+			'capabilities' => array(
+				'publish_posts' => 'publish_projecten',
+				'edit_posts' => 'edit_projecten',
+				'edit_others_posts' => 'edit_others_projecten',
+				'delete_posts' => 'delete_projecten',
+				'delete_others_posts' => 'delete_others_projecten',
+				'read_private_posts' => 'read_private_projecten',
+				'edit_post' => 'edit_project',
+				'delete_post' => 'delete_project',
+				'read_post' => 'read_project',
+				'edit_published_posts' => 'edit_published_projecten',
+				'delete_published_posts' => 'delete_published_projecten'
+			),
 			'register_meta_box_cb' => 'add_projecten_metaboxes'
 		);
 		

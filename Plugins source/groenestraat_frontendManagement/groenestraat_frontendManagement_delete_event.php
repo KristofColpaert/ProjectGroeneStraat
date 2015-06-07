@@ -13,7 +13,7 @@
 
 	function show_delete_event_form()
 	{
-		if(isset($_GET['event']) && !isset($_POST['eventDelete']))
+		if(is_user_logged_in() && isset($_GET['event']) && !isset($_POST['eventDelete']))
 		{
 			$current_user = wp_get_current_user();
 			$event = get_post($_GET['event'], OBJECT);
@@ -33,15 +33,18 @@
 			else
 			{
 				?>
-					<p>Dit event bestaat niet, of u hebt geen toegang tot de gevraagde pagina. Ga terug naar <a href="<?php echo home_url(); ?>">Home</a>.</p>
+					<p class="error-message">Dit event bestaat niet, of u hebt geen toegang tot de gevraagde pagina. Ga terug naar <a href="<?php echo home_url(); ?>">Home</a>.</p>
 				<?php
 			}
 		}
 
+		else if(isset($_POST['eventDelete']))
+		{}
+
 		else
 		{
 			?>
-				<p>Dit event bestaat niet, of u hebt geen toegang tot de gevraagde pagina. Ga terug naar <a href="<?php echo home_url(); ?>">Home</a>.</p>
+				<p class="error-message">Dit event bestaat niet, of u hebt geen toegang tot de gevraagde pagina. Ga terug naar <a href="<?php echo home_url(); ?>">Home</a>.</p>
 			<?php
 		}
 	}
@@ -61,10 +64,21 @@
 				delete_user_meta($user->ID, '_eventCalendar', $eventId);
 			} 
 
+			delete_post_meta($eventId, '_thumbnail_id');
+			delete_post_meta($eventId, '_eventTime');
+			delete_post_meta($eventId, '_eventEndTime');
+			delete_post_meta($eventId, '_eventLocation');
+
 			?>
-				<p>Het event werd succesvol verwijderd. Ga terug naar <a href="<?php echo home_url(); ?>">Home</a>.</p>
+				<img class="center" src="<?php echo get_template_directory_uri() ?>/img/ball.gif" />
+	            <script>
+	                $('.title').remove();
+	            </script>
+	            <h2 class="normalize-text center">Uw event wordt verwijderd</h2>
 			<?php
-				exit;
+
+			echo '<META HTTP-EQUIV="Refresh" Content="0; URL=' . esc_url(home_url()) . '">'; 
+			return;
 		}
 	}
 ?>

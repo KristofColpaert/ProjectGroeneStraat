@@ -19,6 +19,43 @@
 	function prowp_zoekertjes_install()
 	{
 		wp_create_category('Projectzoekertjes');
+		initialize_zoekertjes_capabilities();
+	}
+
+	function initialize_zoekertjes_capabilities()
+	{
+		$roleAdministrator = get_role('administrator');
+		$roleAuthor = get_role('author');
+		$roleContributor = get_role('contributor');
+
+		$roleAdministrator->add_cap('publish_zoekertjes');
+		$roleAdministrator->add_cap('edit_zoekertjes');
+		$roleAdministrator->add_cap('edit_others_zoekertjes');
+		$roleAdministrator->add_cap('delete_zoekertjes');
+		$roleAdministrator->add_cap('delete_others_zoekertjes');
+		$roleAdministrator->add_cap('read_private_zoekertjes');
+		$roleAdministrator->add_cap('edit_zoekertje');
+		$roleAdministrator->add_cap('delete_zoekertje');
+		$roleAdministrator->add_cap('read_zoekertje');
+		$roleAdministrator->add_cap('edit_published_zoekertjes');
+		$roleAdministrator->add_cap('delete_published_zoekertjes');
+
+		$roleAuthor->add_cap('publish_zoekertjes');
+		$roleAuthor->add_cap('edit_zoekertje');
+		$roleAuthor->add_cap('edit_zoekertjes');
+		$roleAuthor->add_cap('edit_published_zoekertjes');
+		$roleAuthor->add_cap('delete_zoekertjes');
+		$roleAuthor->add_cap('delete_published_zoekertjes');
+		$roleAuthor->add_cap('read_zoekertje');
+
+		$roleContributor->add_cap('publish_zoekertjes');
+		$roleContributor->add_cap('edit_zoekertje');
+		$roleContributor->add_cap('edit_zoekertjes');
+		$roleContributor->add_cap('edit_published_zoekertjes');
+		$roleContributor->add_cap('delete_zoekertjes');
+		$roleContributor->add_cap('delete_published_zoekertjes');
+		$roleContributor->add_cap('read_zoekertje');
+		$roleContributor->add_cap('upload_files');
 	}
 	
 	/*
@@ -60,7 +97,20 @@
 			'taxonomies' => array('category'),
 			'menu_icon' => 'dashicons-search',
 			'menu_position' => 8,
-			'capability_type' => 'post',
+			'capability_type' => 'zoekertjes',
+			'capabilities' => array(
+				'publish_posts' => 'publish_zoekertjes',
+				'edit_posts' => 'edit_zoekertjes',
+				'edit_others_posts' => 'edit_others_zoekertjes',
+				'delete_posts' => 'delete_zoekertjes',
+				'delete_others_posts' => 'delete_others_zoekertjes',
+				'read_private_posts' => 'read_private_zoekertjes',
+				'edit_post' => 'edit_zoekertje',
+				'delete_post' => 'delete_zoekertjes',
+				'read_post' => 'read_zoekertje',
+				'edit_published_posts' => 'edit_published_zoekertjes',
+				'delete_published_posts' => 'delete_published_zoekertjes'
+			),
 			'register_meta_box_cb' => 'add_zoekertjes_metaboxes'
 		);
 		
@@ -146,30 +196,32 @@
 
 	function parentproject_metaboxes_callback_zoekertjes( $object, $box ) 
 	{ 
-		echo 'hier';
+		global $post; 
+
+		$current_user = wp_get_current_user();
 		$parents = get_posts(
 			array(
 				'post_type' => 'projecten',
 				'orderby' => 'title',
 				'order' => 'ASC',
-				'numberposts' => -1
+				'numberposts' => -1,
+				'meta_key' => '_subscriberId',
+				'meta_value' => $current_user->ID,
+				'meta_operator' => '='
 			)
 		);
 
+		$postParentId = get_post_meta($post->ID, '_parentProjectId', true);
+		echo '<select name="_parentProjectId" class="widefat">';
+		echo '<option value="0">Geen Project</option>';
 		if(!empty($parents))
 		{
-			global $post; 
-
-			$postParentId = get_post_meta($post->ID, '_parentProjectId', true);
-			echo '<select name="_parentProjectId" class="widefat">';
-			echo '<option value="0">Geen Project</option>';
-
 			foreach($parents as $parent)
 			{
 				printf('<option value="%s"%s>%s</option>', esc_attr($parent->ID), selected($parent->ID, $postParentId, false), esc_html($parent->post_title));
 			}
-			echo '</select>';
 		}
+		echo '</select>';
 
    		echo '<input type="hidden" name="eventmeta_noncename" id="eventmeta_noncename" value="' . wp_create_nonce(plugin_basename(__FILE__)) . '" />';
 	}

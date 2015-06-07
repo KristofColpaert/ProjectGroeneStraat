@@ -7,16 +7,25 @@
 
 	function prowp_delete_zoekertje()
 	{
-		show_delete_zoekertje_form();
 		save_delete_zoekertje_form();
+		show_delete_zoekertje_form();
 	}
 
 	function show_delete_zoekertje_form()
 	{
-		if(isset($_GET['zoekertje']) && !isset($_POST['zoekertjeDelete']))
+		if(is_user_logged_in() && isset($_GET['zoekertje']) && !isset($_POST['zoekertjeDelete']))
 		{
 			$current_user = wp_get_current_user();
 			$zoekertje = get_post($_GET['zoekertje'], OBJECT);
+
+
+			if($zoekertje->post_type != 'zoekertjes')
+			{
+				?>
+					<p class="error-message">Dit zoekertje bestaat niet, of u hebt geen toegang tot de gevraagde pagina. Ga terug naar <a href="<?php echo home_url(); ?>">Home</a>.</p>
+				<?php
+				return;
+			}
 
 			if($zoekertje != null && ($current_user->ID == $zoekertje->zoekertje_author || current_user_can('manage_options')) && current_user_can('delete_published_posts'))
 			{
@@ -33,10 +42,13 @@
 			else
 			{
 				?>
-					<p>Dit zoekertje bestaat niet, of u hebt geen toegang tot de gevraagde pagina. Ga terug naar <a href="<?php echo home_url(); ?>">Home</a>.</p>
+					<p class="error-message">Dit zoekertje bestaat niet, of u hebt geen toegang tot de gevraagde pagina. Ga terug naar <a href="<?php echo home_url(); ?>">Home</a>.</p>
 				<?php
 			}
 		}
+
+		else if(isset($_POST['zoekertjeDelete']))
+		{}
 
 		else
 		{
@@ -55,16 +67,21 @@
 
 			wp_delete_post($zoekertjeId, false);
 
-			$users = get_users();
-			foreach($users as $user)
-			{
-				delete_user_meta($user->ID, '_eventCalendar', $eventId);
-			} 
+			delete_post_meta($zoekertjeId, '_parentProjectId');
+			delete_post_meta($zoekertjeId, '_adPrice');
+			delete_post_meta($zoekertjeId, '_adLocation');
+			delete_post_meta($zoekertjeId, '_thumbnail_id');
 
 			?>
-				<p>Het zoekertje werd succesvol verwijderd. Ga terug naar <a href="<?php echo home_url(); ?>">Home</a>.</p>
+				<img class="center" src="<?php echo get_template_directory_uri() ?>/img/ball.gif" />
+	            <script>
+	                $('.title').remove();
+	            </script>
+	            <h2 class="normalize-text center">Uw zoekertje wordt verwijderd</h2>
 			<?php
-				exit;
+
+			echo '<META HTTP-EQUIV="Refresh" Content="0; URL=' . esc_url(home_url()) . '">'; 
+			return;
 		}
 	}
 ?>

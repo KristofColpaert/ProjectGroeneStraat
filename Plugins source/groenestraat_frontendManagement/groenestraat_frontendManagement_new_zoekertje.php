@@ -42,7 +42,10 @@
 									'post_type' => 'projecten',
 									'orderby' => 'title',
 									'order' => 'ASC',
-									'numberposts' => -1
+									'numberposts' => -1,
+									'meta_key' => '_subscriberId',
+									'meta_value' => $current_user->ID,
+									'meta_operator' => '='
 								)
 							);
 
@@ -70,6 +73,9 @@
 			<?php
 		}
 
+		else if(isset($_POST['adPublish']))
+		{}
+
 		else
 		{
 			?>
@@ -84,7 +90,7 @@
 		{
 			if(!empty($_POST['adTitle']) &&
 				!empty($_POST['adDescription']) &&
-				$_FILES &&
+				$_FILES['adFeaturedImage']['size'] > 0 &&
 				!empty($_POST['adPrice']) &&
 				!empty($_POST['adLocation'])
 				)
@@ -108,7 +114,7 @@
 						'post_title' => $adTitle,
 						'post_content' => $adDescription,
 						'post_status' => 'publish',
-						'post_type' => 'zoekertjes'
+						'post_type' => 'zoekertjes',
 					);
 
 					$postId = wp_insert_post($args, false);
@@ -116,11 +122,13 @@
 					if($parentProjectId != 0)
 					{
 						add_post_meta($postId, '_parentProjectId', $parentProjectId);
+						$tempCategory = get_category_by_slug('projectzoekertjes');
+						wp_set_post_categories($postId, array($tempCategory->term_id), true);
 					}
 					add_post_meta($postId, '_adPrice', $adPrice);
 					add_post_meta($postId, '_adLocation', $adLocation);
 
-					if($_FILES)
+					if($_FILES['adFeaturedImage']['size'] > 0)
 					{
 						foreach ($_FILES as $file => $array) 
 						{
@@ -137,7 +145,7 @@
 					<?php
 
 					echo '<META HTTP-EQUIV="Refresh" Content="0; URL=' . esc_url(get_permalink($postId)) . '">'; 
-					exit;
+					return;
 				}
 
 				else
@@ -147,6 +155,7 @@
 					<?php
 				}
 			}
+			
 			else
 			{
 				?>

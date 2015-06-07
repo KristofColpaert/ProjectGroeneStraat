@@ -14,13 +14,13 @@
 		Add actions
 	*/
 
-	add_action('before_delete_post', 'prowp_delete_event_meta');
+	add_action('before_delete_post', 'prowp_delete_post_meta');
 
 	/*
 		Methods
 	*/
 
-	function prowp_delete_event_meta($postId)
+	function prowp_delete_post_meta($postId)
 	{
 		global $post_type;
 		global $post;

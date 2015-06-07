@@ -39,7 +39,7 @@
 			</script>
 		<?php
 
-		if(is_user_logged_in() && current_user_can('publish_posts'))
+		if(is_user_logged_in() && current_user_can('publish_posts') && !isset($_POST['eventPublish']))
 		{
 			?>
 				
@@ -66,7 +66,10 @@
 									'post_type' => 'projecten',
 									'orderby' => 'title',
 									'order' => 'ASC',
-									'numberposts' => -1
+									'numberposts' => -1,
+									'meta_key' => '_subscriberId',
+									'meta_value' => $current_user->ID,
+									'meta_operator' => '='
 								)
 							);
 
@@ -100,6 +103,9 @@
 			<?php
 		}
 
+		else if(isset($_POST['eventPublish']))
+		{}
+
 		else 
 		{
 			?>
@@ -115,7 +121,7 @@
 			if(!empty($_POST['eventTitle']) && 
 				!empty($_POST['eventDescription']) &&
 				!empty($_POST['eventTime']) &&
-				$_FILES &&
+				$_FILES['eventFeaturedImage']['size'] > 0 &&
 				!empty($_POST['eventLocation']) &&
 				!empty($_POST['eventEndTime'])
 				)
@@ -140,7 +146,7 @@
 						'post_title' => $eventTitle,
 						'post_content' => $eventDescription,
 						'post_status' => 'publish',
-						'post_type' => 'events'
+						'post_type' => 'events',
 					);
 
 					$postId = wp_insert_post($args, false);
@@ -148,12 +154,14 @@
 					if($parentProjectId != 0)
 					{
 						add_post_meta($postId, '_parentProjectId', $parentProjectId);
+						$tempCategory = get_category_by_slug('projectevents');
+						wp_set_post_categories($postId, array($tempCategory->term_id), true);
 					}
 					add_post_meta($postId, '_eventTime', $eventTime);
 					add_post_meta($postId, '_eventEndTime', $eventEndTime);
 					add_post_meta($postId, '_eventLocation', $eventLocation);
 
-                   	if($_FILES)
+                   	if($_FILES['eventFeaturedImage']['size'] > 0)
 					{
 						foreach ($_FILES as $file => $array) 
 						{
@@ -170,7 +178,7 @@
 					<?php
 
 					echo '<META HTTP-EQUIV="Refresh" Content="0; URL=' . esc_url(get_permalink($postId)) . '">'; 
-					exit;
+					return;
 				}
 
 				else
