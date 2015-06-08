@@ -43,7 +43,9 @@
 
 	?>
 	<section class="container">
-		<section class="single-item">
+		<div id="primary" class="content-area">
+		<main id="main" class="site-main" role="main">
+		<div class="contentwrapper">
 	<?php
 
 	while(have_posts()) : the_post();
@@ -122,8 +124,9 @@
 		<?php
 	endwhile;
 
-	?>
-		</section>
+	?>			</div>
+			</main>
+		</div>
 	</section>
 
 	<?php
