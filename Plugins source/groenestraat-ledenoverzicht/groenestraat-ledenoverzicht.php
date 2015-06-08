@@ -15,7 +15,27 @@
 	*/
 
 add_shortcode('leden_overzicht','prowpt_ledenoverzicht');
-$users = array();	
+
+register_activation_hook(__FILE__, 'prowp_ledenOverzicht_install');
+
+	function prowp_ledenOverzicht_install()
+	{
+		makeLedenOverzichtShortcode('Leden overzicht','[leden_overzicht]','leden overzicht','publish','page','closed');
+	}
+
+	function makeLedenOverzichtShortcode($title,$content,$post_name,$post_status,$post_type,$ping_status)
+	{
+		$args = array(
+			'post_title' => $title,
+			'post_content' => $content,
+			'post_name' => $post_name,
+			'post_status' => $post_status, 
+			'post_type' => $post_type,
+			'ping_status' => $ping_status
+		);
+		wp_insert_post($args);
+	}
+
 
 function prowpt_ledenoverzicht()
 {
@@ -27,7 +47,6 @@ function prowpt_ledenoverzicht()
 		 ); 
 
 		$users = get_users($args);
-		$letters = array();
 		foreach ($users as $user) 
 		{
 			//als user gelijk is als de ingelogde user;
