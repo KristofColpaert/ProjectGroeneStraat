@@ -713,8 +713,9 @@ footer
 
 .single-item
 {
+    margin:5%;
     padding:5%;
-    width:90%;
+    width:80%;
     background-color: #f8f7f7;
     min-height: 150px;
 }
@@ -855,3 +856,6 @@ footer
         width:100%;
     }
 }
+
+/* GOOGLE MAPS API */
+#map-canvas { height: 50vh; margin: 0; padding: 0;}
