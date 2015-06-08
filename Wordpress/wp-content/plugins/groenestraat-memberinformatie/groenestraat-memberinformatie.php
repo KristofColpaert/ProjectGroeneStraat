@@ -119,10 +119,13 @@
 			}
 			else
 			{
-				echo "Gelieve u aan te melden om deze pagina te bekijken.";
+				echo "Er werd een verkeerde URL ingegeven.";
 			}
 		}
-		
+		else
+		{
+			echo "Gelieve u aan te melden om deze pagina te bekijken.";
+		}
 	}
 
 ?>

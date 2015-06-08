@@ -19,30 +19,37 @@ $users = array();
 
 function prowpt_ledenoverzicht()
 {
-	$args = array(
-		'orderby'      => 'display_name',
-		'order'        => 'ASC'
-	 ); 
-
-	$users = get_users($args);
-	$letters = array();
-	foreach ($users as $user) 
+	if(is_user_logged_in())
 	{
-		//als user gelijk is als de ingelogde user;
-		if($user->ID == get_current_user_id())
+		$args = array(
+			'orderby'      => 'display_name',
+			'order'        => 'ASC'
+		 ); 
+
+		$users = get_users($args);
+		$letters = array();
+		foreach ($users as $user) 
 		{
-			continue;
+			//als user gelijk is als de ingelogde user;
+			if($user->ID == get_current_user_id())
+			{
+				continue;
+			}
+
+			$eersteLetter = str_split($user->display_name, 1)[0];
+
+			if(!in_array($eersteLetter, $letters))
+			{
+				$letters[] = $eersteLetter;
+				echo '<h1>' . $eersteLetter . '</h1>';
+			}
+
+			echo '<a href="/member-informatie?userid=' . $user->ID . '">' . esc_html( $user->display_name ) . '</a><br />';
 		}
-
-		$eersteLetter = str_split($user->display_name, 1)[0];
-
-		if(!in_array($eersteLetter, $letters))
-		{
-			$letters[] = $eersteLetter;
-			echo '<h1>' . $eersteLetter . '</h1>';
-		}
-
-		echo '<a href="/member-informatie?userid=' . $user->ID . '">' . esc_html( $user->display_name ) . '</a><br />';
+	}
+	else
+	{
+		echo "Gelieve u aan te melden om deze pagina te bekijken.";
 	}
 }
 
