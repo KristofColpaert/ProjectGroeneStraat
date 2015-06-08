@@ -41,17 +41,30 @@
 	
 	global $post;
 
+	?>
+	<section class="container">
+		<section class="single-item">
+	<?php
+
 	while(have_posts()) : the_post();
-		$meta = get_post_meta($post->ID);
-		$adName = $meta['_adName'][0];
-		$adLocation = $meta['_adLocation'][0];
-		$adDescription = $meta['_adDescription'][0];
+			$meta = get_post_meta($post->ID);
+			$adLocation = $meta['_adLocation'][0];
+			$adPrice = $meta['_adPrice'][0];
 		?>
-			<h1><?php the_title(); ?></h1>
-			<p>Name: <?php echo $adName; ?></p>
-			<p>Location: <?php echo $adLocation; ?></p>
-			<p>Meer info: <?php echo $adDescription; ?></p>
-			<hr />
+			<h1><?php the_title(); ?></h1><br/>
+			<p><strong>Beschrijving:</strong><br/><?php echo the_content(); ?></p>
+			<br/>
+			<p><strong>Location:</strong><br/><?php echo $adLocation; ?></p>
+			<br/>
+			<p><strong>Prijs:</strong><br/><?php echo $adPrice; ?></p>
+			<br/>
+			<?php if(has_post_thumbnail($post->ID)) { ?>
+			<p><strong>Foto:</strong><br/><br/>
+			<section class="image-wrapper">
+				<?php echo get_the_post_thumbnail(); ?>
+			</section>
+			<?php } ?>
+			
 
 			<!--naam, email, reactie 
 			<parentprojectId (meta) - enkel gebruikers die lid zijn van da project mogen et zoekertje zien -->
@@ -107,6 +120,35 @@
 			?>
 		<?php
 	endwhile;
+
+	?>
+
+	<br/><br/><br/><hr/><br/><br/>
+	
+	<form method="POST" class="createForm" style="width:50%"; action="<?php $_SERVER['REQUEST_URI']; ?>" method="POST" enctype="multipart/form-data">
+							
+		<label for="Name">Naam</label>
+							<input class="textbox" type="text" readonly name="Name" value="<?php echo $name; ?>"/><br />
+							
+							<label for="Email">E-mail</label>
+							<input class="textbox" type="text" readonly name="Email" value="<?php echo $email; ?>"/><br />
+
+							<label for="Reactie">Reactie</label>
+							<textarea class="textbox" name="Reactie" style="height:100px">
+
+							</textarea><br />
+
+							<input type="submit" value="Verzenden" name="Verzenden" class="form-button" />
+							<input type="hidden" value="<?php the_title(); ?>" name="Title" />
+							<input type="hidden" value="<?php echo $projectId; ?>" name="projectId" />
+						</form>
+
+
+
+		</section>
+	</section>
+
+	<?php
 	
 	get_footer();
 ?>

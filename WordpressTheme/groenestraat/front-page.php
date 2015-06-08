@@ -64,7 +64,6 @@
 	    </section>
 	</section>
     <script>
-        var length = document.getElementsByClassName('artikel-item').length;
         var data = 
         [
             <?php
@@ -108,7 +107,7 @@
         function replace(newId)
         {
             index = newId;
-            for(var i=0;i<length;i++)
+            for(var i=0;i<(data.length)-1;i++)
             {
                 var currentItem = document.getElementsByClassName('artikel-item')[i];
                 var chosen = document.getElementsByClassName('artikel-item')[newId];

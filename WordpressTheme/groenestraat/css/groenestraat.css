@@ -100,7 +100,7 @@ header .menu
     float:right;
 }
 
- img 
+img
 {
     max-width:100%;
     height:auto;
@@ -561,6 +561,7 @@ footer
 .container
 {
     width: 100%;
+    background-color: #69686e;
 }
 
 .sub-menu
@@ -704,6 +705,19 @@ footer
 }
 
 /* OVERZICHT EVENTS */
+
+.image-wrapper
+{
+    width:50%;
+}
+
+.single-item
+{
+    padding:5%;
+    width:90%;
+    background-color: #f8f7f7;
+    min-height: 150px;
+}
 
 .main
 {
