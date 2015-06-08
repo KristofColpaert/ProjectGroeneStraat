@@ -96,38 +96,10 @@
 					$name = $userdata->first_name;
 					$email = $userdata->user_email;
 					?>
-						<form method="POST" class="createForm" action="<?php $_SERVER['REQUEST_URI']; ?>" method="POST" enctype="multipart/form-data">
+					<br/><br/><br/><hr/><br/><br/>
+						<form method="POST" class="createForm" style="width:50%"; action="<?php $_SERVER['REQUEST_URI']; ?>" method="POST" enctype="multipart/form-data">
 							
 							<label for="Name">Naam</label>
-							<input type="text" readonly name="Name" value="<?php echo $name; ?>"/><br />
-							
-							<label for="Email">E-mail</label>
-							<input type="text" readonly name="Email" value="<?php echo $email; ?>"/><br />
-
-							<label for="Reactie">Reactie</label>
-							<textarea name="Reactie">
-
-							</textarea><br />
-
-							<input type="submit" value="Verzenden" name="Verzenden" />
-							<input type="hidden" value="<?php the_title(); ?>" name="Title" />
-							<input type="hidden" value="<?php echo $projectId; ?>" name="projectId" />
-						</form>
-					<?php
-				}
-
-				}
-			?>
-		<?php
-	endwhile;
-
-	?>
-
-	<br/><br/><br/><hr/><br/><br/>
-	
-	<form method="POST" class="createForm" style="width:50%"; action="<?php $_SERVER['REQUEST_URI']; ?>" method="POST" enctype="multipart/form-data">
-							
-		<label for="Name">Naam</label>
 							<input class="textbox" type="text" readonly name="Name" value="<?php echo $name; ?>"/><br />
 							
 							<label for="Email">E-mail</label>
@@ -142,9 +114,15 @@
 							<input type="hidden" value="<?php the_title(); ?>" name="Title" />
 							<input type="hidden" value="<?php echo $projectId; ?>" name="projectId" />
 						</form>
+					<?php
+				}
 
+				}
+			?>
+		<?php
+	endwhile;
 
-
+	?>
 		</section>
 	</section>
 
