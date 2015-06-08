@@ -1,10 +1,10 @@
 <?php
 	/*
-		Plugin Name: Groenestraat Project LedenOverzicht
+		Plugin Name: Groenestraat Projectleden Overzicht
 		Plugin URI: http://www.groenestraat.be
-		Description: Deze plugin toont een overzicht van de leden van een bepaald project.
+		Description: Deze plugin toont een overzicht van de leden van een bepaald project. Leden kunnen verwijderd en/of toegevoegd worden.
 		Version: 1.0
-		Author: Rodric Degroote
+		Author: Rodric Degroote, Kristof Colpaert
 		Author URI: http://www.groenestraat.be
 		Text Domain: prowp-plugin
 		License: GPLv2		
@@ -14,28 +14,25 @@
 		Add actions
 	*/
 
-//deleten van user gekoppeld aan het project.
-if(isset($_POST["ProjectID"]) && isset($_POST["Verwijderen"]))
-{
-	if(!empty($_POST["ProjectID"]) && !empty($_POST["Verwijderen"]))
-	{
-		$post_id = $_POST["ProjectID"];
-		$meta_key = "_subscriberId";
-		$meta_value =  $_POST["Verwijderen"];
-		delete_post_meta($post_id, $meta_key, $meta_value); 
-	}
-}
+	add_shortcode('project_leden','prowpt_projectleden_overzicht');
 
-add_shortcode('leden_project','prowpt_ledenProject_overzicht');
+	add_action('wp_ajax_nopriv_delete_project_member', 'delete_project_member');
+	add_action('wp_ajax_delete_project_member', 'delete_project_member');
+	add_action('wp_ajax_nopriv_get_add_form', 'get_add_form');
+	add_action('wp_ajax_get_add_form', 'get_add_form');
+	add_action('wp_ajax_nopriv_add_project_member', 'add_project_member');
+	add_action('wp_ajax_add_project_member', 'add_project_member');
+	add_action('wp_ajax_nopriv_show_updated_project_members', 'show_updated_project_members');
+	add_action('wp_ajax_show_updated_project_members', 'show_updated_project_members');
 
-register_activation_hook(__FILE__, 'prowp_ledenProject_install');
+	register_activation_hook(__FILE__, 'prowp_ledenProject_install');
 
 	function prowp_ledenProject_install()
 	{
-		makeLedenProjectShortcode('Leden project','[leden_project]','leden project','publish','page','closed');
+		makeLedenProjectShortcodePage('Projectleden','[project_leden]','projectleden','publish','page','closed');
 	}
 
-	function makeLedenProjectShortcode($title,$content,$post_name,$post_status,$post_type,$ping_status)
+	function makeLedenProjectShortcodePage($title,$content,$post_name,$post_status,$post_type,$ping_status)
 	{
 		$args = array(
 			'post_title' => $title,
@@ -48,67 +45,174 @@ register_activation_hook(__FILE__, 'prowp_ledenProject_install');
 		wp_insert_post($args);
 	}
 
+	/*
+		Plugin methods
+	*/
 
-	function prowpt_ledenProject_overzicht()
+	function prowpt_projectleden_overzicht()
 	{
-		if(is_user_logged_in())
+		if(is_user_logged_in() && isset($_GET['project']))
 		{
-			$userId = get_current_user_id(); 
-
 			global $wpdb;
-			$projectID = 300;
-			$subscriber = "_subscriberId";
+			$letters = array();
+			$current_user = wp_get_current_user();
+			$project = get_post($_GET['project']);
+			$previousEersteLetter;
 
-			//ophalen alle gebruikers die gesubscribed hebben op het geselecteerde project
-			$users = $wpdb->get_results($wpdb->prepare( "SELECT post_id, meta_key, meta_value AS userId FROM $wpdb->postmeta WHERE post_id = %d AND meta_key = %s", $projectID, $subscriber), ARRAY_A);
-
-			?>
-				<form method="POST" class="createForm" action="<?php $_SERVER['REQUEST_URI']; ?>" method="POST" enctype="multipart/form-data">
-			<?php
-			if(count($users) > 0)
+			if($project != null && ($project->post_author == $current_user->ID))
 			{
-				foreach ($users as $user) 
+				$subscriber = '_subscriberId';
+				$users = $wpdb->get_results($wpdb->prepare("SELECT a.post_id, a.meta_key AS aKey, a.meta_value AS userId, b.user_nicename AS username FROM $wpdb->postmeta a INNER JOIN $wpdb->users b ON a.meta_value = b.ID WHERE a.post_id = %d AND a.meta_key = %s ORDER BY b.user_nicename ASC", $project->ID, $subscriber), ARRAY_A);
+				?>
+					<section id="projectMemberContainer">
+				<?php
+				if(count($users) > 0)
 				{
-					$userData = get_userdata($user["userId"]);
-
-					//als user gelijk is als de ingelogde user dan wordt hij die niet getoond;
-					if($user->ID == get_current_user_id())
+					foreach ($users as $user)
 					{
+						$userData = get_userdata($user["userId"]);
+
+						// Wanneer user gelijk is aan de ingelogde user, dan wordt hij die niet getoond
+						if(!$userData->ID == $current_user->ID)
+						{
+							continue;
+						}
+
+						$previousEersteLetter = str_split($userData->display_name, 1)[0];
 						continue;
 					}
 
-					$eersteLetter = str_split($userData->display_name, 1)[0];
-
-					if(!in_array($eersteLetter, $letters))
+					foreach ($users as $user) 
 					{
-						$letters[] = $eersteLetter;
-						echo '<h1>' . $eersteLetter . '</h1>';
-					}
+						$userData = get_userdata($user["userId"]);
 
-					echo '<a href="/member-informatie?userid=' . $userData->ID . '">' . esc_html( $userData->display_name ) . '</a>
-					<a href="" value="' . $userData->ID . '" name="Verwijderen"> delete </a>';
+						// Wanneer user gelijk is aan de ingelogde user, dan wordt hij die niet getoond
+						if($userData->ID == $current_user->ID)
+						{
+							continue;
+						}
+
+						$eersteLetter = str_split($userData->display_name, 1)[0];
+
+						if(!in_array($eersteLetter, $letters))
+						{
+							if($previousEersteLetter != $eersteLetter)
+							{
+								?>
+									</section>
+								<?php
+							}
+
+							$letters[] = $eersteLetter;
+							$previousEersteLetter = $eersteLetter;
+							?>
+								<section id="projectMemberContainer<?php echo $eersteLetter; ?>">
+								<h1><?php echo $eersteLetter; ?></h1>
+							<?php
+						}
+						?>
+							<section id="projectMemberContainer<?php echo $userData->ID; ?>">
+								<a href="/member-informatie?userid=<?php echo $userData->ID; ?>"><?php echo esc_html($userData->display_name); ?></a>
+								<input type="button" value="Verwijder" class="projectMemberDelete form-button" data="<?php echo $project->ID . ';' . $user['userId']; ?>" id="projectLedenDelete<?php echo $userData->ID; ?>" />
+							</section>
+						<?php
+					}
+				}
+				else
+				{
+					?>
+						<p class="error-message">Het project heeft geen leden. Ga terug naar <a href="<?php echo home_url(); ?>">Home</a>.</p>
+					<?php
 				}
 
-			}
-			else
-			{
-				echo "Het project heeft nog geen leden.";
+				?>
+					</section>
+					<section id="projectMemberSubmitContainer" data="<?php echo $project->ID; ?>">
+						<input type="button" class="form-button" value="Leden toevoegen" id="projectMemberSubmit" data="<?php echo $project->ID; ?>" />
+					</section>
+				<?php
 			}
 
-			?>
-				<br />
-				<br />
-				<input type="submit" value="Toevoegen" name="Toevoegen" />
-				<input type="hidden" value="<?php echo $projectID ?>" name="ProjectID" />
-				</form>
-			<?php
-			
+			else
+			{
+				?>
+					<p class="error-message">U hebt geen toegang tot het gevraagde project. Ga terug naar <a href="<?php echo home_url(); ?>">Home</a>.</p>
+				<?php
+			}
 		}
 		else
 		{
-			echo "Gelieve u aan te melden om deze pagina te bekijken.";
+			?>
+				<p class="error-message">Dit project bestaat niet of u hebt geen toegang tot de gevraagde pagina. Ga terug naar <a href="<?php echo home_url(); ?>">Home</a>.</p>
+			<?php
 		}
 	}
 
+	function delete_project_member()
+	{
+		if(isset($_POST['projectId']) && isset($_POST['userId']))
+		{
+			$projectId = $_POST['projectId'];
+			$userId = $_POST['userId'];
+			delete_post_meta($projectId, '_subscriberId', $userId);
+			echo 'success';
+			die();
+		}
+		echo 'fail';
+		die();
+	}
 
+	function get_add_form()
+	{
+		?>
+			<form>
+				<input type="text" class="textbox" id="projectMemberAddUsername" placeholder="Gebruikersnaam/e-mailadres"/>
+			</form>
+		<?php
+		die();
+	}
+
+	function add_project_member()
+	{
+		if(isset($_POST['username']) && isset($_POST['projectId']))
+		{
+			$username = $_POST['username'];
+			$projectId = $_POST['projectId'];
+
+			$user = get_user_by('email', $username);
+			$project = get_post($projectId, OBJECT);
+
+			if($user != null && $project != null)
+			{
+				add_post_meta($project->ID, '_subscriberId', $user->ID);
+				echo 'success';
+				die();
+			}
+		}
+		echo 'failed';
+		die();
+	}
+
+	function show_updated_project_members()
+	{
+		if(isset($_POST['projectId']) && isset($_POST['username']))
+		{
+			$username = $_POST['username'];
+			$projectId = $_POST['projectId'];
+
+			$user = get_user_by('email', $username);
+			$project = get_post($projectId, OBJECT);
+
+			if($user != null && $project != null)
+			{
+				?>
+					<a class="newProjectMember" href="/member-informatie?userid=<?php echo $user->ID; ?>"><?php echo esc_html($user->user_nicename); ?></a><br />
+				<?php
+				die();
+			}
+		}
+
+		echo 'fail';
+		die();
+	}
 ?>

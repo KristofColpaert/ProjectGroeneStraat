@@ -14,10 +14,30 @@
 		Shortcode plugin
 	*/
 
+	register_activation_hook(__FILE__, 'prowp_project_articles_install');
+
 	add_shortcode('pending_articles', 'prowp_initialize_pending_articles');
 
 	add_action('wp_ajax_nopriv_add_project_article', 'add_project_article');
 	add_action('wp_ajax_add_project_article', 'add_project_article');
+
+	function prowp_project_articles_install()
+	{
+		makeProjectArticlesShortcodePage('Projectartikels','[pending_articles]','projectartikels','publish','page','closed');
+	}
+
+	function makeProjectArticlesShortcodePage($title,$content,$post_name,$post_status,$post_type,$ping_status)
+	{
+		$args = array(
+			'post_title' => $title,
+			'post_content' => $content,
+			'post_name' => $post_name,
+			'post_status' => $post_status, 
+			'post_type' => $post_type,
+			'ping_status' => $ping_status
+		);
+		wp_insert_post($args);
+	}
 
 	/*
 		Plugin methods

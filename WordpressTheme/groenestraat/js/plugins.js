@@ -266,7 +266,7 @@ $(document).ready(function()
 	    		$("#projectArticleContainer" + tempArticleId).animate(
 	    		{
 				    height: 'toggle'
-				}, 500, function() 
+				}, 250, function() 
 				{
 					$("#projectArticleContainer" + tempArticleId).remove();
 					checkNumberOfArticles();
@@ -287,8 +287,185 @@ $(document).ready(function()
 			$("#projectArticleMainContainer p").animate(
 			{
 				opacity: '100'
-			}, 5000, function()
+			}, 500, function()
 			{});
 		}
 	}
+
+	/*
+		Delete members of project
+	*/
+
+	$(document).on('click', '.projectMemberDelete', function(e)
+	{
+		var targetId = e.target.id;
+	    var data = $('#' + targetId).attr('data');
+	    var dataArray = data.split(';');
+	    var tempProjectId = dataArray[0];
+	    var tempUserId = dataArray[1];
+	    deleteProjectMember(tempProjectId, tempUserId);
+	});	
+
+	function deleteProjectMember(tempProjectId, tempUserId)
+	{
+		jQuery.ajax(
+	    {
+	    	url : plugin.ajax_url,
+	    	type : 'post',
+	    	data : 
+	    	{
+	    		action : 'delete_project_member',
+	    		projectId : tempProjectId,
+	    		userId : tempUserId
+	    	},
+	    	success : function(response)
+	    	{
+	    		if(checkNumberOfMembers(tempUserId))
+				{
+					var element = $("#projectMemberContainer" + tempUserId);
+					var parentElement = element.parent();
+
+					parentElement.animate(
+		    		{
+					    height: 'toggle'
+					}, 250, function() 
+					{
+						parentElement.remove();
+					});
+				}
+
+				else
+				{
+					$("#projectMemberContainer" + tempUserId).animate(
+		    		{
+					    height: 'toggle'
+					}, 250, function() 
+					{
+						$("#projectMemberContainer" + tempUserId).remove();
+					});
+				}
+	    	}
+	    });
+	}
+
+	function checkNumberOfMembers(tempUserId)
+	{
+		var element = $("#projectMemberContainer" + tempUserId);
+		var parentElement = element.parent();
+		var parentElementId = parentElement.attr("id");
+		var number = $("#" + parentElementId + " > section").length;
+		
+		if(number == 1)
+		{
+			return true;
+		}
+
+		else
+		{
+			return false;
+		}
+	}
+
+	/*
+		Add members to project
+	*/
+
+	var addMembersExpanded = false;
+	var newMembers = false;
+
+	$(document).on('click', '#projectMemberSubmit', function(e)
+	{
+		if(!addMembersExpanded)
+		{
+			jQuery.ajax(
+		    {
+		    	url : plugin.ajax_url,
+		    	type : 'post',
+		    	data : 
+		    	{
+		    		action : 'get_add_form'
+		    	},
+		    	success : function(response)
+		    	{
+		    		addMembersExpanded = true;
+		    		$('#projectMemberSubmitContainer').prepend(response);
+		    		$('#projectMemberSubmitContainer form').hide();
+		    		$('#projectMemberSubmitContainer form').slideToggle(250);
+		    		$('#projectMemberSubmit').val('Lid toevoegen');
+		    	}
+		    });
+		}
+
+		else
+		{
+			jQuery.ajax(
+		    {
+		    	url : plugin.ajax_url,
+		    	type : 'post',
+		    	data : 
+		    	{
+		    		action : 'add_project_member',
+		    		username : $('#projectMemberAddUsername').val(),
+		    		projectId : $('#projectMemberSubmit').attr('data')
+		    	},
+		    	success : function(response)
+		    	{
+		    		if(response == 'success')
+		    		{
+		    			if($('.error-message'))
+		    			{
+		    				$('.error-message').fadeOut();
+		    				$('.error-message').remove();
+		    			}
+
+		    			$('#projectMemberSubmit').val('Toegevoegd');
+		    			$('#projectMemberSubmitContainer form').slideToggle(250);
+
+		    			setTimeout(function()
+		    			{
+		    				if(!newMembers)
+				    		{
+				    			$("#projectMemberSubmitContainer").before('<p class="newProjectMemberIntro">Nieuwe projectleden:</p>');
+				    			$(".newProjectMemberIntro").hide();
+				    			$(".newProjectMemberIntro").slideToggle(250);
+				    		}
+
+				    		newMembers = true;
+
+		    				$('#projectMemberSubmit').val('Leden toevoegen');
+
+		    				var tempUsername = $('#projectMemberAddUsername').val();
+		    				var tempProjectId = $('#projectMemberSubmit').attr('data');
+
+		    				$('#projectMemberSubmitContainer form').remove();
+		    				addMembersExpanded = false;
+
+		    				jQuery.ajax(
+						    {
+						    	url : plugin.ajax_url,
+						    	type : 'post',
+						    	data : 
+						    	{
+						    		action : 'show_updated_project_members',
+						    		username : tempUsername,
+		    						projectId : tempProjectId
+						    	},
+						    	success : function(response)
+						    	{
+						    		$("#projectMemberSubmitContainer").before(response);
+						    		$(".newProjectMember:last-of-type").hide();
+						    		$(".newProjectMember:last-of-type").slideToggle(250);
+						    	}
+						    });
+						}, 1500);
+		    		}
+
+		    		else
+		    		{
+		    			$("#projectMemberSubmitContainer").before('<p class="error-message">De ingevoerde gebruiker kon niet gevonden worden.</p>');
+		    		}
+		    	}
+		    });
+		}
+	});	
 });

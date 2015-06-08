@@ -202,6 +202,11 @@
 			{
 				activate_plugin('wp-user-avatar/wp-user-avatar.php');
 			}
+
+			if(is_plugin_inactive('groenestraat-projectLedenoverzicht/groenestraat-projectLedenoverzicht.php'))
+			{
+				activate_plugin('groenestraat-projectLedenoverzicht/groenestraat-projectLedenoverzicht.php');
+			}
 		});
 	}
 ?>
