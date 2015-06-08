@@ -37,49 +37,49 @@
 		wp_insert_post($args);
 	}
 
-
-
-
 function prowpt_persoonlijkeEventenOverzicht()
 {
 	global $post;
-
-	$eventen = array();
 	$userId = get_current_user_id(); 
 
 	if(is_user_logged_in())
 	{
-		global $wpdb;
 		//eventen ophalen waar hij zelf auteur van is.
-		$post_type = "events";
 		$post_author = $userId;
-		$results = $wpdb->get_results($wpdb->prepare( "SELECT ID FROM $wpdb->posts WHERE post_type = %s AND post_author = %d ", $post_type, $post_author), ARRAY_A);
 
-			foreach($results as $result)
-			{
-					$eventId = $result['ID'];
-					$eventen[] = get_post($eventId, OBJECT);
-			}
+		global $post;
+		$the_query = new WP_Query(
+				array(
+					'author' => $userId,
+					'post_type' => 'events',
+					'order' => 'ASC',
+					'orderby' => 'date')
+				);
 
-		foreach($eventen as $event)
+		if ($the_query->have_posts()) {
+					while ($the_query->have_posts() ) {
+						$the_query->the_post();	
+
+						echo '<h2>' . get_the_title() . '</h2>';
+
+						$eventTime = get_post_meta($post->ID, "_eventTime")[0];
+						$eventEndTime = get_post_meta($post->ID, "_eventEndTime")[0];
+						$eventLocation = get_post_meta($post->ID, "_eventLocation")[0];
+
+						if(!empty($eventTime) && !empty($eventEndTime) && !empty($eventLocation))
+						{
+							print '<strong>Startdatum: </strong> ' . $eventTime . '<br />';
+							print '<strong>Einddatum: </strong> ' . $eventEndTime . '<br />';
+							print '<strong>Locatie: </strong> ' . $eventLocation . '<br />';
+							print '<strong>Omschrijving: </strong><p>' . get_the_excerpt()  . '</p>';
+							print '<a href="'.site_url().'/bewerk-event?event='. $post->ID .'">Bewerk event</a>';
+						}
+
+					}
+		}
+		else
 		{
-			$eventAdminId = $event->post_author;
-			$title = $event->post_title;
-			$omschrijving = $event->post_content;
-
-			$eventTime = get_post_meta($event->ID, "_eventTime")[0];
-			$eventEndTime = get_post_meta($event->ID, "_eventEndTime")[0];
-			$eventLocation = get_post_meta($event->ID, "_eventLocation")[0];
-
-			if(!empty($title) && !empty($omschrijving) && !empty($eventTime) && !empty($eventEndTime) && !empty($eventLocation))
-			{
-				print '<h1>' . $title . '</h1>';
-				print '<strong>Startdatum: </strong> ' . $eventTime . '<br />';
-				print '<strong>Einddatum: </strong> ' . $eventEndTime . '<br />';;
-				print '<strong>Locatie: </strong> ' . $eventLocation . '<br />';;
-				print '<strong>Omschrijving: </strong><p>' . $omschrijving . '</p>';
-				print '<a href="'.site_url().'/bewerk-event?event='. $event->ID .'">Bewerk event</a>';
-			}
+			print "Er werden geen events gevonden.";
 		}
 
 	}

@@ -45,40 +45,42 @@ function prowpt_persoonlijkeZoekertjesOverzicht()
 	$userId = get_current_user_id(); 
 
 	if(is_user_logged_in())
-	{
-		global $wpdb;
-		//zoekertjes ophalen waar hij zelf auteur van is.
-		$post_type = "zoekertjes";
+	{	
+		//zoekertjes ophalen die ingelogde gebruiker zelf heeft aangemaakt.
 		$post_author = $userId;
-		$results = $wpdb->get_results($wpdb->prepare( "SELECT ID FROM $wpdb->posts WHERE post_type = %s AND post_author = %d ", $post_type, $post_author), ARRAY_A);
 
-			foreach($results as $result)
-			{
-					$zoekertjesId = $result['ID'];
-					$zoekertjes[] = get_post($zoekertjesId, OBJECT);
-			}
+		global $post;
+		$the_query = new WP_Query(
+				array(
+					'author' => $userId,
+					'post_type' => 'zoekertjes',
+					'order' => 'ASC',
+					'orderby' => 'date')
+				);
 
-		foreach($zoekertjes as $zoekertje)
-		{
-			$zoekertjeAdminId = $zoekertje->post_author;
+		if ($the_query->have_posts()) {
+				while ($the_query->have_posts() ) {
+						$the_query->the_post();	
 
-			$title = $zoekertje->post_title;
-			$omschrijving = $zoekertje->post_content;
+						echo '<h2>' . get_the_title() . '</h2>';
 
-			$adPrice = get_post_meta($zoekertje->ID, "_adPrice")[0];
-			$adLocation = get_post_meta($zoekertje->ID, "_adLocation")[0];
+						$adPrice = get_post_meta($post->ID, "_adPrice")[0];
+						$adLocation = get_post_meta($post->ID, "_adLocation")[0];
 
-			if(!empty($title) && !empty($omschrijving) && !empty($adPrice) && !empty($adLocation))
-			{
-				print '<h1>' . $title . '</h1>';
-				print '<strong>Prijs: </strong> ' . $adPrice . '<br />';
-				print '<strong>Locatie: </strong> ' . $adLocation . '<br />';;
-				print '<strong>Omschrijving: </strong><p>' . $omschrijving . '</p>';
+						if(!empty($adPrice) && !empty($adLocation))
+						{
+							print '<strong>Prijs: </strong> ' . $adPrice . '<br />';
+							print '<strong>Locatie: </strong> ' . $adLocation . '<br />';;
+							print '<strong>Omschrijving: </strong><p>' . get_the_excerpt() . '</p>';
+							print '<a href="'.site_url().'/bewerk-zoekertje?zoekertje='. $post->ID .'">Bewerk zoekertje</a>';
+						}
 
-				print '<a href="'.site_url().'/bewerk-zoekertje?zoekertje='. $zoekertje->ID .'">Bewerk zoekertje</a>';
-			}
+				}
 		}
-
+		else
+		{
+			print "Er werden geen zoekertjes gevonden.";
+		}
 	}
 	else
 	{

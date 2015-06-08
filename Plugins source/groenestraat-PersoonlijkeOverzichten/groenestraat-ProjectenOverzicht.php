@@ -48,59 +48,85 @@ function prowpt_persoonlijkeProjectenOverzicht()
 
 	if(is_user_logged_in())
 	{
-		global $wpdb;
-		//projecten ophalen waar hij op gesubscribed heeft.
-		$results = $wpdb->get_results($wpdb->prepare( "SELECT post_id, meta_value FROM $wpdb->postmeta WHERE meta_key = %s AND meta_value = %d", $subscriber, $userId), ARRAY_A);
-			
-			foreach($results as $result)
-			{
-					//voor iedere waarde met subscriberId zullen we het project gaan ophalen.
-					$projectId = $result['post_id'];
-					$projecten[] = get_post($projectId, OBJECT);
-			}
+		//ophalen subscribers
+		global $post;
 
-		//projecten ophalen waar hij zelf auteur van is.
-		$post_type = "projecten";
-		$post_author = $userId;
-		$results = $wpdb->get_results($wpdb->prepare( "SELECT ID FROM $wpdb->posts WHERE post_type = %s AND post_author = %d ", $post_type, $post_author), ARRAY_A);
+		$projectenSubscribed = array(
+					'post_author' => $userId,
+					'post_type' => 'projecten',
+					'order' => 'ASC',
+					'orderby' => 'date',
+					'meta_key' => '_subscriberId',
+					'meta_compare' => '=',
+            		'meta_query' => array(
+                		array(
+                        'key' => '_subscriberId',
+                        'value' => $userId)));
 
-			foreach($results as $result)
-			{
-					$projectId = $result['ID'];
-					$projecten[] = get_post($projectId, OBJECT);
-			}
+		$projectenAdmin = array(
+					'author' => $userId,
+					'post_type' => 'projecten',
+					'order' => 'ASC',
+					'orderby' => 'date'
+					);
 
-		foreach($projecten as $project)
-		{
-			$projectAdminId = $project->post_author;
 
-			$title = $project->post_title;
-			$omschrijving = $project->post_content;
+		//subscribers 
+		$the_query_subscribed = new WP_Query($projectenSubscribed);
+		$the_query_admin = new WP_Query($projectenAdmin);
+				
 
-			$street = get_post_meta($project->ID, "_projectStreet")[0];
-			$city = get_post_meta($project->ID, "_projectCity")[0];
-			$zipcode = get_post_meta($project->ID, "_projectZipcode")[0];
+		//projecten waarop ingelogde gebruiker is op gesubscribed (ingeschreven)
+		if ($the_query_subscribed->have_posts()) {
+				while ($the_query_subscribed->have_posts() ) {
+							$the_query_subscribed->the_post();	
 
-			if(!empty($title) && !empty($omschrijving) && !empty($street) && !empty($city) && !empty($zipcode))
-			{
-				print '<h1>' . $title . '</h1>';
-				print '<strong>Street: </strong> ' . $street . '<br />';
-				print '<strong>City: </strong> ' . $city . '<br />';;
-				print '<strong>Zipcode: </strong> ' . $zipcode . '<br />';;
-				print '<strong>Omschrijving: </strong><p>' . $omschrijving . '</p>';
-				if($userId == $projectAdminId)
-				{
-					print '<a href="'.site_url().'/bewerk-project?project='. $project->ID .'">Bewerk project</a>';
+							echo '<h2>' . get_the_title() . '</h2>';
+							$projectAdminId = $post->post_author;
+
+							$street = get_post_meta($post->ID, "_projectStreet")[0];
+							$city = get_post_meta($post->ID, "_projectCity")[0];
+							$zipcode = get_post_meta($post->ID, "_projectZipcode")[0];
+
+							if(!empty($street) && !empty($city) && !empty($zipcode))
+							{
+									print '<h1>' . $title . '</h1>';
+									print '<strong>Street: </strong> ' . $street . '<br />';
+									print '<strong>City: </strong> ' . $city . '<br />';;
+									print '<strong>Zipcode: </strong> ' . $zipcode . '<br />';;
+									print '<strong>Omschrijving: </strong><p>' . get_the_excerpt() . '</p>';
+							}
 				}
-			}
 
 		}
 
-	}
-	else
-	{
-		//niet-ingelogd
-		echo "U moet zich aanmelden om deze pagina te bekijken.";
+		//projecten die de ingelogde gebruiker zelf heeft aangemaakt
+		if ($the_query_admin->have_posts()) {
+				while ($the_query_admin->have_posts() ) {
+							$the_query_admin->the_post();	
+
+							echo '<h2>' . get_the_title() . '</h2>';
+							$projectAdminId = $post->post_author;
+
+							$street = get_post_meta($post->ID, "_projectStreet")[0];
+							$city = get_post_meta($post->ID, "_projectCity")[0];
+							$zipcode = get_post_meta($post->ID, "_projectZipcode")[0];
+
+							if(!empty($street) && !empty($city) && !empty($zipcode))
+							{
+									print '<h1>' . $title . '</h1>';
+									print '<strong>Street: </strong> ' . $street . '<br />';
+									print '<strong>City: </strong> ' . $city . '<br />';;
+									print '<strong>Zipcode: </strong> ' . $zipcode . '<br />';;
+									print '<strong>Omschrijving: </strong><p>' . get_the_excerpt() . '</p>';
+									if($userId == $projectAdminId)
+									{
+										print '<a href="'.site_url().'/bewerk-project?project='. $post->ID .'">Bewerk project</a>';
+									}
+							}
+				}
+
+		}
 	}
 
 }
