@@ -48,6 +48,23 @@
 			<br/>
 			<p><strong>Locatie:</strong><br/><?php echo $eventLocation; ?></p>
 			<br/>
+			
+			<?php
+
+			if($post->post_author != get_current_user_id() && is_user_logged_in())
+			{
+				?>
+					<p><strong>Plaatsen op kalender?</strong></p><br/>
+					<form method="POST" id="eventMemberForm">
+						<input id="eventMemberId" name="eventMemberId" type="hidden" value="<?php echo get_current_user_id(); ?>" />
+						<input id="eventMemberProjectId" name="eventMemberProjectId" type="hidden" value="<?php echo $post->ID; ?>" />
+						<input id="eventMemberSubmit" name="eventMemberSubmit" type="submit" value="Toevoegen aan persoonlijke kalender" class="form-button" style="margin:0" />
+					</form>
+				<?php
+			}
+
+			?>
+
 			<?php if(has_post_thumbnail($post->ID)) { ?>
 			<p><strong>Foto:</strong><br/><br/>
 			<section class="image-wrapper">
@@ -57,20 +74,7 @@
 			<br/><br/>
 			<div id="map-canvas"></div>
 		<!-- Kristof zijn toevoegingen -->
-		<?php 
-			if($post->post_author != get_current_user_id() && is_user_logged_in())
-			{
-				?>
-					<form method="POST" id="eventMemberForm">
-						<input id="eventMemberId" name="eventMemberId" type="hidden" value="<?php echo get_current_user_id(); ?>" />
-						<input id="eventMemberProjectId" name="eventMemberProjectId" type="hidden" value="<?php echo $post->ID; ?>" />
-						<input id="eventMemberSubmit" name="eventMemberSubmit" type="submit" value="Toevoegen aan persoonlijke kalender" />
-					</form>
-				<?php
-			}
-	endwhile;
-
-	?>
+		<?php endwhile; ?>
 
 				</div>
 			</main>
