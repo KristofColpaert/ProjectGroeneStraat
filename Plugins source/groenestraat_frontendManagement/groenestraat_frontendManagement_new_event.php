@@ -160,6 +160,7 @@
 					add_post_meta($postId, '_eventTime', $eventTime);
 					add_post_meta($postId, '_eventEndTime', $eventEndTime);
 					add_post_meta($postId, '_eventLocation', $eventLocation);
+					add_user_meta($current_user->ID, '_eventCalendar', $postId);
 
                    	if($_FILES['eventFeaturedImage']['size'] > 0)
 					{

@@ -32,7 +32,7 @@
 		makeShortcodePage('Bewerk event','[edit_event]','bewerk event','publish','page','closed');
 		makeShortcodePage('Bewerk zoekertje','[edit_zoekertje]','bewerk zoekertje','publish','page','closed');
 		makeShortcodePage('Bewerk project','[edit_project]','bewerk project','publish','page','closed');
-		makeShortcodePage('Bewerk artikel','[edit_article]','bewerk artikel','publish','page','closed');
+		makeShortcodePage('Bewerkt artikel','[edit_article]','bewerk artikel','publish','page','closed');
 	}
 
 	function makeShortcodePage($title,$content,$post_name,$post_status,$post_type,$ping_status)

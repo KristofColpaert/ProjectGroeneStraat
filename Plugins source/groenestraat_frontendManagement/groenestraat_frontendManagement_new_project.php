@@ -98,6 +98,7 @@
 					add_post_meta($postId, '_projectStreet', $projectStreet);
 					add_post_meta($postId, '_projectCity', $projectCity);
 					add_post_meta($postId, '_projectZipcode', $projectZipcode);
+					add_post_meta($postId, '_subscriberId', $current_user->ID);
 
 					if($_FILES['projectFeaturedImage']['size'] > 0)
 					{
