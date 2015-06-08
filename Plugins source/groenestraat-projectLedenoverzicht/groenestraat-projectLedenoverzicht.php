@@ -128,7 +128,7 @@
 				?>
 					</section>
 					<section id="projectMemberSubmitContainer" data="<?php echo $project->ID; ?>">
-						<input type="button" class="form-button" value="Leden toevoegen" id="projectMemberSubmit" data="<?php echo $project->ID; ?>" />
+						<input type="button" class="form-button" value="Leden toevoegen" id="projectMemberSubmitMember" data="<?php echo $project->ID; ?>" />
 					</section>
 				<?php
 			}

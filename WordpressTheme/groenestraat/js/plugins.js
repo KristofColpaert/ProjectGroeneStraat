@@ -373,7 +373,7 @@ $(document).ready(function()
 	var addMembersExpanded = false;
 	var newMembers = false;
 
-	$(document).on('click', '#projectMemberSubmit', function(e)
+	$(document).on('click', '#projectMemberSubmitMember', function(e)
 	{
 		if(!addMembersExpanded)
 		{
@@ -391,7 +391,7 @@ $(document).ready(function()
 		    		$('#projectMemberSubmitContainer').prepend(response);
 		    		$('#projectMemberSubmitContainer form').hide();
 		    		$('#projectMemberSubmitContainer form').slideToggle(250);
-		    		$('#projectMemberSubmit').val('Lid toevoegen');
+		    		$('#projectMemberSubmitMember').val('Lid toevoegen');
 		    	}
 		    });
 		}
@@ -406,7 +406,7 @@ $(document).ready(function()
 		    	{
 		    		action : 'add_project_member',
 		    		username : $('#projectMemberAddUsername').val(),
-		    		projectId : $('#projectMemberSubmit').attr('data')
+		    		projectId : $('#projectMemberSubmitMember').attr('data')
 		    	},
 		    	success : function(response)
 		    	{
@@ -418,7 +418,7 @@ $(document).ready(function()
 		    				$('.error-message').remove();
 		    			}
 
-		    			$('#projectMemberSubmit').val('Toegevoegd');
+		    			$('#projectMemberSubmitMember').val('Toegevoegd');
 		    			$('#projectMemberSubmitContainer form').slideToggle(250);
 
 		    			setTimeout(function()
@@ -432,10 +432,10 @@ $(document).ready(function()
 
 				    		newMembers = true;
 
-		    				$('#projectMemberSubmit').val('Leden toevoegen');
+		    				$('#projectMemberSubmitMember').val('Leden toevoegen');
 
 		    				var tempUsername = $('#projectMemberAddUsername').val();
-		    				var tempProjectId = $('#projectMemberSubmit').attr('data');
+		    				var tempProjectId = $('#projectMemberSubmitMember').attr('data');
 
 		    				$('#projectMemberSubmitContainer form').remove();
 		    				addMembersExpanded = false;
