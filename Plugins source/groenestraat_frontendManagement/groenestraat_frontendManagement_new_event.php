@@ -113,7 +113,24 @@
 
 					<input id="eventPublish" name="eventPublish" class="form-button"  type="submit" value="Publiceer" />
 				</form>
-         
+         		<script>
+         			var nietLeeg = "Dit veld is verplicht!";
+
+					var title = new LiveValidation('eventTitle', {validMessage:" "});
+					title.add(Validate.Presence,{failureMessage:nietLeeg});
+
+					var eventTime = new LiveValidation('eventTime', {validMessage:" "});
+					eventTime.add(Validate.Presence,{failureMessage:nietLeeg});
+
+					var eventEndTime = new LiveValidation('eventEndTime', {validMessage:" "});
+					eventEndTime.add(Validate.Presence,{failureMessage:nietLeeg});
+
+					var loc = new LiveValidation('eventLocation', {validMessage:" "});
+					loc.add(Validate.Presence,{failureMessage:nietLeeg});
+
+					var featuredImage = new LiveValidation('eventFeaturedImage', {validMessage:" "});
+					featuredImage.add(Validate.Presence,{failureMessage:nietLeeg});
+         		</script>
 			<?php
 		}
 
@@ -174,7 +191,6 @@
 					add_post_meta($postId, '_eventTime', $eventTime);
 					add_post_meta($postId, '_eventEndTime', $eventEndTime);
 					add_post_meta($postId, '_eventLocation', $eventLocation);
-					add_user_meta($current_user->ID, '_eventCalendar', $postId);
 
                    	if($_FILES['eventFeaturedImage']['size'] > 0)
 					{

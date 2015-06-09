@@ -109,6 +109,12 @@
 					
 					<input id="articlePublish" name="articlePublish" type="submit" value="Publiceer" class="form-button" />
 				</form>
+				<script>
+					var nietLeeg = "Dit veld is verplicht!";
+
+					var title = new LiveValidation('articleTitle', {validMessage:" "});
+					title.add(Validate.Presence,{failureMessage:nietLeeg});
+				</script>
 			<?php
 		}
 

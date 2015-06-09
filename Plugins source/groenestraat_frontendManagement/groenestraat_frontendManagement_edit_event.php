@@ -120,6 +120,21 @@
 
 						<input class="form-button" id="eventEdit" name="eventEdit" type="submit" value="Bewerk" />
 					</form>
+					<script>
+						var nietLeeg = "Dit veld is verplicht!";
+
+						var title = new LiveValidation('eventTitle', {validMessage:" "});
+						title.add(Validate.Presence,{failureMessage:nietLeeg});
+
+						var eventTime = new LiveValidation('eventTime', {validMessage:" "});
+						eventTime.add(Validate.Presence,{failureMessage:nietLeeg});
+
+						var eventEndTime = new LiveValidation('eventEndTime', {validMessage:" "});
+						eventEndTime.add(Validate.Presence,{failureMessage:nietLeeg});
+
+						var loc = new LiveValidation('eventLocation', {validMessage:" "});
+						loc.add(Validate.Presence,{failureMessage:nietLeeg});
+					</script>
 				<?php
 			}
 

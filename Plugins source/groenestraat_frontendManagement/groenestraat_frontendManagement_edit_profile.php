@@ -40,6 +40,10 @@
 					<input id="profileFirstname" name="profileFirstname" class="textbox" type="text" placeholder="Voornaam" value="<?php echo $firstname; ?>"/>
 					<input id="profileName" name="profileName" class="textbox" type="text" placeholder="Naam" value="<?php echo $name; ?>"/>
 
+					<h2>Wachtwoord</h2>
+					<input id="profilePassword1" name="profilePassword1" class="textbox" type="password" placeholder="Wachtwoord" />
+					<input id="profilePassword2" name="profilePassword2" class="textbox" type="password" placeholder="Herhaal wachtwoord" />
+
 					<h2>Contactinformatie</h2>
 					<input id="profileEmail" name="profileEmail" class="textbox" type="text" placeholder="E-mailadres (loginnaam wijzigt niet)" value="<?php echo $current_user->user_email; ?>"/>
 					<input id="profileWebsite" name="profileWebsite" class="textbox" type="text" placeholder="Website" value="<?php echo $current_user->user_url; ?>"/>
@@ -68,6 +72,83 @@
 				    elems.forEach(function(html) {
 				        var switchery = new Switchery(html, {color:'#00cd00', secondaryColor:'#E74C3C', size:'small'});
 				    });
+
+				    var nietLeeg = "Dit veld is verplicht!";
+
+					var lastname = new LiveValidation('profileName', {validMessage:" "});
+					lastname.add(Validate.Presence,{failureMessage:nietLeeg});
+					lastname.add(Validate.Length, {maximum:25, tooLongMessage: "Maximum 25 tekens lang!"});
+
+					var firstname = new LiveValidation('profileFirstname', {validMessage:" "});
+					firstname.add(Validate.Presence,{failureMessage:nietLeeg});
+					firstname.add(Validate.Length, {maximum:15, tooLongMessage: "Maximum 15 tekens lang!"});
+
+					var email = new LiveValidation('profileEmail', {validMessage:" "});
+					email.add(Validate.Presence,{failureMessage:nietLeeg});
+					email.add(Validate.Length, {maximum:50, tooLongMessage: "Maximum 50 tekens lang!"});
+					email.add(Validate.Email, {failureMessage: "Moet een geldig e-mailadres zijn!"});
+					email.add(Validate.Custom, {against: function checkEmail(value){
+				        $("#user_email").css({border:'1px solid #00CD00'});
+				            checkValidEmail(value, function(val){
+				                console.log(val);
+				                if(val != "true"){
+				                     $("#user_email").next().hide();
+				                }
+				                else {
+				                     $("#user_email").next().show();
+				                    $("#user_email").css({border:'1px solid #E74C3C'});
+				                    $("#user_email").next().text("Dit emailadres is reeds geregistreerd!");
+				                    $("#user_email").next().css({color:'#E74C3C'})
+				                    return false;
+				                }
+				            });
+        				return true;
+   					}, failureMessage:"Dit emailadres is reeds geregistreerd!"});
+
+   					var street = new LiveValidation('profileStreet', {validMessage:" "});
+   					street.add(Validate.Length, {maximum:30, tooLongMessage: "Maximum 30 tekens lang!"});
+
+   					var city = new LiveValidation('profileCity', {validMessage:" "});
+   					city.add(Validate.Length, {maximum:20, tooLongMessage: "Maximum 20 tekens lang!"});
+
+   					var zipcode = new LiveValidation('profileZipcode', {validMessage:" "});
+   					zipcode.add(Validate.Length, {is:4, wrongLengthMessage: "Een postcode moet 4 cijfers bevatten!"});
+   					zipcode.add(Validate.Numericality, {onlyInteger:true});
+
+   					var telephone = new LiveValidation('profileTelephone', {validMessage:" "});
+   					telephone.add(Validate.Length, {maximum:13, tooLongMessage: "Maximum 13 tekens lang!"});
+   					telephone.add(Validate.Numericality, {onlyInteger:true});
+
+   					var password1 = new LiveValidation('profilePassword1', {validMessage:" "});
+   					password1.add(Validate.Length, {minimum:6, tooShortMessage:"Wachtwoord moet minimum 6 tekens bevatten."});
+				    password1.add(Validate.Custom, {against: function checkPassword(value){
+				      re = /[0-9]/;
+				      if(!re.test(value)) {
+				        return false;
+				      }
+				      re = /[a-z]/;
+				      if(!re.test(value)) {
+				        return false;
+				      }
+				      re = /[A-Z]/;
+				      if(!re.test(value)) {
+				        return false;
+				      }
+				       else return true;
+				   	}, failureMessage:"Een wachtwoord moet kleine letters, hoofdletters & cijfers bevatten!"});
+
+				    var password2 = new LiveValidation('profilePassword2', {validMessage:" "});
+				   	$('#profilePassword1').change(function()
+				   	{
+				   		password2.add(Validate.Presence,{failureMessage:nietLeeg});
+    					password2.add(Validate.Confirmation, {match:'profilePassword1', failureMessage:"Wachtwoorden zijn niet gelijk!"});
+				   	});
+
+				   	$('#profilePassword2').change(function()
+				   	{
+				   		password2.add(Validate.Presence,{failureMessage:nietLeeg});
+    					password2.add(Validate.Confirmation, {match:'profilePassword1', failureMessage:"Wachtwoorden zijn niet gelijk!"});
+				   	});
 				</script>
 			<?php
 		}
@@ -114,6 +195,25 @@
 						'first_name' => $firstname,
 						'last_name' => $name
 					);
+
+					if(isset($_POST['profilePassword1']) && isset($_POST['profilePassword2']))
+					{
+						$password1 = $_POST['profilePassword1'];
+						$password2 = $_POST['profilePassword2'];
+
+						if($password1 == $password2)
+						{
+							$args['user_pass'] = $password1;
+						}
+
+						else
+						{
+							?>
+								<p class="error-message">Gelieve alle vereiste gegevens correct in te voeren.</p>
+							<?php
+							return;
+						}
+					}				
 
 					wp_update_user($args);
 
