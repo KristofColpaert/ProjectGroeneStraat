@@ -15,7 +15,8 @@
         <section class="recent-item">
             <h1>Events</h1>
             <?php
-                    $my_query = new WP_Query(array('post_type' => 'events', 'posts_per_page' => 3));
+                    $projectevents_id = get_cat_ID('projectevents');
+                    $my_query = new WP_Query(array('post_type' => 'events', 'posts_per_page' => 3, 'cat' => '-' . $projectevents_id));
                     while($my_query->have_posts()) : $my_query->the_post();
                         $meta = get_post_meta($post->ID);
                         $eventTime = $meta['_eventTime'][0];
@@ -67,7 +68,8 @@
         var data = 
         [
             <?php
-                $my_query = new WP_Query(array('post_type' => 'post', 'posts_per_page' => 4));
+                $projectartikels_id = get_cat_ID('projectartikels');
+                $my_query = new WP_Query(array('post_type' => 'post', 'posts_per_page' => 4, 'cat' => '-' . $projectartikels_id));
                 while($my_query->have_posts()) : $my_query->the_post();
             ?>
             {
@@ -160,7 +162,8 @@
     </section>
     <section class="recent-zoekertjes">
         <?php
-            $my_query = new WP_Query(array('post_type' => 'zoekertjes', 'posts_per_page' => 3));
+            $projectzoekertjes_id = get_cat_ID('projectzoekertjes');
+            $my_query = new WP_Query(array('post_type' => 'zoekertjes', 'posts_per_page' => 3,'cat' => '-' . $projectzoekertjes_id));
 
             while($my_query->have_posts()) : $my_query->the_post();
                 $meta = get_post_meta($post->ID);

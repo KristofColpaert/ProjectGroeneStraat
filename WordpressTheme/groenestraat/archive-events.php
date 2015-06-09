@@ -83,13 +83,15 @@ function getMonth($var)
 		}
 
 		$orig_query = $my_query;
+		$projectevents_id = get_cat_ID('projectevents');
 		$paged = (get_query_var('paged')) ? get_query_var('paged') : 1;
 		$my_query = new WP_Query(
 			array(
 				'post_type' => 'events',
 				'posts_per_page' => 9,
 				's' => $keyword,
-				'paged' => $paged)
+				'paged' => $paged,
+				'cat' => '-' . $projectevents_id)
 			);
 
 		while($my_query->have_posts()) : $my_query->the_post();

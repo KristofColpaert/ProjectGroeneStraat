@@ -32,13 +32,15 @@
 		}
 
 		$orig_query = $my_query;
+		$projectzoekertjes_id = get_cat_ID('projectzoekertjes');
 		$paged = (get_query_var('paged')) ? get_query_var('paged') : 1;
 		$my_query = new WP_Query(
 			array(
 				'post_type' => 'zoekertjes',
 				'posts_per_page' => 9,
 				's' => $keyword,
-				'paged' => $paged)
+				'paged' => $paged,
+				'cat' => '-' . $projectzoekertjes_id)
 			);
 
 		while($my_query->have_posts()) : $my_query->the_post();
