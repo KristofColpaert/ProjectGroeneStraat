@@ -64,9 +64,10 @@
 				$subscriber = '_subscriberId';
 				$users = $wpdb->get_results($wpdb->prepare("SELECT a.post_id, a.meta_key AS aKey, a.meta_value AS userId, b.user_nicename AS username FROM $wpdb->postmeta a INNER JOIN $wpdb->users b ON a.meta_value = b.ID WHERE a.post_id = %d AND a.meta_key = %s ORDER BY b.user_nicename ASC", $project->ID, $subscriber), ARRAY_A);
 				?>
+					<a href="<?php echo get_permalink($project->ID); ?>">Ga terug naar het project</a>
 					<section id="projectMemberContainer">
 				<?php
-				if(count($users) > 0)
+				if(count($users) > 1)
 				{
 					foreach ($users as $user)
 					{
@@ -121,7 +122,7 @@
 				else
 				{
 					?>
-						<p class="error-message">Het project heeft geen leden. Ga terug naar <a href="<?php echo home_url(); ?>">Home</a>.</p>
+						<p class="error-message">Het project heeft geen leden. Ga terug naar <a href="<?php echo home_url(); ?>">Home</a> of voeg er toe.</p>
 					<?php
 				}
 
@@ -206,7 +207,7 @@
 			if($user != null && $project != null)
 			{
 				?>
-					<a class="newProjectMember" href="/member-informatie?userid=<?php echo $user->ID; ?>"><?php echo esc_html($user->user_nicename); ?></a><br />
+					<a class="newProjectMember" href="/member-informatie?userid=<?php echo $user->ID; ?>"><?php echo esc_html($user->display_name); ?></a><br />
 				<?php
 				die();
 			}
