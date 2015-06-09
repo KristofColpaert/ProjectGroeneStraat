@@ -20,6 +20,7 @@
 		makeInitialShortcodePage('Registreren', '', 'registreren', 'publish', 'page', 'closed','page-register.php');
 		makeInitialShortcodePage('Login', '', 'login', 'publish', 'page', 'closed', 'page-login.php');
 		makeInitialShortcodePage('Forgot', '', 'forgot', 'publish', 'page', 'closed', 'page-forgot.php');
+		makeInitialShortcodePage('Artikels', '', 'artikels', 'publish', 'page', 'closed', 'page-artikels.php');
 		register_main_menu();
 		activate_all_plugins();
 	}
