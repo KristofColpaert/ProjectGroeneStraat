@@ -33,6 +33,7 @@
 		makeShortcodePage('Bewerk zoekertje','[edit_zoekertje]','bewerk zoekertje','publish','page','closed');
 		makeShortcodePage('Bewerk project','[edit_project]','bewerk project','publish','page','closed');
 		makeShortcodePage('Bewerk artikel','[edit_article]','bewerk artikel','publish','page','closed');
+		makeShortcodePage('Bewerk profiel','[edit_profile]','bewerk profiel','publish','page','closed');
 	}
 
 	function makeShortcodePage($title,$content,$post_name,$post_status,$post_type,$ping_status)
@@ -63,4 +64,6 @@
 	include_once('groenestraat_frontendManagement_new_article.php');
 	include_once('groenestraat_frontendManagement_edit_article.php');
 	include_once('groenestraat_frontendManagement_delete_article.php');
+
+	include_once('groenestraat_frontendManagement_edit_profile.php');
 ?>
