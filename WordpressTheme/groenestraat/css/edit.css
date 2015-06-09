@@ -52,7 +52,7 @@
     font-size: 2em;
 }
 .form-button:hover, #wp-submit:hover{
-    background-color: #f8f7f7;
+    background-color: transparent;
     border: 1px solid #00cd00;
     border-radius: 3px;
     color: #00cd00;
@@ -378,7 +378,7 @@ textarea.LV_invalid_field:active {
     cursor:pointer; 
 }
 .normalize-text{
-    font-weight: 800 !important;
+    font-weight: 600 !important;
     color: #69686e;
 }
 .error-message{
@@ -579,3 +579,15 @@ fc-right{
 /* Fallbacks */
 .click-nav .no-js ul {display:none;}
 .click-nav .no-js:hover ul {display:block;}
+
+
+.search .form-button{
+    width: 100%;
+}
+
+.view-item{
+    display: block;
+    color: #00cd00 !important;
+    float: right;
+    font-size: 2em !important;
+}

@@ -633,7 +633,7 @@ footer
     color:#333333;
 }
 
-.container a
+.hiddenlink
 {
     font-size:none;
     text-decoration: none;
@@ -736,7 +736,6 @@ footer
     width: 86%;
     margin: 5% 5% 0 5%;
     padding: 2%;
-    min-height: 150px;
     background-color: #ffffff;
 }
 
