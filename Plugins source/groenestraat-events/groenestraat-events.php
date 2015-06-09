@@ -177,7 +177,14 @@
 			return $post->ID;
 		}
 
-		if($_POST['_eventTime'])
+		if(!isset($_POST['_eventLocation']) || empty($_POST['_eventLocation']) ||
+			!isset($_POST['_eventTime']) || empty($_POST['_eventTime']) ||
+			!isset($_POST['_eventEndTime']) || empty($_POST['_eventEndTime'])
+			)
+		{
+        	$error = new WP_Error('Er is een fout opgetreden. Gelieve alle gegevens (locatie, begindatum, einddatum) correct in te voeren. <a href="'. $_SERVER['HTTP_REFERER'] .'">Ga terug.</a>');
+		    wp_die($error->get_error_code(), 'Error: Missing Arguments');
+		}
 
 		$events_meta['_eventLocation'] = $_POST['_eventLocation'];
 		$events_meta['_eventTime'] = $_POST['_eventTime'];

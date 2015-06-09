@@ -142,6 +142,9 @@
 
     	echo '<label for="adLocation">Locatie van het zoekertje</label>';
     	echo '<input id="adLocation" type="text" name="_adLocation" value="' . $adLocation . '" class="widefat" />';
+
+    	wp_enqueue_script('validation', get_stylesheet_directory_uri() . '/js/livevalidation_standalone.compressed.js', array( 'jquery' ));
+    	wp_enqueue_script('my_validation', plugins_url() . '/groenestraat-zoekertjes/my_validation.js', array( 'jquery' ));
 	}
 	
 	function save_zoekertjes_metaboxes($post_id, $post)
@@ -154,6 +157,14 @@
 		if (!current_user_can('edit_post', $post->ID))
 		{
 			return $post->ID;
+		}
+
+		if(!isset($_POST['_adPrice']) || empty($_POST['_adPrice']) ||
+			!isset($_POST['_adLocation']) || empty($_POST['_adLocation'])
+			)
+		{
+        	$error = new WP_Error('Er is een fout opgetreden. Gelieve alle gegevens (locatie, prijs) correct in te voeren. <a href="'. $_SERVER['HTTP_REFERER'] .'">Ga terug.</a>');
+		    wp_die($error->get_error_code(), 'Error: Missing Arguments');
 		}
 
 		$events_meta['_adPrice'] = $_POST['_adPrice'];
