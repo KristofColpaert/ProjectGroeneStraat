@@ -39,6 +39,8 @@ register_activation_hook(__FILE__, 'prowp_ledenOverzicht_install');
 
 function prowpt_ledenoverzicht()
 {
+	$letters = array();
+	
 	if(is_user_logged_in())
 	{
 		$args = array(
