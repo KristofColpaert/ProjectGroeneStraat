@@ -590,4 +590,53 @@ fc-right{
     color: #00cd00 !important;
     float: right;
     font-size: 2em !important;
+    border: 1px solid transparent;
+    border-radius: 3px;
+    padding: 5px 15px 5px 15px;
 }
+.view-item:hover{
+    border: 1px solid #00CD00;
+}
+
+
+.project-info h1{
+    color: #FFF;
+    line-height: 1em !important; 
+    position: relative;
+    padding: 1% 1%;
+}
+.project-info{
+    float: left;
+    width: 50%;
+    min-width: 500px;
+    height: 100%;
+}
+.vertical-align{
+    position: relative;
+    top: 50%;
+    -webkit-transform: translateY(-50%);
+    -ms-transform: translateY(-50%);
+    transform: translateY(-50%);
+}
+
+.wide-button{
+    display: block;
+    font-size: 1.5em !important;
+    text-align: center;
+    width: 90% !important;
+    border: 1px solid #00CD00;
+    background-color: #00CD00;
+    padding: 5px 15px 5px 15px;
+    border-radius: 3px;
+    margin: 15px auto;
+}
+.wide-button:hover{
+    background-color: transparent;
+    color: #00CD00;
+}
+
+.options .form-button{
+    display: none;
+}
+
+

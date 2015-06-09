@@ -49,15 +49,29 @@
 ?>
 
 	<section class="project-image header-image">
-		<section class="project-info">
-
-			<!-- Kristof zijn toevoegingen -->
-			
-		</section>
+		
 	</section>
-
+       
 	<section class="container" style="background-color:#ccc">
+         <section class="sub-menu">
+             <section class="project-info">
 
+			
+			
+		      </section>
+            <ul>
+                <li>
+                    <a href="<?php echo get_site_url();?>/nieuw-artikel?project=<?php echo $post->ID; ?>">nieuw artikel</a>
+                </li>
+                <li>
+                    <a href="<?php echo get_site_url();?>/nieuw-zoekertje?project=<?php echo $post->ID; ?>">nieuw zoekertje</a>
+                </li>
+                <li>
+                    <a href="<?php echo get_site_url();?>/nieuw-event?project=<?php echo $post->ID; ?>">nieuw event</a>
+                </li>
+            </ul>
+             <section class="clear"></section>
+        </section>
 		<section class="main">
 		
 	<?php
@@ -78,6 +92,7 @@
 		var info = document.getElementsByClassName("project-info")[0];
 		var h1 = document.createElement("h1");
 		h1.innerHTML = "<?php the_title(); ?>";
+           // h1.className = "vertical-align";
 		info.appendChild(h1);
 
 
@@ -187,6 +202,13 @@
                     <hr/>
 					<?php
 				}
+                else if(is_user_logged_in()){
+                    ?>
+                    <a  class="wide-button" href="<?php echo get_site_url() ?>/projectleden?project=<?php echo $post->ID; ?>">Leden</a>
+                    <a  class="wide-button" href="<?php echo get_site_url() ?>/bewerk-project?project=<?php echo $post->ID; ?>">Beheren</a>
+                <hr />
+                <?php
+                }
 
 			?>
                 
@@ -212,7 +234,7 @@
                 
                 <section class="form-line">
         
-                   <a href="<?php echo get_site_url() ?>/projectleden?project=<?php echo $post->ID; ?>">Leden</a>
+                   <
                 </section>
             </section>
             
@@ -248,16 +270,16 @@
                 $('.'+el).animate(
 	    		{
 				    height: 'toggle',
-                    padding: '2%',
-                    margin:'5% 5% 0 5%',
+                    padding: '4%',
+                    margin:'5% 3%',
 				}, 500);
             }
             else {
                 $('.'+el).animate(
 	    		{
-                    padding:'0% 2%',
+                    padding:'0% 4%',
 				    height: 'toggle',
-                    margin:'0% 5% -5% 5%',
+                    margin:'0% 3%',
 				}, 500);
             }
     }
