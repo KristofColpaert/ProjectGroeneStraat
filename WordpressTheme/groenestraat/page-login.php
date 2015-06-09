@@ -51,7 +51,35 @@ $args = array(
     elems.forEach(function(html) {
         var switchery = new Switchery(html, {color:'#00cd00', size:'small'});
     });
-   
+    var nietLeeg = "Dit veld is verplicht!";
+    var email = new LiveValidation('user_login', {validMessage:" "});
+    email.add(Validate.Presence,{failureMessage:nietLeeg});
+    email.add(Validate.Length, {maximum:50, tooLongMessage: "Maximum 50 tekens lang!"});
+    email.add(Validate.Email, {failureMessage: "Moet een geldig emailadres zijn!"});
+    email.add(Validate.Custom, {against: function checkEmail(value){
+        $("#user_login").css({border:'1px solid #00CD00'});
+            checkValidEmail(value, function(val){
+                console.log(val);
+                if(val != "true"){
+                     $("#user_login").next().show();
+                    $("#user_login").css({border:'1px solid #E74C3C'});
+                    $("#user_login").next().text("Dit emailadres is nog niet geregistreerd!");
+                    $("#user_login").next().css({color:'#E74C3C'})
+                    return false;
+                     
+                }
+                else {
+                    $("#user_login").css({border:'1px solid #00CD00'});
+                    $("#user_login").next().hide();
+                    return true;
+                }
+            });
+        return false;        
+      
+    }, failureMessage:" "});
+    
+    var pass = new LiveValidation('user_pass', {validMessage:" "});
+    pass.add(Validate.Presence,{failureMessage:nietLeeg});
 
 </script>
     
