@@ -75,30 +75,28 @@
 			<?php 
 			global $post;
 			$meta_key = "_parentProjectId";
-			$current_user = get_current_user_id();
+			$current_user = wp_get_current_user();
 
 			//kijken of user project heeft.
 			$results = $wpdb->get_results($wpdb->prepare( "SELECT post_id, meta_key, meta_value FROM $wpdb->postmeta WHERE post_id = %d AND meta_key = %s", $post->ID, $meta_key), ARRAY_A);
 			$projectId = $results[0]["meta_value"];
 
 			$subscriber = "_subscriberId";
-			$subscribers = $wpdb->get_results($wpdb->prepare( "SELECT meta_value AS SubscriberId FROM $wpdb->postmeta WHERE post_id = %d AND meta_key = %s", $projectId, $subscriber), ARRAY_A);
+			$subscribers = $wpdb->get_results($wpdb->prepare( "SELECT meta_value FROM $wpdb->postmeta WHERE post_id = %d AND meta_key = %s", $projectId, $subscriber), ARRAY_A);
 
 			foreach($subscribers as $subscriber)
 			{
-				$users[] = $subscriber["SubscriberId"];
+				$users[] = $subscriber["meta_value"];
 			}
 
 			//count($results) als project nergens behoort kan iedereen reageren.
-			if($current_user > 0 && $post->post_author != $current_user)
+			if($current_user->ID > 0 && $post->post_author != $current_user->ID)
 			{
 				if(in_array($current_user, $users) || count($results) == 0 )
 				{
-					$userdata = get_userdata($current_user);
-					$name = $userdata->first_name;
-					$email = $userdata->user_email;
+					$name = $current_user->display_name;
+					$email = $current_user->user_email;
 					?>
-					<br/><br/><br/><hr/><br/><br/>
 						<form method="POST" class="createForm" style="width:50%"; action="<?php $_SERVER['REQUEST_URI']; ?>" method="POST" enctype="multipart/form-data">
 							
 							<label for="Name">Naam</label>
@@ -119,7 +117,7 @@
 					<?php
 				}
 
-				}
+			}
 			?>
 		<?php
 	endwhile;
