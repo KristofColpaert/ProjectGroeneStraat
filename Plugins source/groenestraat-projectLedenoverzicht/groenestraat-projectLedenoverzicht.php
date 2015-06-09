@@ -58,6 +58,7 @@
 			$current_user = wp_get_current_user();
 			$project = get_post($_GET['project']);
 			$previousEersteLetter;
+			$isFirst = true;
 
 			if($project != null && ($project->post_author == $current_user->ID))
 			{
@@ -99,21 +100,33 @@
 						{
 							if($previousEersteLetter != $eersteLetter)
 							{
-								?>
-									</section>
-								<?php
+								if($isFirst)
+								{
+									$isFirst = false;
+								}
+
+								else
+								{
+									?>
+										</section>
+									<?php
+								}
 							}
 
 							$letters[] = $eersteLetter;
 							$previousEersteLetter = $eersteLetter;
 							?>
-								<section id="projectMemberContainer<?php echo $eersteLetter; ?>">
+								<section class="projectMemberContainer" id="projectMemberContainer<?php echo $eersteLetter; ?>">
 								<h1><?php echo $eersteLetter; ?></h1>
 							<?php
 						}
+
+						$firstname = get_user_meta($user['userId'], 'first_name', true);
+						$name = get_user_meta($user['userId'], 'last_name', true);
+
 						?>
-							<section id="projectMemberContainer<?php echo $userData->ID; ?>">
-								<a href="/member-informatie?userid=<?php echo $userData->ID; ?>"><?php echo esc_html($userData->display_name); ?></a>
+							<section class="projectMember" id="projectMemberContainer<?php echo $userData->ID; ?>">
+								<a href="<?php echo home_url(); ?>/member-informatie?userid=<?php echo $userData->ID; ?>"><?php if($firstname != '' && $name != '')echo $firstname . " " . $name; else echo $userData->display_name ?></a>
 								<input type="button" value="Verwijder" class="projectMemberDelete form-button" data="<?php echo $project->ID . ';' . $user['userId']; ?>" id="projectLedenDelete<?php echo $userData->ID; ?>" />
 							</section>
 						<?php
