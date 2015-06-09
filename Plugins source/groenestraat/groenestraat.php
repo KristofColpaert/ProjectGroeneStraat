@@ -14,6 +14,7 @@
 		Install plugins
 	*/
 	register_activation_hook(__FILE__, 'prowp_groenestraat_install');
+	add_action('admin_head','check_post_type_and_remove_media_buttons');
 
 	function prowp_groenestraat_install()
 	{
@@ -41,6 +42,23 @@
 			'page_template' => $page_template
 		);
 		wp_insert_post($args);
+	}
+
+	function check_post_type_and_remove_media_buttons()
+	{
+		global $current_screen;
+
+		if('projecten' == $current_screen->post_type
+			|| 'zoekertjes' == $current_screen->post_type
+			|| 'events' == $current_screen->post_type)
+		{
+			remove_action('media_buttons', 'media_buttons');
+		}
+
+		else if('post' == $current_screen->post_type)
+		{
+			remove_meta_box( 'postimagediv', 'post', 'side' );
+		}
 	}
 
 	function register_main_menu()
