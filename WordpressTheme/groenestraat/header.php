@@ -12,21 +12,20 @@
         <nav>
             <a href="<?php echo get_site_url(); ?>"><img src="<?php bloginfo('template_directory'); ?>/img/logo.png" class="logo" width="400" height="65" alt="" title="" /></a>
             <section class="menu">
-                 <ul>
+              <ul>
+                <!--
                 <li class="basic-menu-item normalize-text"><a href="<?php echo get_site_url(); ?>/artikels">Artikels</a></li>
                 <li class="basic-menu-item normalize-text"><a href="<?php echo get_site_url(); ?>/projecten">Projecten</a></li>
-                    <li class="basic-menu-item normalize-text"><a href="<?php echo get_site_url(); ?>/events">Events</a></li>
-                     <li class="basic-menu-item normalize-text"><a href="<?php echo get_site_url(); ?>/zoekertjes">Zoekertjes</a></li>
-                     
+                <li class="basic-menu-item normalize-text"><a href="<?php echo get_site_url(); ?>/events">Events</a></li>
+                <li class="basic-menu-item normalize-text"><a href="<?php echo get_site_url(); ?>/zoekertjes">Zoekertjes</a></li>
+                -->
                 <?php
                    
                 if ( is_user_logged_in() ) 
                 { 
                     $userstring = $current_user->user_firstname." ".$current_user->user_lastname;
-                    get_currentuserinfo();
-                     
-                     
-           ?>
+                    get_currentuserinfo();     
+                ?>
                      
                     <div id="logged-user" class="click-nav">
                       <ul class="no-js">
@@ -67,8 +66,8 @@
                 }
                 else{
                     echo '<li class="aanmelden"><a href="'.get_site_url().'/login">AANMELDEN</a></li>';
-                    
                 }?> 
+                      <?php wp_nav_menu(array('Main menu' => 'header-menu')); ?>
                      </ul>
             </section>
         </nav>

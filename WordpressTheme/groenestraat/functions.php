@@ -13,8 +13,10 @@ function script_enqueue(){
     wp_enqueue_script('plugins', get_stylesheet_directory_uri() . '/js/plugins.js', array('jquery'));
     wp_localize_script('plugins', 'plugin', array('ajax_url' => admin_url('admin-ajax.php')));
 }
+
 add_action('wp_enqueue_scripts', 'script_enqueue');     
 
+register_nav_menu( 'primary', __( 'Main menu', 'groenestraat' ) );
 
 function excerpt($limit) 
 {
