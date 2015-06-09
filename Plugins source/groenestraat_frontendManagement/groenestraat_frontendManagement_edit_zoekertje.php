@@ -38,7 +38,7 @@
 						
 						<label class="normalize-text" for="adDescription">Beschrijving</label><br \>
 						<?php
-							$settings = array('textarea_name' => 'adDescription');
+							$settings = array('textarea_name' => 'adDescription', 'media_buttons' => false);
 							$content = $zoekertje->post_content; 
 							$editor_id = 'adDescription';
 

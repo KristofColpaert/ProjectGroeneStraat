@@ -1,6 +1,4 @@
 <?php
-	include_once('helper.php');
-
 	/*
 		Shortcode plugin
 	*/
@@ -146,9 +144,6 @@
 								}
 							?>
 						</select>
-
-						<label for="articleFeaturedImage" class="normalize-text">Afbeelding</label>
-	                  	<input id="articleFeaturedImage" name="articleFeaturedImage" type="file" accept="image/x-png, image/gif, image/jpeg" />
 						
 						<input id="articleId" name="articleId" type="hidden" value="<?php echo $article->ID; ?>" />
 
@@ -214,14 +209,6 @@
 					{
 						$tempCategory = get_category_by_slug('projectartikels');
 						wp_set_post_categories($postId, array($tempCategory->term_id), true);
-					}
-
-					if($_FILES['articleFeaturedImage']['size'] > 0)
-					{
-						foreach($_FILES as $file => $array)
-						{
-							$newupload = insert_featured_image($file, $postId);
-						}
 					}
 
 					?>

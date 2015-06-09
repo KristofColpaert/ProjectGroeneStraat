@@ -38,7 +38,7 @@
 
 						<label for="projectDescription" class="normalize-text">Beschrijving</label><br \>
 						<?php 
-							$settings = array('textarea_name' => 'projectDescription');
+							$settings = array('textarea_name' => 'projectDescription', 'media_buttons' => false);
 							$content = $project->post_content;
 							$editor_id = 'projectDescription';
 

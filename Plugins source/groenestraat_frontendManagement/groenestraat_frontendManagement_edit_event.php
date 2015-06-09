@@ -58,7 +58,7 @@
 						
 						<label for="eventDescription" class="normalize-text">Beschrijving</label><br \>
 						<?php
-							$settings = array('textarea_name' => 'eventDescription');
+							$settings = array('textarea_name' => 'eventDescription', 'media_buttons' => false);
 							$content = $event->post_content; 
 							$editor_id = 'eventDescription';
 

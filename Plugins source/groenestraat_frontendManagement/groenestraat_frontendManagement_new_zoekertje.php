@@ -25,7 +25,7 @@
 
 					<label for="adDescription" class="normalize-text">Beschrijving</label><br \>
 					<?php
-						$settings = array('textarea_name' => 'adDescription');
+						$settings = array('textarea_name' => 'adDescription', 'media_buttons' => false);
 						$content = ''; 
 						$editor_id = 'adDescription';
 
