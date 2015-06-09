@@ -53,9 +53,23 @@
 							{
 								foreach($parents as $parent)
 								{
-									?>
-										<option value="<?php echo $parent->ID; ?>"><?php echo $parent->post_title; ?></option>
-									<?php
+									if(isset($_GET['project']))
+									{
+										$tempProject = get_post($_GET['project'], OBJECT);
+										if($tempProject != null && $tempProject->ID == $parent->ID)
+										{
+											?>
+												<option selected value="<?php echo $parent->ID; ?>"><?php echo $parent->post_title; ?></option>
+											<?php
+										}
+									}
+
+									else
+									{
+										?>
+											<option value="<?php echo $parent->ID; ?>"><?php echo $parent->post_title; ?></option>
+										<?php
+									}
 								}
 							}
 						?>
