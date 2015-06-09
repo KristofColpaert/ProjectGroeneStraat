@@ -22,9 +22,8 @@
 	?>
 
 	<section class="container">
-		<div id="primary" class="content-area">
-		<main id="main" class="site-main" role="main">
-		<div class="contentwrapper">
+		
+		
 
 	<?php
 
@@ -40,14 +39,30 @@
 		*/
 
 		?>
-
+            <?php if(has_post_thumbnail($post->ID)) { 
+			 $url = wp_get_attachment_url( get_post_thumbnail_id($post->ID) );?>
+			<section class="image-wrapper">
+				
+			</section>
+        <script>
+             $('.image-wrapper').css({"background-image":"url(<?php echo $url; ?>)"});
+        </script>
+		<?php } ?>
+            <div class="eventwrapper normalize-text">
 		<h1><?php the_title(); ?></h1><br/>
-			<p><strong>Beschrijving:</strong><br/><?php echo the_content(); ?></p>
-			<br/>
-			<p><strong>Tijdstip:</strong><br/><?php echo $eventTime . " - " . $eventEndTime; ?></p>
-			<br/>
-			<p><strong>Locatie:</strong><br/><?php echo $eventLocation; ?></p>
-			<br/>
+                <section class="column-3">
+                    <p><strong>Beschrijving:</strong><br/><?php echo the_content(); ?></p>
+                </section>
+			
+                <section class="column-3">
+                    <p><strong>Tijdstip:</strong><br/><?php echo $eventTime . " - " . $eventEndTime; ?></p>
+	
+                </section >
+                <section class="column-3">
+                    <p><strong>Locatie:</strong><br/><?php echo $eventLocation; ?></p>
+                </section>
+			<section class="clear"></section>
+			
 			
 			<?php
 
@@ -65,22 +80,19 @@
 
 			?>
 
-			<?php if(has_post_thumbnail($post->ID)) { ?>
-			<p><strong>Foto:</strong><br/><br/>
-			<section class="image-wrapper">
-				<?php echo get_the_post_thumbnail(); ?>
-			</section>
-		<?php } ?>
+			
 			<br/><br/>
+                </div>
 			<div id="map-canvas"></div>
 		<!-- Kristof zijn toevoegingen -->
 		<?php endwhile; ?>
 
-				</div>
-			</main>
-		</div>
+				
+			
 	</section>
 	<script type="text/javascript">
+        
+       
 		var map;
 		var myLatlng;
 
@@ -90,12 +102,12 @@
 	    		var mapOptions = {
 	    			zoom: 12,
 		          	center: new google.maps.LatLng(coords[0], coords[1]),
-		          	disableDefaultUI: true
+		          	disableDefaultUI: true, 
+                    scrollwheel: false,
 		        };
 
 		        myLatlng = new google.maps.LatLng(coords[0], coords[1]);
 
-		        console.log('coordinaten: ' + mapOptions.center[0]);
 		        map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
 
 		        var contentString = '<div id="content">'+

@@ -607,7 +607,7 @@ fc-right{
 }
 .project-info{
     float: left;
-    width: 50%;
+    width: 65%;
     min-width: 500px;
     height: 100%;
 }
@@ -639,4 +639,33 @@ fc-right{
     display: none;
 }
 
+.image-wrapper{
+    margin: 0 auto;
+    height: 30vh;
+    width: 100%;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+}
+
+.eventwrapper{
+    background-color: #69686e;
+    text-align: center;
+}
+.eventwrapper h1{
+    color: #FFF;
+}
+.eventwrapper strong{
+    font-size: 1.5em !important;
+}
+.column-3{
+    background-color: #FFF;
+    width: 20%;
+    padding: 2%;
+    margin: 0 4.66%;
+    float:left;
+}
+.eventwrapper .column-3{
+    text-align: center;
+}
 
