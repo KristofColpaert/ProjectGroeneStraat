@@ -49,7 +49,7 @@
 
 				echo '<strong>Gebruikersnaam: </strong><label>'. $user->user_login . '</label><br />';
 
-				if(get_user_meta($user->ID, "rpr_gegevens", true) == 0)
+				if(get_user_meta($user->ID, "rpr_gegevens", true) == 1)
 				{
 					echo '<strong>E-mail: </strong><label>'. $user->user_email  . '</label><br />';
 					if($usermeta['rpr_straat'][0] != "" || $usermeta['rpr_postcode'][0] != "" || $usermeta['rpr_gemeente'][0] != "")
@@ -114,7 +114,7 @@
 					echo "<h2>Er werden geen activiteiten gevonden.</h2>";
 				}
 
-				echo '<a href="'.site_url().'/ledenoverzicht">Terug naar ledenoverzicht</a>';
+				echo '<a href="'.site_url().'/leden-overzicht">Terug naar ledenoverzicht</a>';
 
 			}
 			else

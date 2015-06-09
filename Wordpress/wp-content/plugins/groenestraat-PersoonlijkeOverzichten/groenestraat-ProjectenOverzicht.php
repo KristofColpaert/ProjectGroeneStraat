@@ -52,7 +52,6 @@ function prowpt_persoonlijkeProjectenOverzicht()
 		global $post;
 
 		$projectenSubscribed = array(
-					'post_author' => $userId,
 					'post_type' => 'projecten',
 					'order' => 'ASC',
 					'orderby' => 'date',
@@ -81,21 +80,26 @@ function prowpt_persoonlijkeProjectenOverzicht()
 				while ($the_query_subscribed->have_posts() ) {
 							$the_query_subscribed->the_post();	
 
-							echo '<h2>' . get_the_title() . '</h2>';
 							$projectAdminId = $post->post_author;
 
-							$street = get_post_meta($post->ID, "_projectStreet")[0];
-							$city = get_post_meta($post->ID, "_projectCity")[0];
-							$zipcode = get_post_meta($post->ID, "_projectZipcode")[0];
-
-							if(!empty($street) && !empty($city) && !empty($zipcode))
+							if($projectAdminId != $userId)
 							{
-									print '<h1>' . $title . '</h1>';
-									print '<strong>Street: </strong> ' . $street . '<br />';
-									print '<strong>City: </strong> ' . $city . '<br />';;
-									print '<strong>Zipcode: </strong> ' . $zipcode . '<br />';;
-									print '<strong>Omschrijving: </strong><p>' . get_the_excerpt() . '</p>';
+								echo '<h2>' . get_the_title() . '</h2>';
+								
+								$street = get_post_meta($post->ID, "_projectStreet")[0];
+								$city = get_post_meta($post->ID, "_projectCity")[0];
+								$zipcode = get_post_meta($post->ID, "_projectZipcode")[0];
+
+								if(!empty($street) && !empty($city) && !empty($zipcode))
+								{
+										print '<h1>' . $title . '</h1>';
+										print '<strong>Street: </strong> ' . $street . '<br />';
+										print '<strong>City: </strong> ' . $city . '<br />';;
+										print '<strong>Zipcode: </strong> ' . $zipcode . '<br />';;
+										print '<strong>Omschrijving: </strong><p>' . get_the_excerpt() . '</p>';
+								}
 							}
+
 				}
 
 		}
