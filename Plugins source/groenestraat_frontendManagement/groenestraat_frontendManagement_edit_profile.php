@@ -87,23 +87,9 @@
 					email.add(Validate.Presence,{failureMessage:nietLeeg});
 					email.add(Validate.Length, {maximum:50, tooLongMessage: "Maximum 50 tekens lang!"});
 					email.add(Validate.Email, {failureMessage: "Moet een geldig e-mailadres zijn!"});
-					email.add(Validate.Custom, {against: function checkEmail(value){
-				        $("#user_email").css({border:'1px solid #00CD00'});
-				            checkValidEmail(value, function(val){
-				                console.log(val);
-				                if(val != "true"){
-				                     $("#user_email").next().hide();
-				                }
-				                else {
-				                     $("#user_email").next().show();
-				                    $("#user_email").css({border:'1px solid #E74C3C'});
-				                    $("#user_email").next().text("Dit emailadres is reeds geregistreerd!");
-				                    $("#user_email").next().css({color:'#E74C3C'})
-				                    return false;
-				                }
-				            });
-        				return true;
-   					}, failureMessage:"Dit emailadres is reeds geregistreerd!"});
+					$("#user_login").focusout(function(){
+        				checkValidEmail($("#user_login").val(),true,"user_login");
+    				});
 
    					var street = new LiveValidation('profileStreet', {validMessage:" "});
    					street.add(Validate.Length, {maximum:30, tooLongMessage: "Maximum 30 tekens lang!"});
