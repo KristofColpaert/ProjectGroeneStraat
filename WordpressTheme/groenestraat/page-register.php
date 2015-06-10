@@ -69,24 +69,7 @@ get_header();
     email.add(Validate.Presence,{failureMessage:nietLeeg});
     email.add(Validate.Length, {maximum:50, tooLongMessage: "Maximum 50 tekens lang!"});
     email.add(Validate.Email, {failureMessage: "Moet een geldig emailadres zijn!"});
-    email.add(Validate.Custom, {against: function checkEmail(value){
-        $("#user_email").css({border:'1px solid #00CD00'});
-            checkValidEmail(value, function(val){
-                console.log(val);
-                if(val != "true"){
-                     $("#user_email").next().hide();
-                }
-                else {
-                     $("#user_email").next().show();
-                    $("#user_email").css({border:'1px solid #E74C3C'});
-                    $("#user_email").next().text("Dit emailadres is reeds geregistreerd!");
-                    $("#user_email").next().css({color:'#E74C3C'})
-                    return false;
-                }
-            });
-        return true;        
-      
-    }, failureMessage:"Dit emailadres is reeds geregistreerd!"});
+    
     
     var straat = new LiveValidation('rpr_straat', {validMessage:" "});
     straat.add(Validate.Length, {maximum:30, tooLongMessage: "Maximum 30 tekens lang!"});
@@ -128,7 +111,9 @@ get_header();
     var voorwaarden = new LiveValidation('accept_privacy_policy', {validMessage:" "});
     voorwaarden.add(Validate.Acceptance, {failureMessage:"Accepteer de gebruiksvoorwaarden!"});
     
-   
+    $("#user_email").focusout(function(){
+        checkValidEmail($("#user_email").val(),false,"user_email");
+    });
   
   
 </script>

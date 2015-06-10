@@ -1,4 +1,4 @@
-function checkValidEmail(emailAddress, callback)
+function checkValidEmail(emailAddress, allowed, id)
 	{
 	    jQuery.ajax(
 	    {
@@ -11,7 +11,39 @@ function checkValidEmail(emailAddress, callback)
 	        },
 	        success : function(response)
 	        {
-                callback(response);
+                console.log("response: "+response+emailAddress);
+                if(email!=null){
+                    email.destroy();
+                }
+                
+                var correct = false;
+                var failureMessage;
+                if(allowed='true'){
+                    failureMessage = "Dit emailadres is nog niet geregistreerd";
+                }
+                else{
+                    failureMessage = "Dit emailadres is al geregistreerd";
+                }
+                if(response=='true' && allowed=='true'){
+                     correct=true;
+                }
+                if(response=='false' && allowed =='false'){
+                    correct = true;
+                    
+                }
+                else{
+                    
+                    correct=false;
+                }
+                var nietLeeg = "Dit veld is verplicht!";
+                var email = new LiveValidation(id, {validMessage:" "});
+                email.add(Validate.Presence,{failureMessage:nietLeeg});
+                email.add(Validate.Length, {maximum:50, tooLongMessage: "Maximum 50 tekens lang!"});
+                email.add(Validate.Email, {failureMessage: "Moet een geldig emailadres zijn!"});
+                email.add(Validate.Custom, {against: function checkEmail(value){
+                        console.log(correct);
+                        return correct;        
+                    }, failureMessage:failureMessage});
 	            return response;
 	        },
 	        error : function(error)
