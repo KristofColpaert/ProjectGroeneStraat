@@ -219,8 +219,12 @@
 
 			if($user != null && $project != null)
 			{
+				$firstname = get_user_meta($user->ID, 'first_name', true);
+				$name = get_user_meta($user->ID, 'last_name', true);
+				$display_name = get_user_meta($user->ID, 'display_name', true);
+
 				?>
-					<a class="newProjectMember" href="/member-informatie?userid=<?php echo $user->ID; ?>"><?php echo esc_html($user->display_name); ?></a><br />
+					<a class="newProjectMember" href="/member-informatie?userid=<?php echo $user->ID; ?>"><?php if($firstname != '' && $name != '')echo $firstname . " " . $name; else echo $display_name?></a><br />
 				<?php
 				die();
 			}
