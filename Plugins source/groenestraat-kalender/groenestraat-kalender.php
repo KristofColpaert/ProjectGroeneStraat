@@ -53,8 +53,11 @@
 		foreach($value as $val)
 		{
 			$event = get_post($val, OBJECT);
-			$event->eventTime = get_post_meta($event->ID, '_eventTime')[0];
-			$event->eventEndTime = get_post_meta($event->ID, '_eventEndTime')[0];
+			$post_meta = get_post_meta($event->ID);
+			$event->eventTime = $post_meta['_eventTime'][0];
+			$event->eventEndTime = $post_meta['_eventEndTime'][0];
+			$event->eventStartHour = $post_meta['_eventStartHour'][0];
+			$event->eventEndHour = $post_meta['_eventEndHour'][0];
 			$events[] = $event;
 		}
 
@@ -92,12 +95,18 @@
 											<?php
 											$start = date_create($event->eventTime);
 											$end = date_create($event->eventEndTime);
-											$end->setTime(24, 00, 00);
+
+											//het splitsen van het uur
+											$startHour = split(":", $event->eventStartHour);
+											$start->setTime($startHour[0],$startHour[0]);
+
+											$endHour = split(":" , $event->eventEndHour);
+											$end->setTime($endHour[0],$endHour[0]);
+
 											print "start: '" . date_format($start, 'Y-m-d H:i:s') . "',";
 											print "end: '" . date_format($end, 'Y-m-d H:i:s') . "',";
 											?>
 											url: '<?php echo get_permalink($event->ID); ?>',
-											allDay: true,
 										},
 									<?php
 								}
