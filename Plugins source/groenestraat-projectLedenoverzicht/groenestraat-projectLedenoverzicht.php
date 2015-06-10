@@ -221,7 +221,7 @@
 			{
 				$firstname = get_user_meta($user->ID, 'first_name', true);
 				$name = get_user_meta($user->ID, 'last_name', true);
-				$display_name = get_user_meta($user->ID, 'display_name', true);
+				$display_name = $user->display_name;
 
 				?>
 					<a class="newProjectMember" href="/member-informatie?userid=<?php echo $user->ID; ?>"><?php if($firstname != '' && $name != '')echo $firstname . " " . $name; else echo $display_name?></a><br />
