@@ -1,3 +1,4 @@
+
 $(window).load(function(){
     var primaryheight = window.innerHeight-65;
     var height = $('.contentwrapper').outerHeight();
@@ -9,4 +10,7 @@ $(window).load(function(){
         var padding = (primaryheight - height)/2;
         $('#primary').css("padding",padding+"px 0px");
     }
+        $('#primary').css({"opacity":100});
+        $('footer').show();
+        $("#calender").show();
 });

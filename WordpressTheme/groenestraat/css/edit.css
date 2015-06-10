@@ -249,6 +249,7 @@ textarea.LV_invalid_field:active {
 
 /**********NIEUWPROJECT***********/
 #primary{
+    opacity: 0;
     background-color: #a2a1a9;
 }
 .contentwrapper{
@@ -672,4 +673,6 @@ fc-right{
 .eventwrapper .column-3{
     text-align: center;
 }
-
+footer{
+    display: none;
+}
