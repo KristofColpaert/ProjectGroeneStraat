@@ -103,7 +103,15 @@
                         <input id="eventTime" readonly name="eventTime" type="text" class="normalize-text" placeholder="Datum start"/>
                     </section>
 					<section class="date textbox right">
-                    <input class="normalize-text" id="eventEndTime" readonly name="eventEndTime" type="text" placeholder="Datum einde" />             
+                    	<input class="normalize-text" id="eventEndTime" readonly name="eventEndTime" type="text" placeholder="Datum einde" />             
+                    </section>
+
+					<section class="date textbox left">
+                        <input id="eventStartHour" name="eventStartHour" type="text" class="normalize-text" placeholder="Aanvangstijd (HH:MM)"/>
+                    </section>
+
+                    <section class="date textbox right">
+                    	<input id="eventEndHour" name="eventEndHour" type="text" placeholder="Eindtijd (HH:MM)" />
                     </section>
 					
 					<input class="textbox normalize-text" id="eventLocation" name="eventLocation" type="text" placeholder="Locatie" />
@@ -127,6 +135,26 @@
 
 					var loc = new LiveValidation('eventLocation', {validMessage:" "});
 					loc.add(Validate.Presence,{failureMessage:nietLeeg});
+
+					var eventStartHour = new LiveValidation('eventStartHour', {validMessage:" "});
+					eventStartHour.add(Validate.Presence,{failureMessage:nietLeeg});
+					eventStartHour.add(Validate.Custom, {against: function checkTime(value){
+				      	re = /([0-9]|0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]$/;
+				     	if(!re.test(value)) {
+				     		return false;
+				      	}
+				      	else return true;
+				   	}, failureMessage:"Een tijdstip moet de structuur (HH:MM) hebben!"});
+
+					var eventEndHour = new LiveValidation('eventEndHour', {validMessage:" "});
+					eventEndHour.add(Validate.Presence,{failureMessage:nietLeeg});
+					eventEndHour.add(Validate.Custom, {against: function checkTime(value){
+				      	re = /([0-9]|0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]$/;
+				      	if(!re.test(value)) {
+				        	return false;
+				      	}
+				       	else return true;
+				   	}, failureMessage:"Een tijdstip moet de structuur (HH:MM) hebben!"});
 
 					var featuredImage = new LiveValidation('eventFeaturedImage', {validMessage:" "});
 					featuredImage.add(Validate.Presence,{failureMessage:nietLeeg});
@@ -154,7 +182,9 @@
 				!empty($_POST['eventTime']) &&
 				$_FILES['eventFeaturedImage']['size'] > 0 &&
 				!empty($_POST['eventLocation']) &&
-				!empty($_POST['eventEndTime'])
+				!empty($_POST['eventEndTime']) &&
+				!empty($_POST['eventStartHour']) &&
+				!empty($_POST['eventEndHour'])
 				)
 			{
 				$eventTitle = $_POST['eventTitle'];
@@ -163,6 +193,41 @@
 				$eventTime = $_POST['eventTime'];
 				$eventEndTime = $_POST['eventEndTime'];
 				$eventLocation = $_POST['eventLocation'];
+				$eventStartHour = $_POST['eventStartHour'];
+				$eventEndHour = $_POST['eventEndHour'];
+
+				$date1 = strtotime($eventTime);
+				$date2 = strtotime($eventEndTime);
+
+				if($date1 > $date2)
+				{
+					?>
+						<p class="error-message">Gelieve een startdatum in te voeren die vroeger valt dan de einddatum. Ga <a href="<?php echo home_url() . '/nieuw-event'; ?>">terug</a>.</p>
+					<?php
+					return;
+				}
+
+				if($date1 == $date2)
+				{
+					$start = explode(":", $eventStartHour);
+					$end = explode(":", $eventEndHour);
+
+					if($start[0] > $end[0])
+					{
+						?>
+							<p class="error-message">Gelieve een aanvangstijd in te voeren die vroeger valt dan de eindtijd. Ga <a href="<?php echo home_url() . '/nieuw-event'; ?>">terug</a>.</p>
+						<?php
+						return;
+					}
+
+					if($start[0] == $end[0] && $start[1] > $end[1])
+					{
+						?>
+							<p class="error-message">Gelieve een aanvangstijd in te voeren die vroeger valt dan de eindtijd. Ga <a href="<?php echo home_url() . '/nieuw-event'; ?>">terug</a>.</p>
+						<?php
+						return;
+					}
+				}
 
 				if(null == get_page_by_title($eventTitle))
 				{
@@ -191,6 +256,8 @@
 					add_post_meta($postId, '_eventTime', $eventTime);
 					add_post_meta($postId, '_eventEndTime', $eventEndTime);
 					add_post_meta($postId, '_eventLocation', $eventLocation);
+					add_post_meta($postId, '_eventStartHour', $eventStartHour);
+					add_post_meta($postId, '_eventEndHour', $eventEndHour);
 
                    	if($_FILES['eventFeaturedImage']['size'] > 0)
 					{

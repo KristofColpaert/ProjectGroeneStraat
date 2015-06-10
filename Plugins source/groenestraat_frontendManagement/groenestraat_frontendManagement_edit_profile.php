@@ -243,12 +243,5 @@
 				}
 			}
 		}
-
-		else
-		{
-			?>
-				<p class="error-message">U bent niet aangemeld. Gelieve eerst <a href="<?php echo home_url() . '/login'; ?>">in te loggen of te registreren</a>.</p>
-			<?php
-		}
 	}
 ?>
