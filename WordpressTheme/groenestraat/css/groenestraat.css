@@ -533,9 +533,9 @@ footer
         width:96%;
     }
 }
-@media (max-width: 1000px) 
+@media (max-width: 1150px) 
 {
-    .menu
+    header>nav>.menu
     {
         display: none;
     }
@@ -567,7 +567,7 @@ footer
 .sub-menu
 {
     width: 100%;
-    min-height: 60px;
+    height: 60px;
     background-color: #333333;
     text-transform: lowercase;
     overflow: hidden;
@@ -589,13 +589,12 @@ footer
 
 .sub-menu ul
 {
-    padding: 24px 2%;
+    padding:22px;
     float:right;
 }
 
 .sub-menu ul li
 {
-    
     display: block;
     float: left;
 }
@@ -735,13 +734,12 @@ footer
     float:left;
     color: #333;
     width: 86%;
-    margin: 5% 3%;
-    padding: 4%;
+    margin: 5% 5% 0 5%;
+    padding: 2%;
+    min-height: 150px;
     background-color: #ffffff;
 }
-.list-item h1{
-    line-height: 1em !important;
-}
+
 .list-item>h1>a
 {
     color:#333;
