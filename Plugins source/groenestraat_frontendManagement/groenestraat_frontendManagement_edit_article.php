@@ -1,4 +1,7 @@
 <?php
+	
+	include_once('helper.php');
+
 	/*
 		Shortcode plugin
 	*/
@@ -144,6 +147,9 @@
 								}
 							?>
 						</select>
+
+						<label for="articleFeaturedImage" class="normalize-text">Afbeelding</label>
+	                  	<input id="articleFeaturedImage" name="articleFeaturedImage" type="file" accept="image/x-png, image/gif, image/jpeg" />
 						
 						<input id="articleId" name="articleId" type="hidden" value="<?php echo $article->ID; ?>" />
 
@@ -154,6 +160,9 @@
 
 						var title = new LiveValidation('articleTitle', {validMessage:" "});
 						title.add(Validate.Presence,{failureMessage:nietLeeg});
+
+						var featuredImage = new LiveValidation('articleFeaturedImage', {validMessage:" "});
+						featuredImage.add(Validate.Presence,{failureMessage:nietLeeg});
 					</script>
 				<?php
 			}
@@ -221,6 +230,14 @@
 					else
 					{
 						wp_set_post_categories($postId, $articleCategories, false);
+					}
+
+					if($_FILES['articleFeaturedImage']['size'] > 0)
+					{
+						foreach($_FILES as $file => $array)
+						{
+							$newupload = insert_featured_image($file, $postId);
+						}
 					}
 
 					?>

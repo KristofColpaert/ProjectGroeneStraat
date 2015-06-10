@@ -54,11 +54,6 @@
 		{
 			remove_action('media_buttons', 'media_buttons');
 		}
-
-		else if('post' == $current_screen->post_type)
-		{
-			remove_meta_box( 'postimagediv', 'post', 'side' );
-		}
 	}
 
 	function register_main_menu()

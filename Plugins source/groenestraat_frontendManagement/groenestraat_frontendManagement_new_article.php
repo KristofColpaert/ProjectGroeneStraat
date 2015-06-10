@@ -1,4 +1,7 @@
 <?php 
+
+	include_once('helper.php');
+
 	/*
 		Shortcode plugin
 	*/
@@ -106,6 +109,9 @@
 							}
 						?>
 					</select>
+
+					<label for="articleFeaturedImage" class="normalize-text">Afbeelding</label>
+                  	<input id="articleFeaturedImage" name="articleFeaturedImage" type="file" accept="image/x-png, image/gif, image/jpeg" />
 					
 					<input id="articlePublish" name="articlePublish" type="submit" value="Publiceer" class="form-button" />
 				</form>
@@ -114,6 +120,9 @@
 
 					var title = new LiveValidation('articleTitle', {validMessage:" "});
 					title.add(Validate.Presence,{failureMessage:nietLeeg});
+
+					var featuredImage = new LiveValidation('articleFeaturedImage', {validMessage:" "});
+					featuredImage.add(Validate.Presence,{failureMessage:nietLeeg});
 				</script>
 			<?php
 		}
@@ -134,7 +143,8 @@
 		if(isset($_POST['articlePublish']))
 		{
 			if(!empty($_POST['articleTitle']) &&
-				!empty($_POST['articleDescription'])
+				!empty($_POST['articleDescription']) &&
+				$_FILES['articleFeaturedImage']['size'] > 0
 				)
 			{
 				$articleTitle = $_POST['articleTitle'];
@@ -195,6 +205,14 @@
 						add_post_meta($postId, '_parentProjectId', $parentProjectId);
 						$tempCategory = get_category_by_slug('projectartikels');
 						wp_set_post_categories($postId, array($tempCategory->term_id), true);
+					}
+
+					if($_FILES['articleFeaturedImage']['size'] > 0)
+					{
+						foreach($_FILES as $file => $array)
+						{
+							$newupload = insert_featured_image($file, $postId);
+						}
 					}
 
 					if(current_user_can('publish_posts'))
