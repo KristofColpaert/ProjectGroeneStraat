@@ -51,15 +51,15 @@
             <div class="eventwrapper normalize-text">
 		<h1><?php the_title(); ?></h1><br/>
                 <section class="column-3">
-                    <p><strong>Beschrijving:</strong><br/><?php echo the_content(); ?></p>
+                    <p><img src="<?php echo get_template_directory_uri(); ?>/img/description.png" /><br/><?php echo the_content(); ?></p>
                 </section>
 			
                 <section class="column-3">
-                    <p><strong>Tijdstip:</strong><br/><?php echo $eventTime . " - " . $eventEndTime; ?></p>
+                    <p><img src="<?php echo get_template_directory_uri(); ?>/img/time.png" /><br/><?php echo $eventTime . " - " . $eventEndTime; ?></p>
 	
                 </section >
                 <section class="column-3">
-                    <p><strong>Locatie:</strong><br/><?php echo $eventLocation; ?></p>
+                    <p><img src="<?php echo get_template_directory_uri(); ?>/img/location.png" /><br/><?php echo $eventLocation; ?></p>
                 </section>
 			<section class="clear"></section>
 			

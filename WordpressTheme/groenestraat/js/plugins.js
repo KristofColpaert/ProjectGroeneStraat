@@ -1,15 +1,4 @@
-$(document).ready(function()
-{
-	/*
-		Registration mail check
-	*/
-	$(document).on('click', '.test-button', function()
-	{
-	    var emailAddress = jQuery('#user_email').val();
-	    checkValidEmail(emailAddress);
-	});
-
-	function checkValidEmail(emailAddress)
+function checkValidEmail(emailAddress, callback)
 	{
 	    jQuery.ajax(
 	    {
@@ -22,6 +11,7 @@ $(document).ready(function()
 	        },
 	        success : function(response)
 	        {
+                callback(response);
 	            return response;
 	        },
 	        error : function(error)
@@ -29,7 +19,20 @@ $(document).ready(function()
 	            return 'failed';
 	        }
 	    });
-	}
+    }
+$(document).ready(function()
+{
+	/*
+		Registration mail check
+	*/
+	$(document).on('click', '.test-button', function()
+	{
+	    var emailAddress = jQuery('#user_email').val();
+	    checkValidEmail(emailAddress);
+	});
+
+	
+	
 
 	/*
 		Become member of a project
