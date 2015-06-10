@@ -16,7 +16,6 @@
             var li = document.createElement('li');
             li.setAttribute('class', 'basic-menu-item normalize-text');
             li.appendChild(a);
-            console.log(li);
             menu.appendChild(li);
         }
     </script>
@@ -25,28 +24,6 @@
     <header>
         <nav>
             <img src="<?php bloginfo('template_directory'); ?>/img/logo.png" class="logo" width="400" height="65" alt="" title="" />
-            <style>
-              .mobile-menu
-              {
-                  position: absolute;
-                  display: block;
-                  width:100%;
-                  min-height: 65px;
-                  background-color: #333;
-                  z-index: 9999999999;
-                  text-align: center;
-                  text-transform: uppercase;
-              }
-              .mobile-menu ul
-               {
-                width:100%;
-               }
-              .mobile-menu ul li
-              {
-                display: block;
-                width: 100%;
-              }
-            </style>
             <section class="mobile-menu" style="display:none">
                 <?php wp_nav_menu(array('Main menu' => 'header-menu')); ?>              
                 <?php 

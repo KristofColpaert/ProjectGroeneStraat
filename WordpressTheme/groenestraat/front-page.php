@@ -75,7 +75,7 @@
             {
                 "titel": "<?php the_title(); ?>",
                 "info": "<?php echo excerpt(40); ?>",
-                "image": "<?php echo get_the_post_thumbnail(); ?>",
+                "image": "<?php echo wp_get_attachment_url(get_post_thumbnail_id($post->ID)); ?>";
                 "url": "<?php the_permalink(); ?>"
             },
             <?php
@@ -149,12 +149,7 @@
                         <div class="overlay">
                             <h1><?php the_title(); ?></h1>
                         </div>
-                        <script>
-
-                            console.log('<?php echo wp_get_attachment_url(get_post_thumbnail_id($post->ID)); ?>');
-
-                        </script>
-                        <img src="<?php echo wp_get_attachment_url(get_post_thumbnail_id($post->ID)); ?>" alt="recent-project">
+                        <div style="background-image:url('<?php echo wp_get_attachment_url(get_post_thumbnail_id($post->ID)); ?>');background-size:cover;width:auto;height:200px"></div>
                     </div>
                 </a>
             <?php
