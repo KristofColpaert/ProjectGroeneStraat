@@ -6,27 +6,76 @@
     <title>Groene Straat</title>
     <link rel="icon" href="<?php bloginfo('template_directory'); ?>/img/favicon.ico" type="image/x-icon" />
     <?php wp_head(); ?>
+    <script>
+        function addMenuLink(linkSrc, linkName)
+        {
+            var menu = document.getElementById('menu-main-menu');
+            var a = document.createElement('a');
+            a.setAttribute('href', linkSrc);
+            a.innerHTML = linkName;
+            var li = document.createElement('li');
+            li.setAttribute('class', 'basic-menu-item normalize-text');
+            li.appendChild(a);
+            console.log(li);
+            menu.appendChild(li);
+        }
+    </script>
 </head>
 <body>
     <header>
         <nav>
-            <a href="<?php echo get_site_url(); ?>"><img src="<?php bloginfo('template_directory'); ?>/img/logo.png" class="logo" width="400" height="65" alt="" title="" /></a>
+            <img src="<?php bloginfo('template_directory'); ?>/img/logo.png" class="logo" width="400" height="65" alt="" title="" />
+            <style>
+              .mobile-menu
+              {
+                  position: absolute;
+                  display: block;
+                  width:100%;
+                  min-height: 65px;
+                  background-color: #333;
+                  z-index: 9999999999;
+                  text-align: center;
+                  text-transform: uppercase;
+              }
+              .mobile-menu ul
+               {
+                width:100%;
+               }
+              .mobile-menu ul li
+              {
+                display: block;
+                width: 100%;
+              }
+            </style>
+            <section class="mobile-menu" style="display:none">
+                <?php wp_nav_menu(array('Main menu' => 'header-menu')); ?>              
+                <?php 
+                  if ( is_user_logged_in() ) 
+                  {
+                  ?>
+                  <script>
+                        addMenuLink('<?php echo get_site_url(); ?>/member-informatie?userid=<?php echo $current_user->ID ?>', 'mijn profiel (<?php echo $current_user->user_firstname ?>)');
+                        addMenuLink('<?php echo wp_logout_url(get_site_url()); ?>', 'afmelden');
+                  </script>
+                <?php
+                  }
+                  else{ 
+                ?>
+                    <script>
+                        addMenuLink('<?php echo get_site_url(); ?>/login', 'aanmelden');
+                    </script>
+                    <?php
+                }?> 
+            </section>
             <section class="menu">
               <ul>
-                <!--
-                <li class="basic-menu-item normalize-text"><a href="<?php echo get_site_url(); ?>/artikels">Artikels</a></li>
-                <li class="basic-menu-item normalize-text"><a href="<?php echo get_site_url(); ?>/projecten">Projecten</a></li>
-                <li class="basic-menu-item normalize-text"><a href="<?php echo get_site_url(); ?>/events">Events</a></li>
-                <li class="basic-menu-item normalize-text"><a href="<?php echo get_site_url(); ?>/zoekertjes">Zoekertjes</a></li>
-                -->
                 <?php
-                   
+
                 if ( is_user_logged_in() ) 
                 { 
                     $userstring = $current_user->user_firstname." ".$current_user->user_lastname;
                     get_currentuserinfo();     
                 ?>
-                     
                     <div id="logged-user" class="click-nav">
                       <ul class="no-js">
                         <li>
@@ -61,14 +110,89 @@
                           });
                         });
                      </script>
+                     <?php wp_nav_menu(array('Main menu' => 'header-menu')); ?>
                 <?php
-   
                 }
                 else{
-                    echo '<li class="aanmelden"><a href="'.get_site_url().'/login">AANMELDEN</a></li>';
+                  
+                  echo '<li class="aanmelden" style="float:right"><a href="'.get_site_url().'/login">AANMELDEN</a></li>';
+                  wp_nav_menu(array('Main menu' => 'header-menu'));
                 }?> 
-                      <?php wp_nav_menu(array('Main menu' => 'header-menu')); ?>
+                        
                      </ul>
             </section>
+            <script>
+
+              var isOpen = false;
+              var isResize = false;
+              var menu = document.getElementsByClassName('mobile-menu')[0];
+              var logo = document.getElementsByClassName('logo')[0];
+
+              function toggleNavigation()
+              {   
+                if(window.innerWidth < 1150)
+                  {
+                      if(isOpen){
+                        menu.style.display = 'none';
+                        isOpen = false;
+                      }
+                      else { 
+                        menu.style['position'] = 'top';
+                        if(document.getElementById('wpadminbar') != null)
+                        {
+                            menu.style['top'] = document.getElementsByTagName('nav')[0].offsetHeight + document.getElementById('wpadminbar').offsetHeight + 'px'; 
+                        }else
+                        {
+                            menu.style['top'] = document.getElementsByTagName('nav')[0].offsetHeight + 'px'; 
+                        }
+                        menu.style.display = 'block';
+                        isOpen = true;
+                      }
+                  }
+              }
+
+              function setLogo()
+              {
+                  if(window.innerWidth < 1150)
+                  {
+                      logo.setAttribute('width', '500px');
+                      logo.setAttribute('src', '<?php bloginfo('template_directory'); ?>/img/logo-mobile.png');
+                  }
+                  if(window.innerWidth > 1150)
+                  {
+                      logo.setAttribute('width', '400px');
+                      logo.setAttribute('src', '<?php bloginfo('template_directory'); ?>/img/logo.png');
+                      logo.addEventListener('click', function() { document.location = '<?php echo get_site_url(); ?>'; });
+                  }
+              }
+
+              function toggleHeight()
+              {
+                  setLogo();
+
+                  if(isOpen){
+                      if(window.innerWidth < 1150)
+                      {
+                          if(document.getElementById('wpadminbar') != null)
+                          {
+                              menu.style['top'] = document.getElementsByTagName('nav')[0].offsetHeight + document.getElementById('wpadminbar').offsetHeight + 'px'; 
+                          }
+                          else
+                          {
+                              menu.style['top'] = document.getElementsByTagName('nav')[0].offsetHeight + 'px'; 
+                          }
+                      }
+                      else
+                      {
+                          menu.style.display = 'none';
+                          isOpen = false;
+                      }
+                  }
+              }
+
+              document.getElementsByTagName('nav')[0].addEventListener('click', function() { toggleNavigation(); });
+              window.addEventListener('resize', function() { toggleHeight(); });
+              window.addEventListener('load', function() { setLogo(); });
+            </script>
         </nav>
     </header>
