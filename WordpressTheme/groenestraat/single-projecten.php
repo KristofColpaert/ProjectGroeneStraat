@@ -44,9 +44,11 @@
 		}
 		return $string;
 	}
+
 	get_header(); 
 	global $post;
 ?>
+	//Google StreetView Coordinates
     <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDC5KoyRfBkse2foN9chLRWQuo0kC61qXI"></script>
     <script>
         //Get coordinates of a location.
@@ -118,7 +120,12 @@
                         heading : 165,
                         pitch : 0
                     },
-                    zoom : 1
+                    zoom : 1,
+                    addressControl : false,
+                    linksControl : false,
+                    panControl : false,
+                    zoomControl : false,
+                    enableCloseButton : false
                 };
 
                 var myPano = new google.maps.StreetViewPanorama(
