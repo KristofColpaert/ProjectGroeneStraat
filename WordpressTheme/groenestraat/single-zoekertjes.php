@@ -40,7 +40,7 @@
 	get_header();
 	
 	global $post;
-
+	$users = array();
 	?>
 	<section class="container">
 		<div id="primary" class="content-area">
@@ -81,6 +81,7 @@
 			$results = $wpdb->get_results($wpdb->prepare( "SELECT post_id, meta_key, meta_value FROM $wpdb->postmeta WHERE post_id = %d AND meta_key = %s", $post->ID, $meta_key), ARRAY_A);
 			$projectId = $results[0]["meta_value"];
 
+			//kijken of er subscribers zijn op dat project.
 			$subscriber = "_subscriberId";
 			$subscribers = $wpdb->get_results($wpdb->prepare( "SELECT meta_value FROM $wpdb->postmeta WHERE post_id = %d AND meta_key = %s", $projectId, $subscriber), ARRAY_A);
 
@@ -89,10 +90,9 @@
 				$users[] = $subscriber["meta_value"];
 			}
 
-			//count($results) als project nergens behoort kan iedereen reageren.
 			if($current_user->ID > 0 && $post->post_author != $current_user->ID)
 			{
-				if(in_array($current_user, $users) || count($results) == 0 )
+				if(in_array($current_user->ID, $users) || count($results) == 0 )
 				{
 					$name = $current_user->display_name;
 					$email = $current_user->user_email;
