@@ -153,6 +153,8 @@
 		$eventTime = get_post_meta($post->ID, '_eventTime', true);
 		$eventLocation = get_post_meta($post->ID, '_eventLocation', true);
 		$eventEndTime = get_post_meta($post->ID, '_eventEndTime', true);
+		$eventStartHour = get_post_meta($post->ID, '_eventStartHour', true);
+		$eventEndHour = get_post_meta($post->ID, '_eventEndHour', true);
 
 		echo '<label class="eventTime" for="eventTime">Datum</label><br />';
     	echo '<input id="eventTime" readonly type="text" name="_eventTime" value="' . $eventTime . '" class="widefat"><br />';    
@@ -160,8 +162,17 @@
 		echo '<label class="eventEndTime" for="eventEndTime">Einddatum</label><br />';
     	echo '<input id="eventEndTime" readonly type="text" name="_eventEndTime" value="' . $eventEndTime . '" class="widefat"><br />';  
 
+    	echo '<label class="eventStartHour" for="eventStartHour">Aanvangstijd (HH:MM)</label><br />';
+    	echo '<input id="eventStartHour" type="text" name="_eventStartHour" value="' . $eventStartHour . '" class="widefat"><br />';  
+
+    	echo '<label class="eventEndHour" for="eventEndHour">Eindtijd (HH:MM)</label><br />';
+    	echo '<input id="eventEndHour" type="text" name="_eventEndHour" value="' . $eventEndHour . '" class="widefat"><br />';  
+
     	echo '<label for="eventLocation">Locatie van het event</label>';
     	echo '<input id="eventLocation" type="text" name="_eventLocation" value="' . $eventLocation . '" class="widefat" />';
+
+    	wp_enqueue_script('validation', get_stylesheet_directory_uri() . '/js/livevalidation_standalone.compressed.js', array( 'jquery' ));
+    	wp_enqueue_script('my_validation', plugins_url() . '/groenestraat-events/my_validation.js', array( 'jquery' ));
 	}
 	
 	function save_events_metaboxes($post_id, $post) 
@@ -179,7 +190,9 @@
 
 		if(!isset($_POST['_eventLocation']) || empty($_POST['_eventLocation']) ||
 			!isset($_POST['_eventTime']) || empty($_POST['_eventTime']) ||
-			!isset($_POST['_eventEndTime']) || empty($_POST['_eventEndTime'])
+			!isset($_POST['_eventEndTime']) || empty($_POST['_eventEndTime']) ||
+			!isset($_POST['_eventStartHour']) || empty($_POST['_eventStartHour']) ||
+			!isset($_POST['_eventEndHour']) || empty($_POST['_eventEndHour'])
 			)
 		{
         	$error = new WP_Error('Er is een fout opgetreden. Gelieve alle gegevens (locatie, begindatum, einddatum) correct in te voeren. <a href="'. $_SERVER['HTTP_REFERER'] .'">Ga terug.</a>');
@@ -189,6 +202,8 @@
 		$events_meta['_eventLocation'] = $_POST['_eventLocation'];
 		$events_meta['_eventTime'] = $_POST['_eventTime'];
 		$events_meta['_eventEndTime'] = $_POST['_eventEndTime'];
+		$events_meta['_eventStartHour'] = $_POST['_eventStartHour'];
+		$events_meta['_eventEndHour'] = $_POST['_eventEndHour'];
 
 		foreach ($events_meta as $key => $value) 
 		{ 

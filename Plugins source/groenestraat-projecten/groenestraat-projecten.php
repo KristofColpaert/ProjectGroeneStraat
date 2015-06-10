@@ -138,11 +138,14 @@
 		echo '<label class="projectStreet" for="projectStreet">Straat van het project</label><br />';
     	echo '<input id="projectStreet" type="text" name="_projectStreet" value="' . $projectStreet . '" class="widefat"><br />';    
 
-    	echo '<label for="projectCity">Gemeente van het project</label>';
-    	echo '<input id="projectCity" type="text" name="_projectCity" value="' . $projectCity . '" class="widefat" />';
+    	echo '<label for="projectCity">Gemeente van het project</label><br />';
+    	echo '<input id="projectCity" type="text" name="_projectCity" value="' . $projectCity . '" class="widefat" /><br />';
 
     	echo '<label for="projectZipcode">Postcode van het project</label>';
     	echo '<input id="projectZipcode" type="text" name="_projectZipcode" class="widefat" value="'. $projectZipcode . '" />';
+
+    	wp_enqueue_script('validation', get_stylesheet_directory_uri() . '/js/livevalidation_standalone.compressed.js', array( 'jquery' ));
+    	wp_enqueue_script('my_validation', plugins_url() . '/groenestraat-projecten/my_validation.js', array( 'jquery' ));
 	}
 
 	function save_projecten_metaboxes($post_id, $post)
@@ -155,6 +158,15 @@
 		if (!current_user_can('edit_post', $post->ID))
 		{
 			return $post->ID;
+		}
+
+		if(!isset($_POST['_projectStreet']) || empty($_POST['_projectStreet']) ||
+			!isset($_POST['_projectCity']) || empty($_POST['_projectCity']) ||
+			!isset($_POST['_projectZipcode']) || empty($_POST['_projectZipcode'])
+			)
+		{
+        	$error = new WP_Error('Er is een fout opgetreden. Gelieve alle gegevens (straat, gemeente, postcode) correct in te voeren. <a href="'. $_SERVER['HTTP_REFERER'] .'">Ga terug.</a>');
+		    wp_die($error->get_error_code(), 'Error: Missing Arguments');
 		}
 
 		$events_meta['_projectStreet'] = $_POST['_projectStreet'];
