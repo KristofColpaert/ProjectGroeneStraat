@@ -101,14 +101,20 @@
 						<br />
                         <label  for="eventTime" class="normalize-text left labeldate">Van</label><label  for="eventEndTime" class="normalize-text right labeldate">Tot</label>
                         <section class="date textbox left">
-
-                            <input id="eventTime" name="eventTime" readonly class="normalize-text" type="text" value="<?php echo $eventTime; ?>" />                   </section>
-
+                            <input id="eventTime" name="eventTime" readonly class="normalize-text" type="text" value="<?php echo $eventTime; ?>" />                   
+                        </section>
                         <section class="date textbox right">
-						
-						
-                            <input id="eventEndTime" name="eventEndTime" readonly type="text" class="normalize-text" value="<?php echo $eventEndTime; ?>" /></section>
+                            <input id="eventEndTime" name="eventEndTime" readonly type="text" class="normalize-text" value="<?php echo $eventEndTime; ?>" />
+                        </section>
 						<br />
+
+						<section class="date textbox left">
+	                        <input id="eventStartHour" name="eventStartHour" type="text" class="normalize-text" placeholder="Aanvangstijd (HH:MM)"/>
+	                    </section>
+
+	                    <section class="date textbox right">
+	                    	<input id="eventEndHour" name="eventEndHour" type="text" placeholder="Eindtijd (HH:MM)" />
+	                    </section>
 
 						<label for="eventLocation" class="normalize-text">Locatie</label>
 						<input class="textbox" id="eventLocation" name="eventLocation" type="text" value="<?php echo $eventLocation; ?>" />
@@ -120,6 +126,41 @@
 
 						<input class="form-button" id="eventEdit" name="eventEdit" type="submit" value="Bewerk" />
 					</form>
+					<script>
+						var nietLeeg = "Dit veld is verplicht!";
+
+						var title = new LiveValidation('eventTitle', {validMessage:" "});
+						title.add(Validate.Presence,{failureMessage:nietLeeg});
+
+						var eventTime = new LiveValidation('eventTime', {validMessage:" "});
+						eventTime.add(Validate.Presence,{failureMessage:nietLeeg});
+
+						var eventEndTime = new LiveValidation('eventEndTime', {validMessage:" "});
+						eventEndTime.add(Validate.Presence,{failureMessage:nietLeeg});
+
+						var eventStartHour = new LiveValidation('eventStartHour', {validMessage:" "});
+						eventStartHour.add(Validate.Presence,{failureMessage:nietLeeg});
+						eventStartHour.add(Validate.Custom, {against: function checkTime(value){
+					      	re = /([0-9]|0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]$/;
+					     	if(!re.test(value)) {
+					     		return false;
+					      	}
+					      	else return true;
+					   	}, failureMessage:"Een tijdstip moet de structuur (HH:MM) hebben!"});
+
+						var eventEndHour = new LiveValidation('eventEndHour', {validMessage:" "});
+						eventEndHour.add(Validate.Presence,{failureMessage:nietLeeg});
+						eventEndHour.add(Validate.Custom, {against: function checkTime(value){
+					      	re = /([0-9]|0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]$/;
+					      	if(!re.test(value)) {
+					        	return false;
+					      	}
+					       	else return true;
+					   	}, failureMessage:"Een tijdstip moet de structuur (HH:MM) hebben!"});
+
+						var loc = new LiveValidation('eventLocation', {validMessage:" "});
+						loc.add(Validate.Presence,{failureMessage:nietLeeg});
+					</script>
 				<?php
 			}
 
@@ -151,7 +192,9 @@
 				!empty($_POST['eventTime']) &&
 				!empty($_POST['eventLocation']) &&
 				!empty($_POST['eventEndTime']) &&
-				!empty($_POST['eventId'])
+				!empty($_POST['eventId']) &&
+				!empty($_POST['eventStartHour']) &&
+				!empty($_POST['eventEndHour'])
 				)
 			{
 				$eventId = $_POST['eventId'];
@@ -161,6 +204,41 @@
 				$eventEndTime = $_POST['eventEndTime'];
 				$eventLocation = $_POST['eventLocation'];
 				$parentProjectId = $_POST['parentProjectId'];
+				$eventStartHour = $_POST['eventStartHour'];
+				$eventEndHour = $_POST['eventEndHour'];
+
+				$date1 = strtotime($eventTime);
+				$date2 = strtotime($eventEndTime);
+
+				if($date1 > $date2)
+				{
+					?>
+						<p class="error-message">Gelieve een startdatum in te voeren die vroeger valt dan de einddatum. Ga <a href="<?php echo home_url() . '/nieuw-event'; ?>">terug</a>.</p>
+					<?php
+					return;
+				}
+
+				if($date1 == $date2)
+				{
+					$start = explode(":", $eventStartHour);
+					$end = explode(":", $eventEndHour);
+
+					if($start[0] > $end[0])
+					{
+						?>
+							<p class="error-message">Gelieve een aanvangstijd in te voeren die vroeger valt dan de eindtijd. Ga <a href="<?php echo home_url() . '/nieuw-event'; ?>">terug</a>.</p>
+						<?php
+						return;
+					}
+
+					if($start[0] == $end[0] && $start[1] > $end[1])
+					{
+						?>
+							<p class="error-message">Gelieve een aanvangstijd in te voeren die vroeger valt dan de eindtijd. Ga <a href="<?php echo home_url() . '/nieuw-event'; ?>">terug</a>.</p>
+						<?php
+						return;
+					}
+				}
 
 				if(null == get_page_by_title($eventTitle))
 				{
@@ -180,11 +258,18 @@
 					update_post_meta($postId, '_eventEndTime', $eventEndTime);
 					update_post_meta($postId, '_eventLocation', $eventLocation);
 					update_post_meta($postId, '_parentProjectId', $parentProjectId);
+					update_post_meta($postId, '_eventStartHour', $eventStartHour);
+					update_post_meta($postId, '_eventEndHour', $eventEndHour);
 
 					if($parentProjectId != 0)
 					{
 						$tempCategory = get_category_by_slug('projectevents');
 						wp_set_post_categories($postId, array($tempCategory->term_id), true);
+					}
+
+					else
+					{
+						wp_set_post_categories($postId, null, false);
 					}
                     
                     if($_FILES['eventFeaturedImage']['size'] != 0)

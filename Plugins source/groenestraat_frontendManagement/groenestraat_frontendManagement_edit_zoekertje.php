@@ -93,6 +93,19 @@
 
 						<input id="zoekertjeEdit" class="form-button" name="zoekertjeEdit" type="submit" value="Bewerk" />
 					</form>
+					<script>
+						var nietLeeg = "Dit veld is verplicht!";
+
+						var title = new LiveValidation('adTitle', {validMessage:" "});
+						title.add(Validate.Presence,{failureMessage:nietLeeg});
+
+						var price = new LiveValidation('adPrice', {validMessage:" "});
+						price.add(Validate.Presence,{failureMessage:nietLeeg});
+						price.add(Validate.Numericality,{onlyInteger:true, notANumberMessage: "Een prijs moet een getal in euro zijn!"});
+
+						var loc = new LiveValidation('adLocation', {validMessage:" "});
+						loc.add(Validate.Presence,{failureMessage:nietLeeg});
+					</script>
 				<?php
 			}
 
@@ -157,6 +170,12 @@
 						$tempCategory = get_category_by_slug('projectzoekertjes');
 						wp_set_post_categories($postId, array($tempCategory->term_id), true);
 					}
+
+					else
+					{
+						wp_set_post_categories($postId, null, false);
+					}
+
 
 					if($_FILES['adFeaturedImage']['size'] != 0)
 					{

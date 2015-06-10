@@ -149,6 +149,12 @@
 
 						<input id="articleEdit" name="articleEdit" type="submit" value="Bewerk" class="form-button" />
 					</form>
+					<script>
+						var nietLeeg = "Dit veld is verplicht!";
+
+						var title = new LiveValidation('articleTitle', {validMessage:" "});
+						title.add(Validate.Presence,{failureMessage:nietLeeg});
+					</script>
 				<?php
 			}
 
@@ -205,10 +211,16 @@
 					wp_set_post_categories($postId, $articleCategories, false);
 
 					update_post_meta($postId, '_parentProjectId', $parentProjectId);
+
 					if($parentProjectId != 0)
 					{
 						$tempCategory = get_category_by_slug('projectartikels');
 						wp_set_post_categories($postId, array($tempCategory->term_id), true);
+					}
+
+					else
+					{
+						wp_set_post_categories($postId, $articleCategories, false);
 					}
 
 					?>
