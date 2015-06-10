@@ -47,16 +47,29 @@
 	get_header(); 
 	global $post;
 ?>
+    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDC5KoyRfBkse2foN9chLRWQuo0kC61qXI"></script>
+    <script>
+        //Get coordinates of a location.
+        geocoder = new google.maps.Geocoder();
+        window.getCoordinates = function(address, callback)
+        {
+            var coordinates;
+            geocoder.geocode({ address: address }, function (results, status)
+            {
+                coords_obj = results[0].geometry.location;
+                coordinates = [coords_obj.A, coords_obj.F];
+                callback(coordinates);
+            })
+        }
+    </script>
 
-	<section class="project-image header-image">
+	<section class="project-image header-image" id="project-image">
 		
 	</section>
        
 	<section class="container" style="background-color:#ccc">
          <section class="sub-menu">
              <section class="project-info">
-
-			
 			
 		      </section>
             <ul>
@@ -81,14 +94,50 @@
 		$projectStreet = $meta['_projectStreet'][0];
 		$projectCity = $meta['_projectCity'][0];
 		$projectZipcode = $meta['_projectZipcode'][0];
+        $projectLocation = $projectStreet . " " . $projectCity;
 		$adresInfo = $projectStreet . " " . $projectCity . " " . $projectZipcode;
 		?>
 
 		<script>
-
+        // If image is set.
 		var header = document.getElementsByClassName("project-image")[0];
-		header.style["background-image"] = "url('<?php echo wp_get_attachment_url(get_post_thumbnail_id($post->ID)); ?>')";
+        header.style["background-image"] = "url('<?php echo wp_get_attachment_url(get_post_thumbnail_id($post->ID)); ?>')";
 
+        // If no image is set, show Street View.
+        function initialize()
+        {
+            getCoordinates('<?php echo $projectLocation; ?>', function(coords)
+            {
+                var myLatLng = new google.maps.LatLng(coords[0], coords[1]);
+
+                var panoramaOptions = 
+                {
+                    position : myLatLng,
+                    pov : 
+                    {
+                        heading : 165,
+                        pitch : 0
+                    },
+                    zoom : 1
+                };
+
+                var myPano = new google.maps.StreetViewPanorama(
+                    document.getElementById('project-image'),
+                    panoramaOptions
+                );
+
+                myPano.setVisible(true);
+            });           
+        }
+        
+        <?php
+            if(!get_post_thumbnail_id($post->ID))
+            {
+                ?>
+                    google.maps.event.addDomListener(window, 'load', initialize);
+                <?php
+            }
+        ?>
 		var info = document.getElementsByClassName("project-info")[0];
 		var h1 = document.createElement("h1");
 		h1.innerHTML = "<?php the_title(); ?>";
