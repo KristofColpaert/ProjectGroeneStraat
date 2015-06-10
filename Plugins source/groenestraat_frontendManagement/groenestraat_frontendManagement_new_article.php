@@ -22,6 +22,21 @@
 	{
 		if(is_user_logged_in() && current_user_can('edit_posts') && !isset($_POST['articlePublish']))
 		{
+			if(isset($_GET['project']))
+			{
+				$project = get_post($_GET['project']);
+				$current_user = wp_get_current_user();
+				$meta = get_post_meta($project->ID, '_subscriberId');
+
+				if(!in_array($current_user->ID, $meta))
+				{
+					?>
+						<p class="error-message">U hebt geen toegang tot de gevraagde pagina. Ga terug naar <a href="<?php echo home_url(); ?>">Home</a>.</p>
+					<?php
+					return;
+				}
+			}
+
 			?>
 				<form class="createForm" action="<?php $_SERVER['REQUEST_URI'] ?>" method="POST" enctype="multipart/form-data">
 					<input class="textbox" id="articleTitle" id="articleTitle" name="articleTitle" type="text" placeholder="Titel" />

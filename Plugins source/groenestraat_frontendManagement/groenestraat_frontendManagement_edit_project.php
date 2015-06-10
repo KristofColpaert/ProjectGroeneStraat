@@ -29,7 +29,7 @@
 				return;
 			}
 
-			if($project != null && ($current_user->ID == $project->post_author || current_user_can('manage_options')) && current_user_can('edit_published_posts'))
+			if($project != null && ($current_user->ID == $project->post_author || current_user_can('manage_options')) && current_user_can('edit_published_projecten'))
 			{
 				?>
 					<form class="createForm" action="<?php $_SERVER['REQUEST_URI']; ?>" method="POST" enctype="multipart/form-data">
@@ -157,7 +157,7 @@
 		                <script>
 		                    $('.title').remove();
 		                </script>
-		                <h2 class="normalize-text center">Uw zoekertje wordt bewerkt</h2>
+		                <h2 class="normalize-text center">Uw project wordt bewerkt</h2>
 					<?php
 
 					echo '<META HTTP-EQUIV="Refresh" Content="0; URL=' . esc_url(get_permalink($postId)) . '">'; 

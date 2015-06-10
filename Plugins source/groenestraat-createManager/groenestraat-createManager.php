@@ -24,12 +24,20 @@
 	function prowp_create_event_post_meta($postId, $post)
 	{
 		$current_user = wp_get_current_user();
-		add_user_meta($current_user->ID, '_eventCalendar', $postId);
+		$meta = get_user_meta($current_user->ID, '_eventCalendar');
+		if(!in_array($postId, $meta))
+		{
+			add_user_meta($current_user->ID, '_eventCalendar', $postId);
+		}
 	}
 
 	function prowp_create_project_post_meta($postId, $post)
 	{
 		$current_user = wp_get_current_user();
-		add_post_meta($postId, '_subscriberId', $current_user->ID);
+		$meta = get_post_meta($postId, '_subscriberId');
+		if(!in_array($current_user->ID, $meta))
+		{
+			add_post_meta($postId, '_subscriberId', $current_user->ID);
+		}
 	}
 ?>

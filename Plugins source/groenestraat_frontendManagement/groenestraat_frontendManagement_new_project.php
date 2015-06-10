@@ -16,7 +16,6 @@
 
 	function show_new_project_form()
 	{
-
 		if(is_user_logged_in() && current_user_can('publish_projecten') && !isset($_POST['projectPublish']))
 		{
 			?>
@@ -117,7 +116,6 @@
 					add_post_meta($postId, '_projectStreet', $projectStreet);
 					add_post_meta($postId, '_projectCity', $projectCity);
 					add_post_meta($postId, '_projectZipcode', $projectZipcode);
-					add_post_meta($postId, '_subscriberId', $current_user->ID);
 
 					if($_FILES['projectFeaturedImage']['size'] > 0)
 					{

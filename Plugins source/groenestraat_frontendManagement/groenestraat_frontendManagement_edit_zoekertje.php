@@ -29,7 +29,7 @@
 				return;
 			}
 
-			if($zoekertje != null && ($current_user->ID == $zoekertje->post_author || current_user_can('manage_options')) && current_user_can('edit_published_posts'))
+			if($zoekertje != null && ($current_user->ID == $zoekertje->post_author || current_user_can('manage_options')) && current_user_can('edit_published_zoekertjes'))
 			{
 				?>
 					<form class="createForm" action="<?php $_SERVER['REQUEST_URI']; ?>" method="POST" enctype="multipart/form-data">

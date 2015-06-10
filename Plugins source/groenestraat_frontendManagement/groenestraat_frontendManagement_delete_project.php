@@ -26,7 +26,7 @@
 				return;
 			}
 
-			if($project != null && ($current_user->ID == $project->post_author || current_user_can('manage_options')) && current_user_can('delete_published_posts'))
+			if($project != null && ($current_user->ID == $project->post_author || current_user_can('manage_options')) && current_user_can('delete_published_projecten'))
 			{
 				?>
 					<p class="alert-message normalize-text">Bent u zeker dat u het project <strong><a href="<?php echo $project->guid; ?>"><?php echo $project->post_title; ?></a></strong> wilt verwijderen?</p>

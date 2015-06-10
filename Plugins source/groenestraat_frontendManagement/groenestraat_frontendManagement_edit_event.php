@@ -29,7 +29,7 @@
 				return;
 			}
 
-			if($event != null && ($current_user->ID == $event->post_author || current_user_can('manage_options')) && current_user_can('edit_published_posts'))
+			if($event != null && ($current_user->ID == $event->post_author || current_user_can('manage_options')) && current_user_can('edit_published_events'))
 			{
                 ?>
                     <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>

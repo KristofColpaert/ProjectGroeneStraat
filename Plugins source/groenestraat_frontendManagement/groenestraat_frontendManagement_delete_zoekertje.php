@@ -27,7 +27,7 @@
 				return;
 			}
 
-			if($zoekertje != null && ($current_user->ID == $zoekertje->zoekertje_author || current_user_can('manage_options')) && current_user_can('delete_published_posts'))
+			if($zoekertje != null && ($current_user->ID == $zoekertje->zoekertje_author || current_user_can('manage_options')) && current_user_can('delete_published_zoekertjes'))
 			{
 				?>
 					<p class="alert-message normalize-text">Bent u zeker dat u het zoekertje <strong><a href="<?php echo $zoekertje->guid; ?>"><?php echo $zoekertje->post_title; ?></a></strong> wilt verwijderen?</p>
