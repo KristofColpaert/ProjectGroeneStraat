@@ -16,7 +16,8 @@
 
 	function show_new_project_form()
 	{
-		if(is_user_logged_in() && current_user_can('publish_posts') && !isset($_POST['projectPublish']))
+
+		if(is_user_logged_in() && current_user_can('publish_projecten') && !isset($_POST['projectPublish']))
 		{
 			?>
 				<form class="createForm" action="<?php $_SERVER['REQUEST_URI']; ?>" method="POST" enctype="multipart/form-data">

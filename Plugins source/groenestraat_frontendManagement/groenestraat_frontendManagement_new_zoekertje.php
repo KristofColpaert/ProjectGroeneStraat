@@ -16,7 +16,7 @@
 
 	function show_new_zoekertje_form()
 	{
-		if(is_user_logged_in() && current_user_can('publish_posts') && !isset($_POST['adPublish']))
+		if(is_user_logged_in() && current_user_can('publish_zoekertjes') && !isset($_POST['adPublish']))
 		{
 			?>
 				<form class="createForm" action="<?php $_SERVER['REQUEST_URI'] ?>" method="POST" enctype="multipart/form-data">
