@@ -171,6 +171,12 @@
 						wp_set_post_categories($postId, array($tempCategory->term_id), true);
 					}
 
+					else
+					{
+						wp_set_post_categories($postId, null, false);
+					}
+
+
 					if($_FILES['adFeaturedImage']['size'] != 0)
 					{
 						foreach ($_FILES as $file => $array) 

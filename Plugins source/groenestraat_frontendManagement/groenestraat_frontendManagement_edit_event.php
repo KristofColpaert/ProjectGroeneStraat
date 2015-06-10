@@ -201,6 +201,11 @@
 						$tempCategory = get_category_by_slug('projectevents');
 						wp_set_post_categories($postId, array($tempCategory->term_id), true);
 					}
+
+					else
+					{
+						wp_set_post_categories($postId, null, false);
+					}
                     
                     if($_FILES['eventFeaturedImage']['size'] != 0)
 					{

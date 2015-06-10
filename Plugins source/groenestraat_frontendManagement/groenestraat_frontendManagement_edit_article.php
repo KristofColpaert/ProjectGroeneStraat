@@ -211,10 +211,16 @@
 					wp_set_post_categories($postId, $articleCategories, false);
 
 					update_post_meta($postId, '_parentProjectId', $parentProjectId);
+
 					if($parentProjectId != 0)
 					{
 						$tempCategory = get_category_by_slug('projectartikels');
 						wp_set_post_categories($postId, array($tempCategory->term_id), true);
+					}
+
+					else
+					{
+						wp_set_post_categories($postId, $articleCategories, false);
 					}
 
 					?>
