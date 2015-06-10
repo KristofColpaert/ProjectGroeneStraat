@@ -2,7 +2,7 @@
 	/*
 		Plugin Name: Groenestraat Nieuwsbrief
 		Plugin URI: http://www.groenestraat.be
-		Description: Deze plugin verstuurd een nieuwsbrief naar iedere user. 
+		Description: Deze plugin verstuurt een nieuwsbrief naar iedere user. 
 		Version: 1.0
 		Author: Rodric Degroote
 		Author URI: http://www.groenestraat.be
