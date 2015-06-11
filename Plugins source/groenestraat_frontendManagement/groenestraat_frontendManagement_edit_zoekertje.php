@@ -134,7 +134,6 @@
 		{
 			if(!empty($_POST['adTitle']) && 
 				!empty($_POST['adDescription']) &&
-				!empty($_POST['adPrice']) &&
 				!empty($_POST['adLocation']) &&
 				!empty($_POST['zoekertjeId'])
 				)

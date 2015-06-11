@@ -145,7 +145,6 @@
 			if(!empty($_POST['adTitle']) &&
 				!empty($_POST['adDescription']) &&
 				$_FILES['adFeaturedImage']['size'] > 0 &&
-				!empty($_POST['adPrice']) &&
 				!empty($_POST['adLocation'])
 				)
 			{
