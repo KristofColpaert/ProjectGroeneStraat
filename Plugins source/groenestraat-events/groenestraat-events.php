@@ -148,28 +148,33 @@
 
 		global $post;
 		
-		echo '<input type="hidden" name="eventmeta_noncename" id="eventmeta_noncename" value="' . wp_create_nonce( plugin_basename(__FILE__) ) . '" />';
-		
+		?>
+			<input type="hidden" name="eventmeta_noncename" id="eventmeta_noncename" value="<?php echo wp_create_nonce( plugin_basename(__FILE__) ) ?>" />
+		<?php
+
 		$eventTime = get_post_meta($post->ID, '_eventTime', true);
 		$eventLocation = get_post_meta($post->ID, '_eventLocation', true);
 		$eventEndTime = get_post_meta($post->ID, '_eventEndTime', true);
 		$eventStartHour = get_post_meta($post->ID, '_eventStartHour', true);
 		$eventEndHour = get_post_meta($post->ID, '_eventEndHour', true);
 
-		echo '<label class="eventTime" for="eventTime">Datum</label><br />';
-    	echo '<input id="eventTime" readonly type="text" name="_eventTime" value="' . $eventTime . '" class="widefat"><br />';    
+		?>
 
-		echo '<label class="eventEndTime" for="eventEndTime">Einddatum</label><br />';
-    	echo '<input id="eventEndTime" readonly type="text" name="_eventEndTime" value="' . $eventEndTime . '" class="widefat"><br />';  
+			<label class="eventTime" for="eventTime">StartDatum</label><br />
+			<input type="text" id="eventTime" readonly name="_eventTime" value="<?php echo $eventTime; ?>" class="widefat" /><br />
 
-    	echo '<label class="eventStartHour" for="eventStartHour">Aanvangstijd (HH:MM)</label><br />';
-    	echo '<input id="eventStartHour" type="text" name="_eventStartHour" value="' . $eventStartHour . '" class="widefat"><br />';  
+			<label class="eventEndTime" for="eventEndTime">Einddatum</label><br />
+			<input type="text" id="eventEndTime" readonly name="_eventEndTime" value="<?php echo $eventEndTime; ?>" class="widefat" /><br />
+			
+			<label class="eventStartHour" for="eventStartHour">Aanvangstijd (HH:MM)</label><br />
+			<input type="text" id="eventStartHour" name="_eventStartHour" value="<?php echo $eventStartHour; ?>" class="widefat" /><br />
 
-    	echo '<label class="eventEndHour" for="eventEndHour">Eindtijd (HH:MM)</label><br />';
-    	echo '<input id="eventEndHour" type="text" name="_eventEndHour" value="' . $eventEndHour . '" class="widefat"><br />';  
-
-    	echo '<label for="eventLocation">Locatie van het event</label>';
-    	echo '<input id="eventLocation" type="text" name="_eventLocation" value="' . $eventLocation . '" class="widefat" />';
+			<label class="eventEndHour" for="eventEndHour">Eindtijd (HH:MM)</label><br />
+			<input type="text" id="eventEndHour" name="_eventEndHour" value="<?php echo $eventEndHour; ?>" class="widefat" /><br />
+			
+			<label class="eventLocation" for="eventEndHour">Locatie van het event</label><br />
+			<input type="text" id="eventLocation" name="_eventLocation" value="<?php echo $eventLocation; ?>" class="widefat" /><br />
+		<?php
 
     	wp_enqueue_script('validation', get_stylesheet_directory_uri() . '/js/livevalidation_standalone.compressed.js', array( 'jquery' ));
     	wp_enqueue_script('my_validation', plugins_url() . '/groenestraat-events/my_validation.js', array( 'jquery' ));
@@ -257,18 +262,21 @@
 		);
 
 		$postParentId = get_post_meta($post->ID, '_parentProjectId', true);
-		echo '<select name="_parentProjectId" class="widefat">';
-		echo '<option value="0">Geen Project</option>';
-		if(!empty($parents))
-		{
-			foreach($parents as $parent)
+		?>
+			<select name="_parentProjectId" class="widefat">
+				<option value="0">Geen project</option>
+		<?php
+			if(!empty($parents))
 			{
-				printf('<option value="%s"%s>%s</option>', esc_attr($parent->ID), selected($parent->ID, $postParentId, false), esc_html($parent->post_title));
+				foreach($parents as $parent)
+				{
+					printf('<option value="%s"%s>%s</option>', esc_attr($parent->ID), selected($parent->ID, $postParentId, false), esc_html($parent->post_title));
+				}
 			}
-		}
-		echo '</select>';
-
-   		echo '<input type="hidden" name="eventmeta_noncename" id="eventmeta_noncename" value="' . wp_create_nonce(plugin_basename(__FILE__)) . '" />';
+		?>
+			</select>
+			<input type="hidden" name="eventmeta_noncename" id="eventmeta_noncename" value="<?php echo wp_create_nonce(plugin_basename(__FILE__)); ?>"/>
+		<?php
 	}
 
 	function parentproject_metaboxes_save_events($post_id, $post)

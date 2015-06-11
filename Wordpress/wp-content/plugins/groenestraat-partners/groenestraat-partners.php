@@ -18,7 +18,6 @@
 		{
 			if(is_admin())
 			{
-				print $_POST["PartnerId"];
 				$id = $_POST["PartnerId"];
 
 				$wpdb->delete("wp_partners", array(
@@ -125,23 +124,19 @@
 		//ophalen van alle partners geregistreerd op wordpress
 		$results = $wpdb->get_results( "SELECT * FROM wp_partners", ARRAY_A);
 
-		?>
-			<form method="post" action="<?php echo get_permalink(); ?>" enctype="multipart/form-data">
-		<?php
 		foreach($results as $result)
 		{
-			?>
+			?>			
+			<form method="post" action="<?php echo get_permalink(); ?>" enctype="multipart/form-data">
 				<strong>Bedrijfsnaam: </strong><p><?php echo $result["Bedrijfsnaam"]; ?></p>
 				<strong>URL Bedrijf: </strong><a href="<?php echo $result["URL"]; ?>"><?php echo $result["URL"]; ?></a>
 				<br />
 				<img src="<?php echo $result["URLImage"]; ?>" alt="Logo" title="Logo"/><br />
 				<input type="submit" name="Verwijderen" value="Verwijderen" />
 				<input type="hidden" value="<?php echo $result["ID"]; ?>" name="PartnerId"/>
-				<hr />
+			</form>
+			<hr />
 			<?php
 		}
-		?>
-			</form>
-		<?php
 	}
 ?>
