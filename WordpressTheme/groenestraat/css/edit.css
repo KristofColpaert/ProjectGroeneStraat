@@ -258,7 +258,7 @@ textarea.LV_invalid_field:active {
     width: 800px;
     max-width: 80vw;
     padding: 2vw;
-    background-color: #f8f7f7;
+    background-color: #FFF;
 }
 
 .createForm label{
@@ -412,11 +412,11 @@ textarea.LV_invalid_field:active {
     text-transform: uppercase;
     font-weight: 600;
     display: block;
-    margin: 15px 1%;
+    margin: 15px 0;
     background-color: #E74C3C;
     border: 1px solid transparent;
     border-radius: 3px;
-    color: #f8f7f7;
+    color: #FFF;
     padding: 5px 15px 5px 15px;
     font-size: 1.2em;
 }
@@ -424,6 +424,26 @@ textarea.LV_invalid_field:active {
     background-color: transparent;
     border: 1px solid #E74C3C;
     color: #E74C3C;
+    cursor: pointer;
+}
+.confirm-button-green{
+    float: left;
+    text-transform: uppercase;
+    font-family: "lane";
+    font-weight: 600;
+    display: block;
+    margin: 15px 0;
+    background-color: #00CD00;
+    border: 1px solid transparent;
+    border-radius: 3px;
+    color: #FFF;
+    padding: 5px 15px 5px 15px;
+    font-size: 1.2em;
+}
+.confirm-button-green:hover{
+    background-color: transparent;
+    border: 1px solid #00CD00;
+    color: #00CD00;
     cursor: pointer;
 }
 .cancel-button{
@@ -664,15 +684,66 @@ fc-right{
 }
 .column-3{
     background-color: #FFF;
+    min-width: 200px;
     width: 20%;
     padding: 2%;
     margin: 0 4.66% 20px 4.66%;
     float:left;
+    
 }
-
+.list-item, .sub-menu{
+  -webkit-box-shadow: 0px 0px 43px -31px rgba(105,104,110,1);
+-moz-box-shadow: 0px 0px 43px -31px rgba(105,104,110,1);
+box-shadow: 0px 0px 43px -20px rgba(105,104,110,1);
+}
 .eventwrapper .column-3{
     text-align: center;
 }
+@media (max-width:1025px){
+    .column-3{
+        width: 80%;
+    }
+    
+}
 footer{
     display: none;
+}
+.zoekertjewrapper h1{
+    padding: 2% 0 2% 0;
+    text-align: center;
+    color: #fff;
+}
+
+#location-canvas{
+    height: 250px;
+}
+.stack-3{
+    background-color: #FFF;
+    text-align: center;
+    padding: 2%;
+    margin: 2% 0 2% 0;
+    font-size: 1.5em;
+}
+.stack-3 form{
+    margin: 0 auto;
+}
+.stack-3 img{
+    width: 50px;
+    height: 50px;
+}
+.stack-3 label{
+    text-align: left;
+}
+.green-text{
+    color: #00CD00;
+}
+.zoekertjewrapper{
+    display: block;
+    padding: 2% !important;
+}
+#zoekertje-image{
+    height: 60vh;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center;
 }
