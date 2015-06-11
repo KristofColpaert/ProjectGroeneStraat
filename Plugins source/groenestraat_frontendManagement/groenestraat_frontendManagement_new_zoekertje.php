@@ -94,11 +94,21 @@
 					<input class="textbox" id="adLocation" name="adLocation" type="text" placeholder="Locatie" />
 
 					<label for="adFeaturedImage" class="normalize-text">Afbeelding</label>
-                  	<input id="adFeaturedImage" name="adFeaturedImage" type="file" accept="image/x-png, image/gif, image/jpeg" />
+                    <div style="height:0px;overflow:hidden">
+                        <input id="adFeaturedImage" class="image-upload" name="adFeaturedImage" type="file" accept="image/x-png, image/gif, image/jpeg" />
+                    </div>
+                  	<button type="button" class="confirm-button" id="upload" onclick="chooseFile();">Kies afbeelding</button>
 
 					<input id="adPublish" name="adPublish" type="submit" value="Publiceer" class="form-button" />
 				</form>
 				<script>
+                    $(document).ready(function () {
+                        $("#adFeaturedImage").on("change", function () {
+                            $("#upload").toggleClass("confirm-button");
+                             $("#upload").toggleClass("confirm-button-green");
+                        });
+                    });
+                   
 					var nietLeeg = "Dit veld is verplicht!";
 
 					var title = new LiveValidation('adTitle', {validMessage:" "});
