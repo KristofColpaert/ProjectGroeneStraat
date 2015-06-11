@@ -70,6 +70,7 @@
 			<!--<script src='http://fullcalendar.io/js/fullcalendar-2.1.1/lib/jquery.min.js'></script>-->
 			<script src="http://fullcalendar.io/js/fullcalendar-2.1.1/lib/jquery-ui.custom.min.js"></script>
 			<script src='http://fullcalendar.io/js/fullcalendar-2.1.1/fullcalendar.min.js'></script>
+			<script src='http://fullcalendar.io/js/fullcalendar-2.1.1/lang-all.js'></script>
 			
 			<script>
 			<?php
@@ -79,6 +80,7 @@
 			?>
 				$(document).ready(function() {
 					$('#calendar').fullCalendar({
+						lang: 'nl',
 						defaultDate: new Date(),
 						editable: true,
 						firstDay: 1,
