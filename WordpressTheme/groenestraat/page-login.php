@@ -44,6 +44,7 @@ $args = array(
 
 
 <script>
+    var correct;
     $("#user_login").attr('placeholder','Emailadres');
      $("#user_pass").attr('placeholder','Wachtwoord');
     $("#rememberme").addClass('js-switch');
@@ -56,12 +57,6 @@ $args = array(
     email.add(Validate.Presence,{failureMessage:nietLeeg});
     email.add(Validate.Length, {maximum:50, tooLongMessage: "Maximum 50 tekens lang!"});
     email.add(Validate.Email, {failureMessage: "Moet een geldig emailadres zijn!"});
-    var correct = false;
-    var failureMessage = "";
-    email.add(Validate.Custom, {against: function checkEmail(value){
-                        return correct;        
-                    }, failureMessage:failureMessage});
-    
     var pass = new LiveValidation('user_pass', {validMessage:" "});
     pass.add(Validate.Presence,{failureMessage:nietLeeg});
     $("#user_login").focusout(function(){

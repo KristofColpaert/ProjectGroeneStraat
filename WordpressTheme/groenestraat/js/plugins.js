@@ -11,12 +11,12 @@ function checkValidEmail(emailAddress, allowed, id)
 	        },
 	        success : function(response)
 	        {
-                console.log("response: "+response+emailAddress);
+                console.log("response: "+response+" email: "+emailAddress+" allowed: "+allowed);
                 if(email!=null){
                     email.destroy();
                 }
                 
-                var correct = false;
+                
                 var failureMessage;
                 if(allowed='true'){
                     failureMessage = "Dit emailadres is nog niet geregistreerd";
@@ -27,8 +27,8 @@ function checkValidEmail(emailAddress, allowed, id)
                 if(response=='true' && allowed=='true'){
                      correct=true;
                 }
-                if(response=='false' && allowed =='false'){
-                    correct = true;
+                else if(response=='false' && allowed =='false'){
+                    correct=true;
                     
                 }
                 else{
@@ -41,7 +41,6 @@ function checkValidEmail(emailAddress, allowed, id)
                 email.add(Validate.Length, {maximum:50, tooLongMessage: "Maximum 50 tekens lang!"});
                 email.add(Validate.Email, {failureMessage: "Moet een geldig emailadres zijn!"});
                 email.add(Validate.Custom, {against: function checkEmail(value){
-                        console.log(correct);
                         return correct;        
                     }, failureMessage:failureMessage});
 	            return response;
