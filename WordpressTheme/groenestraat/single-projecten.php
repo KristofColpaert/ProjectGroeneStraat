@@ -48,9 +48,10 @@
 	get_header(); 
 	global $post;
 ?>
-	//Google StreetView Coordinates
+	
     <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDC5KoyRfBkse2foN9chLRWQuo0kC61qXI"></script>
     <script>
+        //Google StreetView Coordinates
         //Get coordinates of a location.
         geocoder = new google.maps.Geocoder();
         window.getCoordinates = function(address, callback)
@@ -105,7 +106,7 @@
 		var header = document.getElementsByClassName("project-image")[0];
         header.style["background-image"] = "url('<?php echo wp_get_attachment_url(get_post_thumbnail_id($post->ID)); ?>')";
 
-        // If no image is set, show Street View.
+        // Function to show Street View.
         function initialize()
         {
             getCoordinates('<?php echo $projectLocation; ?>', function(coords)
@@ -138,6 +139,7 @@
         }
         
         <?php
+            // If no image is set, show Street View.
             if(!get_post_thumbnail_id($post->ID))
             {
                 ?>
@@ -145,10 +147,11 @@
                 <?php
             }
         ?>
+
 		var info = document.getElementsByClassName("project-info")[0];
 		var h1 = document.createElement("h1");
 		h1.innerHTML = "<?php the_title(); ?>";
-           // h1.className = "vertical-align";
+        // h1.className = "vertical-align";
 		info.appendChild(h1);
 
 
@@ -247,26 +250,25 @@
 		<section class="sidebar">
             <section class="search normalize-text">
                 <?php
-				if(is_user_logged_in() && $post->post_author != get_current_user_id())
-				{
-					?>
-						<form method="POST" id="projectMemberForm">
-							<input id="projectMemberId" name="projectMemberId" type="hidden" value="<?php echo get_current_user_id(); ?>" />
-							<input id="projectMemberProjectId" name="projectMemberProjectId" type="hidden" value="<?php echo $post->ID; ?>" />
-							<input id="projectMemberSubmit" name="projectMemberSubmit" type="submit" value="Inschrijven" class="form-button" />
-						</form>
-                    <hr/>
-					<?php
-				}
-                else if(is_user_logged_in()){
-                    ?>
-                    <a  class="wide-button" href="<?php echo get_site_url() ?>/projectleden?project=<?php echo $post->ID; ?>">Leden</a>
-                    <a  class="wide-button" href="<?php echo get_site_url() ?>/bewerk-project?project=<?php echo $post->ID; ?>">Beheren</a>
-                <hr />
-                <?php
-                }
-
-			?>
+    				if(is_user_logged_in() && $post->post_author != get_current_user_id())
+    				{
+    					?>
+    						<form method="POST" id="projectMemberForm">
+    							<input id="projectMemberId" name="projectMemberId" type="hidden" value="<?php echo get_current_user_id(); ?>" />
+    							<input id="projectMemberProjectId" name="projectMemberProjectId" type="hidden" value="<?php echo $post->ID; ?>" />
+    							<input id="projectMemberSubmit" name="projectMemberSubmit" type="submit" value="Inschrijven" class="form-button" />
+    						</form>
+                        <hr/>
+    					<?php
+    				}
+                    else if(is_user_logged_in()){
+                        ?>
+                            <a  class="wide-button" href="<?php echo get_site_url() ?>/projectleden?project=<?php echo $post->ID; ?>">Leden</a>
+                            <a  class="wide-button" href="<?php echo get_site_url() ?>/bewerk-project?project=<?php echo $post->ID; ?>">Beheren</a>
+                            <hr />
+                        <?php
+                    }
+			    ?>
                 
                 <section class="form-line">
                     <input class="checkbox js-switch" id="zoekertjes" onchange="apply_filter('z')" type="checkbox" name="zoekertjes" value="1" checked/>
@@ -302,48 +304,44 @@
 
 	</section>
 	<section class="clear"></section>
-	<!----switches--->
-<script>
-    var elems = Array.prototype.slice.call(document.querySelectorAll('.js-switch'));
-    elems.forEach(function(html) {
-        var switchery = new Switchery(html, {color:'#00cd00', size:'small'});
-    });
-    $('.events').css('height', $('.events').height());
-    function apply_filter(type){
-        console.log(type);
-        var el;
-        if(type=='z'){
-            el ="zoekertjes";
-        }
-        if(type=='e'){
-            el="events";
-        }
-        if(type=='a'){
-            el="post";
-        }
-        if($("#"+el).prop("checked")){
-                
-                $('.'+el).animate(
-	    		{
-				    height: 'toggle',
-                    padding: '4%',
-                    margin:'5% 3%',
-				}, 500);
+	<!--switches-->
+    <script>
+        var elems = Array.prototype.slice.call(document.querySelectorAll('.js-switch'));
+        elems.forEach(function(html) {
+            var switchery = new Switchery(html, {color:'#00cd00', size:'small'});
+        });
+        $('.events').css('height', $('.events').height());
+        function apply_filter(type){
+            console.log(type);
+            var el;
+            if(type=='z'){
+                el ="zoekertjes";
             }
-            else {
-                $('.'+el).animate(
-	    		{
-                    padding:'0% 4%',
-				    height: 'toggle',
-                    margin:'0% 3%',
-				}, 500);
+            if(type=='e'){
+                el="events";
             }
-    }
-    
-    
-    
-        
-</script>
-	<?php
+            if(type=='a'){
+                el="post";
+            }
+            if($("#"+el).prop("checked")){
+                    
+                    $('.'+el).animate(
+    	    		{
+    				    height: 'toggle',
+                        padding: '4%',
+                        margin:'5% 3%',
+    				}, 500);
+                }
+                else {
+                    $('.'+el).animate(
+    	    		{
+                        padding:'0% 4%',
+    				    height: 'toggle',
+                        margin:'0% 3%',
+    				}, 500);
+                }
+        }  
+    </script>
+<?php
 	get_footer();
 ?>
