@@ -94,8 +94,8 @@
 		{
 			?>
 				<form method="POST" class="createForm" action="<?php $_SERVER['REQUEST_URI']; ?>" method="POST" enctype="multipart/form-data">
-					<input type="text" name="Onderwerp" placeholder="Vul hier uw onderwerp in" /><br />
-					<select name="Projecten">
+					<input class="textbox" type="text" name="Onderwerp" placeholder="Onderwerp" /><br />
+					<select class="input combobox normalize-text" name="Projecten">
 						<?php
 							global $wpdb;
 							$postType = "projecten";
@@ -106,14 +106,21 @@
 				
 							foreach($projecten as $project)
 							{
-								print "<option value='".$project["ID"]."'>". $project["post_title"]. "</option>";
+                                
+                                if($project["ID"] == $_GET["project"]){
+                                    print "<option class='normalize-text' value='".$project["ID"]."' selected>". $project["post_title"]. "</option>";
+                                }
+                                else{
+                                    print "<option class='normalize-text' value='".$project["ID"]."'>". $project["post_title"]. "</option>";
+                                }
+								
 							}
 						?>
 					</select><br />
-					<textarea name="Bericht">
+					<textarea class="input textarea-large" name="Bericht">
 					</textarea><br />
 
-					<input type="submit" value="Verzenden" name="Verzenden" />
+					<input type="submit" value="Verzenden" class="form-button" name="Verzenden" />
 				</form>
 			<?php
 		}

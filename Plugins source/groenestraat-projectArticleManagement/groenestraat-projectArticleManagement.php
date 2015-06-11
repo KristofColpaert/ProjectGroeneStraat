@@ -82,19 +82,26 @@
 			foreach($posts as $post)
 			{
 				?>
-					<article id="projectArticleContainer<?php echo $post->ID; ?>">
-						<h2><?php echo $post->post_title; ?></h2>
-						<p><?php echo $post->post_content; ?></p>
+					<article class="box" id="projectArticleContainer<?php echo $post->ID; ?>">
+                        <section >
+                            <h2 class="normalize-text"><?php echo $post->post_title; ?></h2>
+						    <p class="normalize-text"><?php echo $post->post_content; ?></p>
+                        </section>
+						
 						<form action="<?php $_SERVER['REQUEST_URI']; ?>" method="POST">
-							<input type="button" id="projectArticleSubmit<?php echo $post->ID; ?>" data="<?php echo $post->ID; ?>" name="projectArticleSubmit" class="projectArticleSubmit form-button" value="Accepteren" />
-							<input type="button" id="projectArticleDelete<?php echo $post->ID; ?>" data="<?php echo $post->ID; ?>" name="projectArticleDelete" class="projectArticleDelete form-button" value="Verwijderen" />
+							<input type="button" id="projectArticleSubmit<?php echo $post->ID; ?>" data="<?php echo $post->ID; ?>" name="projectArticleSubmit" class="projectArticleSubmit confirm-button-green" value="Accepteren" />
+							<input type="button" id="projectArticleDelete<?php echo $post->ID; ?>" data="<?php echo $post->ID; ?>" name="projectArticleDelete" class="projectArticleDelete confirm-button" value="Verwijderen" />
 						</form>
+                        
 					</article>
+               
 				<?php
 			}
 		}
 		?>
+                <section class="clear"></section>
 			</section>
+
 		<?php
 	}
 

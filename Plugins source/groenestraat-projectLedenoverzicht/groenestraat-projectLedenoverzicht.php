@@ -65,7 +65,7 @@
 				$subscriber = '_subscriberId';
 				$users = $wpdb->get_results($wpdb->prepare("SELECT a.post_id, a.meta_key AS aKey, a.meta_value AS userId, b.user_nicename AS username FROM $wpdb->postmeta a INNER JOIN $wpdb->users b ON a.meta_value = b.ID WHERE a.post_id = %d AND a.meta_key = %s ORDER BY b.user_nicename ASC", $project->ID, $subscriber), ARRAY_A);
 				?>
-					<a href="<?php echo get_permalink($project->ID); ?>">Ga terug naar het project</a>
+					<a class="button-grey" href="<?php echo get_permalink($project->ID); ?>">Terug naar project</a>
 					<section id="projectMemberContainer">
 				<?php
 				if(count($users) > 1)
@@ -126,8 +126,8 @@
 
 						?>
 							<section class="projectMember" id="projectMemberContainer<?php echo $userData->ID; ?>">
-								<a href="<?php echo home_url(); ?>/member-informatie?userid=<?php echo $userData->ID; ?>"><?php if($firstname != '' && $name != '')echo $firstname . " " . $name; else echo $userData->display_name ?></a>
-								<input type="button" value="Verwijder" class="projectMemberDelete form-button" data="<?php echo $project->ID . ';' . $user['userId']; ?>" id="projectLedenDelete<?php echo $userData->ID; ?>" />
+								<a class="normalize-text" href="<?php echo home_url(); ?>/member-informatie?userid=<?php echo $userData->ID; ?>"><?php if($firstname != '' && $name != '')echo $firstname . " " . $name; else echo $userData->display_name ?></a>
+								<input type="button" value="Verwijder" class="projectMemberDelete confirm-button" data="<?php echo $project->ID . ';' . $user['userId']; ?>" id="projectLedenDelete<?php echo $userData->ID; ?>" />
 							</section>
 						<?php
 					}

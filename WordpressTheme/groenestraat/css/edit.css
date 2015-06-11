@@ -58,8 +58,18 @@
     color: #00cd00;
     cursor: pointer;
 }
-.grey-button{
+.button-grey{
     background-color: #a2a1a9;
+    font-family: "lane";
+    text-transform: uppercase;
+    font-weight: 600;
+    border: 1px solid transparent;
+    border-radius: 3px;
+    color: #FFF;
+    padding: 5px 15px 5px 15px;
+    font-size: 1.5em;
+    text-decoration: none;
+    width: auto;
     
 }
 
@@ -422,6 +432,7 @@ textarea.LV_invalid_field:active {
     border: 1px solid transparent;
     border-radius: 3px;
     color: #FFF;
+    height: 25px;
     padding: 5px 15px 5px 15px;
     font-size: 1.2em;
 }
@@ -434,8 +445,9 @@ textarea.LV_invalid_field:active {
 .confirm-button-green{
     text-decoration: none;
     float: left;
-    text-transform: uppercase;
+    height: 25px;
     font-family: "lane";
+    text-transform: uppercase;
     font-weight: 600;
     display: block;
     margin: 15px 0;
@@ -778,4 +790,36 @@ footer{
 }
 .container{
     position: relative;
+}
+.box section{
+    width: 80%;
+    float:left;
+}
+.box form{
+    width: 20%
+    float: right;
+}
+.box{
+    display: block;
+    height: inherit;
+}
+.projectMember{
+    width: 100%;
+    height: 35px;
+}
+.projectMember .confirm-button{
+    width: 20%;
+    float:right;
+    margin: 0;
+}
+.projectMember a{
+    display: block;
+    float: left;
+    color:#69686e;
+    padding: 5px;
+    text-decoration: none;
+}
+.textarea-large{
+    height: 400px;
+    width: 96%;
 }

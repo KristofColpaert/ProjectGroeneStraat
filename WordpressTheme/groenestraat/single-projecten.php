@@ -264,7 +264,9 @@
                     else if(is_user_logged_in()){
                         ?>
                             <a  class="wide-button" href="<?php echo get_site_url() ?>/projectleden?project=<?php echo $post->ID; ?>">Leden</a>
-                            <a  class="wide-button" href="<?php echo get_site_url() ?>/bewerk-project?project=<?php echo $post->ID; ?>">Beheren</a>
+                            <a  class="wide-button" href="<?php echo get_site_url() ?>/bewerk-project?project=<?php echo $post->ID; ?>">Beheren</a>                 
+                            <a  class="wide-button" href="<?php echo get_site_url() ?>/projectartikels">Artikels beheren</a>
+                            <a  class="wide-button" href="<?php echo get_site_url() ?>/project-mail-members/?project=<?php echo $post->ID; ?>">Stuur mail</a>             
                             <hr />
                         <?php
                     }
