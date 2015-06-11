@@ -22,6 +22,13 @@
 		makeInitialShortcodePage('Login', '', 'login', 'publish', 'page', 'closed', 'page-login.php');
 		makeInitialShortcodePage('Forgot', '', 'forgot', 'publish', 'page', 'closed', 'page-forgot.php');
 		makeInitialShortcodePage('Artikels', '', 'artikels', 'publish', 'page', 'closed', 'page-artikels.php');
+		
+		//privacy policy & gebruikersvoorwaarden
+		makeInitialShortcodePage('Verkoopvoorwaarden', '', 'verkoopvoorwaarden', 'publish', 'page', 'closed', 'page.php');
+		makeInitialShortcodePage('Gebruikersvoorwaarden', '', 'gebruikersvoorwaarden', 'publish', 'page', 'closed', 'page.php');
+		makeInitialShortcodePage('Cookiesbeleid', '', 'cookiesbeleid', 'publish', 'page', 'closed', 'page.php');
+
+
 		register_main_menu();
 		activate_all_plugins();
 	}
