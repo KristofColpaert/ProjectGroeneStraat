@@ -9,6 +9,7 @@
 		Text Domain: prowp-plugin
 		License: GPLv2		
 	*/
+
 	if(isset($_POST["Verzenden"]))
 	{
 		add_action('plugins_loaded', 'register_sendMail_project_members');
@@ -39,16 +40,20 @@
 					$postNaam = get_post($id, ARRAY_A)['post_title'];
 
 					$userId= $result['meta_value'];
-					$userEmail = get_userdata($userId)->user_email;
-
-					if(wp_mail($userEmail, $onderwerp, $bericht . $postNaam, $headers))
+					if($userId != get_current_user_id())
 					{
-							//echo "Verstuurd";
+						$userEmail = get_userdata($userId)->user_email;
 
-					}
-					else
-					{		
-							//echo "Niet verstuurd";
+						//mogelijkheid tot feedback
+						if(wp_mail($userEmail, $onderwerp, $bericht . $postNaam, $headers))
+						{
+								//
+
+						}
+						else
+						{		
+								//
+						}
 					}
 				}
 			}	
