@@ -42,10 +42,25 @@
 	global $post;
 	$users = array();
 	?>
-	<section class="container">
-		<div id="primary" class="content-area">
-		<main id="main" class="site-main" role="main">
-		<div class="contentwrapper">
+<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDC5KoyRfBkse2foN9chLRWQuo0kC61qXI"></script>
+	<script>
+		geocoder = new google.maps.Geocoder();
+		window.getCoordinates = function(address, callback)
+		{
+			var coordinates;
+			geocoder.geocode({ address: address }, function (results, status)
+			{
+				coords_obj = results[0].geometry.location;
+				console.log(coords_obj);
+				coordinates = [coords_obj.A, coords_obj.F];
+				callback(coordinates);
+			})
+		}
+	</script>
+
+        <section class="zoekertjewrapper">
+       
+		
 	<?php
 
 	while(have_posts()) : the_post();
@@ -54,16 +69,27 @@
 			$adPrice = $meta['_adPrice'][0];
 		?>
 			<h1><?php the_title(); ?></h1><br/>
-			<p><strong>Beschrijving:</strong><br/><?php echo the_content(); ?></p>
-			<br/>
-			<p><strong>Location:</strong><br/><?php echo $adLocation; ?></p>
-			<br/>
-			<p><strong>Prijs:</strong><br/><?php echo $adPrice; ?></p>
+            <section class="stack-3">
+                <p><img src="<?php echo get_template_directory_uri();?>/img/description.png"/><br/><?php echo the_content(); ?></p><br/><p class="green-text">
+                <?php 
+                    if($adPrice == 0){
+                        echo "gratis";
+                    }
+else{
+    echo $adPrice." euro";
+}
+                ?>
+                </p>
+            </section>
+			
+			<section class="stack-3" id="location-canvas">
+            </section>
+			
 			<br/>
 			<?php if(has_post_thumbnail($post->ID)) { ?>
-			<p><strong>Foto:</strong><br/><br/>
-			<section class="image-wrapper">
-				<?php echo get_the_post_thumbnail(); ?>
+			
+			<section class="stack-3" id="zoekertje-image">
+				
 			</section>
 			<?php } ?>
 			
@@ -97,6 +123,7 @@
 					$name = $current_user->display_name;
 					$email = $current_user->user_email;
 					?>
+    <section class="stack-3">
 						<form method="POST" class="createForm" style="width:50%"; action="<?php $_SERVER['REQUEST_URI']; ?>" method="POST" enctype="multipart/form-data">
 							
 							<label for="Name">Naam</label>
@@ -113,7 +140,7 @@
 							<input type="submit" value="Verzenden" name="Verzenden" class="form-button" />
 							<input type="hidden" value="<?php the_title(); ?>" name="Title" />
 							<input type="hidden" value="<?php echo $projectId; ?>" name="projectId" />
-						</form>
+        </form></section>
 					<?php
 				}
 
@@ -122,11 +149,59 @@
 		<?php
 	endwhile;
 
-	?>			</div>
-			</main>
-		</div>
-	</section>
+	?>			
+		
 
+</section>
+
+	<script type="text/javascript">
+        
+       
+		var map;
+		var myLatlng;
+
+	    function initialize() {
+	    	getCoordinates('<?php echo $adLocation; ?>', function(coords) 
+	    	{
+	    		var mapOptions = {
+	    			zoom: 12,
+		          	center: new google.maps.LatLng(coords[0], coords[1]),
+		          	disableDefaultUI: true, 
+                    scrollwheel: false,
+		        };
+
+		        myLatlng = new google.maps.LatLng(coords[0], coords[1]);
+
+		        map = new google.maps.Map(document.getElementById('location-canvas'), mapOptions);
+
+		        var contentString = '<div id="content">'+
+			      					'<div id="bodyContent" style="font-size:0.7em;text-align:center;padding:4px">'+
+			      					'<p style="font-size:2.4em"><b><?php echo $adLocation; ?></b></p>' +
+								    '</div>'+
+								    '</div>';
+
+				var infowindow = new google.maps.InfoWindow({
+				    content: contentString,
+      				maxWidth: 250,
+      				maxHeight: 50
+				});
+
+				var marker = new google.maps.Marker({
+			    	position: myLatlng,
+			    	map: map,
+			    	title: 'Meer info'
+  				});
+
+
+				infowindow.open(map, marker);
+	    	})
+	    }
+
+
+	    google.maps.event.addDomListener(window, 'load', initialize);
+        
+        $("#zoekertje-image").css({"background-image": "url(<?php echo wp_get_attachment_url( get_post_thumbnail_id($post->ID) );?>)"});
+    </script>
 	<?php
 	
 	get_footer();
