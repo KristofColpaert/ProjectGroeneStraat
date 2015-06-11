@@ -199,5 +199,35 @@
 				delete_post_meta($post->ID, $key);
 			}
 		}
+
+		if($events_meta['_projectStreet'] != null && $events_meta['_projectStreet'] != '' &&
+			$events_meta['_projectCity'] != null && $events_meta['_projectCity'] != '')
+		{
+			//Get location and save Google Street View Image API code in database.
+			$tempProjectStreet = str_replace(' ', '%20', $events_meta['_projectStreet']);
+			$tempProjectCity = str_replace(' ', '%20', $events_meta['_projectCity']);
+
+			$url = 'https://maps.googleapis.com/maps/api/geocode/json?address=' . $tempProjectStreet . '%20' . $tempProjectCity . '&key=AIzaSyChwJePvaLHTx1xlGAFUHrmjkPWKpVyGVA';
+		}
+
+		else
+		{
+			$url = 'https://maps.googleapis.com/maps/api/geocode/json?address=Grote%20Markt%20Kortrijk&key=AIzaSyChwJePvaLHTx1xlGAFUHrmjkPWKpVyGVA';
+		}
+
+		$ch = curl_init();
+		curl_setopt($ch, CURLOPT_URL, $url); 
+		curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1); 
+		$output = curl_exec($ch);   
+
+		$json = json_decode($output, true);
+		$lat = $json['results'][0]['geometry']['location']['lat'];
+		$lng = $json['results'][0]['geometry']['location']['lng'];
+
+		$imageUrl = 'https://maps.googleapis.com/maps/api/streetview?key=AIzaSyChwJePvaLHTx1xlGAFUHrmjkPWKpVyGVA&size=800x800&location=' . $lat . ',' . $lng . '&fov=90&heading=235&pitch=10';
+
+		add_post_meta($post->ID, '_projectStreetViewThumbnail', $imageUrl);
+
+		curl_close($ch);
 	}
 ?>

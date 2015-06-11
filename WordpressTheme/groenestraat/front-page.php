@@ -182,7 +182,22 @@
                                 document.getElementsByClassName('projectname')[<?php echo $index ?>].innerHTML = splitter('<?php the_title(); ?>', 30);
                             </script>
                         </div>
-                        <div style="background-image:url('<?php echo wp_get_attachment_url(get_post_thumbnail_id($post->ID)); ?>');background-size:cover;width:auto;height:200px"></div>
+                        <?php 
+                            if(has_post_thumbnail())
+                            {
+                                ?>
+                                    <div style="background-image:url('<?php echo wp_get_attachment_url(get_post_thumbnail_id($post->ID)); ?>');background-size:cover;width:auto;height:200px"></div>
+                                <?php
+                            }
+                            
+                            else
+                            {
+                                $projectStreetViewThumbnail = get_post_meta($post->ID, '_projectStreetViewThumbnail')[0];
+                                ?>
+                                    <div style="background-image:url('<?php echo $projectStreetViewThumbnail; ?>');background-size:cover;width:auto;height:200px"></div>
+                                <?php
+                            }
+                        ?>
                     </div>
                 </a>
             <?php

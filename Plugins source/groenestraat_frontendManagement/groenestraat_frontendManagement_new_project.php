@@ -124,6 +124,30 @@
 	    					$newupload = insert_featured_image($file, $postId);
 					    }
 					}
+
+					else
+					{
+						$tempProjectStreet = str_replace(' ', '%20', $projectStreet);
+						$tempProjectCity = str_replace(' ', '%20', $projectCity);
+
+						$url = 'https://maps.googleapis.com/maps/api/geocode/json?address=' . $tempProjectStreet . '%20' . $tempProjectCity . '&key=AIzaSyChwJePvaLHTx1xlGAFUHrmjkPWKpVyGVA';
+
+						$ch = curl_init();
+						curl_setopt($ch, CURLOPT_URL, $url); 
+						curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1); 
+						$output = curl_exec($ch);   
+
+						$json = json_decode($output, true);
+						$lat = $json['results'][0]['geometry']['location']['lat'];
+						$lng = $json['results'][0]['geometry']['location']['lng'];
+
+						$imageUrl = 'https://maps.googleapis.com/maps/api/streetview?key=AIzaSyChwJePvaLHTx1xlGAFUHrmjkPWKpVyGVA&size=800x800&location=' . $lat . ',' . $lng . '&fov=90&heading=235&pitch=10';
+
+						add_post_meta($postId, '_projectStreetViewThumbnail', $imageUrl);
+
+						curl_close($ch);
+					}
+
 					?>
 						<img class="center" src="<?php echo get_template_directory_uri() ?>/img/ball.gif" />
 	                    <script>
