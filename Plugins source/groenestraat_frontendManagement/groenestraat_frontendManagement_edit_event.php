@@ -68,6 +68,8 @@
 							$eventTime = get_post_meta($event->ID, '_eventTime')[0];
 							$eventEndTime = get_post_meta($event->ID, '_eventEndTime')[0];
 							$eventLocation = get_post_meta($event->ID, '_eventLocation')[0];
+							$eventStartHour = get_post_meta($event->ID, '_eventStartHour')[0];
+							$eventEndHour = get_post_meta($event->ID, '_eventEndHour')[0];
 
 							echo $eventTime;
 						?>
@@ -109,11 +111,11 @@
 						<br />
 
 						<section class="date textbox left">
-	                        <input id="eventStartHour" name="eventStartHour" type="text" class="normalize-text" placeholder="Aanvangstijd (HH:MM)"/>
+	                        <input id="eventStartHour" name="eventStartHour" type="text" class="normalize-text" placeholder="Aanvangstijd (HH:MM)" value="<?php echo $eventStartHour; ?>" />
 	                    </section>
 
 	                    <section class="date textbox right">
-	                    	<input id="eventEndHour" name="eventEndHour" type="text" placeholder="Eindtijd (HH:MM)" />
+	                    	<input id="eventEndHour" name="eventEndHour" type="text" placeholder="Eindtijd (HH:MM)" value="<?php echo $eventEndHour; ?>" />
 	                    </section>
 
 						<label for="eventLocation" class="normalize-text">Locatie</label>
