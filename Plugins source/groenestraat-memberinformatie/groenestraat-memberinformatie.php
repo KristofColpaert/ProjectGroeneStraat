@@ -47,25 +47,32 @@
 				$user = get_userdata($userid);
 				$usermeta = get_user_meta($userid);
 
-				echo '<strong>Gebruikersnaam: </strong><label>'. $user->user_login . '</label><br />';
-
+				?>
+						<strong>Gebruikersnaam: </strong><p><?php echo $user->user_login; ?></p>
+				<?php
 				if(get_user_meta($user->ID, "rpr_gegevens", true) == 1)
 				{
-					echo '<strong>E-mail: </strong><label>'. $user->user_email  . '</label><br />';
+					?>
+						<strong>E-mail: </strong><p><?php echo $user->user_email; ?></p>
+					<?php
 					if($usermeta['rpr_straat'][0] != "" || $usermeta['rpr_postcode'][0] != "" || $usermeta['rpr_gemeente'][0] != "")
 					{
-						echo '<strong>Adres: </strong><label>'. $usermeta['rpr_straat'][0] . ', ' . $usermeta['rpr_postcode'][0] . ' ' . $usermeta['rpr_gemeente'][0] . '</label><br />';
+					?>
+						<strong>Adres: </strong><p><?php echo $usermeta['rpr_straat'][0] . ', ' . $usermeta['rpr_postcode'][0] . ' ' . $usermeta['rpr_gemeente'][0]; ?></p>
+					<?php
 					}
 					if($usermeta['rpr_telefoon'][0] != "")
 					{
-						echo '<strong>Telefoon: </strong><label>'. $usermeta['rpr_telefoon'][0]  .'</label><br />';
+					?>
+						<strong>Telefoon: </strong><p><?php echo $usermeta['rpr_telefoon'][0]; ?></p>
+					<?php
 					}
 				}
 
 				echo get_avatar($userid); 
-
-				print '<hr />';
-				print '<h1> Activiteiten gebruiker</h1>';
+				?>
+					<h1>Activiteiten gebruiker</h1>
+				<?php
 				global $post;
 				$the_query = new WP_Query(
 				array(
@@ -80,8 +87,10 @@
 						$the_query->the_post();	
 						$post_type = $post->post_type;
 
-						echo '<h2>' . get_the_title() . '</h2>';
-						echo '<p>' . get_the_excerpt() . '</p>';
+						?>
+						<h2><?php echo get_the_title(); ?></h2>
+						<p><strong>Omschrijving: </strong></p><p><?php echo get_the_excerpt(); ?></p>
+						<?php
 
 						$meta = get_post_meta($post->ID);
 						switch ($post_type) {
@@ -89,42 +98,57 @@
 						    	$projectStreet = $meta['_projectStreet'][0];
 								$projectCity = $meta['_projectCity'][0];
 								$projectZipcode = $meta['_projectZipcode'][0];
-								print "<label>Straat:</label><p>" . $projectStreet . '</p>';
-								print "<label>Stad:</label><p>" . $projectCity . '</p>';
-								print "<label>Zipcode:</label><p>" . $projectZipcode . '</p>';
+
+								?>	
+									<p><strong>Straat: </strong></p><p><?php echo $projectStreet; ?></p>
+									<p><strong>Gemeente: </strong></p><p><?php echo $projectCity; ?></p>
+									<p><strong>Postcode: </strong></p><p><?php echo $projectZipcode; ?></p>
+								<?php
 						        break;
 						    case "events":
 						       	$eventTime = $meta['_eventTime'][0];
 								$eventEndTime = $meta['_eventEndTime'][0];
 								$eventLocation = $meta['_eventLocation'][0];
-								print "<label>Startdatum:</label><p>" . $eventTime . '</p>';
-								print "<label>Einddatum:</label><p>" . $eventEndTime . '</p>';
-								print "<label>Locatie:</label><p>" . $eventLocation . '</p>';
+
+								?>
+									<p><strong>Van: </strong></p><p><?php echo $eventTime; ?></p>
+									<p><strong>Tot: </strong></p><p><?php echo $eventEndTime; ?></p>
+									<p><strong>Locatie: </strong></p><p><?php echo $eventLocation; ?></p>
+								<?php
 						        break;
 						    case "zoekertjes":
 						        $adPrice = $meta['_adPrice'][0];
 								$adLocation = $meta['_adLocation'][0];
-								print "<label>Prijs:</label><p> € " . $adPrice . '</p>';
-								print "<label>Locatie:</label><p>" . $adLocation . '</p>';
+
+								?>
+									<p><strong>Prijs: </strong></p><p><?php echo $adPrice; ?></p>
+									<p><strong>Locatie: </strong></p><p><?php echo $adLocation; ?></p>
+								<?php
 						        break;
 						}
-						echo '<hr />';
 					}
 				} else {
-					echo "<h2>Er werden geen activiteiten gevonden.</h2>";
+					?>
+						<h2>Er werden geen activiteiten gevonden.</h2>
+					<?php
 				}
 
-				echo '<a href="'.site_url().'/leden-overzicht">Terug naar ledenoverzicht</a>';
-
+				?>
+					<a href="<?php echo site_url().'/leden-overzicht'; ?>">Terug naar ledenoverzicht</a>
+				<?php
 			}
 			else
 			{
-				echo "Er werd een verkeerde URL ingegeven.";
+				?>
+					<p>De URL die u hebt meegegeven is niet geldig.</p>
+				<?php
 			}
 		}
 		else
 		{
-			echo "Gelieve u aan te melden om deze pagina te bekijken.";
+			?>
+				<p>U moet zich aanmelden om deze pagina te bekijken.</p>
+			<?php
 		}
 	}
 
