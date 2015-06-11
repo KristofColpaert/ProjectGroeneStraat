@@ -62,30 +62,36 @@ function prowpt_persoonlijkeZoekertjesOverzicht()
 				while ($the_query->have_posts() ) {
 						$the_query->the_post();	
 
-						echo '<h2>' . get_the_title() . '</h2>';
-
+						?>
+							<h2><?php echo get_the_title(); ?></h2>
+						<?php
 						$adPrice = get_post_meta($post->ID, "_adPrice")[0];
 						$adLocation = get_post_meta($post->ID, "_adLocation")[0];
 
 						if(!empty($adPrice) && !empty($adLocation))
 						{
-							print '<strong>Prijs: </strong> ' . $adPrice . '<br />';
-							print '<strong>Locatie: </strong> ' . $adLocation . '<br />';;
-							print '<strong>Omschrijving: </strong><p>' . get_the_excerpt() . '</p>';
-							print '<a href="'.site_url().'/bewerk-zoekertje?zoekertje='. $post->ID .'">Bewerk zoekertje</a>';
+							?>
+							<strong>Prijs: </strong><p><?php echo $adPrice; ?></p>
+							<strong>Locatie: </strong><p><?php echo $adLocation; ?></p>
+							<strong>Omschrijving: </strong><p><?php echo get_the_excerpt(); ?></p>
+							<a href="<?php echo site_url().'/bewerk-zoekertje?zoekertje='. $post->ID; ?>">Bewerk zoekertje</a>
+							<?php
 						}
 
 				}
 		}
 		else
 		{
-			print "Er werden geen zoekertjes gevonden.";
+			?>
+				<p>Er werden geen zoekertjes gevonden.</p>
+			<?php
 		}
 	}
 	else
 	{
-		//niet-ingelogd
-		echo "U moet zich aanmelden om deze pagina te bekijken.";
+			?>
+				<p>U moet zich aanmelden om deze pagina te bekijken.</p>
+			<?php
 	}
 
 }

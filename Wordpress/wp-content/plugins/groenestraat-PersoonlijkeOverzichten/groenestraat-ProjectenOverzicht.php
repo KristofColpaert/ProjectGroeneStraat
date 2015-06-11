@@ -70,30 +70,44 @@ function prowpt_persoonlijkeProjectenOverzicht()
 							$the_query->the_post();	
 
 							$projectAdminId = $post->post_author;
-
-							echo '<h2>' . get_the_title() . '</h2>';
-								
+							?>
+								<h2><?php echo get_the_title(); ?></h2>
+							<?php	
 							$street = get_post_meta($post->ID, "_projectStreet")[0];
 							$city = get_post_meta($post->ID, "_projectCity")[0];
 							$zipcode = get_post_meta($post->ID, "_projectZipcode")[0];
 
 							if(!empty($street) && !empty($city) && !empty($zipcode))
 							{
-								print '<h1>' . $title . '</h1>';
-								print '<strong>Street: </strong> ' . $street . '<br />';
-								print '<strong>City: </strong> ' . $city . '<br />';;
-								print '<strong>Zipcode: </strong> ' . $zipcode . '<br />';;
-								print '<strong>Omschrijving: </strong><p>' . get_the_excerpt() . '</p>';
+								?>
+								<h1><?php echo $title; ?></h1>
+								<strong>Street</strong><p><?php echo $street; ?></p>
+								<strong>City</strong><p><?php echo $city; ?></p>
+								<strong>Zipcode</strong><p><?php echo $zipcode; ?></p>
+								<strong>Omschrijving</strong><p><?php echo get_the_excerpt(); ?></p>
+								<?php
 								if($userId == $projectAdminId)
 								{
-									print '<a href="'.site_url().'/bewerk-project?project='. $post->ID .'">Bewerk project</a>';
+									?>
+									<a href="<?php echo site_url() . '/bewerk-project?project=' .  $post->ID ?>">Bewerk project</a>
+									<?php
 								}
 							}
 				}
 
 		}
-
-		
+		else
+		{
+			?>	
+				<p>Er werden geen projecten gevonden.</p>
+			<?php
+		}
+	}
+	else
+	{
+		?>	
+			<p>U moet zich aanmelden om deze pagina te bekijken.</p>
+		<?php
 	}
 
 }

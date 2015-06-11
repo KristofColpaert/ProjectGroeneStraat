@@ -61,23 +61,25 @@ function prowpt_persoonlijkeArtikelsOverzicht()
 		if ($the_query->have_posts()) {
 				while ($the_query->have_posts() ) {
 						$the_query->the_post();	
-
-						echo '<h2>' . get_the_title() . '</h2>';
-						echo '<strong>Omschrijving: </strong><p>' . the_content() . '</p>';
-							
-						echo '<a href="'.site_url().'/bewerk-artikel?artikel='. $post->ID .'">Bewerk artikel</a>';
+						?> 
+							<h2><?php echo get_the_title(); ?></h2>
+							<strong>Omschrijving: </strong><p><?php echo the_content(); ?></p>
+							<a href="<?php echo site_url().'/bewerk-artikel?artikel='. $post->ID; ?>">Bewerk artikel</a>
+						<?php
 				}
 		}
 		else
 		{
-			print "Er werden geen artikels gevonden.";
+			?>
+				<p>Er werden geen artikels gevonden.</p>
+			<?php
 		}
 	}
 	else
 	{
-		//niet-ingelogd
-		echo "U moet zich aanmelden om deze pagina te bekijken.";
+		?>
+			<p>U moet zich eerst aanmelden om deze pagina te bekijken.</p>
+		<?php
 	}
-
 }
 ?>

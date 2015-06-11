@@ -59,34 +59,43 @@ function prowpt_persoonlijkeEventenOverzicht()
 		if ($the_query->have_posts()) {
 					while ($the_query->have_posts() ) {
 						$the_query->the_post();	
-
-						echo '<h2>' . get_the_title() . '</h2>';
-
+						?>
+							<h2><?php echo get_the_title(); ?></h2>
+						<?php
 						$eventTime = get_post_meta($post->ID, "_eventTime")[0];
 						$eventEndTime = get_post_meta($post->ID, "_eventEndTime")[0];
 						$eventLocation = get_post_meta($post->ID, "_eventLocation")[0];
+						$eventStartHour = get_post_meta($post->ID, "_eventStartHour")[0];
+						$eventEndHour = get_post_meta($post->ID, "_eventEndHour")[0];
 
-						if(!empty($eventTime) && !empty($eventEndTime) && !empty($eventLocation))
+						if(!empty($eventTime) && !empty($eventEndTime) && !empty($eventLocation) && !empty($eventStartHour) && !empty($eventEndHour))
 						{
-							print '<strong>Startdatum: </strong> ' . $eventTime . '<br />';
-							print '<strong>Einddatum: </strong> ' . $eventEndTime . '<br />';
-							print '<strong>Locatie: </strong> ' . $eventLocation . '<br />';
-							print '<strong>Omschrijving: </strong><p>' . get_the_excerpt()  . '</p>';
-							print '<a href="'.site_url().'/bewerk-event?event='. $post->ID .'">Bewerk event</a>';
+							?>
+								<strong>Startdatum: </strong><p><?php echo $eventTime; ?></p>
+								<strong>Einddatum: </strong><p><?php echo $eventEndTime; ?></p>
+								<strong>Van: </strong><p><?php echo $eventStartHour; ?></p>
+								<strong>Tot: </strong><p><?php echo $eventEndHour; ?></p>
+								<strong>Locatie: </strong><p><?php echo $eventLocation; ?></p>
+								<strong>Omschrijving: </strong><p><?php echo get_the_excerpt(); ?></p>
+								<a href="<?php echo site_url().'/bewerk-event?event='. $post->ID; ?>">Bewerk event</a>
+							<?php
 						}
 
 					}
 		}
 		else
 		{
-			print "Er werden geen events gevonden.";
+			?>
+				<p>Er werden geen events gevonden.</p>
+			<?php
 		}
 
 	}
 	else
 	{
-		//niet-ingelogd
-		echo "U moet zich aanmelden om deze pagina te bekijken.";
+			?>
+				<p>U moet zich aanmelden om deze pagina te bekijken.</p>
+			<?php
 	}
 
 }
