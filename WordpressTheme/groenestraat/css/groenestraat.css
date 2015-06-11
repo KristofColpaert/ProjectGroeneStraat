@@ -275,11 +275,6 @@ img
 }
 
 /* ARTIKELS */
-/* 
-
-todo: fix 1-2px red border???? 
-
-*/
 
 .recent-artikel
 {
@@ -291,6 +286,11 @@ todo: fix 1-2px red border????
     background-position: center center;
     transition: background 0.25s ease;
     position: relative;
+}
+
+.recent-artikel h1
+{
+    line-height: 1.5em;
 }
 
 .artikel-info
@@ -320,13 +320,14 @@ todo: fix 1-2px red border????
 
 .artikel-side
 {
+    text-align: center;
     color:#fff;
     position: absolute;
     left: 0;
     bottom: 0;
     padding:0 2%;
     width: 61%;
-    height: 20%;
+    height: 15%;
     background: url("../img/blackfilter.png") repeat;
 }
 
@@ -351,7 +352,7 @@ todo: fix 1-2px red border????
 
 #recent-projects-slider .item h1
 {
-    /*line-height: 100%;*/
+    line-height: 100%;
     font-size: 2.5em;
     text-transform: lowercase;
 }

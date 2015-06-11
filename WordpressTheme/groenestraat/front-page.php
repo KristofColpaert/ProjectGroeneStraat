@@ -75,7 +75,7 @@
             {
                 "titel": "<?php the_title(); ?>",
                 "info": "<?php echo excerpt(40); ?>",
-                "image": "<?php echo wp_get_attachment_url(get_post_thumbnail_id($post->ID)); ?>";
+                "image": "<?php echo wp_get_attachment_url(get_post_thumbnail_id($post->ID)); ?>",
                 "url": "<?php the_permalink(); ?>"
             },
             <?php
@@ -87,25 +87,52 @@
         parseData(data);
 
         var index = 0;
+        replace(index);
+
         var timer = setInterval(function () { 
-
             replace(index);
-
             index++;
             if(index > 3) { index = 0; }
-
         }, 3000);
 
         function parseData(data) 
         {
-            for(var i=0;i<(data.length)-1;i++) 
+            for(var i=0;i<(data.length)-1;i++)
             {
                 var e = document.getElementsByClassName('artikel-item')[i];
-                e.getElementsByTagName('h1')[0].innerHTML = data[i].titel;
-                e.getElementsByTagName('p')[0].innerHTML = data[i].info;   
+                e.getElementsByTagName('h1')[0].innerHTML = splitter(data[i].titel, 10);
+                e.getElementsByTagName('p')[0].innerHTML = splitter(data[i].info, 140);  
             }
         }
- 
+
+        function splitter(content, maxChar)
+        {
+            var tekens = 0;
+            var newContent = '';
+
+            for(var i=0;i<content.length;i++)
+            {
+                if(i > maxChar)
+                {
+                    for(var s=maxChar;s<content.length;s++)
+                    {
+                        if(content.charAt(s) == ' ')
+                        {
+                            var zin = '';
+                            for(var teller=0;teller<s;teller++)
+                            {
+                                newContent += content.charAt(teller);
+                            }
+
+                            return newContent + ' ...';
+                        }
+                    }
+                }
+            }
+
+            return content;
+        }
+
         function replace(newId)
         {
             index = newId;
@@ -120,9 +147,11 @@
                     chosen.setAttribute('id', 'active');
 
                     var info = document.getElementsByClassName('artikel-side')[0];
-                    info.getElementsByTagName('h1')[0].innerHTML = data[newId].titel;
-                    info.getElementsByTagName('p')[0].innerHTML = data[newId].info;
-                    document.getElementsByClassName('recent-artikel')[0].style["background-image"] = "url('<?php echo bloginfo('template_directory'); ?>" + data[newId].image + "')";
+                    info.getElementsByTagName('h1')[0].innerHTML = splitter(data[newId].titel, 250);
+                    //info.getElementsByTagName('p')[0].innerHTML = splitter(data[newId].info, 250);
+                    var recentArtikel = document.getElementsByClassName('recent-artikel')[0];
+                    recentArtikel.style["background-image"] = "url('" + data[newId].image + "')";
+                    recentArtikel.style["background-size"] = "cover";
                 }
             }
         }
@@ -141,18 +170,23 @@
     <section class="recent-projects">
         <div id="recent-projects-slider">
             <?php
+                $index = 0;
                 $my_query = new WP_Query(array('post_type' => 'projecten', 'posts_per_page' => 10));
                 while($my_query->have_posts()) : $my_query->the_post();
             ?>
                 <a href="<?php the_permalink(); ?>">
                     <div class="item fade">
                         <div class="overlay">
-                            <h1><?php the_title(); ?></h1>
+                            <h1 class="projectname"></h1>
+                            <script>
+                                document.getElementsByClassName('projectname')[<?php echo $index ?>].innerHTML = splitter('<?php the_title(); ?>', 30);
+                            </script>
                         </div>
                         <div style="background-image:url('<?php echo wp_get_attachment_url(get_post_thumbnail_id($post->ID)); ?>');background-size:cover;width:auto;height:200px"></div>
                     </div>
                 </a>
             <?php
+                $index++;
                 endwhile;
             ?>
         </div>        
