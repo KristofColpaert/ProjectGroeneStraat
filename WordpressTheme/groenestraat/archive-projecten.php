@@ -1,5 +1,30 @@
 <?php get_header(); ?>
+	<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDC5KoyRfBkse2foN9chLRWQuo0kC61qXI"></script>
+	<script>
+		var globalIndexes = [];
+		var globalCoordinates = [];
 
+		//Google StreetView Coordinates
+        //Get coordinates of a location.
+        geocoder = new google.maps.Geocoder();
+        window.getCoordinates = function(address, callback)
+        {
+            var coordinates;
+            geocoder.geocode({ address: address }, function (results, status)
+            {
+            	if(results[0])
+            	{
+            		coords_obj = results[0].geometry.location;
+                	coordinates = [coords_obj.A, coords_obj.F];
+                	callback(coordinates);
+            	}
+                else
+                {
+                	callback('none');
+                }
+            })
+        }
+	</script>
 	<section class="container">
 	<section class="sub-menu">
 		<ul>
@@ -48,6 +73,7 @@
 		$projectStreet = $meta['_projectStreet'][0];
 		$projectCity = $meta['_projectCity'][0];
 		$projectZipcode = $meta['_projectZipcode'][0];
+		$projectLocation = $projectStreet . ' ' . $projectCity;
 
 		?>
 			<a href="<?php the_permalink(); ?>">
@@ -67,9 +93,18 @@
 						{
 							?>
 							<script> 
-									var e = document.getElementsByClassName("project-item")['<?php echo $index; ?>'];
-									e.style["background-image"] = "url('<?php echo bloginfo('template_directory'); ?>/img/project-example.png')";
-									e.style["background-size"] = "cover";
+								var e = document.getElementsByClassName("project-item")['<?php echo $index; ?>'];
+								globalIndexes.push(<?php echo $index; ?>);
+								
+								getCoordinates('<?php echo $projectLocation; ?>', function(coords)
+								{
+									globalCoordinates.push([]);
+									globalCoordinates[globalCoordinates.length - 1].push(coords);
+									if(globalCoordinates.length == globalIndexes.length)
+									{
+										test();
+									}
+								});
 							</script>
 							<?php
 						}
@@ -110,5 +145,25 @@
 
 		?>
 	</section>
-	
+	<script>
+		
+		function test()
+		{
+			for(i = 0; i < globalIndexes.length; i++)
+			{
+				var index = globalIndexes[i];
+				var coords = globalCoordinates[i];
+
+				if(coords[0] != 'none')
+				{
+					var coord1 = coords[0][0];
+					var coord2 = coords[0][1];
+					var url = 'https://maps.googleapis.com/maps/api/streetview?key=AIzaSyChwJePvaLHTx1xlGAFUHrmjkPWKpVyGVA&size=800x800&location=' + coord1 + ',' + coord2 + '&fov=90&heading=235&pitch=10';
+					var e = document.getElementsByClassName("project-item")[index];
+					e.style["background-image"] = "url('" + url + "')";
+					e.style["background-size"] = "cover";
+				}
+			}
+		}
+	</script>	
 <?php get_footer(); ?>
