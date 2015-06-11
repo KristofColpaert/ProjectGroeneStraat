@@ -18,21 +18,23 @@ function checkValidEmail(emailAddress, allowed, id)
                 
                 
                 var failureMessage;
-                if(allowed='true'){
+                if(allowed=='true'){
                     failureMessage = "Dit emailadres is nog niet geregistreerd";
                 }
                 else{
                     failureMessage = "Dit emailadres is al geregistreerd";
                 }
-                if(response=='true' && allowed=='true'){
+                if(response=='true' && allowed==true){
+                    console.log("correct=truetrue");
                      correct=true;
                 }
-                else if(response=='false' && allowed =='false'){
+                else if(response=='false' && allowed ==false){
+                    console.log("correct=true");
                     correct=true;
                     
                 }
                 else{
-                    
+                    console.log("correct=false");
                     correct=false;
                 }
                 var nietLeeg = "Dit veld is verplicht!";
