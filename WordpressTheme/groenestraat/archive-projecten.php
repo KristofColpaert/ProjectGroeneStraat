@@ -3,6 +3,7 @@
 	<script>
 		var globalIndexes = [];
 		var globalCoordinates = [];
+		var endIndex = 0;
 
 		//Google StreetView Coordinates
         //Get coordinates of a location.
@@ -12,6 +13,7 @@
             var coordinates;
             geocoder.geocode({ address: address }, function (results, status)
             {
+            	console.log()
             	if(results[0])
             	{
             		coords_obj = results[0].geometry.location;
@@ -67,6 +69,11 @@
 			)
 		);
 
+	?>
+		<script>
+			endIndex = <?php echo $my_query->post_count; ?>;
+		</script>
+	<?php
 	while($my_query->have_posts()) : $my_query->the_post();
 
 		$meta = get_post_meta($post->ID);
@@ -79,7 +86,7 @@
 			<a href="<?php the_permalink(); ?>">
 				<section class="project-item">				
 					<?php 
-						if (has_post_thumbnail()) 
+						if(has_post_thumbnail()) 
 						{ 
 							?>
 								<script> 
@@ -98,9 +105,10 @@
 								
 								getCoordinates('<?php echo $projectLocation; ?>', function(coords)
 								{
-									globalCoordinates.push([]);
-									globalCoordinates[globalCoordinates.length - 1].push(coords);
-									if(globalCoordinates.length == globalIndexes.length)
+									globalCoordinates.push(coords);
+
+
+									if(<?php echo $index; ?> == endIndex - 1 && globalIndexes.length == globalCoordinates.length)
 									{
 										test();
 									}
@@ -134,6 +142,8 @@
 	?>
 
 	</section>
+	<script>
+	</script>
 	<section class="clear"></section>
 	
 	<section class="navigate-menu">
@@ -146,7 +156,6 @@
 		?>
 	</section>
 	<script>
-		
 		function test()
 		{
 			for(i = 0; i < globalIndexes.length; i++)
@@ -154,10 +163,10 @@
 				var index = globalIndexes[i];
 				var coords = globalCoordinates[i];
 
-				if(coords[0] != 'none')
+				if(coords != 'none')
 				{
-					var coord1 = coords[0][0];
-					var coord2 = coords[0][1];
+					var coord1 = coords[0];
+					var coord2 = coords[1];
 					var url = 'https://maps.googleapis.com/maps/api/streetview?key=AIzaSyChwJePvaLHTx1xlGAFUHrmjkPWKpVyGVA&size=800x800&location=' + coord1 + ',' + coord2 + '&fov=90&heading=235&pitch=10';
 					var e = document.getElementsByClassName("project-item")[index];
 					e.style["background-image"] = "url('" + url + "')";
