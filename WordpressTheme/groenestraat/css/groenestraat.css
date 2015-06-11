@@ -445,11 +445,14 @@ footer
 
 .footer-sitemap, .footer-logo, .footer-links
 {
+    color:#ffffff;
     float:left;
     width: 21.333333%;
     margin:8% 4%;
     padding: 2%;
     min-height: 150px;
+    background-color: gray;
+    text-transform: lowercase;
 }
 
 .footer-logo img
@@ -461,7 +464,7 @@ footer
 
 .footer-sitemap ul li, .footer-links ul li
 {
-    list-style-type: square;
+    list-style-type: none;
     width: 100%;
 }
 
@@ -469,7 +472,8 @@ footer
 {
     display: block;
     color: #ffffff;
-    font-size:1.7em;
+    font-size:1.8em;
+    padding:2px 0;
     text-decoration: none;
 }
 
@@ -550,6 +554,7 @@ footer
     }
     .footer-sitemap, .footer-logo, .footer-links
     {
+        text-align: center;
         float:left;
         width: 70%;
         margin:10% 10%;
