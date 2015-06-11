@@ -2,7 +2,7 @@
 	/*
 		Plugin Name: Groenestraat Projecten
 		Plugin URI: http://www.groenestraat.be
-		Description: Deze plugin voegt het Projecten custom post type toe. 
+		Description: Deze plugin voegt het custom post type Projecten toe. 
 		Version: 1.0
 		Author: Rodric Degroote, Kristof Colpaert
 		Author URI: http://www.groenestraat.be
@@ -129,21 +129,24 @@
 	{
 		global $post;
 		
-		echo '<input type="hidden" name="eventmeta_noncename" id="eventmeta_noncename" value="' . wp_create_nonce( plugin_basename(__FILE__) ) . '" />';
-		
+		?>
+			<input type="hidden" name="eventmeta_noncename" id="eventmeta_noncename" value="<?php echo wp_create_nonce( plugin_basename(__FILE__) ); ?>"/>
+		<?php		
 		$projectStreet = get_post_meta($post->ID, '_projectStreet', true);
 		$projectCity = get_post_meta($post->ID, '_projectCity', true);
 		$projectZipcode = get_post_meta($post->ID, '_projectZipcode', true);
 		
-		echo '<label class="projectStreet" for="projectStreet">Straat van het project</label><br />';
-    	echo '<input id="projectStreet" type="text" name="_projectStreet" value="' . $projectStreet . '" class="widefat"><br />';    
+		?>
+			<label class="projectStreet" for="projectStreet">Straat van het project</label><br />
+			<input type="text" id="projectStreet" name="_projectStreet" value="<?php echo $projectStreet; ?>" class="widefat"><br />
 
-    	echo '<label for="projectCity">Gemeente van het project</label><br />';
-    	echo '<input id="projectCity" type="text" name="_projectCity" value="' . $projectCity . '" class="widefat" /><br />';
+			<label for="projectCity">Gemeente van het project</label><br />
+			<input type="text" id="projectCity" name="_projectCity" value="<?php echo $projectCity; ?>" class="widefat"><br />
 
-    	echo '<label for="projectZipcode">Postcode van het project</label>';
-    	echo '<input id="projectZipcode" type="text" name="_projectZipcode" class="widefat" value="'. $projectZipcode . '" />';
+			<label class="projectZipcode" for="projectZipcode">Postcode van het project</label><br />
+			<input type="text" id="projectZipcode" name="_projectZipcode" value="<?php echo $projectZipcode; ?>" class="widefat"><br />
 
+		<?php
     	wp_enqueue_script('validation', get_stylesheet_directory_uri() . '/js/livevalidation_standalone.compressed.js', array( 'jquery' ));
     	wp_enqueue_script('my_validation', plugins_url() . '/groenestraat-projecten/my_validation.js', array( 'jquery' ));
 	}
