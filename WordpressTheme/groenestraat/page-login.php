@@ -32,6 +32,10 @@ $args = array(
         'value_username' => '',
         'value_remember' => true
 ); 
+    if($_GET['login']=="failed"){?>
+        <p class="LV_validation_message LV_invalid">Het emailadres of wachtwoord was fout.</p>
+    <?php
+    }
     wp_login_form($args);
 
 ?>
