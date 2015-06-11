@@ -1,3 +1,7 @@
+function chooseFile() {
+      $(".image-upload").click();
+   }
+
 function checkValidEmail(emailAddress, allowed, id)
 	{
 	    jQuery.ajax(
