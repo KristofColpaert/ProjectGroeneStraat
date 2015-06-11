@@ -38,7 +38,12 @@
 			Form to add event to personal calendar.
 		*/
 
+		
+         if($current_user->ID > 0 && $post->post_author == $current_user->ID)
+			{
 		?>
+           
+            <a class="edit-button" href="<?php echo get_site_url();?>/bewerk-event?event=<?php echo $post->ID ?>">Bewerken</a><?php} ?>
             <?php if(has_post_thumbnail($post->ID)) { 
 			 $url = wp_get_attachment_url( get_post_thumbnail_id($post->ID) );?>
 			<section class="image-wrapper">

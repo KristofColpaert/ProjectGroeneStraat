@@ -47,7 +47,7 @@
     background-color: #00cd00;
     border: 1px solid transparent;
     border-radius: 3px;
-    color: #f8f7f7;
+    color: #FFF;
     padding: 5px 15px 5px 15px;
     font-size: 2em;
 }
@@ -58,6 +58,11 @@
     color: #00cd00;
     cursor: pointer;
 }
+.grey-button{
+    background-color: #a2a1a9;
+    
+}
+
 #loginform .login-remember{
     font-weight: 800;
     text-align: center;
@@ -427,6 +432,7 @@ textarea.LV_invalid_field:active {
     cursor: pointer;
 }
 .confirm-button-green{
+    text-decoration: none;
     float: left;
     text-transform: uppercase;
     font-family: "lane";
@@ -542,6 +548,7 @@ fc-right{
     cursor:pointer;
 }
 .click-nav ul li ul {
+    z-index: 99;
     position:absolute;
     left:0;
     right:0;
@@ -614,9 +621,6 @@ fc-right{
     border: 1px solid transparent;
     border-radius: 3px;
     padding: 5px 15px 5px 15px;
-}
-.view-item:hover{
-    border: 1px solid #00CD00;
 }
 
 
@@ -738,6 +742,8 @@ footer{
     color: #00CD00;
 }
 .zoekertjewrapper{
+    position: relative;
+    background-color: #69686e;
     display: block;
     padding: 2% !important;
 }
@@ -746,4 +752,30 @@ footer{
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center center;
+}
+.edit-button{
+    position: absolute;
+    right: 2%;
+    top: 2%;
+    text-decoration: none;
+    float: left;
+    text-transform: uppercase;
+    font-family: "lane";
+    font-weight: 600;
+    display: block;
+    background-color: #00CD00;
+    border: 1px solid transparent;
+    border-radius: 3px;
+    color: #FFF;
+    padding: 5px 15px 5px 15px;
+    font-size: 1.8em;
+}
+.edit-button:hover{
+    background-color: #FFF;
+    border: 1px solid #00CD00;
+    color: #00CD00;
+    cursor: pointer;
+}
+.container{
+    position: relative;
 }
