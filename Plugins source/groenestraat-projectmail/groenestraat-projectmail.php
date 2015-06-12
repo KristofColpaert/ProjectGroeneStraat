@@ -199,5 +199,11 @@
 				</form>
 			<?php
 		}
+		else
+		{
+			?>
+				<p>U moet zich eerst aanmelden om deze pagina te bekijken.</p>
+			<?php
+		}
 	}
 ?>
