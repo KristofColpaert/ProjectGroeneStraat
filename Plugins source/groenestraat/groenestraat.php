@@ -253,6 +253,11 @@
 			{
 				activate_plugin('groenestraat-apikey/groenestraat-apikey.php');
 			}
+
+			if(is_plugin_inactive('groenestraat-loadPosts/groenestraat-loadPosts.php'))
+			{
+				activate_plugin('groenestraat-loadPosts/groenestraat-loadPosts.php');
+			}
 		});
 	}
 ?>
