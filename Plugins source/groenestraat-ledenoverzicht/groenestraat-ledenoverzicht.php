@@ -76,6 +76,9 @@ function prowpt_ledenoverzicht()
 
 <?php
 		}
+        ?>
+        <section class="clear"></section>
+    <?php
 	}
 	else
 	{

@@ -10,7 +10,7 @@ get_header();
     <section class="sub-menu">
         <ul>
             <li><a href="<?php echo get_site_url(); ?>/nieuw-artikel">Nieuw artikel</a></li>
-            <li><a href="#">Mijn artikels</a></li>
+            <li><a href="<?php echo get_site_url(); ?>/mijn-artikels">Mijn artikels</a></li>
         </ul>
         <section class="options">
             <form action="<?php $_SERVER['PHP_SELF']; ?>" method="GET">

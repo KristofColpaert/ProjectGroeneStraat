@@ -3,7 +3,7 @@
 	<section class="sub-menu">
 		<ul>
 			<li><a href="<?php echo get_site_url(); ?>/nieuw-project">Nieuw project</a></li>
-			<li><a href="#">Mijn projecten</a></li>
+			<li><a href="<?php echo get_site_url(); ?>/mijn-projecten">Mijn projecten</a></li>
 		</ul>
 		<section class="options">
 			<form action="<?php $_SERVER['PHP_SELF']; ?>" method="GET">
