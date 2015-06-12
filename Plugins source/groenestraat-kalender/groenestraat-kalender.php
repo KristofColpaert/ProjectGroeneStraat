@@ -99,10 +99,10 @@
 											$end = date_create($event->eventEndTime);
 
 											//het splitsen van het uur
-											$startHour = split(":", $event->eventStartHour);
+											$startHour = explode(":", $event->eventStartHour);
 											$start->setTime($startHour[0],$startHour[0]);
 
-											$endHour = split(":" , $event->eventEndHour);
+											$endHour = explode(":" , $event->eventEndHour);
 											$end->setTime($endHour[0],$endHour[0]);
 
 											print "start: '" . date_format($start, 'Y-m-d H:i:s') . "',";
