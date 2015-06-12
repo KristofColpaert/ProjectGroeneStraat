@@ -21,13 +21,10 @@
 			<p><strong>Beschrijving:</strong><br/><?php echo the_content(); ?></p>
 			<br/>
 			<?php if(has_post_thumbnail($post->ID)) { ?>
-			
-			<?php comments_template(); ?>
-			<!--<p><strong>Foto:</strong><br/><br/>-->
-			<section class="image-wrapper">
-				<?php //echo get_the_post_thumbnail(); ?>
-			</section>
+				<?php echo get_the_post_thumbnail(); ?>
 			<?php } ?>
+			<br/><br/>
+			<?php comments_template(); ?>
 			<?php endwhile; ?>
 				</div>
 			</main>
