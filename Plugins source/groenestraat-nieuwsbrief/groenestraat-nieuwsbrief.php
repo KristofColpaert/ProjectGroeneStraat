@@ -10,7 +10,6 @@
 		License: GPLv2		
 	*/
 
-	//Verzenden mail
 	if(isset($_POST["Verzenden"]))
 	{
 		add_action('plugins_loaded', 'register_sendmail');
@@ -30,10 +29,83 @@
 			return;
 		}
 
-		$completeBijlage = "<body><h1>Nieuwsbrief</h1>" . $bijlage . "<br />" . "<p>Met vriendelijke groeten</p><br /><p>Groenestraat.be</p>";
+
+		$completeBijlage = '<!doctype html>
+
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+
+  <title>The HTML5 Herald</title>
+  <meta name="description" content="The HTML5 Herald">
+  <meta name="author" content="SitePoint">
+
+
+  <!--[if lt IE 9]>
+  <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->
+</head>
+
+<body>
+    <style>
+        *{padding: 0; margin: 0;}
+        body{background-color: #a2a1a9; padding: 0vw 10vw; font-family: "verdana";}
+        #wrapper{
+            width: 100%;
+            max-width: 700px;
+            margin: 0 auto;
+            background-color: #f8f7f7;
+            min-height: 100vh;
+        }
+        img{
+            display: block;
+            margin: 0 auto;
+            max-width: 70vw;
+        }
+        h1{
+            color: #69686e;
+            font-weight: 100;
+            text-align: center;
+            text-transform: uppercase;
+            font-size: 1.5em;
+        }
+        p{
+            color: #69686e;
+            text-align: center;
+            padding: 10px;
+        }
+        a{
+            text-align: center;
+            color: #69686e;
+        }
+        #reset{
+            display: block;
+            margin: 0 auto;
+            text-decoration: none;
+            border: 1px solid #00cd00;
+            width: 60%;
+            padding: 5px;
+            border-radius: 3px;
+        }
+        #reset:hover{
+            background-color: #00cd00;
+            color: #f8f7f7;
+        }
+    </style>
+ <div id="wrapper">
+     <img src="http://groenestraat.azurewebsites.net/abcdefghij/wp-content/themes/groenestraat/img/logo_large.png" />
+     <h1>Nieuwsbrief, '. $onderwerp . '</h1>
+     <p>'. $bijlage . '</p>
+     <p>Veel leesplezier,<br>
+     het groenestraat.be team</p>
+</div>
+</body>
+</html>';
 
 		$headers  = 'MIME-Version: 1.0' . "\r\n";
 		$headers .= 'Content-type: text/html; charset=UTF-8' . "\r\n";
+		$headers .= 'From: Het groenestraat.be team' . "\r\n";
+		$headers .= 'Reply-To: wordpress@groenestraat.be' . "\r\n";
 
 		foreach($users as $user)
 		{
@@ -44,20 +116,19 @@
 			}
 		}
 
+		//eventueel feedback geven
 		if(wp_mail($ontvangers, $onderwerp, $completeBijlage, $headers))
 		{
 			//
-			echo "Verstuurd";
-
 		}
 		else
 		{
 			//
-			echo "Niet verstuurd";
 		}
 	}
-?>
-<?php
+	?>
+
+	<?php
 	add_action('admin_menu', 'register_nieuwsbrief');
 
 
@@ -68,7 +139,6 @@
 
 	function add_nieuwsbrief_metaboxes(){
 		?>
-
 		<form method="post" action="<?php echo get_permalink(); ?>" >
 					<h1>Nieuwsbrief</h1>
 					<strong>Onderwerp: </strong><br />
@@ -79,7 +149,6 @@
 					</textarea><br />
 					<input type="submit" value="Verzenden" name="Verzenden"/><br />
 		</form>
-
 		<?php
 	}
 ?>
