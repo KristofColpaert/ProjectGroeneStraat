@@ -14,9 +14,20 @@
 	{
 		if(isset($_POST["ApplicationID"]) && !empty($_POST["ApplicationID"]))
 		{
-			//wp_options
+			print "test";
+
 			$id = $_POST["ApplicationID"];
-			add_option("_applicationID", $id);
+			$name = "_applicationID";
+
+			$option = get_option($name);
+			
+			if(get_option($name)) {
+				update_option($name, $id);
+				print "update";
+			} else {
+				add_option($name, $id);
+				print "add";
+			}
 		}
 	}
 
@@ -32,7 +43,7 @@
 	function add_keys_metaboxes(){
 		?>
 		<h1>API Key Google</h1>
-		<form method="post" action="<?php echo get_permalink(); ?>" enctype="multipart/form-data">
+		<form class="createForm" method="post" action="<?php echo get_permalink(); ?>" enctype="multipart/form-data">
 				<strong>Application Key: </strong><br />
 				<input type="text" name="ApplicationID" placeholder="Application Key" /><br />
 				<input type="submit" value="Opslaan" name="Opslaan"/>
