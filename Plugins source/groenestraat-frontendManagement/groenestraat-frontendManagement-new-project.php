@@ -129,8 +129,9 @@
 					{
 						$tempProjectStreet = str_replace(' ', '%20', $projectStreet);
 						$tempProjectCity = str_replace(' ', '%20', $projectCity);
+						$apiKey = get_option('_applicationId');
 
-						$url = 'https://maps.googleapis.com/maps/api/geocode/json?address=' . $tempProjectStreet . '%20' . $tempProjectCity . '&key=AIzaSyChwJePvaLHTx1xlGAFUHrmjkPWKpVyGVA';
+						$url = 'https://maps.googleapis.com/maps/api/geocode/json?address=' . $tempProjectStreet . '%20' . $tempProjectCity . '&key=' . $apiKey;
 
 						$ch = curl_init();
 						curl_setopt($ch, CURLOPT_URL, $url); 
@@ -141,7 +142,7 @@
 						$lat = $json['results'][0]['geometry']['location']['lat'];
 						$lng = $json['results'][0]['geometry']['location']['lng'];
 
-						$imageUrl = 'https://maps.googleapis.com/maps/api/streetview?key=AIzaSyChwJePvaLHTx1xlGAFUHrmjkPWKpVyGVA&size=800x800&location=' . $lat . ',' . $lng . '&fov=90&heading=235&pitch=10';
+						$imageUrl = 'https://maps.googleapis.com/maps/api/streetview?key=' . $apiKey . '&size=800x800&location=' . $lat . ',' . $lng . '&fov=90&heading=235&pitch=10';
 
 						add_post_meta($postId, '_projectStreetViewThumbnail', $imageUrl);
 

@@ -200,6 +200,8 @@
 			}
 		}
 
+		$apiKey = get_option('_applicationId');
+
 		if($events_meta['_projectStreet'] != null && $events_meta['_projectStreet'] != '' &&
 			$events_meta['_projectCity'] != null && $events_meta['_projectCity'] != '')
 		{
@@ -207,12 +209,13 @@
 			$tempProjectStreet = str_replace(' ', '%20', $events_meta['_projectStreet']);
 			$tempProjectCity = str_replace(' ', '%20', $events_meta['_projectCity']);
 
-			$url = 'https://maps.googleapis.com/maps/api/geocode/json?address=' . $tempProjectStreet . '%20' . $tempProjectCity . '&key=AIzaSyChwJePvaLHTx1xlGAFUHrmjkPWKpVyGVA';
+
+			$url = 'https://maps.googleapis.com/maps/api/geocode/json?address=' . $tempProjectStreet . '%20' . $tempProjectCity . '&key=' . $apiKey;
 		}
 
 		else
 		{
-			$url = 'https://maps.googleapis.com/maps/api/geocode/json?address=Grote%20Markt%20Kortrijk&key=AIzaSyChwJePvaLHTx1xlGAFUHrmjkPWKpVyGVA';
+			$url = 'https://maps.googleapis.com/maps/api/geocode/json?address=Grote%20Markt%20Kortrijk&key=' . $apiKey;
 		}
 
 		$ch = curl_init();
@@ -224,7 +227,7 @@
 		$lat = $json['results'][0]['geometry']['location']['lat'];
 		$lng = $json['results'][0]['geometry']['location']['lng'];
 
-		$imageUrl = 'https://maps.googleapis.com/maps/api/streetview?key=AIzaSyChwJePvaLHTx1xlGAFUHrmjkPWKpVyGVA&size=800x800&location=' . $lat . ',' . $lng . '&fov=90&heading=235&pitch=10';
+		$imageUrl = 'https://maps.googleapis.com/maps/api/streetview?key=' . $apiKey . '&size=800x800&location=' . $lat . ',' . $lng . '&fov=90&heading=235&pitch=10';
 
 		add_post_meta($post->ID, '_projectStreetViewThumbnail', $imageUrl);
 
