@@ -47,9 +47,11 @@
 
 	get_header(); 
 	global $post;
+
+    $apiKey = get_option('_applicationId');
 ?>
 	
-    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDC5KoyRfBkse2foN9chLRWQuo0kC61qXI"></script>
+    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=<?php echo $apiKey; ?>"></script>
     <script>
         //Google StreetView Coordinates
         //Get coordinates of a location.

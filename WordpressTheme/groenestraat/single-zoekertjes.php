@@ -38,11 +38,13 @@
 
 <?php
 	get_header();
+
+	$apiKey = get_option('_applicationId');
 	
 	global $post;
 	$users = array();
 	?>
-<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDC5KoyRfBkse2foN9chLRWQuo0kC61qXI"></script>
+<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=<?php echo $apiKey; ?>"></script>
 	<script>
 		geocoder = new google.maps.Geocoder();
 		window.getCoordinates = function(address, callback)
