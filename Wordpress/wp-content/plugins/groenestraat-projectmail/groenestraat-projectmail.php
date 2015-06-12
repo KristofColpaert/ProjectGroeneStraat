@@ -23,6 +23,8 @@
 			{
 				$selectedProjectId = $_POST["Projecten"];
 				$projectTitle = get_post($selectedProjectId)->post_title;
+				$projectAuthor = get_post($selectedProjectId)->post_author;
+				$projectAuthorUserMail = get_userdata($projectAuthor)->user_email;
 				$onderwerp = $_POST["Onderwerp"];
 				$bericht = $_POST["Bericht"];
 				$bijlage = '<!doctype html>
@@ -114,10 +116,11 @@
 					if($userId != get_current_user_id())
 					{
 						$userEmail = get_userdata($userId)->user_email;
+						print $userEmail;
 						$headers  = 'MIME-Version: 1.0' . "\r\n";
 						$headers .= 'Content-type: text/html; charset=UTF-8' . "\r\n";
-						$headers .= 'From: Admin Project' . "\r\n";
-						$headers .= 'Reply-To: Admin Project' . "\r\n";
+						$headers .= 'From:' . $projectAuthorUserMail . "\r\n";
+						$headers .= 'Reply-To: ' . $projectAuthorUserMail . "\r\n";
 
 						//mogelijkheid tot feedback
 						if(wp_mail($userEmail, $onderwerp, $bijlage, $headers))
