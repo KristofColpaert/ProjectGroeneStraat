@@ -890,7 +890,7 @@ footer
                 margin-top: 50px;
                 display: block;
             }
-            #comments, span, small
+            #comments span,.comment-author .vcard  small, .comment-author .vcard small
             {
                 display: none;
             }
