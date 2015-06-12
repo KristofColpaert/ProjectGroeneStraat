@@ -43,7 +43,7 @@
 			{
 		?>
            
-            <a class="edit-button" href="<?php echo get_site_url();?>/bewerk-event?event=<?php echo $post->ID ?>">Bewerken</a><?php} ?>
+            <a class="edit-button" href="<?php echo get_site_url();?>/bewerk-event?event=<?php echo $post->ID ?>">Bewerken</a><?php  } ?>
             <?php if(has_post_thumbnail($post->ID)) { 
 			 $url = wp_get_attachment_url( get_post_thumbnail_id($post->ID) );?>
 			<section class="image-wrapper">
@@ -78,7 +78,7 @@
 					<form method="POST" id="eventMemberForm">
 						<input id="eventMemberId" name="eventMemberId" type="hidden" value="<?php echo get_current_user_id(); ?>" />
 						<input id="eventMemberProjectId" name="eventMemberProjectId" type="hidden" value="<?php echo $post->ID; ?>" />
-						<input id="eventMemberSubmit" name="eventMemberSubmit" type="submit" value="Toevoegen aan persoonlijke kalender" class="form-button" style="margin:0" />
+						<input id="eventMemberSubmit" name="eventMemberSubmit" type="submit" value="Toevoegen aan kalender" class="edit-button" style="margin:0" />
 					</form>
 				<?php
 			}

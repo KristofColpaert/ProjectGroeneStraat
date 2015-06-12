@@ -188,7 +188,7 @@ $(document).ready(function()
 		var tempUser_id = $('#eventMemberId').val();
 		var tempEvent_id = $('#eventMemberProjectId').val();
 
-		if($('#eventMemberSubmit').val() == 'Toevoegen aan persoonlijke kalender')
+		if($('#eventMemberSubmit').val() == 'Toevoegen aan kalender')
 		{
 			jQuery.ajax(
 		    {
@@ -203,7 +203,7 @@ $(document).ready(function()
 		        },
 		        success : function(response)
 		        {
-		        	$('#eventMemberSubmit').val("Verwijderen uit persoonlijke kalender");
+		        	$('#eventMemberSubmit').val("Verwijderen uit kalender");
 		            return response;
 		        },
 		        error : function(error)
@@ -228,7 +228,7 @@ $(document).ready(function()
 		        },
 		        success : function(response)
 		        {
-		        	$('#eventMemberSubmit').val('Toevoegen aan persoonlijke kalender');
+		        	$('#eventMemberSubmit').val('Toevoegen aan kalender');
 		            return response;
 		        },
 		        error : function(error)
@@ -258,7 +258,7 @@ $(document).ready(function()
 	        {
 	            if(response == 'true')
 	            {
-	            	$('#eventMemberSubmit').attr('value', 'Verwijderen uit persoonlijke kalender');
+	            	$('#eventMemberSubmit').attr('value', 'Verwijderen uit kalender');
 	            }
 	            $('#eventMemberSubmit').css('visibility', 'visible');
 	        },
