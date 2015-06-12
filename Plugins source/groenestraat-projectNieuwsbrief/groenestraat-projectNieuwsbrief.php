@@ -120,7 +120,7 @@
 		}		
 	}
 
-	add_shortcode('mail_projectmembers', 'prowp_mail');
+	add_shortcode('project_nieuwsbrief', 'prowp_mail');
 	register_activation_hook(__FILE__, 'prowp_mailProjectmembers_install');
 
 	function prowp_mailProjectmembers_install()
