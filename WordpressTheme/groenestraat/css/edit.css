@@ -152,6 +152,10 @@
     margin: 10px 0 10px 0;
     height: 30px;
 }
+.center-radio label{
+    font-size: 1em !important;
+    display: inline!important;
+}
 .checkbox-label a{
     font-size: 1em;
     color: #69686e;
@@ -707,7 +711,7 @@ fc-right{
     float:left;
     
 }
-.list-item, .sub-menu{
+.list-item, .search{
   -webkit-box-shadow: 0px 0px 43px -31px rgba(105,104,110,1);
 -moz-box-shadow: 0px 0px 43px -31px rgba(105,104,110,1);
 box-shadow: 0px 0px 43px -20px rgba(105,104,110,1);
@@ -818,6 +822,7 @@ footer{
     color:#69686e;
     padding: 5px;
     text-decoration: none;
+    width: 100%;
 }
 .textarea-large{
     height: 400px;
@@ -832,4 +837,7 @@ footer{
     color: #FFF;
     line-height: 1em;
     padding: 10px;
+}
+.red-text{
+    color: #E74C3C !important;
 }

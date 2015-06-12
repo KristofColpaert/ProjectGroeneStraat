@@ -31,7 +31,7 @@
                   {
                   ?>
                   <script>
-                        addMenuLink('<?php echo get_site_url(); ?>/member-informatie?userid=<?php echo $current_user->ID ?>', 'mijn profiel (<?php echo $current_user->user_firstname ?>)');
+                        addMenuLink('<?php echo get_site_url(); ?>/profiel?userid=<?php echo $current_user->ID ?>', 'mijn profiel (<?php echo $current_user->user_firstname ?>)');
                         addMenuLink('<?php echo wp_logout_url(get_site_url()); ?>', 'afmelden');
                   </script>
                 <?php
@@ -61,11 +61,14 @@
                                 <img class="small-arrow" src="<?php echo get_template_directory_uri();?>/img/arrow_grey.png"/>
                             </a>
                           <ul>
-                            <li><a href="#">Profiel</a></li>
-                            <li><a href="#">Beheren</a></li>
-                            <li><a href="#">Privacy</a></li>
-                            <li><a href="#">Help</a></li>
-                            <li><a href="<?php echo wp_logout_url(get_site_url()); ?>">Afmelden</a></li>
+                            <li><a href="<?php echo get_site_url(); ?>/profiel?userid=<?php echo $current_user->ID ?>">Profiel</a></li>
+                            <li><a href="<?php echo get_site_url(); ?>/bewerk-profiel">Bewerk profiel</a></li>
+                              <li><a href="<?php echo get_site_url(); ?>/leden-overzicht">Ledenoverzicht</a></li>
+                              <li><a href="<?php echo get_site_url(); ?>/mijn-projecten">Mijn projecten</a></li>
+                              <li><a href="<?php echo get_site_url(); ?>/mijn-events">Mijn events</a></li>
+                              <li><a href="<?php echo get_site_url(); ?>/mijn-zoekertjes">Mijn zoekertjes</a></li>
+                              <li><a href="<?php echo get_site_url(); ?>/mijn-artikels">Mijn artikels</a></li>
+                            <li><a class="red-text" href="<?php echo wp_logout_url(get_site_url()); ?>">Afmelden</a></li>
                           </ul>
                         </li>
                       </ul>
