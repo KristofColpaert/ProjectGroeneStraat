@@ -49,21 +49,21 @@
 		wp_insert_post($args);
 	}
 
-	include_once('groenestraat_frontendManagement_new_project.php');
-	include_once('groenestraat_frontendManagement_edit_project.php');
-	include_once('groenestraat_frontendManagement_delete_project.php');
+	include_once('groenestraat-frontendManagement-new-project.php');
+	include_once('groenestraat-frontendManagement-edit-project.php');
+	include_once('groenestraat-frontendManagement-delete-project.php');
 
-	include_once('groenestraat_frontendManagement_new_event.php');
-	include_once('groenestraat_frontendManagement_edit_event.php');
-	include_once('groenestraat_frontendManagement_delete_event.php');
+	include_once('groenestraat-frontendManagement-new-event.php');
+	include_once('groenestraat-frontendManagement-edit-event.php');
+	include_once('groenestraat-frontendManagement-delete-event.php');
 
-	include_once('groenestraat_frontendManagement_new_zoekertje.php');
-	include_once('groenestraat_frontendManagement_edit_zoekertje.php');
-	include_once('groenestraat_frontendManagement_delete_zoekertje.php');
+	include_once('groenestraat-frontendManagement-new-zoekertje.php');
+	include_once('groenestraat-frontendManagement-edit-zoekertje.php');
+	include_once('groenestraat-frontendManagement-delete-zoekertje.php');
 
-	include_once('groenestraat_frontendManagement_new_article.php');
-	include_once('groenestraat_frontendManagement_edit_article.php');
-	include_once('groenestraat_frontendManagement_delete_article.php');
+	include_once('groenestraat-frontendManagement-new-article.php');
+	include_once('groenestraat-frontendManagement-edit-article.php');
+	include_once('groenestraat-frontendManagement-delete-article.php');
 
-	include_once('groenestraat_frontendManagement_edit_profile.php');
+	include_once('groenestraat-frontendManagement-edit-profile.php');
 ?>
