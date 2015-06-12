@@ -83,10 +83,6 @@
 		wp_insert_post($args);
 	}
 
-    ?>
-    
-    <?php
-
 	function prowpt_memberinformatie()
 	{
 		if(is_user_logged_in())
