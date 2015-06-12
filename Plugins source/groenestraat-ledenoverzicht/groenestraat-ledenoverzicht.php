@@ -57,18 +57,16 @@ function prowpt_ledenoverzicht()
 				continue;
 			}
 
-			$eersteLetter = str_split($user->display_name, 1)[0];
+			$firstname = get_user_meta($user->ID, 'first_name', true);
+            $name = get_user_meta($user->ID, 'last_name', true);
+            $display_name = $user->display_name;
+			$eersteLetter = str_split($firstname, 1)[0];
 
 			if(!in_array($eersteLetter, $letters))
 			{
 				$letters[] = $eersteLetter;
 				echo '<h1>' . $eersteLetter . '</h1>';
 			}
-            $firstname = get_user_meta($user->ID, 'first_name', true);
-				
-            $name = get_user_meta($user->ID, 'last_name', true);
-			
-            $display_name = $user->display_name;
 ?>
 			<a class="newProjectMember normalize-text" href="<?php echo get_site_url(); ?>/profiel?userid=<?php echo $user->ID; ?>">
                 <?php

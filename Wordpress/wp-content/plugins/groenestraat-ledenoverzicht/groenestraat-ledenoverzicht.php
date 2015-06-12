@@ -2,7 +2,7 @@
 	/*
 		Plugin Name: Groenestraat Ledenoverzicht
 		Plugin URI: http://www.groenestraat.be
-		Description: Deze plugin voegt een overzicht de leden in Groenestraat.be 
+		Description: Deze plugin voegt een overzicht van een gekozen member toe. 
 		Version: 1.0
 		Author: Rodric Degroote
 		Author URI: http://www.groenestraat.be
@@ -57,24 +57,29 @@ function prowpt_ledenoverzicht()
 				continue;
 			}
 
-			$eersteLetter = str_split($user->display_name, 1)[0];
+			$firstname = get_user_meta($user->ID, 'first_name', true);
+            $name = get_user_meta($user->ID, 'last_name', true);
+            $display_name = $user->display_name;
+			$eersteLetter = str_split($firstname, 1)[0];
 
 			if(!in_array($eersteLetter, $letters))
 			{
 				$letters[] = $eersteLetter;
 				echo '<h1>' . $eersteLetter . '</h1>';
 			}
+?>
+			<a class="newProjectMember normalize-text" href="<?php echo get_site_url(); ?>/profiel?userid=<?php echo $user->ID; ?>">
+                <?php
+                        if($firstname != '' && $name != '')echo $firstname . " " . $name; else echo $display_name;
+                ?>
+            </a><br />
 
-			?>
-				<a href="/member-informatie?userid=<?php echo $user->ID; ?>"><?php echo $user->display_name; ?></a>
-			<?php
+<?php
 		}
 	}
 	else
 	{
-		?>
-			<p>Gelieve u aan te melden om deze pagina te bekijken.</p>
-		<?php
+		echo "<p class='error-message'>Gelieve u aan te melden om deze pagina te bekijken.</p>";
 	}
 }
 
