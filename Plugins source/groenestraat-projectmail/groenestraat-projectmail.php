@@ -116,8 +116,8 @@
 						$userEmail = get_userdata($userId)->user_email;
 						$headers  = 'MIME-Version: 1.0' . "\r\n";
 						$headers .= 'Content-type: text/html; charset=UTF-8' . "\r\n";
-						$headers .= 'From:' . $userEmail . "\r\n";
-						$headers .= 'Reply-To: ' . $userEmail . "\r\n";
+						$headers .= 'From: Admin Project' . "\r\n";
+						$headers .= 'Reply-To: Admin Project' . "\r\n";
 
 						//mogelijkheid tot feedback
 						if(wp_mail($userEmail, $onderwerp, $bijlage, $headers))
