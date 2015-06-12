@@ -1,6 +1,6 @@
 <?php
 	/*
-		Plugin Name: Groenestraat ProjectMail
+		Plugin Name: Groenestraat Project Nieuwsbrief
 		Plugin URI: http://www.groenestraat.be
 		Description: Deze plugin zorgt ervoor dat een projectbeheerder een e-mail kan versturen naar leden van zijn project. 
 		Version: 1.0
@@ -27,23 +27,7 @@
 				$projectAuthorUserMail = get_userdata($projectAuthor)->user_email;
 				$onderwerp = $_POST["Onderwerp"];
 				$bericht = $_POST["Bericht"];
-				$bijlage = '<!doctype html>
-
-<html lang="en">
-<head>
-  <meta charset="utf-8">
-
-  <title>The HTML5 Herald</title>
-  <meta name="description" content="The HTML5 Herald">
-  <meta name="author" content="SitePoint">
-
-
-  <!--[if lt IE 9]>
-  <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
-  <![endif]-->
-</head>
-
-<body>
+				$bijlage = '
     <style>
         *{padding: 0; margin: 0;}
         body{background-color: #a2a1a9; padding: 0vw 10vw; font-family: "verdana";}
@@ -95,9 +79,7 @@
      <p>' . $bericht .'</p>
      <p>Veel leesplezier,<br>
      het groenestraat.be team</p>
-</div>
-</body>
-</html>';
+</div>';
 
 				global $wpdb;
 
@@ -116,7 +98,7 @@
 					if($userId != get_current_user_id())
 					{
 						$userEmail = get_userdata($userId)->user_email;
-						print $userEmail;
+						//print $userEmail;
 						$headers  = 'MIME-Version: 1.0' . "\r\n";
 						$headers .= 'Content-type: text/html; charset=UTF-8' . "\r\n";
 						$headers .= 'From:' . $projectAuthorUserMail . "\r\n";
@@ -144,7 +126,7 @@
 	function prowp_mailProjectmembers_install()
 	{
 		//mail pagina aanmaken users
-		makeMailUserPage('Project members mailen','[mail_projectmembers]','project-mail-members','publish','page','closed');
+		makeMailUserPage('Project Nieuwsbrief','[project_nieuwsbrief]','project nieuwsbrief','publish','page','closed');
 	}
 
 	function makeMailUserPage($title,$content,$post_name,$post_status,$post_type,$ping_status)
