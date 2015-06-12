@@ -96,7 +96,7 @@
 
 	function register_partners() 
 	{
-		add_menu_page( 'Partners', 'Partners', 'manage_options', 'Partners', 'add_partners_metaboxes', 'dashicons-feedback', 82);
+		add_menu_page( 'Partners', 'Partners', 'manage_options', 'Partners', 'add_partners_metaboxes', 'dashicons-feedback', 86);
 	}
 
 	function add_partners_metaboxes(){
