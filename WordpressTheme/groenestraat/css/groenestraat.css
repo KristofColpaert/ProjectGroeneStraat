@@ -738,13 +738,7 @@ footer
 
 .list-item
 {
-    float:left;
-    color: #333;
-    width: 86%;
-    margin: 5% 5% 0 5%;
-    padding: 2%;
-    min-height: 150px;
-    background-color: #ffffff;
+    float:left; color: #333; width: 86%; margin: 5% 3%; padding: 4%; background-color: #ffffff;
 }
 
 .list-item>h1>a
@@ -888,3 +882,58 @@ footer
                 display: block;
                 width: 100%;
               }
+
+/* COMMENTS/REPLY SINGLE */
+
+#respond
+            {
+                margin-top: 50px;
+                display: block;
+            }
+            #comments, span, small
+            {
+                display: none;
+            }
+            .commentlist
+            {
+                list-style-type: none;
+            }
+            #submit
+            {
+                font-size:1.2em;
+            }
+            #comment
+            {
+                padding-top:10px;
+                height: 150px;
+            }
+            ol>li
+            {
+                background-color: #f1f0f0;
+                margin-bottom: 25px;
+                border-radius: 10px;
+            }
+            .commentlist
+            {
+                margin: 50px 0;
+            }
+            cite.fn
+            {
+                font-style:normal;
+                margin-left: 10px;
+                font-size:1.5em;
+            }
+            .comment-author
+            {
+                margin-bottom: 30px;
+            }
+            .comment-body
+             {
+                width:96%;
+                padding:2%;
+                min-height: 150px;
+             }
+            .commentlist .comment-meta
+            {
+                display: none;
+            }
