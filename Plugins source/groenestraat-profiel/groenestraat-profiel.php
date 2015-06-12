@@ -1,6 +1,6 @@
 <?php
 	/*
-		Plugin Name: Groenestraat Profielinformatie
+		Plugin Name: Groenestraat Profiel
 		Plugin URI: http://www.groenestraat.be
 		Description: Deze plugin toont het profiel van een gebruiker. 
 		Version: 1.0
@@ -14,13 +14,13 @@
 		Add Shortcodes
 	*/
 
-	add_shortcode('profiel_informatie','prowpt_memberinformatie');
+	add_shortcode('profiel','prowpt_memberinformatie');
 
 	register_activation_hook(__FILE__, 'prowp_memberinformatie_install');
 
 	function prowp_memberinformatie_install()
 	{
-		makeMemberInformationShortcode('Profielinformatie','[profiel_informatie]','profielinformatie','publish','page','closed');
+		makeMemberInformationShortcode('Profiel','[profiel]','profiel','publish','page','closed');
 	}
 
 	function makeMemberInformationShortcode($title,$content,$post_name,$post_status,$post_type,$ping_status)
