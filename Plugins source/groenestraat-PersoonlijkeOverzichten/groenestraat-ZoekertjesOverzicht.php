@@ -1,10 +1,10 @@
 <?php
 	/*
-		Plugin Name: Groenestraat Persoonlijke Zoekertjes Overzicht
+		Plugin Name: Groenestraat Mijn Zoekertjes Overzicht
 		Plugin URI: http://www.groenestraat.be
-		Description: Deze plugin toont de zoekertjes waarvan de ingelogde user lid van is. 
+		Description: Deze plugin toont de zoekertjes waarvan de ingelogde gebruiker lid van is. 
 		Version: 1.0
-		Author: Rodric Degroote
+		Author: Rodric Degroote, Kristof Colpaertt
 		Author URI: http://www.groenestraat.be
 		Text Domain: prowp-plugin
 		License: GPLv2		
@@ -14,14 +14,14 @@
 		Add Shortcodes
 	*/
 		
-	add_shortcode('persoonlijke_zoekertjes','prowpt_persoonlijkeZoekertjesOverzicht');
+	add_shortcode('mijn_zoekertjes','prowpt_persoonlijkeZoekertjesOverzicht');
 
 	register_activation_hook(__FILE__, 'prowp_persoonlijkeZoekertjes_install');
 
 	function prowp_persoonlijkeZoekertjes_install()
 	{
 		//Persoonlijke overzicht van zoekertjes
-		makePersZoekertjesShortcode('Persoonlijke zoekertjes','[persoonlijke_zoekertjes]','persoonlijke zoekertjes','publish','page','closed');
+		makePersZoekertjesShortcode('Mijn zoekertjes','[mijn_zoekertjes]','Mijn zoekertjes','publish','page','closed');
 	}
 
 	function makePersZoekertjesShortcode($title,$content,$post_name,$post_status,$post_type,$ping_status)

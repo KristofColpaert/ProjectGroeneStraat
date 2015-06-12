@@ -1,8 +1,8 @@
 <?php
 	/*
-		Plugin Name: Groenestraat Persoonlijke Eventen Overzicht
+		Plugin Name: Groenestraat Mijn Events Overzicht
 		Plugin URI: http://www.groenestraat.be
-		Description: Deze plugin toont de eventen waarvan de ingelogde user lid van is. 
+		Description: Deze plugin toont de events waarvan de ingelogde user lid van is. 
 		Version: 1.0
 		Author: Rodric Degroote
 		Author URI: http://www.groenestraat.be
@@ -14,14 +14,14 @@
 		Add Shortcodes
 	*/
 		
-	add_shortcode('persoonlijke_events','prowpt_persoonlijkeEventenOverzicht');
+	add_shortcode('mijn_events','prowpt_persoonlijkeEventenOverzicht');
 
 	register_activation_hook(__FILE__, 'prowp_persoonlijkeEventen_install');
 
 	function prowp_persoonlijkeEventen_install()
 	{
 		//Persoonlijke overzicht van events
-		makePersEventenShortcode('Persoonlijke events','[persoonlijke_events]','persoonlijke events','publish','page','closed');
+		makePersEventenShortcode('Mijn events','[mijn_events]','mijn events','publish','page','closed');
 	}
 
 	function makePersEventenShortcode($title,$content,$post_name,$post_status,$post_type,$ping_status)

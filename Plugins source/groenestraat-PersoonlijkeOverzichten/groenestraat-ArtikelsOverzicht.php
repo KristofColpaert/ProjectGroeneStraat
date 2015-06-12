@@ -1,8 +1,8 @@
 <?php
 	/*
-		Plugin Name: Groenestraat Persoonlijke Artikels Overzicht
+		Plugin Name: Groenestraat Mijn Artikels Overzicht
 		Plugin URI: http://www.groenestraat.be
-		Description: Deze plugin toont de artikels die de ingelogde user aangemaakt heeft. 
+		Description: Deze plugin toont de artikels die de ingelogde gebruiker aangemaakt heeft. 
 		Version: 1.0
 		Author: Rodric Degroote
 		Author URI: http://www.groenestraat.be
@@ -14,14 +14,14 @@
 		Add Shortcodes
 	*/
 		
-	add_shortcode('persoonlijke_artikels','prowpt_persoonlijkeArtikelsOverzicht');
+	add_shortcode('mijn_artikels','prowpt_persoonlijkeArtikelsOverzicht');
 
 	register_activation_hook(__FILE__, 'prowp_persoonlijkeArtikels_install');
 
 	function prowp_persoonlijkeArtikels_install()
 	{
 		//Persoonlijke overzicht van artikels
-		makePersArtikelsShortcode('Persoonlijke artikels','[persoonlijke_artikels]','persoonlijke artikels','publish','page','closed');
+		makePersArtikelsShortcode('Mijn artikels','[mijn_artikels]','mijn artikels','publish','page','closed');
 	}
 
 	function makePersArtikelsShortcode($title,$content,$post_name,$post_status,$post_type,$ping_status)

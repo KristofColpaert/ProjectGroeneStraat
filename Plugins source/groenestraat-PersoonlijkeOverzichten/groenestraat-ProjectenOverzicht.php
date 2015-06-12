@@ -1,10 +1,10 @@
 <?php
 	/*
-		Plugin Name: Groenestraat Persoonlijke Projecten Overzicht
+		Plugin Name: Groenestraat Mijn Projecten Overzicht
 		Plugin URI: http://www.groenestraat.be
-		Description: Deze plugin toont de projecten waarvan de ingelogde user lid van is. 
+		Description: Deze plugin toont de projecten waarvan de ingelogde gebruiker lid van is. 
 		Version: 1.0
-		Author: Rodric Degroote
+		Author: Rodric Degroote, Kristof Colpaert
 		Author URI: http://www.groenestraat.be
 		Text Domain: prowp-plugin
 		License: GPLv2		
@@ -14,13 +14,13 @@
 		Add Shortcodes
 	*/
 		
-	add_shortcode('persoonlijke_projecten','prowpt_persoonlijkeProjectenOverzicht');
+	add_shortcode('mijn_projecten','prowpt_persoonlijkeProjectenOverzicht');
 
 	register_activation_hook(__FILE__, 'prowp_persoonlijkeProjecten_install');
 
 	function prowp_persoonlijkeProjecten_install()
 	{
-		makePersProjectenShortcode('Mijn projecten','[persoonlijke_projecten]','persoonlijke projecten','publish','page','closed');
+		makePersProjectenShortcode('Mijn projecten','[mijn_projecten]','mijn projecten','publish','page','closed');
 	}
 
 	function makePersProjectenShortcode($title,$content,$post_name,$post_status,$post_type,$ping_status)
