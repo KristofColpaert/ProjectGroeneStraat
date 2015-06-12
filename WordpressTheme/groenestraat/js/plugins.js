@@ -508,4 +508,59 @@ $(document).ready(function()
 		    });
 		}
 	});	
+
+	/*
+		Load new posts
+	*/
+
+	var scrolled = false;
+
+	$(window).scroll(function()
+	{
+		var scrollPosition = $(window).scrollTop();
+		var lastPosition = $('.main section:last-child');
+		var lastPositionTop = lastPosition.offset().top;
+		if(scrollPosition >= (lastPositionTop - 1500))
+		{
+			if(scrolled == false)
+			{
+				loadPosts();
+				scrolled = true;
+			}
+		}
+
+		else if(scrollPosition <= (lastPositionTop - 1500))
+		{
+			if(scrolled == true)
+			{
+				scrolled = false;
+			}
+		}
+	});
+
+	function loadPosts()
+	{
+		var tempData = $('.main').attr('data');
+		var res = tempData.split(';');
+		var tempPage = parseInt(res[0]) + 1;
+		var tempProject = res[1];
+
+		$('.main').attr('data', tempPage + ';' + tempProject);
+
+		jQuery.ajax(
+		{
+		   	url : plugin.ajax_url,
+		   	type : 'post',
+		   	data : 
+		  	{
+		   		action : 'load_new_posts',
+		   		page : tempPage,
+		   		projectId : tempProject
+		   	},
+		   	success : function(response)
+		   	{
+		   		$('.main').append(response);
+		   	}
+		});
+	}
 });
