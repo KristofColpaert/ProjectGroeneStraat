@@ -66,6 +66,7 @@
 				$users = $wpdb->get_results($wpdb->prepare("SELECT a.post_id, a.meta_key AS aKey, a.meta_value AS userId, b.user_nicename AS username FROM $wpdb->postmeta a INNER JOIN $wpdb->users b ON a.meta_value = b.ID WHERE a.post_id = %d AND a.meta_key = %s ORDER BY b.user_nicename ASC", $project->ID, $subscriber), ARRAY_A);
 				?>
 					<a class="button-grey" href="<?php echo get_permalink($project->ID); ?>">Terug naar project</a>
+<br /><br />
 					<section id="projectMemberContainer">
 				<?php
 				if(count($users) > 1)
@@ -126,7 +127,7 @@
 
 						?>
 							<section class="projectMember" id="projectMemberContainer<?php echo $userData->ID; ?>">
-								<a class="normalize-text" href="<?php echo home_url(); ?>/member-informatie?userid=<?php echo $userData->ID; ?>"><?php if($firstname != '' && $name != '')echo $firstname . " " . $name; else echo $userData->display_name ?></a>
+								<a class="normalize-text" href="<?php echo home_url(); ?>/profiel?userid=<?php echo $userData->ID; ?>"><?php if($firstname != '' && $name != '')echo $firstname . " " . $name; else echo $userData->display_name ?></a>
 								<input type="button" value="Verwijder" class="projectMemberDelete confirm-button" data="<?php echo $project->ID . ';' . $user['userId']; ?>" id="projectLedenDelete<?php echo $userData->ID; ?>" />
 							</section>
 						<?php
@@ -135,7 +136,8 @@
 				else
 				{
 					?>
-						<p class="error-message">Het project heeft geen leden. Ga terug naar <a href="<?php echo home_url(); ?>">Home</a> of voeg er toe.</p>
+                                    
+						<p class="error-message">Het project heeft geen leden. Ga terug naar <a href="<?php echo get_permalink($project->ID) ?>">het project</a> of voeg er toe.</p>
 					<?php
 				}
 
@@ -150,14 +152,14 @@
 			else
 			{
 				?>
-					<p class="error-message">U hebt geen toegang tot het gevraagde project. Ga terug naar <a href="<?php echo home_url(); ?>">Home</a>.</p>
+					<p class="error-message">U hebt geen toegang tot het gevraagde project. Ga <a href="<?php echo get_permalink($project->ID);; ?>">Home</a>.</p>
 				<?php
 			}
 		}
 		else
 		{
 			?>
-				<p class="error-message">Dit project bestaat niet of u hebt geen toegang tot de gevraagde pagina. Ga terug naar <a href="<?php echo home_url(); ?>">Home</a>.</p>
+				<p class="error-message">Dit project bestaat niet of u hebt geen toegang tot de gevraagde pagina. Ga terug naar <a href="<?php echo get_permalink($project->ID); ?>">het project</a>.</p>
 			<?php
 		}
 	}
@@ -224,7 +226,7 @@
 				$display_name = $user->display_name;
 
 				?>
-					<a class="newProjectMember" href="/member-informatie?userid=<?php echo $user->ID; ?>"><?php if($firstname != '' && $name != '')echo $firstname . " " . $name; else echo $display_name?></a><br />
+					<a class="newProjectMember normalize-text" href="<?php echo get_site_url(); ?>/profiel?userid=<?php echo $user->ID; ?>"><?php if($firstname != '' && $name != '')echo $firstname . " " . $name; else echo $display_name?></a><br />
 				<?php
 				die();
 			}

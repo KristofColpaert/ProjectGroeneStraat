@@ -36,42 +36,41 @@
 		wp_insert_post($args);
 	}
 
+    ?>
+    
+    <?php
 
 	function prowpt_memberinformatie()
 	{
 		if(is_user_logged_in())
 		{
+            ?>
+                <script>
+                            $(".contentwrapper").addClass("container");
+                            $(".container").removeClass("contentwrapper");
+                            $("#main").unwrap();
+                            $(".container").unwrap();
+                            $(".title").remove();
+                </script>
+            <?php
 			if(isset($_GET["userid"]))
 			{
+                ?>
+                <section class="sub-menu">
+                <?php
 				$userid = $_GET["userid"];
 				$user = get_userdata($userid);
 				$usermeta = get_user_meta($userid);
+                $firstname = $usermeta["first_name"][0];
+				$name =  $usermeta["last_name"][0];
+				
+				
+            
 
+				echo get_avatar($userid, 60); 
+                echo "<h1 class='name'>".$firstname." ".$name;
 				?>
-						<strong>Gebruikersnaam: </strong><p><?php echo $user->user_login; ?></p>
-				<?php
-				if(get_user_meta($user->ID, "rpr_gegevens", true) == 1)
-				{
-					?>
-						<strong>E-mail: </strong><p><?php echo $user->user_email; ?></p>
-					<?php
-					if($usermeta['rpr_straat'][0] != "" || $usermeta['rpr_postcode'][0] != "" || $usermeta['rpr_gemeente'][0] != "")
-					{
-					?>
-						<strong>Adres: </strong><p><?php echo $usermeta['rpr_straat'][0] . ', ' . $usermeta['rpr_postcode'][0] . ' ' . $usermeta['rpr_gemeente'][0]; ?></p>
-					<?php
-					}
-					if($usermeta['rpr_telefoon'][0] != "")
-					{
-					?>
-						<strong>Telefoon: </strong><p><?php echo $usermeta['rpr_telefoon'][0]; ?></p>
-					<?php
-					}
-				}
-
-				echo get_avatar($userid); 
-				?>
-					<h1>Activiteiten gebruiker</h1>
+				
 				<?php
 				global $post;
 				$the_query = new WP_Query(
@@ -81,60 +80,142 @@
 					'order' => 'ASC',
 					'orderby' => 'date')
 				);
-
+                ?> 
+                    </section>
+                    <section class="main">
+                <?php
 				if ($the_query->have_posts()) {
 					while ($the_query->have_posts() ) {
 						$the_query->the_post();	
-						$post_type = $post->post_type;
+						 switch($post->post_type){
+                    case "events":{
+                        $meta = get_post_meta($post->ID);
+                        $eventTime = $meta['_eventTime'][0];
+                        $eventLocation = $meta['_eventLocation'][0];
+                        $eventEndTime = $meta['_eventEndTime'][0];
 
-						?>
-						<h2><?php echo get_the_title(); ?></h2>
-						<p><strong>Omschrijving: </strong></p><p><?php echo get_the_excerpt(); ?></p>
-						<?php
+                        $day = explode("/", $eventTime)[1];
+                        $monthNumber = explode("/", $eventTime)[0];
+                        $month = getMonth($monthNumber);
+		?>
 
-						$meta = get_post_meta($post->ID);
-						switch ($post_type) {
-						    case "projecten":
-						    	$projectStreet = $meta['_projectStreet'][0];
-								$projectCity = $meta['_projectCity'][0];
-								$projectZipcode = $meta['_projectZipcode'][0];
+               
+                            <section class="list-item normalize-text <?php echo $post->post_type;?>">
+                                <section class="event-calendar">
+                                    <h1><?php echo $day; ?></h1>
+                                    <h2><?php echo $month; ?></h2>
+                                </section>
+                                <section class="event-content">
+                                    <h1><?php the_title(); ?></h1>
+                                    <p><strong>Tijdstip: </strong><?php echo $eventTime . " - " . $eventEndTime; ?></p>
+                                    <p><strong>Locatie: </strong><?php echo $eventLocation; ?></p>
+                                    <p><strong>Meer info: </strong><?php echo excerpt(50); ?></p>
+                                     
+                                </section>
+                                <a class="view-item" href="<?php the_permalink(); ?>">Bekijk event</a>
+                            </section>
+                        
 
-								?>	
-									<p><strong>Straat: </strong></p><p><?php echo $projectStreet; ?></p>
-									<p><strong>Gemeente: </strong></p><p><?php echo $projectCity; ?></p>
-									<p><strong>Postcode: </strong></p><p><?php echo $projectZipcode; ?></p>
-								<?php
-						        break;
-						    case "events":
-						       	$eventTime = $meta['_eventTime'][0];
-								$eventEndTime = $meta['_eventEndTime'][0];
-								$eventLocation = $meta['_eventLocation'][0];
+		<?php
+                    }
+                    break;
+                    case "zoekertjes":{
+                        $meta = get_post_meta($post->ID);
+                        $adLocation = $meta['_adLocation'][0];
+                        $adPrice = $meta['_adPrice'][0];
+                    ?>
 
-								?>
-									<p><strong>Van: </strong></p><p><?php echo $eventTime; ?></p>
-									<p><strong>Tot: </strong></p><p><?php echo $eventEndTime; ?></p>
-									<p><strong>Locatie: </strong></p><p><?php echo $eventLocation; ?></p>
-								<?php
-						        break;
-						    case "zoekertjes":
-						        $adPrice = $meta['_adPrice'][0];
-								$adLocation = $meta['_adLocation'][0];
+                   
+                        <section class="list-item normalize-text <?php echo $post->post_type;?>">
+                            <h1><?php the_title(); ?></h1>
+                            <p><strong>Beschrijving: </strong><?php the_content(); ?></p>
+                            <p><strong>Locatie: </strong><?php echo $adLocation; ?></p>
+                            <p><strong>Prijs: </strong><?php echo $adPrice; ?></p>
+                             <a class="view-item" href="<?php the_permalink(); ?>">Bekijk zoekertje</a>
+                        </section>
+                    
 
-								?>
-									<p><strong>Prijs: </strong></p><p><?php echo $adPrice; ?></p>
-									<p><strong>Locatie: </strong></p><p><?php echo $adLocation; ?></p>
-								<?php
-						        break;
-						}
+		<?php
+                    
+                    }break;
+                    case "post":{
+                        ?>
+                        <section class="list-item normalize-text <?php echo $post->post_type; ?>">
+					<h1><?php echo the_title();?></h1>
+                    <?php echo the_excerpt();
+?>				 <a class="view-item" href="<?php the_permalink(); ?>">Lees meer</a></section><?php
+                    }break;
+                    default: break;
+                }
+                        ?>
+                
+                <?php
 					}
 				} else {
 					?>
-						<h2>Er werden geen activiteiten gevonden.</h2>
+                        
+                        <section class="list-item">
+                            <h2 class="normalize-text">Er werden geen activiteiten gevonden.</h2>s
+                        </section>
+						
 					<?php
 				}
-
+                    
 				?>
-					<a href="<?php echo site_url().'/leden-overzicht'; ?>">Terug naar ledenoverzicht</a>
+        </section>
+            <section class="sidebar">
+                <section class="search normalize-text">
+                    <a class="wide-button" href="<?php echo site_url().'/leden-overzicht'; ?>">Terug naar ledenoverzicht</a>
+                    <?php
+                        if($userid == get_current_user_id()){
+                        ?>
+                            <a class="wide-button" href="<?php echo site_url().'/leden-overzicht'; ?>">Bewerk profiel</a>
+                        <?php
+                        }
+                    ?>
+                    
+                    <hr />
+                    <section class="form-line">
+                        <input class="checkbox js-switch" id="zoekertjes" onchange="apply_filter('z')" type="checkbox" name="zoekertjes" value="1" checked/>
+                        <label class="checkbox-label">Toon zoekertjes</label>
+                    </section>
+                    <section class="form-line">
+                        <input class="checkbox js-switch" id="events" onchange="apply_filter('e')" type="checkbox" name="events" value="1" checked/>
+                        <label class="checkbox-label">Toon events</label> 
+                    </section>
+                    <section class="form-line">
+                        <input class="checkbox js-switch" id="post" onchange="apply_filter('a')" type="checkbox" name="artikels" value="1" checked/>
+                        <label class="checkbox-label">Toon artikels</label> 
+                        <hr />
+                    </section>
+                    <?php
+                        if(get_user_meta($user->ID, "rpr_gegevens", true) == 1)
+                        {
+                            ?>
+
+                                <strong>E-mail: </strong><p><?php echo $user->user_email; ?></p>
+                            <?php
+                            if($usermeta['rpr_straat'][0] != "" || $usermeta['rpr_postcode'][0] != "" || $usermeta['rpr_gemeente'][0] != "")
+                            {
+                            ?>
+                                <strong>Adres: </strong><p><?php echo $usermeta['rpr_straat'][0] . ', ' . $usermeta['rpr_postcode'][0] . ' ' . $usermeta['rpr_gemeente'][0]; ?></p>
+                            <?php
+                            }
+                            if($usermeta['rpr_telefoon'][0] != "")
+                            {
+                            ?>
+                                <strong>Telefoon: </strong><p><?php echo $usermeta['rpr_telefoon'][0]; ?></p>
+                            <?php
+                            }
+                        }
+                    ?>
+                </section>
+               
+                
+                
+                    
+            </section>
+					
 				<?php
 			}
 			else
@@ -150,6 +231,48 @@
 				<p>U moet zich aanmelden om deze pagina te bekijken.</p>
 			<?php
 		}
+        ?>
+        <script>
+        var elems = Array.prototype.slice.call(document.querySelectorAll('.js-switch'));
+        elems.forEach(function(html) {
+            var switchery = new Switchery(html, {color:'#00cd00', size:'small'});
+        });
+        
+        function apply_filter(type){
+            console.log(type);
+            var el;
+            if(type=='z'){
+                el ="zoekertjes";
+            }
+            if(type=='e'){
+                el="events";
+            }
+            if(type=='a'){
+                el="post";
+            }
+            if($("#"+el).prop("checked")){
+                    
+                    $('.'+el).animate(
+    	    		{
+    				    height: 'toggle',
+                        padding: '4%',
+                        margin:'5% 3%',
+    				}, 500);
+                }
+                else {
+                    $('.'+el).animate(
+    	    		{
+                        padding:'0% 4%',
+    				    height: 'toggle',
+                        margin:'0% 3%',
+    				}, 500);
+                }
+        }  
+    </script>
+
+    <?php
 	}
 
 ?>
+
+

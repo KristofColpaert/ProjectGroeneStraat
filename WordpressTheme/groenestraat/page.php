@@ -16,6 +16,7 @@ the_content();
 endwhile;
 ?>
         </main></div>
+<section class="clear"></section>
 <?php 
 get_footer();
 ?>

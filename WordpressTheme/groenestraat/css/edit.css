@@ -812,7 +812,7 @@ footer{
     float:right;
     margin: 0;
 }
-.projectMember a{
+.projectMember a, .newProjectMember{
     display: block;
     float: left;
     color:#69686e;
@@ -822,4 +822,14 @@ footer{
 .textarea-large{
     height: 400px;
     width: 96%;
+}
+.avatar{
+    float: left;
+    margin: 0 20px;
+}
+.name{
+    float: left;
+    color: #FFF;
+    line-height: 1em;
+    padding: 10px;
 }
