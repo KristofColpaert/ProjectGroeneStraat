@@ -108,7 +108,7 @@
         function splitter(content, maxChar)
         {
             var tekens = 0;
-            var newContent = '';
+            var newContent = zin = '';
 
             for(var i=0;i<content.length;i++)
             {
@@ -118,12 +118,7 @@
                     {
                         if(content.charAt(s) == ' ')
                         {
-                            var zin = '';
-                            for(var teller=0;teller<s;teller++)
-                            {
-                                newContent += content.charAt(teller);
-                            }
-
+                            newContent += content.substring(0, s);
                             return newContent + ' ...';
                         }
                     }
@@ -145,10 +140,8 @@
                 {
                     currentItem.removeAttribute('id');
                     chosen.setAttribute('id', 'active');
-
                     var info = document.getElementsByClassName('artikel-side')[0];
                     info.getElementsByTagName('h1')[0].innerHTML = splitter(data[newId].titel, 250);
-                    //info.getElementsByTagName('p')[0].innerHTML = splitter(data[newId].info, 250);
                     var recentArtikel = document.getElementsByClassName('recent-artikel')[0];
                     recentArtikel.style["background-image"] = "url('" + data[newId].image + "')";
                     recentArtikel.style["background-size"] = "cover";
@@ -160,8 +153,6 @@
         document.getElementsByClassName('artikel-item')[1].addEventListener('click', function() { replace(1); });
         document.getElementsByClassName('artikel-item')[2].addEventListener('click', function() { replace(2); });
         document.getElementsByClassName('artikel-item')[3].addEventListener('click', function() { replace(3); });
-        
-        //fancy slider by koen van crombrugge
 
     </script>
     <section class="home-title">
@@ -189,7 +180,6 @@
                                     <div style="background-image:url('<?php echo wp_get_attachment_url(get_post_thumbnail_id($post->ID)); ?>');background-size:cover;width:auto;height:200px"></div>
                                 <?php
                             }
-                            
                             else
                             {
                                 $projectStreetViewThumbnail = get_post_meta($post->ID, '_projectStreetViewThumbnail')[0];
