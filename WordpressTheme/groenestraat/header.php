@@ -9,7 +9,7 @@
     <script>
         function addMenuLink(linkSrc, linkName)
         {
-            var menu = document.getElementById('menu-main-menu');
+         	var menu = document.getElementById('menu-main-menu');
             var a = document.createElement('a');
             a.setAttribute('href', linkSrc);
             a.innerHTML = linkName;
@@ -23,7 +23,7 @@
 <body>
     <header>
         <nav>
-            <img src="<?php bloginfo('template_directory'); ?>/img/logo.png" class="logo" width="400" height="65" alt="" title="" />
+           	<img src="<?php bloginfo('template_directory'); ?>/img/logo.png" class="logo" width="400" height="65" alt="" title="" />
             <section class="mobile-menu" style="display:none">
                 <?php wp_nav_menu(array('Main menu' => 'header-menu')); ?>              
                 <?php 
@@ -94,12 +94,10 @@
                 <?php
                 }
                 else{
-                  
                   echo '<li class="aanmelden" style="float:right"><a href="'.get_site_url().'/login">AANMELDEN</a></li>';
                   wp_nav_menu(array('Main menu' => 'header-menu'));
-                }?> 
-                        
-                     </ul>
+                }?>  
+                    </ul>
             </section>
             <script>
 
@@ -107,6 +105,12 @@
               var isResize = false;
               var menu = document.getElementsByClassName('mobile-menu')[0];
               var logo = document.getElementsByClassName('logo')[0];
+              var a = document.getElementsByClassName('a')[0];
+
+              function posMenu()
+              {
+            		document.getElementById('wpadminbar') != null ? menu.style['top'] = document.getElementsByTagName('nav')[0].offsetHeight + document.getElementById('wpadminbar').offsetHeight + 'px': menu.style['top'] = document.getElementsByTagName('nav')[0].offsetHeight + 'px';
+              }
 
               function toggleNavigation()
               {   
@@ -118,51 +122,40 @@
                       }
                       else { 
                         menu.style['position'] = 'top';
-                        if(document.getElementById('wpadminbar') != null)
-                        {
-                            menu.style['top'] = document.getElementsByTagName('nav')[0].offsetHeight + document.getElementById('wpadminbar').offsetHeight + 'px'; 
-                        }else
-                        {
-                            menu.style['top'] = document.getElementsByTagName('nav')[0].offsetHeight + 'px'; 
-                        }
+                        posMenu();
                         menu.style.display = 'block';
                         isOpen = true;
                       }
                   }
               }
 
-              function setLogo()
+            	function setLogo()
               {
                   if(window.innerWidth < 1150)
                   {
+                  	 logo.addEventListener('click', function() { window.stop(); });
                       logo.setAttribute('width', '500px');
-                      logo.setAttribute('src', '<?php bloginfo('template_directory'); ?>/img/logo-mobile.png');
+                      logo.setAttribute('src', '<?php bloginfo("template_directory"); ?>/img/logo-mobile.png');
+                      
                   }
                   if(window.innerWidth > 1150)
                   {
                       logo.setAttribute('width', '400px');
-                      logo.setAttribute('src', '<?php bloginfo('template_directory'); ?>/img/logo.png');
+                      logo.setAttribute('src', '<?php bloginfo("template_directory"); ?>/img/logo.png');
                       logo.addEventListener('click', function() { document.location = '<?php echo get_site_url(); ?>'; });
                   }
-              }
+              }        
 
               function toggleHeight()
               {
-                  setLogo();
+              		setLogo();
 
                   if(isOpen){
                       if(window.innerWidth < 1150)
                       {
-                          if(document.getElementById('wpadminbar') != null)
-                          {
-                              menu.style['top'] = document.getElementsByTagName('nav')[0].offsetHeight + document.getElementById('wpadminbar').offsetHeight + 'px'; 
-                          }
-                          else
-                          {
-                              menu.style['top'] = document.getElementsByTagName('nav')[0].offsetHeight + 'px'; 
-                          }
+                          posMenu();
                       }
-                      else
+                      if(window.innerWidth > 1150)
                       {
                           menu.style.display = 'none';
                           isOpen = false;
@@ -172,7 +165,8 @@
 
               document.getElementsByTagName('nav')[0].addEventListener('click', function() { toggleNavigation(); });
               window.addEventListener('resize', function() { toggleHeight(); });
-              window.addEventListener('load', function() { setLogo(); });
+              window.addEventListener('load', function() { toggleHeight(); });
+
             </script>
         </nav>
     </header>
