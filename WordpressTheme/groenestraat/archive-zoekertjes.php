@@ -12,7 +12,6 @@
 			</form>
 		</section>
 	</section>
-	<section class="main">
 
 	<?php
 
@@ -29,6 +28,20 @@
 			{
 				$keyword = 'phrase';
 			}
+		}
+
+		if($keyword != '')
+		{
+			?>
+				<section class="main" data="zoekertjes;1;<?php echo $keyword; ?>">
+			<?php
+		}
+
+		else
+		{
+			?>
+				<section class="main" data="zoekertjes;1">
+			<?php
 		}
 
 		$orig_query = $my_query;
@@ -92,9 +105,6 @@
 
 	<section class="navigate-menu">
 		<?php
-
-		previous_posts_link();
-		next_posts_link();
 
 		$my_query = $orig_query;
 

@@ -514,39 +514,208 @@ $(document).ready(function()
 	*/
 
 	var scrolled = false;
+	var moreElements = false;
 
 	$(window).scroll(function()
 	{
+		var containerElement; 
+		var data;
+		var pageType;
+
+
+		if($('.main').length)
+		{
+			containerElement = $('.main');
+			data = containerElement.attr('data');
+			pageType = data.split(';')[0];
+		}
+
+		else if($('.container').length)
+		{
+			containerElement = $('.container');
+			data = containerElement.attr('data');
+			pageType = data.split(';')[0];
+		}
+
+		checkNumberOfPosts(containerElement, pageType);
+
+		var lastPosition = $('footer');
+
 		var scrollPosition = $(window).scrollTop();
-		var lastPosition = $('.main section:last-child');
 		var lastPositionTop = lastPosition.offset().top;
-		if(scrollPosition >= (lastPositionTop - 1500))
+
+		if(scrollPosition >= (lastPositionTop - 2000))
 		{
 			if(scrolled == false)
 			{
-				loadPosts();
+				loadPosts(containerElement);
 				scrolled = true;
 			}
 		}
 
-		else if(scrollPosition <= (lastPositionTop - 1500))
+		else if(scrollPosition <= (lastPositionTop - 2000))
 		{
 			if(scrolled == true)
 			{
 				scrolled = false;
 			}
 		}
+
+		/*if(pageType == 'projecten')
+		{
+			if(scrollPosition >= (lastPositionTop))
+			{
+				if(scrolled == false)
+				{
+					loadPosts(containerElement);
+					scrolled = true;
+				}
+			}
+
+			else if(scrollPosition <= (lastPositionTop))
+			{
+				if(scrolled == true)
+				{
+					scrolled = false;
+				}
+			}
+		}
+
+		else if(pageType == 'singleProjecten' || pageType == 'artikels')
+		{
+			if(scrollPosition >= (lastPositionTop - 1500))
+			{
+				if(scrolled == false)
+				{
+					loadPosts(containerElement);
+					scrolled = true;
+				}
+			}
+
+			else if(scrollPosition <= (lastPositionTop - 1500))
+			{
+				if(scrolled == true)
+				{
+					scrolled = false;
+				}
+			}
+		}
+
+		else if(pageType == 'events' || pageType == 'zoekertjes')
+		{
+			if(scrollPosition >= (lastPositionTop + 2000))
+			{
+				if(scrolled == false)
+				{
+					loadPosts(containerElement);
+					scrolled = true;
+				}
+			}
+
+			else if(scrollPosition <= (lastPositionTop + 2000))
+			{
+				if(scrolled == true)
+				{
+					scrolled = false;
+				}
+			}
+		}*/
 	});
 
-	function loadPosts()
+	function checkNumberOfPosts(containerElement, pageType)
 	{
-		var tempData = $('.main').attr('data');
+		if(pageType == 'singleProjecten')
+		{
+			if(((containerElement.children('section:not(.loadMorePostsWarning)').length) % 9) == 0 && containerElement.children('section:not(.loadMorePostsWarning)').length != 0)
+			{
+				if(moreElements == false)
+				{
+					containerElement.append('<section class="loadMorePostsWarning list-item normalize-text post" style="background-color:#FFFFFF;"><h2 class="normalize-text center">Meer posts worden geladen...</h2></section>');
+					moreElements = true;
+				}
+			}
+		}
+
+		else if(pageType == 'projecten')
+		{
+			if((containerElement.children('a').length % 9) == 0 && containerElement.children('a').length != 0)
+			{
+				if(moreElements == false)
+				{
+					containerElement.append('<section class="loadMorePostsWarning" style="background-color:#FFFFFF;"><h2 class="normalize-text center">Meer projecten worden geladen...</h2></section>');
+					moreElements = true;
+				}
+			}
+		}
+
+		else if(pageType == 'events')
+		{
+			if((containerElement.children('a').length % 9) == 0 && containerElement.children('a').length != 0)
+			{
+				if(moreElements == false)
+				{
+					containerElement.append('<section class="loadMorePostsWarning list-item normalize-text post" style="background-color:#FFFFFF;"><h2 class="normalize-text center">Meer events worden geladen...</h2></section>');
+					moreElements = true;
+				}
+			}
+		}
+
+		else if(pageType == 'zoekertjes')
+		{
+			if((containerElement.children('a').length % 9) == 0 && containerElement.children('a').length != 0)
+			{
+				if(moreElements == false)
+				{
+					containerElement.append('<section class="loadMorePostsWarning list-item normalize-text post" style="background-color:#FFFFFF;"><h2 class="normalize-text center">Meer zoekertjes worden geladen...</h2></section>');
+					moreElements = true;
+				}
+			}
+		}
+
+		else if(pageType == 'artikels')
+		{
+			if((containerElement.children('section').length % 9) == 0 && containerElement.children('section').length != 0)
+			{
+				if(moreElements == false)
+				{
+					containerElement.append('<section class="loadMorePostsWarning list-item normalize-text post" style="background-color:#FFFFFF;"><h2 class="normalize-text center">Meer artikels worden geladen...</h2></section>');
+					moreElements = true;
+				}
+			}
+		}
+
+		else
+		{
+			$('.loadMorePostsWarning').remove();
+			moreElements = false;
+		}
+	}
+
+	function loadPosts(containerElement)
+	{
+		var tempData = containerElement.attr('data');
 		var res = tempData.split(';');
-		var tempPage = parseInt(res[0]) + 1;
-		var tempProject = res[1];
+		var tempPageType = res[0]
+		var tempPage = parseInt(res[1]) + 1;
+		var tempProject = '';
+		var tempSearch = '';
 
-		$('.main').attr('data', tempPage + ';' + tempProject);
+		if(tempPageType == 'singleProjecten')
+		{
+			tempProject = res[2];
+			containerElement.attr('data', tempPageType + ';' + tempPage + ';' + tempProject);
+		}
 
+		else
+		{
+			containerElement.attr('data', tempPageType + ';' + tempPage);
+		}
+
+		if(tempPageType != 'singleProjecten' && res.length == 3)
+		{
+			tempSearch = res[2];
+		}
+		
 		jQuery.ajax(
 		{
 		   	url : plugin.ajax_url,
@@ -554,12 +723,15 @@ $(document).ready(function()
 		   	data : 
 		  	{
 		   		action : 'load_new_posts',
+		   		pageType : tempPageType,
 		   		page : tempPage,
-		   		projectId : tempProject
+		   		projectId : tempProject,
+		   		search : tempSearch
 		   	},
 		   	success : function(response)
 		   	{
-		   		$('.main').append(response);
+		   		$('.loadMorePostsWarning').before(response);
+		   		checkNumberOfPosts(containerElement);
 		   	}
 		});
 	}

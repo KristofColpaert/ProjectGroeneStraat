@@ -18,7 +18,6 @@ get_header();
             </form>
         </section>
     </section>
-    <section class="main">
 
     <?php
 
@@ -35,6 +34,20 @@ get_header();
             {
                 $keyword = 'phrase';
             }
+        }
+
+        if($keyword != '')
+        {
+            ?>
+                <section class="main" data="artikels;1;<?php echo $keyword; ?>">
+            <?php
+        }
+
+        else
+        {
+            ?>
+                <section class="main" data="artikels;1">
+            <?php
         }
 
         $orig_query = $my_query;
@@ -87,11 +100,6 @@ get_header();
 
     <section class="navigate-menu">
         <?php
-
-        next_posts_link();
-        previous_posts_link();
-        
-        //get_next_posts_link();
 
         $my_query = $orig_query;
 

@@ -63,7 +63,6 @@ function getMonth($var)
 			</form>
 		</section>
 	</section>
-	<section class="main">
 
 	<?php
 
@@ -80,6 +79,20 @@ function getMonth($var)
 			{
 				$keyword = 'phrase';
 			}
+		}
+
+		if($keyword != '')
+		{
+			?>
+				<section class="main" data="events;1;<?php echo $keyword; ?>">
+			<?php
+		}
+
+		else
+		{
+			?>
+				<section class="main" data="events;1">
+			<?php
 		}
 
 		$orig_query = $my_query;
@@ -154,8 +167,6 @@ function getMonth($var)
 	<section class="navigate-menu">
 		<?php
 
-		previous_posts_link();
-		next_posts_link();
 		$my_query = $orig_query;
 
 		?>		

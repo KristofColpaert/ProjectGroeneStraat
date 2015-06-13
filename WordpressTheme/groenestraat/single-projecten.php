@@ -90,7 +90,7 @@
             </ul>
              <section class="clear"></section>
         </section>
-		<section class="main" data="1;<?php echo $post->ID; ?>">
+		<section class="main" data="singleProjecten;1;<?php echo $post->ID; ?>">
 		
 	<?php
 

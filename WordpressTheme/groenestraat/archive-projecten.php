@@ -1,19 +1,6 @@
-<?php get_header(); ?>
-	<section class="container">
-	<section class="sub-menu">
-		<ul>
-			<li><a href="<?php echo get_site_url(); ?>/nieuw-project">Nieuw project</a></li>
-			<li><a href="<?php echo get_site_url(); ?>/mijn-projecten">Mijn projecten</a></li>
-		</ul>
-		<section class="options">
-			<form action="<?php $_SERVER['PHP_SELF']; ?>" method="GET">
-				<input type="text" name="zoekveld" class="textbox" placeholder="Zoeken op projectnaam"><input type="submit" class="form-button" value="zoeken" name="zoeken">
-			</form>
-		</section>
-	</section>
-
-	<?php
-
+<?php 
+	get_header();
+	
 	global $post;
 	$index = 0;
 	$keyword = '';
@@ -30,6 +17,34 @@
 		}
 	}
 
+	if($keyword != '')
+	{	
+		?>
+			<section class="container" data="projecten;1;<?php echo $keyword; ?>">
+		<?php
+	}
+
+	else
+	{
+		?>
+			<section class="container" data="projecten;1">
+		<?php
+	}
+
+	?>
+		<section class="sub-menu">
+			<ul>
+				<li><a href="<?php echo get_site_url(); ?>/nieuw-project">Nieuw project</a></li>
+				<li><a href="<?php echo get_site_url(); ?>/mijn-projecten">Mijn projecten</a></li>
+			</ul>
+			<section class="options">
+				<form action="<?php $_SERVER['PHP_SELF']; ?>" method="GET">
+					<input type="text" name="zoekveld" class="textbox" placeholder="Zoeken op projectnaam"><input type="submit" class="form-button" value="zoeken" name="zoeken">
+				</form>
+			</section>
+		</section>
+	<?php
+
 	$orig_query = $my_query;
 	$paged = (get_query_var('paged')) ? get_query_var('paged') : 1;
 	$my_query = new WP_Query(
@@ -41,18 +56,12 @@
 			)
 		);
 
-	?>
-		<script>
-			endIndex = <?php echo $my_query->post_count; ?>;
-		</script>
-	<?php
 	while($my_query->have_posts()) : $my_query->the_post();
 
 		$meta = get_post_meta($post->ID);
 		$projectStreet = $meta['_projectStreet'][0];
 		$projectCity = $meta['_projectCity'][0];
 		$projectZipcode = $meta['_projectZipcode'][0];
-		$projectLocation = $projectStreet . ' ' . $projectCity;
 
 		?>
 			<a href="<?php the_permalink(); ?>">
@@ -112,8 +121,6 @@
 	<section class="navigate-menu">
 		<?php
 
-		previous_posts_link();
-		next_posts_link();
 		$my_query = $orig_query;
 
 		?>
