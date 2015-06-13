@@ -10,7 +10,7 @@
 		License: GPLv2		
 	*/
 
-    function getMonth($var)
+    function getProfileMonth($var)
     {
         switch ($var) 
         {
@@ -139,7 +139,7 @@
 
                         $day = explode("/", $eventTime)[1];
                         $monthNumber = explode("/", $eventTime)[0];
-                        $month = getMonth($monthNumber);
+                        $month = getProfileMonth($monthNumber);
 		?>
 
                
