@@ -101,21 +101,21 @@
 
 	function add_partners_metaboxes(){
 		?>
-		<h1>Toevoegen partner</h1>
+		<div class="wrap" id="wp-media-grid">
+		<h2>Toevoegen partner</h2>
 		<form method="post" action="<?php echo get_permalink(); ?>" enctype="multipart/form-data">
-					<strong>Bedrijfsnaam: </strong><br />
+					<h3 class="hndle ui-sortable-handle">Bedrijfsnaam: </h3>
 					<input type="text" name="Bedrijfsnaam" placeholder="Vul een bedrijfsnaam in" /><br />
-					<strong>URL Website: </strong><br />
-					<input type="text" name="URL" placeholder="Vul een URL in" /><br />
-					<br />
-					<strong>Afbeelding Logo</strong><br />
-					<input type='file' name="Logo" />
-					<br />
-					<br />
-					<input type="submit" value="Opslaan" name="Opslaan"/>
+					<h3 class="hndle ui-sortable-handle">URL Website: </h3>
+					<input type="text" name="URL" placeholder="Vul een URL in" />
+					<h3 class="hndle ui-sortable-handle">Afbeelding Logo</h3>
+					<input type='file' name="Logo"/>
+					<input type="submit" value="Opslaan" name="Opslaan" class="button button-primary button-large"/>
 		</form>
+	    </div>
 
-		<h1>Partners</h1>
+		<div class="wrap" id="wp-media-grid">
+		<h2>Partners</h2>
 
 		<?php
 		
@@ -128,11 +128,13 @@
 		{
 			?>			
 			<form method="post" action="<?php echo get_permalink(); ?>" enctype="multipart/form-data">
-				<strong>Bedrijfsnaam: </strong><p><?php echo $result["Bedrijfsnaam"]; ?></p>
-				<strong>URL Bedrijf: </strong><a href="<?php echo $result["URL"]; ?>"><?php echo $result["URL"]; ?></a>
+				<h3 class="hndle ui-sortable-handle">Bedrijfsnaam: </h3>
+					<p class="about-description"><?php echo $result["Bedrijfsnaam"]; ?></p>
+				<h3 class="hndle ui-sortable-handle">URL Bedrijf: </h3>
+					<a href="<?php echo $result["URL"]; ?>"><?php echo $result["URL"]; ?></a>
 				<br />
 				<img src="<?php echo $result["URLImage"]; ?>" alt="Logo" title="Logo"/><br />
-				<input type="submit" name="Verwijderen" value="Verwijderen" />
+				<input type="submit" name="Verwijderen" value="Verwijderen" class="button button-primary button-large"/>
 				<input type="hidden" value="<?php echo $result["ID"]; ?>" name="PartnerId"/>
 			</form>
 			<hr />

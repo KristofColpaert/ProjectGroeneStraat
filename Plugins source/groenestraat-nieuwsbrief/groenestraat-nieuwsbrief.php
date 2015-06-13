@@ -10,6 +10,14 @@
 		License: GPLv2		
 	*/
 
+	?>
+		<style>
+
+
+		</style>
+
+	<?php
+
 	if(isset($_POST["Verzenden"]))
 	{
 		add_action('plugins_loaded', 'register_sendmail');
@@ -137,16 +145,18 @@
 
 	function add_nieuwsbrief_metaboxes(){
 		?>
+	<div class="wrap" id="wp-media-grid">
+		<h2>Nieuwsbrief</h2>
 		<form method="post" action="<?php echo get_permalink(); ?>" >
-					<h1>Nieuwsbrief</h1>
-					<strong>Onderwerp: </strong><br />
+					<h3 class="hndle ui-sortable-handle">Onderwerp: </h3>
 					<input type="text" name="Onderwerp" placeholder="Vul een onderwerp in" /><br />
-					<strong>Bijlage: </strong><br />
-					<textarea name="Bijlage" style="width: 500px; height: 300px; resize: none">
+					<h3 class="hndle ui-sortable-handle">Bijlage: </h3>
+					<textarea id="content" class="mceEditor" autocomplete="off" name="Bijlage" style="width: 500px; height: 300px; resize: none">
 							
 					</textarea><br />
-					<input type="submit" value="Verzenden" name="Verzenden"/><br />
+					<input type="submit" value="Verzenden" name="Verzenden" class="button button-primary button-large"/><br />
 		</form>
+	</div>
 		<?php
 	}
 ?>

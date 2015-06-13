@@ -42,12 +42,14 @@
 
 	function add_keys_metaboxes(){
 		?>
-		<h1>API Key Google</h1>
+		<div class="wrap" id="wp-media-grid">
+		<h2>API Key Google</h2>
 		<form class="createForm" method="post" action="<?php echo get_permalink(); ?>" enctype="multipart/form-data">
-				<strong>Application Key: </strong><br />
+				<h3 class="hndle ui-sortable-handle">Application Key: </h3>
 				<input type="text" name="ApplicationID" placeholder="Application Key" /><br />
-				<input type="submit" value="Opslaan" name="Opslaan"/>
+				<input type="submit" value="Opslaan" name="Opslaan" class="button button-primary button-large"/>
 		</form>
+		</div>
 		<?php
 	}
 ?>
