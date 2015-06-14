@@ -48,51 +48,70 @@ function prowpt_persoonlijkeProjectenOverzicht()
 
 	if(is_user_logged_in())
 	{
-		//ophalen subscribers
 		global $post;
 
-		//ophalen projecten waarop hij gesubscribed is en heeft aangemaakt
-		$projectenSubscribed = array(
+		$projectenAdmin = array(
 					'post_type' => 'projecten',
 					'order' => 'ASC',
-					'orderby' => 'date',
-					'meta_key' => '_subscriberId',
-					'meta_compare' => '=',
-            		'meta_query' => array(
-                		array(
-                        'key' => '_subscriberId',
-                        'value' => $userId)));
+					'orderby' => 'date');
 
-		$the_query = new WP_Query($projectenSubscribed);
-				
+		$the_query = new WP_Query($projectenAdmin);				
 		if ($the_query->have_posts()) {
-				while ($the_query->have_posts() ) {
+				while ($the_query->have_posts() )
+				{
 							$the_query->the_post();	
-
 							$projectAdminId = $post->post_author;
-							?>
-								<h2><?php echo get_the_title(); ?></h2>
-							<?php	
-							$street = get_post_meta($post->ID, "_projectStreet")[0];
-							$city = get_post_meta($post->ID, "_projectCity")[0];
-							$zipcode = get_post_meta($post->ID, "_projectZipcode")[0];
 
-							if(!empty($street) && !empty($city) && !empty($zipcode))
+							if($projectAdminId == $userId)
 							{
 								?>
-								<h1><?php echo $title; ?></h1>
-								<strong>Street</strong><p><?php echo $street; ?></p>
-								<strong>City</strong><p><?php echo $city; ?></p>
-								<strong>Zipcode</strong><p><?php echo $zipcode; ?></p>
-								<strong>Omschrijving</strong><p><?php echo get_the_excerpt(); ?></p>
+									<h2><?php echo get_the_title(); ?></h2>
 								<?php
-								if($userId == $projectAdminId)
+
+								$street = get_post_meta($post->ID, "_projectStreet")[0];
+								$city = get_post_meta($post->ID, "_projectCity")[0];
+								$zipcode = get_post_meta($post->ID, "_projectZipcode")[0];
+
+								if(!empty($street) && !empty($city) && !empty($zipcode))
 								{
-									?>
-									<a href="<?php echo site_url() . '/bewerk-project?project=' .  $post->ID ?>">Bewerk project</a>
-									<?php
+										?>
+											<h1><?php echo $title; ?></h1>
+											<strong>Street</strong><p><?php echo $street; ?></p>
+											<strong>City</strong><p><?php echo $city; ?></p>
+											<strong>Zipcode</strong><p><?php echo $zipcode; ?></p>
+											<strong>Omschrijving</strong><p><?php echo get_the_excerpt(); ?></p>
+											<a href="<?php echo site_url() . '/bewerk-project?project=' .  $post->ID ?>">Bewerk project</a>
+										<?php
 								}
 							}
+							else
+							{
+								$subscribers = get_post_meta($post->ID, "_subscriberId");
+								foreach($subscribers as $subscriber)
+								{
+									if($subscriber == $userId)
+									{
+										?>
+											<h2><?php echo get_the_title(); ?></h2>
+										<?php
+
+										$street = get_post_meta($post->ID, "_projectStreet")[0];
+										$city = get_post_meta($post->ID, "_projectCity")[0];
+										$zipcode = get_post_meta($post->ID, "_projectZipcode")[0];
+
+										if(!empty($street) && !empty($city) && !empty($zipcode))
+										{
+											?>
+											<h1><?php echo $title; ?></h1>
+											<strong>Street</strong><p><?php echo $street; ?></p>
+											<strong>City</strong><p><?php echo $city; ?></p>
+											<strong>Zipcode</strong><p><?php echo $zipcode; ?></p>
+											<strong>Omschrijving</strong><p><?php echo get_the_excerpt(); ?></p>
+											<?php
+										}	
+									}
+								}
+							}	
 				}
 
 		}
