@@ -713,11 +713,6 @@ footer
 
 /* OVERZICHT EVENTS */
 
-.image-wrapper
-{
-    width:50%;
-}
-
 .single-item
 {
     margin:5%;
@@ -792,7 +787,7 @@ footer
     float:left;
     width:20%;
     margin-right: 5%;
-    height: 100%;
+    height: 0%;
     text-align: center;
     min-height: 175px;
     background-size: cover;
