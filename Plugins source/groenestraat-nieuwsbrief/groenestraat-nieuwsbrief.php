@@ -10,14 +10,6 @@
 		License: GPLv2		
 	*/
 
-	?>
-		<style>
-
-
-		</style>
-
-	<?php
-
 	if(isset($_POST["Verzenden"]))
 	{
 		add_action('plugins_loaded', 'register_sendmail');
