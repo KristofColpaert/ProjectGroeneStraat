@@ -37,7 +37,7 @@
 					<form class="createForm" action="<?php $_SERVER['REQUEST_URI']; ?>" method="POST" enctype="multipart/form-data">
 						<input id="projectId" name="projectId" type="hidden" value="<?php echo $project->ID; ?>" />
 						<input class="confirm-button" id="articleDelete" name="articleDelete" type="submit" value="Verwijder" />
-                        <a class="cancel-button" href="<?php echo $project->guid; ?>">Annuleer</a>
+                        <a class="cancel-button" href="<?php echo $article->guid; ?>">Annuleer</a>
                         <div class="clear"></div>
 					</form>
 				<?php
