@@ -159,13 +159,21 @@
 						<input id="articleEdit" name="articleEdit" type="submit" value="Bewerk" class="form-button" />
 					</form>
 					<script>
+                        $(document).ready(function () {
+                            $("#articleFeaturedImage").on("change", function () {
+                                $("#upload").toggleClass("confirm-button");
+                                 $("#upload").toggleClass("confirm-button-green");
+                            });
+                        });
 						var nietLeeg = "Dit veld is verplicht!";
 
 						var title = new LiveValidation('articleTitle', {validMessage:" "});
 						title.add(Validate.Presence,{failureMessage:nietLeeg});
 
-						var featuredImage = new LiveValidation('articleFeaturedImage', {validMessage:" "});
-						featuredImage.add(Validate.Presence,{failureMessage:nietLeeg});
+		
+                        
+                        var description = new LiveValidation('articleDescription', {validMessage:" "});
+                        description.add(Validate.Presence,{failureMessage: nietLeeg});
 					</script>
 				<?php
 			}

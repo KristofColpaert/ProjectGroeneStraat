@@ -97,6 +97,12 @@
 						<input id="zoekertjeEdit" class="form-button" name="zoekertjeEdit" type="submit" value="Bewerk" />
 					</form>
 					<script>
+                        $(document).ready(function () {
+                        $("#adFeaturedImage").on("change", function () {
+                            $("#upload").toggleClass("confirm-button");
+                             $("#upload").toggleClass("confirm-button-green");
+                        });
+                    });
 						var nietLeeg = "Dit veld is verplicht!";
 
 						var title = new LiveValidation('adTitle', {validMessage:" "});
@@ -105,7 +111,9 @@
 						var price = new LiveValidation('adPrice', {validMessage:" "});
 						price.add(Validate.Presence,{failureMessage:nietLeeg});
 						price.add(Validate.Numericality,{onlyInteger:true, notANumberMessage: "Een prijs moet een getal in euro zijn!"});
-
+                        var description = new LiveValidation('adDescription', {validMessage:" "});
+                        description.add(Validate.Presence,{failureMessage: nietLeeg});
+                        
 						var loc = new LiveValidation('adLocation', {validMessage:" "});
 						loc.add(Validate.Presence,{failureMessage:nietLeeg});
 					</script>

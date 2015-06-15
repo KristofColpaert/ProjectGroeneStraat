@@ -141,6 +141,12 @@
 						<input class="form-button" id="eventEdit" name="eventEdit" type="submit" value="Bewerk" />
 					</form>
 					<script>
+                        $(document).ready(function () {
+                            $("#eventFeaturedImage").on("change", function () {
+                                $("#upload").toggleClass("confirm-button");
+                                 $("#upload").toggleClass("confirm-button-green");
+                            });
+                        });
 						var nietLeeg = "Dit veld is verplicht!";
 
 						var title = new LiveValidation('eventTitle', {validMessage:" "});
@@ -174,6 +180,9 @@
 
 						var loc = new LiveValidation('eventLocation', {validMessage:" "});
 						loc.add(Validate.Presence,{failureMessage:nietLeeg});
+                        
+                        var description = new LiveValidation('eventDescription', {validMessage:" "});
+                        description.add(Validate.Presence,{failureMessage: nietLeeg});
                         
                          window.onload = fixSpan();
                     
