@@ -733,7 +733,18 @@ footer
 
 .list-item
 {
-    float:left; color: #333; width: 86%; margin: 5% 3%; padding: 4%; background-color: #ffffff;
+    float:left; 
+    color: #333; 
+    width: 86%; 
+    margin: 5% 3%; 
+    padding: 4%; 
+    background-color: #ffffff;
+}
+
+.list-item .confirm-button-green
+{
+    font-size:1.5em;
+    margin-right: 15px;
 }
 
 .list-item>h1>a

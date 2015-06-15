@@ -4,7 +4,7 @@
 		Plugin URI: http://www.groenestraat.be
 		Description: Deze plugin toont de artikels die de ingelogde gebruiker aangemaakt heeft. 
 		Version: 1.0
-		Author: Rodric Degroote
+		Author: Rodric Degroote, Koen Van Crombrugge
 		Author URI: http://www.groenestraat.be
 		Text Domain: prowp-plugin
 		License: GPLv2		
@@ -39,6 +39,17 @@
 
 function prowpt_persoonlijkeArtikelsOverzicht()
 {
+	?>
+	<script>
+        $(".contentwrapper").addClass("container");
+        $(".container").removeClass("contentwrapper");
+        $("#main").unwrap();
+        $(".container").unwrap();
+        $(".title").remove();
+        $(".container").append('<section class="sub-menu"><ul><li><a onClick="history.go(-1)">Terug</a></li></ul><section class="options"><form action="<?php $_SERVER['PHP_SELF']; ?>" method="GET"><input type="text" name="zoekveld" class="textbox" placeholder="Zoeken op artikel"><input type="submit" class="form-button" value="zoeken" name="zoeken"></form></section>');
+    </script>
+    <?php
+
 	global $post;
 
 	$artikels = array();
@@ -62,9 +73,12 @@ function prowpt_persoonlijkeArtikelsOverzicht()
 				while ($the_query->have_posts() ) {
 						$the_query->the_post();	
 						?> 
-							<h2><?php echo get_the_title(); ?></h2>
-							<strong>Omschrijving: </strong><p><?php echo the_content(); ?></p>
-							<a href="<?php echo site_url().'/bewerk-artikel?artikel='. $post->ID; ?>">Bewerk artikel</a>
+							<section class="list-item" style="margin-top:3%;margin-bottom:1.5%">
+								<h1><?php echo get_the_title(); ?></h1>
+								<p><?php echo the_content(); ?></p><br/>
+								<a class="confirm-button-green" href="<?php echo site_url().'/bewerk-artikel?artikel='. $post->ID; ?>">Bewerk artikel</a>
+								<a class="confirm-button-green" href="<?php echo site_url().'/verwijder-artikel?artikel='. $post->ID; ?>">Verwijder artikel</a>
+							</section>
 						<?php
 				}
 		}

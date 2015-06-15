@@ -39,6 +39,17 @@
 
 function prowpt_persoonlijkeEventenOverzicht()
 {
+	?>
+	<script>
+        $(".contentwrapper").addClass("container");
+        $(".container").removeClass("contentwrapper");
+        $("#main").unwrap();
+        $(".container").unwrap();
+        $(".title").remove();
+        $(".container").append('<section class="sub-menu"><ul><li><a onClick="history.go(-1)">Terug</a></li></ul><section class="options"><form action="<?php $_SERVER['PHP_SELF']; ?>" method="GET"><input type="text" name="zoekveld" class="textbox" placeholder="Zoeken op event"><input type="submit" class="form-button" value="zoeken" name="zoeken"></form></section>');
+    </script>
+    <?php
+
 	global $post;
 	$userId = get_current_user_id(); 
 
@@ -59,9 +70,6 @@ function prowpt_persoonlijkeEventenOverzicht()
 		if ($the_query->have_posts()) {
 					while ($the_query->have_posts() ) {
 						$the_query->the_post();	
-						?>
-							<h2><?php echo get_the_title(); ?></h2>
-						<?php
 						$eventTime = get_post_meta($post->ID, "_eventTime")[0];
 						$eventEndTime = get_post_meta($post->ID, "_eventEndTime")[0];
 						$eventLocation = get_post_meta($post->ID, "_eventLocation")[0];
@@ -71,13 +79,13 @@ function prowpt_persoonlijkeEventenOverzicht()
 						if(!empty($eventTime) && !empty($eventEndTime) && !empty($eventLocation) && !empty($eventStartHour) && !empty($eventEndHour))
 						{
 							?>
-								<strong>Startdatum: </strong><p><?php echo $eventTime; ?></p>
-								<strong>Einddatum: </strong><p><?php echo $eventEndTime; ?></p>
-								<strong>Van: </strong><p><?php echo $eventStartHour; ?></p>
-								<strong>Tot: </strong><p><?php echo $eventEndHour; ?></p>
-								<strong>Locatie: </strong><p><?php echo $eventLocation; ?></p>
-								<strong>Omschrijving: </strong><p><?php echo get_the_excerpt(); ?></p>
-								<a href="<?php echo site_url().'/bewerk-event?event='. $post->ID; ?>">Bewerk event</a>
+								<section class="list-item" style="margin-top:3%;margin-bottom:1.5%">
+									<h1><?php echo get_the_title(); ?></h1>
+									<p><?php echo the_content(); ?></p><br/><br/>
+									<p>Van <strong><?php echo $eventTime . ' (' . $eventStartHour . ')' . '</strong> tot <strong>' . $eventEndTime . ' (' . $eventEndHour . ')' . '</strong> te <strong>' . $eventLocation; ?></strong></p><br/>
+									<a class="confirm-button-green" href="<?php echo site_url().'/bewerk-event?event='. $post->ID; ?>">Bewerk event</a>
+									<a class="confirm-button-green" href="<?php echo site_url().'/verwijder-event?event='. $post->ID; ?>">Verwijder event</a>
+								</section>
 							<?php
 						}
 

@@ -4,7 +4,7 @@
 		Plugin URI: http://www.groenestraat.be
 		Description: Deze plugin toont de projecten waarvan de ingelogde gebruiker lid van is. 
 		Version: 1.0
-		Author: Rodric Degroote, Kristof Colpaert
+		Author: Rodric Degroote, Kristof Colpaert =D
 		Author URI: http://www.groenestraat.be
 		Text Domain: prowp-plugin
 		License: GPLv2		
@@ -41,6 +41,17 @@
 
 function prowpt_persoonlijkeProjectenOverzicht()
 {
+	?>
+	<script>
+        $(".contentwrapper").addClass("container");
+        $(".container").removeClass("contentwrapper");
+        $("#main").unwrap();
+        $(".container").unwrap();
+        $(".title").remove();
+        $(".container").append('<section class="sub-menu"><ul><li><a onClick="history.go(-1)">Terug</a></li></ul><section class="options"><form action="<?php $_SERVER['PHP_SELF']; ?>" method="GET"><input type="text" name="zoekveld" class="textbox" placeholder="Zoeken op project"><input type="submit" class="form-button" value="zoeken" name="zoeken"></form></section>');
+    </script>
+    <?php
+    
 	global $post;
 
 	$subscriber = "_subscriberId";
@@ -64,10 +75,6 @@ function prowpt_persoonlijkeProjectenOverzicht()
 
 							if($projectAdminId == $userId)
 							{
-								?>
-									<h2><?php echo get_the_title(); ?></h2>
-								<?php
-
 								$street = get_post_meta($post->ID, "_projectStreet")[0];
 								$city = get_post_meta($post->ID, "_projectCity")[0];
 								$zipcode = get_post_meta($post->ID, "_projectZipcode")[0];
@@ -75,12 +82,12 @@ function prowpt_persoonlijkeProjectenOverzicht()
 								if(!empty($street) && !empty($city) && !empty($zipcode))
 								{
 										?>
-											<h1><?php echo $title; ?></h1>
-											<strong>Street</strong><p><?php echo $street; ?></p>
-											<strong>City</strong><p><?php echo $city; ?></p>
-											<strong>Zipcode</strong><p><?php echo $zipcode; ?></p>
-											<strong>Omschrijving</strong><p><?php echo get_the_excerpt(); ?></p>
-											<a href="<?php echo site_url() . '/bewerk-project?project=' .  $post->ID ?>">Bewerk project</a>
+											<section class="list-item" style="margin-top:3%;margin-bottom:1.5%">
+												<h1><?php echo get_the_title(); ?></h1>
+												<p><?php echo the_content(); ?></p><br/>
+												<a class="confirm-button-green" href="<?php echo site_url() . '/bewerk-project?project=' .  $post->ID ?>">Bewerk project</a>
+												<a class="confirm-button-green" href="<?php echo site_url() . '/verwijder-project?project=' .  $post->ID ?>">Verwijder project</a>
+											</section>
 										<?php
 								}
 							}
@@ -91,10 +98,6 @@ function prowpt_persoonlijkeProjectenOverzicht()
 								{
 									if($subscriber == $userId)
 									{
-										?>
-											<h2><?php echo get_the_title(); ?></h2>
-										<?php
-
 										$street = get_post_meta($post->ID, "_projectStreet")[0];
 										$city = get_post_meta($post->ID, "_projectCity")[0];
 										$zipcode = get_post_meta($post->ID, "_projectZipcode")[0];
@@ -102,11 +105,12 @@ function prowpt_persoonlijkeProjectenOverzicht()
 										if(!empty($street) && !empty($city) && !empty($zipcode))
 										{
 											?>
-											<h1><?php echo $title; ?></h1>
-											<strong>Street</strong><p><?php echo $street; ?></p>
-											<strong>City</strong><p><?php echo $city; ?></p>
-											<strong>Zipcode</strong><p><?php echo $zipcode; ?></p>
-											<strong>Omschrijving</strong><p><?php echo get_the_excerpt(); ?></p>
+												<section class="list-item" style="margin-top:3%;margin-bottom:1.5%">
+													<h1><?php echo get_the_title(); ?></h1>
+													<p><?php echo the_content(); ?></p><br/>
+													<a class="confirm-button-green" href="<?php echo site_url() . '/bewerk-project?project=' .  $post->ID ?>">Bewerk project</a>
+													<a class="confirm-button-green" href="<?php echo site_url() . '/verwijder-project?project=' .  $post->ID ?>">Verwijder project</a>
+												</section>
 											<?php
 										}	
 									}

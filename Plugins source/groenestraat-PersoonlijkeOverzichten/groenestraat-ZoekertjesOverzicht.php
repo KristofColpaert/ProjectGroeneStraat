@@ -39,6 +39,17 @@
 
 function prowpt_persoonlijkeZoekertjesOverzicht()
 {
+	?>
+	<script>
+        $(".contentwrapper").addClass("container");
+        $(".container").removeClass("contentwrapper");
+        $("#main").unwrap();
+        $(".container").unwrap();
+        $(".title").remove();
+        $(".container").append('<section class="sub-menu"><ul><li><a onClick="history.go(-1)">Terug</a></li></ul><section class="options"><form action="<?php $_SERVER['PHP_SELF']; ?>" method="GET"><input type="text" name="zoekveld" class="textbox" placeholder="Zoeken op zoekertje"><input type="submit" class="form-button" value="zoeken" name="zoeken"></form></section>');
+    </script>
+    <?php
+
 	global $post;
 
 	$zoekertjes = array();
@@ -61,20 +72,18 @@ function prowpt_persoonlijkeZoekertjesOverzicht()
 		if ($the_query->have_posts()) {
 				while ($the_query->have_posts() ) {
 						$the_query->the_post();	
-
-						?>
-							<h2><?php echo get_the_title(); ?></h2>
-						<?php
 						$adPrice = get_post_meta($post->ID, "_adPrice")[0];
 						$adLocation = get_post_meta($post->ID, "_adLocation")[0];
 
 						if(!empty($adPrice) && !empty($adLocation))
 						{
 							?>
-							<strong>Prijs: </strong><p><?php echo $adPrice; ?></p>
-							<strong>Locatie: </strong><p><?php echo $adLocation; ?></p>
-							<strong>Omschrijving: </strong><p><?php echo get_the_excerpt(); ?></p>
-							<a href="<?php echo site_url().'/bewerk-zoekertje?zoekertje='. $post->ID; ?>">Bewerk zoekertje</a>
+								<section class="list-item" style="margin-top:3%;margin-bottom:1.5%">
+									<h1><?php echo get_the_title(); ?></h1>
+									<p><?php echo the_content(); ?></p><br/><br/>
+									<a class="confirm-button-green" href="<?php echo site_url().'/bewerk-zoekertje?zoekertje='. $post->ID; ?>">Bewerk zoekertje</a>
+									<a class="confirm-button-green" href="<?php echo site_url().'/verwijder-zoekertje?zoekertje='. $post->ID; ?>">Verwijder zoekertje</a>
+								</section>
 							<?php
 						}
 
