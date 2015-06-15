@@ -25,7 +25,10 @@
         <nav>
            	<img src="<?php bloginfo('template_directory'); ?>/img/logo.png" class="logo" width="400" height="65" alt="" title="" />
             <section class="mobile-menu" style="display:none">
-                <?php wp_nav_menu(array('Main menu' => 'header-menu')); ?>              
+                <?php wp_nav_menu(array('Main menu' => 'header-menu')); ?>
+                <script>
+             		$('#menu-main-menu').prepend('<li class="basic-menu-item normalize-text"><a href="<?php echo get_site_url(); ?>">Home</a></li>');
+                </script>           
                 <?php 
                   if ( is_user_logged_in() ) 
                   {
@@ -106,6 +109,7 @@
               var menu = document.getElementsByClassName('mobile-menu')[0];
               var logo = document.getElementsByClassName('logo')[0];
               var a = document.getElementsByClassName('a')[0];
+              logo.setAttribute('style', 'cursor:pointer');
 
               function posMenu()
               {
