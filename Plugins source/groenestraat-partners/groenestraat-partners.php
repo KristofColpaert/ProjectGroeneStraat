@@ -131,7 +131,7 @@
 				<h3 class="hndle ui-sortable-handle">Bedrijfsnaam: </h3>
 					<p class="about-description"><?php echo $result["Bedrijfsnaam"]; ?></p>
 				<h3 class="hndle ui-sortable-handle">URL Bedrijf: </h3>
-					<a href="<?php echo $result["URL"]; ?>"><?php echo $result["URL"]; ?></a>
+					<a href="<?php echo $result["URL"]; ?>" target="_blank"><?php echo $result["URL"]; ?></a>
 				<br />
 				<img src="<?php echo $result["URLImage"]; ?>" alt="Logo" title="Logo"/><br />
 				<input type="submit" name="Verwijderen" value="Verwijderen" class="button button-primary button-large"/>
