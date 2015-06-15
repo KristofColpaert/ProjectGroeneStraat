@@ -210,7 +210,7 @@
                 $adPrice = $meta['_adPrice'][0];
         ?>
             <section class="zoekertje-item">
-                <h3><?php the_title(); ?></h3>
+                <h3><?php the_title(); ?></h3><br/><br/>
                 <p><?php echo excerpt(20); ?></p>
                 <div>
                     <p>Locatie: <?php echo $adLocation; ?></p>

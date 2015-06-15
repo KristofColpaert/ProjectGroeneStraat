@@ -25,7 +25,7 @@ h1
     font-size:3.8em;
     text-transform: uppercase;
     font-weight: lighter;
-    line-height: 2em;
+    line-height: 1.3em;
 }
 
 h2
@@ -33,7 +33,7 @@ h2
     font-size:2.4em;
     text-transform: uppercase;
     font-weight: lighter;
-    line-height: 2em;
+    line-height: 1.em;
 }
 
 h3
@@ -327,8 +327,13 @@ img
     bottom: 0;
     padding:0 2%;
     width: 61%;
-    height: 15%;
+    height: 10%;
     background: url("../img/blackfilter.png") repeat;
+}
+
+.artikel-side h1
+{
+    margin:1%;
 }
 
 /* PROJECTS */
