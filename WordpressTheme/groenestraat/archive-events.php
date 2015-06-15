@@ -126,6 +126,7 @@ function getMonth($var)
 				</section>
 				<section class="event-content">
 					<h1><?php the_title(); ?></h1>
+					<p><strong>Organisator: </strong><?php echo the_author_meta('first_name'); ?> <?php echo the_author_meta('last_name'); ?></p>
 					<p><strong>Tijdstip: </strong><?php echo $eventTime . " - " . $eventEndTime; ?></p>
 					<p><strong>Location: </strong><?php echo $eventLocation; ?></p>
 					<p><strong>Meer info: </strong><?php echo excerpt(50); ?></p>

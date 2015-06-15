@@ -91,7 +91,24 @@ get_header();
         ?>
             <section class="list-item">
                 <h1><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h1>
-                <p><?php the_content(); ?></p>
+                <p>
+                    Auteur: <a style="color:black;" class="author-name" href="<?php echo home_url(); ?>/profiel/?userid=<?php echo the_author_meta('ID'); ?>"><?php echo the_author_meta('first_name'); ?> <?php echo the_author_meta('last_name'); ?></a> |
+                    Gebubliceerd op: <?php echo get_the_date(); ?> | 
+                    Categorieën: 
+                    <?php 
+                        $categories =  get_the_category();
+
+                        foreach($categories as $category)
+                        {
+                            ?>
+                                <a style="color:black;" class="author-name" href="<?php echo home_url(); ?>/artikels?categorie=<?php echo $category->term_id; ?>"><?php echo $category->name; ?></a> 
+                            <?php
+                        } 
+                    ?>
+                </p>
+                <br />
+                <p><?php the_excerpt(); ?></p>
+                <a class="view-item" href="<?php echo get_permalink($post->ID); ?>">Lees meer</a>
             </section>
         <?php
 

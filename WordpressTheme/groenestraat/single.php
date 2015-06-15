@@ -11,12 +11,40 @@
 
 	while(have_posts()) : the_post();
 		?>
+			<?php if(has_post_thumbnail($post->ID)) { ?>
+				<div class="center"><?php echo get_the_post_thumbnail(); ?></div>
+			<?php } ?>
 			<h1><?php the_title(); ?></h1><br/>
+			<p>
+				Auteur: <a style="color:black;" class="author-name" href="<?php echo home_url(); ?>/profiel/?userid=<?php echo the_author_meta('ID'); ?>"><?php echo the_author_meta('first_name'); ?> <?php echo the_author_meta('last_name'); ?></a> |
+				Gebubliceerd op: <?php echo get_the_date(); ?> | 
+				Categorieën: 
+				<?php 
+					$categories =  get_the_category();
+
+					foreach($categories as $category)
+					{
+						?>
+							<a style="color:black;" class="author-name" href="<?php echo home_url(); ?>/artikels?categorie=<?php echo $category->term_id; ?>"><?php echo $category->name; ?></a> 
+						<?php
+					} 
+				?>
+			</p>
 			<p><br/><?php echo the_content(); ?></p>
 			<br/><br/><br/>
-			<?php if(has_post_thumbnail($post->ID)) { ?>
-				<?php echo get_the_post_thumbnail(); ?>
-			<?php } ?>
+			<p>
+				Tags: 
+				<?php 
+					$tags = get_the_tags();
+					if($tags)
+					{
+						foreach($tags as $tag)
+						{
+							echo $tag->name . ' ';
+						}
+					}
+				?>
+			</p>
 			<br/><br/><br/>
 			<?php comments_template(); ?>
 			<?php endwhile; ?>

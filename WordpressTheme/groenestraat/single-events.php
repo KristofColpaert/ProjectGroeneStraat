@@ -32,6 +32,8 @@
 		$meta = get_post_meta($post->ID);
 		$eventTime = $meta['_eventTime'][0];
 		$eventEndTime = $meta['_eventEndTime'][0];
+		$eventStartHour = $meta['_eventStartHour'][0];
+		$eventEndHour = $meta['_eventEndHour'][0];
 		$eventLocation = $meta['_eventLocation'][0];
 		$eventID = $post->ID;
 
@@ -56,12 +58,15 @@
 		<?php } ?>
             <div class="eventwrapper normalize-text">
 		<h1><?php the_title(); ?></h1><br/>
+				<p style="color:white;">Organisator: <a href="<?php echo home_url(); ?>/profiel/?userid=<?php echo the_author_meta('ID'); ?>"><?php echo the_author_meta('first_name'); ?> <?php echo the_author_meta('last_name');?></a></p>
+				<br/><br/>
                 <section class="column-3">
                     <p><img src="<?php echo get_template_directory_uri(); ?>/img/description.png" /><br/><?php echo the_content(); ?></p>
                 </section>
 			
                 <section class="column-3">
                     <p><img src="<?php echo get_template_directory_uri(); ?>/img/time.png" /><br/><?php echo $eventTime . " - " . $eventEndTime; ?></p>
+                    <p><?php echo $eventStartHour; ?> - <?php echo $eventEndHour; ?></p>
 	
                 </section >
                 <section class="column-3">

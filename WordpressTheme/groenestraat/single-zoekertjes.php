@@ -75,6 +75,9 @@
            
             <a class="edit-button" href="<?php echo get_site_url();?>/bewerk-zoekertje?zoekertje=<?php echo $post->ID ?>">Bewerken</a><?php } ?>
 			<h1><?php the_title(); ?></h1><br/>
+
+			<p style="color:white;">Aanbieder: <a href="<?php echo home_url(); ?>/profiel/?userid=<?php echo the_author_meta('ID'); ?>"><?php echo the_author_meta('first_name'); ?> <?php echo the_author_meta('last_name');?></a></p>
+
             <section class="stack-3">
                 <p><img src="<?php echo get_template_directory_uri();?>/img/description.png"/><br/><?php echo the_content(); ?></p><br/><p class="green-text">
                 <?php 

@@ -3,7 +3,7 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>Groene Straat</title>
+    <title><?php wp_title('&laquo;', true, 'right'); ?> <?php bloginfo('name'); ?></title>
     <link rel="icon" href="<?php bloginfo('template_directory'); ?>/img/favicon.ico" type="image/x-icon" />
     <?php wp_head(); ?>
     <script>
@@ -25,10 +25,7 @@
         <nav>
            	<img src="<?php bloginfo('template_directory'); ?>/img/logo.png" class="logo" width="400" height="65" alt="" title="" />
             <section class="mobile-menu" style="display:none">
-                <?php wp_nav_menu(array('Main menu' => 'header-menu')); ?>
-                <script>
-             		$('#menu-main-menu').prepend('<li class="basic-menu-item normalize-text"><a href="<?php echo get_site_url(); ?>">Home</a></li>');
-                </script>           
+                <?php wp_nav_menu(array('Main menu' => 'header-menu')); ?>              
                 <?php 
                   if ( is_user_logged_in() ) 
                   {
@@ -109,7 +106,6 @@
               var menu = document.getElementsByClassName('mobile-menu')[0];
               var logo = document.getElementsByClassName('logo')[0];
               var a = document.getElementsByClassName('a')[0];
-              logo.setAttribute('style', 'cursor:pointer');
 
               function posMenu()
               {

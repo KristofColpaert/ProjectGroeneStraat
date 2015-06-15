@@ -66,9 +66,10 @@
 		<a href="<?php the_permalink(); ?>">
 			<section class="list-item">
 				<h1><?php the_title(); ?></h1>
-				<p><strong>Description: </strong><?php the_content(); ?></p>
+				<p><strong>Aanbieder: </strong><?php echo the_author_meta('first_name'); ?> <?php echo the_author_meta('last_name'); ?></p>
+				<p><strong>Beschrijving: </strong><?php the_excerpt(); ?></p>
 				<p><strong>Location: </strong><?php echo $adLocation; ?></p>
-				<p><strong>Prijs: </strong><?php echo $adPrice; ?></p>
+				<p><strong>Prijs: </strong><?php echo $adPrice; ?> euro</p>
 			</section>
 		</a>
 

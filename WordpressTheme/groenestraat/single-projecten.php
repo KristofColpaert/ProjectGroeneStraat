@@ -293,10 +293,10 @@
                     <h3>Beschrijving</h3>
                         <?php the_content(); ?>
                 </section>
-                
+                <br/><br/>
                 <section class="form-line">
-        
-                   <
+                    <h3>Auteur</h3>
+                    <p><a style="color:black;" class="author-name" href="<?php echo home_url(); ?>/profiel/?userid=<?php echo the_author_meta('ID'); ?>"><?php echo the_author_meta('first_name'); ?> <?php echo the_author_meta('last_name'); ?></a></p>
                 </section>
             </section>
             
