@@ -311,10 +311,16 @@
 		global $post;
 
 		$keyword = '';
+		$categories = array();
 
 		if(isset($_POST['search']))
 		{
 			$keyword = $_POST['search'];
+		}
+
+		if(isset($_POST['cats']))
+		{
+			$categories = $_POST['cats'];
 		}
 
         $projectartikels_id = get_cat_ID('projectartikels');
@@ -324,8 +330,10 @@
                 'posts_per_page' => 9,
                 'paged' => $_POST['page'],
                 's' => $keyword,
-                'cat' => '-' . $projectartikels_id)
-            );
+                'category__in' => $categories,
+                'category__not_in' => '-' . $projectartikels_id
+        	)
+        );
 
         while($my_query->have_posts()) : $my_query->the_post();
         ?>

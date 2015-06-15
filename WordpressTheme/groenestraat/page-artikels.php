@@ -5,7 +5,6 @@ Template Name: Artikels
 get_header();
  
 ?>
-
     <section class="container">
     <section class="sub-menu">
         <ul>
@@ -14,7 +13,8 @@ get_header();
         </ul>
         <section class="options">
             <form action="<?php $_SERVER['PHP_SELF']; ?>" method="GET">
-                <input type="text" name="zoekveld" class="textbox" placeholder="Zoeken op artikel"><input type="submit" class="form-button" value="zoeken" name="zoeken">
+                <input type="text" name="zoekveld" class="textbox" placeholder="Zoeken op artikel">
+                <input type="submit" class="form-button" value="zoeken" name="zoeken">
             </form>
         </section>
     </section>
@@ -23,6 +23,7 @@ get_header();
 
     global $post;
     $keyword = '';
+    $categories = array(); 
 
         if(isset($_GET['zoeken']))
         {
@@ -34,12 +35,34 @@ get_header();
             {
                 $keyword = 'phrase';
             }
+
+            if(isset($_GET['categorie']))
+            {
+                $categories = $_GET['categorie'];
+            }
         }
 
         if($keyword != '')
         {
+            if(count($categories) > 0)
+            {
+                ?>
+                    <section class="main" data="artikels;1;<?php echo $keyword;?>;<?php for($i = 0; $i < (count($categories)); $i++) { if($i == count($categories) - 1) echo $categories[$i]; else echo $categories[$i] . ';'; }?>">
+                <?php
+            }
+
+            else
+            {
+                ?>
+                    <section class="main" data="artikels;1;<?php echo $keyword; ?>">
+                <?php
+            }
+        }
+
+        else if(count($categories) > 0)
+        {
             ?>
-                <section class="main" data="artikels;1;<?php echo $keyword; ?>">
+                <section class="main" data="artikels;1;none;<?php for($i = 0; $i < (count($categories)); $i++) { if($i == count($categories) - 1) echo $categories[$i]; else echo $categories[$i] . ';'; }?>">
             <?php
         }
 
@@ -50,8 +73,8 @@ get_header();
             <?php
         }
 
-        $orig_query = $my_query;
         $projectartikels_id = get_cat_ID('projectartikels');
+        $orig_query = $my_query;
         $paged = (get_query_var('paged')) ? get_query_var('paged') : 1;
         $my_query = new WP_Query(
             array(
@@ -59,8 +82,10 @@ get_header();
                 'posts_per_page' => 9,
                 's' => $keyword,
                 'paged' => $paged,
-                'cat' => '-' . $projectartikels_id)
-            );
+                'category__in' => $categories,
+                'category__not_in' => '-' . $projectartikels_id
+            )
+        );
 
         while($my_query->have_posts()) : $my_query->the_post();
         ?>
@@ -89,7 +114,33 @@ get_header();
             <h1>Zoeken</h1>
             <form action="<?php $_SERVER['PHP_SELF']; ?>" method="GET">
                 <p>
-                    <input type="text" name="zoekveld" class="textbox" placeholder="Zoeken op artikel"><input type="submit" class="form-button" value="zoeken" name="zoeken">
+                    <input type="text" name="zoekveld" class="textbox" placeholder="Zoeken op artikel">
+                    <select class="textbox combobox" id="articleCategories" name="categorie[]" multiple size="5">
+                        <?php
+                            $categories = get_categories(
+                                array(
+                                    'type' => 'post',
+                                    'orderby' => 'name',
+                                    'order' => 'ASC',
+                                    'hide_empty' => 0
+                                )
+                            );
+
+                            if(!empty($categories))
+                            {
+                                foreach($categories as $category)
+                                {
+                                    if($category->name != 'Projectartikels' && $category->name != 'Projectzoekertjes' && $category->name != 'Projectevents')
+                                    {
+                                        ?>
+                                            <option value="<?php echo $category->term_id; ?>"><?php echo $category->name; ?></option>
+                                        <?php
+                                    }
+                                }
+                            }
+                        ?>
+                    </select>
+                    <input type="submit" class="form-button" value="zoeken" name="zoeken">
                 </p>
             </form>
         </section>

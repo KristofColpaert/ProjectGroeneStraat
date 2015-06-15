@@ -651,6 +651,7 @@ $(document).ready(function()
 		var tempPage = parseInt(res[1]) + 1;
 		var tempProject = '';
 		var tempSearch = '';
+		var tempCats = [];
 
 		if(tempPageType == 'singleProjecten')
 		{
@@ -668,6 +669,21 @@ $(document).ready(function()
 			tempSearch = res[2];
 			containerElement.attr('data', tempPageType + ';' + tempPage + ';' + tempSearch);
 		}
+
+		if(tempPageType == 'artikels' && res.length > 3)
+		{
+			tempSearch = res[2];
+
+			for(var i = 3; i < (res.length); i++)
+			{
+				tempCats.push(res[i]);
+			}
+		}
+
+		if(tempSearch == 'none')
+		{
+			tempSearch = '';
+		}
 		
 		jQuery.ajax(
 		{
@@ -679,10 +695,12 @@ $(document).ready(function()
 		   		pageType : tempPageType,
 		   		page : tempPage,
 		   		projectId : tempProject,
-		   		search : tempSearch
+		   		search : tempSearch,
+		   		cats : tempCats
 		   	},
 		   	success : function(response)
 		   	{
+		   		console.log(response);
 		   		$('.loadMorePostsWarning').before(response);
 		   		checkNumberOfPosts(containerElement);
 		   	}
