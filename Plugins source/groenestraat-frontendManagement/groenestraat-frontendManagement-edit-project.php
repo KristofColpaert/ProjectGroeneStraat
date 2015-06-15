@@ -59,7 +59,10 @@
 						<input class="textbox" id="projectZipcode" name="projectZipcode" type="text" value="<?php echo $projectZipcode; ?>"/>
 
 						<label for="projectFeaturedImage" class="normalize-text">Upload Hoofdigsafbeelding</label>
-						<input id="projectFeaturedImage" name="projectFeaturedImage" type="file" accept="image/x-png, image/gif, image/jpeg" />
+						<div style="height:0px;overflow:hidden">
+                        <input id="projectFeaturedImage" class="image-upload" name="projectFeaturedImage" type="file" accept="image/x-png, image/gif, image/jpeg" />
+                    </div>
+                  	<button type="button" class="confirm-button" id="upload" onclick="chooseFile();">Kies afbeelding</button>
 
 
 						<input id="projectId" name="projectId" type="hidden" value="<?php echo $project->ID; ?>" />

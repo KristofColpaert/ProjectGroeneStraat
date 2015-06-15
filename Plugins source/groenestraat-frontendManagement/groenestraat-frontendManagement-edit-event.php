@@ -102,27 +102,39 @@
 						</select>
 						<br />
                         <label  for="eventTime" class="normalize-text left labeldate">Van</label><label  for="eventEndTime" class="normalize-text right labeldate">Tot</label>
-                        <section class="date textbox left">
-                            <input id="eventTime" name="eventTime" readonly class="normalize-text" type="text" value="<?php echo $eventTime; ?>" />                   
-                        </section>
-                        <section class="date textbox right">
-                            <input id="eventEndTime" name="eventEndTime" readonly type="text" class="normalize-text" value="<?php echo $eventEndTime; ?>" />
-                        </section>
+                       
+                        
 						<br />
+                        
+						
+                        
+                        <section class="left">
+                            
+                             <section id="startDate" class="date textbox">
+                                <input id="eventTime" name="eventTime" readonly class="normalize-text" type="text" value="<?php echo $eventTime; ?>" />                   
+                            </section>
+                           
+                                <input id="eventStartHour" class="textbox" name="eventStartHour" type="text" class="normalize-text" placeholder="Aanvangstijd (HH:MM)" value="<?php echo $eventStartHour; ?>" />
+                        </section>
+                        <section class="right">
+                            <section id="endDate" class="date textbox">
+                                <input id="eventEndTime" name="eventEndTime" readonly type="text" class="normalize-text" value="<?php echo $eventEndTime; ?>" />
+                            </section>
+                             
+                                <input id="eventEndHour" class="textbox" name="eventEndHour" type="text" placeholder="Eindtijd (HH:MM)" value="<?php echo $eventEndHour; ?>" />
+                           
+                        </section>
 
-						<section class="date textbox left">
-	                        <input id="eventStartHour" name="eventStartHour" type="text" class="normalize-text" placeholder="Aanvangstijd (HH:MM)" value="<?php echo $eventStartHour; ?>" />
-	                    </section>
+	                   
 
-	                    <section class="date textbox right">
-	                    	<input id="eventEndHour" name="eventEndHour" type="text" placeholder="Eindtijd (HH:MM)" value="<?php echo $eventEndHour; ?>" />
-	                    </section>
-
-						<label for="eventLocation" class="normalize-text">Locatie</label>
+						
 						<input class="textbox" id="eventLocation" name="eventLocation" type="text" value="<?php echo $eventLocation; ?>" />
 						
 						<label for="eventFeaturedImage" class="normalize-text">Afbeelding</label>
-                  		<input id="eventFeaturedImage" name="eventFeaturedImage" type="file" accept="image/x-png, image/gif, image/jpeg" />
+                  		<div style="height:0px;overflow:hidden">
+                            <input id="eventFeaturedImage" class="image-upload" name="eventFeaturedImage" type="file" accept="image/x-png, image/gif, image/jpeg" />
+                    </div>
+                  	<button type="button" class="confirm-button" id="upload" onclick="chooseFile();">Kies afbeelding</button>
 
 						<input id="eventId" name="eventId" type="hidden" value="<?php echo $event->ID; ?>" />
 
@@ -162,6 +174,23 @@
 
 						var loc = new LiveValidation('eventLocation', {validMessage:" "});
 						loc.add(Validate.Presence,{failureMessage:nietLeeg});
+                        
+                         window.onload = fixSpan();
+                    
+                    function fixSpan(){
+                            document.getElementById('startDate').addEventListener('DOMNodeInserted', function(ev){
+                            var span = $('#startDate span');
+                                if(span != null){
+                                    span.insertAfter("#startDate");
+                                }
+                            });
+                            document.getElementById('endDate').addEventListener('DOMNodeInserted', function(ev){
+                            var span = $('#endDate span');
+                                if(span != null){
+                                    span.insertAfter("#endDate");
+                                }
+                            });
+                    }
 					</script>
 				<?php
 			}

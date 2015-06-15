@@ -149,7 +149,10 @@
 						</select>
 
 						<label for="articleFeaturedImage" class="normalize-text">Afbeelding</label>
-	                  	<input id="articleFeaturedImage" name="articleFeaturedImage" type="file" accept="image/x-png, image/gif, image/jpeg" />
+	                  	<div style="height:0px;overflow:hidden">
+                        <input id="articleFeaturedImage" class="image-upload" name="articleFeaturedImage" type="file" accept="image/x-png, image/gif, image/jpeg" />
+                    </div>
+                  	<button type="button" class="confirm-button" id="upload" onclick="chooseFile();">Kies afbeelding</button>
 						
 						<input id="articleId" name="articleId" type="hidden" value="<?php echo $article->ID; ?>" />
 

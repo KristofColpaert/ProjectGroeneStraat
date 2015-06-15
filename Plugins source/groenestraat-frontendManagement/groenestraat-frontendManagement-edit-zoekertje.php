@@ -87,7 +87,10 @@
 						<input class="textbox" id="adLocation" name="adLocation" type="text" value="<?php echo $adLocation; ?>" />
 						
 						<label for="adFeaturedImage" class="normalize-text">Afbeelding</label>
-                  		<input id="adFeaturedImage" name="adFeaturedImage" type="file" accept="image/x-png, image/gif, image/jpeg" />
+                  		<div style="height:0px;overflow:hidden">
+                        <input id="adFeaturedImage" class="image-upload" name="adFeaturedImage" type="file" accept="image/x-png, image/gif, image/jpeg" />
+                    </div>
+                  	<button type="button" class="confirm-button" id="upload" onclick="chooseFile();">Kies afbeelding</button>
 						
 						<input id="zoekertjeId" name="zoekertjeId" type="hidden" value="<?php echo $zoekertje->ID; ?>" />
 

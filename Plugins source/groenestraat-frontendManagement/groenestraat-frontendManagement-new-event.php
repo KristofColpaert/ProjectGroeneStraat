@@ -112,25 +112,30 @@
 						?>
 					</select>				
 
-					<section class="date textbox left">
-                        <input id="eventTime" readonly name="eventTime" type="text" class="normalize-text" placeholder="Datum start"/>
-                    </section>
-					<section class="date textbox right">
-                    	<input class="normalize-text" id="eventEndTime" readonly name="eventEndTime" type="text" placeholder="Datum einde" />             
-                    </section>
-
-					<section class="date textbox left">
-                        <input id="eventStartHour" name="eventStartHour" type="text" class="normalize-text" placeholder="Aanvangstijd (HH:MM)"/>
-                    </section>
-
-                    <section class="date textbox right">
-                    	<input id="eventEndHour" name="eventEndHour" type="text" placeholder="Eindtijd (HH:MM)" />
-                    </section>
+					<section class="left">
+                            
+                             <section id="startDate" class="date textbox">
+                                <input id="eventTime" name="eventTime" readonly class="normalize-text" type="text" value="" />                   
+                            </section>
+                           
+                                <input id="eventStartHour" class="textbox" name="eventStartHour" type="text" class="normalize-text" placeholder="Aanvangstijd (HH:MM)" value="" />
+                        </section>
+                        <section class="right">
+                            <section id="endDate" class="date textbox">
+                                <input id="eventEndTime" name="eventEndTime" readonly type="text" class="normalize-text" value="" />
+                            </section>
+                             
+                                <input id="eventEndHour" class="textbox" name="eventEndHour" type="text" placeholder="Eindtijd (HH:MM)" value="" />
+                           
+                        </section>
 					
 					<input class="textbox normalize-text" id="eventLocation" name="eventLocation" type="text" placeholder="Locatie" />
 
 					<label for="eventFeaturedImage" class="normalize-text">Afbeelding</label>
-                  	<input id="eventFeaturedImage" name="eventFeaturedImage" type="file" accept="image/x-png, image/gif, image/jpeg" />
+                  	<div style="height:0px;overflow:hidden">
+                        <input id="eventFeaturedImage" class="image-upload" name="eventFeaturedImage" type="file" accept="image/x-png, image/gif, image/jpeg" />
+                    </div>
+                  	<button type="button" class="confirm-button" id="upload" onclick="chooseFile();">Kies afbeelding</button>
 
 					<input id="eventPublish" name="eventPublish" class="form-button"  type="submit" value="Publiceer" />
 				</form>
@@ -140,10 +145,10 @@
 					var title = new LiveValidation('eventTitle', {validMessage:" "});
 					title.add(Validate.Presence,{failureMessage:nietLeeg});
 
-					var eventTime = new LiveValidation('eventTime', {validMessage:" "});
+					var eventTime = new LiveValidation('eventTime', {validMessage:" ", onlyOnSubmit: true});
 					eventTime.add(Validate.Presence,{failureMessage:nietLeeg});
 
-					var eventEndTime = new LiveValidation('eventEndTime', {validMessage:" "});
+					var eventEndTime = new LiveValidation('eventEndTime', {validMessage:" ", onlyOnSubmit: true});
 					eventEndTime.add(Validate.Presence,{failureMessage:nietLeeg});
 
 					var loc = new LiveValidation('eventLocation', {validMessage:" "});
@@ -171,6 +176,26 @@
 
 					var featuredImage = new LiveValidation('eventFeaturedImage', {validMessage:" "});
 					featuredImage.add(Validate.Presence,{failureMessage:nietLeeg});
+                    
+                    /* fix */
+                    
+                    window.onload = fixSpan();
+                    
+                    function fixSpan(){
+                            document.getElementById('startDate').addEventListener('DOMNodeInserted', function(ev){
+                            var span = $('#startDate span');
+                                if(span != null){
+                                    span.insertAfter("#startDate");
+                                }
+                            });
+                            document.getElementById('endDate').addEventListener('DOMNodeInserted', function(ev){
+                            var span = $('#endDate span');
+                                if(span != null){
+                                    span.insertAfter("#endDate");
+                                }
+                            });
+                    }
+                   
          		</script>
 			<?php
 		}
