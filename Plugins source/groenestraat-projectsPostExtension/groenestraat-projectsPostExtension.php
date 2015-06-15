@@ -67,6 +67,7 @@
 
 	function parentproject_metaboxes_save($post_id, $post)
 	{
+		echo 'sdkldslkdslmflmkfmdkmdskdmfskmdfmkldfsdkmlklmdfdklmfdfklmfmkldflmkdflmdffdklmfdkmldfmdflmdflmkdf';
 		if(!isset( $_POST['eventmeta_noncename'] ) || !wp_verify_nonce($_POST['eventmeta_noncename'], plugin_basename(__FILE__)))
 		{
 			return $post->ID;
@@ -84,12 +85,27 @@
 			$category = get_category_by_slug('projectartikels'); 
   			$categoryId = $category->term_id;
 
-  			wp_set_post_categories($post->ID, array($categoryId), false);
+  			wp_set_post_categories($post->ID, array($categoryId), true);
 		}
 
 		else 
 		{
 			wp_set_post_categories($post->ID, null, false);
+
+			$category = get_category_by_slug('projectartikels'); 
+  			$categoryId = $category->term_id;
+			if(isset($_POST['post_category']))
+			{
+				$cats = array();
+				foreach($_POST['post_category'] as $value)
+				{
+					if($value != $categoryId)
+					{
+						$cats[] = $value;
+					}
+				}
+				wp_set_post_categories($post->ID, $cats, false);
+			}
 		}
 
 		foreach($events_meta as $key => $value)
