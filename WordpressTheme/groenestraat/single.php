@@ -64,11 +64,6 @@
 		}
 	?>
 	<script>
-
-		//$('.vcard').prepend('<p style="float:right;">' + '#datum#' + '<p>');
-		$('.comment-reply-link').removeClass('comment-reply-link').addClass('form-button');
-		$('.form-button').css({'float:':'left', 'width':'150px', 'margin':'15px 0 0 0', 'font-size' : '1.5em', 'text-align': 'center'});
-
 		var form = document.getElementById('commentform');
 		form.getElementsByTagName('p')[0].style.display = 'none';
 

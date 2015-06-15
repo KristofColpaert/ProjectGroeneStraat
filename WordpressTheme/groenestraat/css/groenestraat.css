@@ -896,7 +896,7 @@ footer
     display: block;
     min-height: 275px;
 }
-#comments span,.comment-author .vcard  small, .comment-author .vcard small, .says, .comment-meta .comment-edit-link, .comment-meta
+#comments span,.comment-author .vcard  small, .comment-author .vcard small, .says, .comment-meta .comment-edit-link, .comment-meta, .reply
 {
     display: none;
 }
@@ -938,5 +938,5 @@ ol>li
 {
     width:96%;
     padding:2%;
-    min-height: 100px;
+    min-height: 50px;
 }
