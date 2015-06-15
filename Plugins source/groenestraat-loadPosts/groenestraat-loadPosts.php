@@ -98,6 +98,11 @@
 			{
 				load_zoekertjes_posts();
 			}
+
+			else if($pageType == 'profiel')
+			{
+				load_profiel_posts();
+			}
 		}
 		echo 'no';
 		die();
@@ -374,5 +379,85 @@
 
 		endwhile;
 		die();
+	}
+
+	function load_profiel_posts()
+	{
+		global $post;
+		$the_query = new WP_Query(
+			array(
+            	'posts_per_page' => 9,
+				'author' => $userid,
+                'paged' => $_POST['page'],
+				'post_type' => array('events', 'post', 'zoekertjes'),
+				'order' => 'ASC',
+				'orderby' => 'date'
+			)
+		);
+
+		if ($the_query->have_posts()) {
+			while ($the_query->have_posts()) : $the_query->the_post();
+				switch($post->post_type)
+                {
+                    case "events":{
+                        $meta = get_post_meta($post->ID);
+                        $eventTime = $meta['_eventTime'][0];
+                        $eventLocation = $meta['_eventLocation'][0];
+                        $eventEndTime = $meta['_eventEndTime'][0];
+
+                        $day = explode("/", $eventTime)[1];
+                        $monthNumber = explode("/", $eventTime)[0];
+                        $month = getProfileMonth($monthNumber);
+        		                
+                        ?>
+                        	<section class="list-item normalize-text <?php echo $post->post_type;?>">
+                            	<section class="event-calendar">
+                                	<h1><?php echo $day; ?></h1>
+                                    <h2><?php echo $month; ?></h2>
+                                </section>
+                            	<section class="event-content">
+		                            <h1><?php the_title(); ?></h1>
+		                            <p><strong>Tijdstip: </strong><?php echo $eventTime . " - " . $eventEndTime; ?></p>
+		                            <p><strong>Locatie: </strong><?php echo $eventLocation; ?></p>
+                            		<p><strong>Meer info: </strong><?php echo excerpt(50); ?></p>
+                                </section>
+                                <a class="view-item" href="<?php the_permalink(); ?>">Bekijk event</a>
+                            </section>
+                        <?php
+                    }
+                    break;
+
+                    case "zoekertjes":{
+                    	$meta = get_post_meta($post->ID);
+                        $adLocation = $meta['_adLocation'][0];
+                        $adPrice = $meta['_adPrice'][0];
+                        ?>
+                        	<section class="list-item normalize-text <?php echo $post->post_type;?>">
+                            	<h1><?php the_title(); ?></h1>
+                                <p><strong>Beschrijving: </strong><?php the_content(); ?></p>
+                                <p><strong>Locatie: </strong><?php echo $adLocation; ?></p>
+                                <p><strong>Prijs: </strong><?php echo $adPrice; ?></p>
+                                <a class="view-item" href="<?php the_permalink(); ?>">Bekijk zoekertje</a>
+                            </section>
+        		        <?php
+                    }
+                    break;
+
+                    case "post":{
+                    	?>
+                        	<section class="list-item normalize-text <?php echo $post->post_type; ?>">
+        						<h1><?php echo the_title();?></h1>
+                                <?php echo the_excerpt(); ?>
+                    			<a class="view-item" href="<?php the_permalink(); ?>">Lees meer</a>
+                    		</section>
+                    	<?php
+              	    }
+                	break;
+
+                    default: break;
+                }        
+			endwhile;
+			die();
+		} 
 	}
 ?>

@@ -118,15 +118,16 @@
 				global $post;
 				$the_query = new WP_Query(
 				array(
-                    'posts_per_page' => -1,
+                    'posts_per_page' => 9,
 					'author' => $userid,
+                    'paged' => 1,
 					'post_type' => array('events', 'post', 'zoekertjes'),
 					'order' => 'ASC',
 					'orderby' => 'date')
 				);
                 ?> 
                     </section>
-                    <section class="main">
+                    <section class="main" data="profiel;1">
                 <?php
 				if ($the_query->have_posts()) {
 					while ($the_query->have_posts()) : $the_query->the_post();

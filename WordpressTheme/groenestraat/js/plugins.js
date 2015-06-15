@@ -560,73 +560,13 @@ $(document).ready(function()
 				scrolled = false;
 			}
 		}
-
-		/*if(pageType == 'projecten')
-		{
-			if(scrollPosition >= (lastPositionTop))
-			{
-				if(scrolled == false)
-				{
-					loadPosts(containerElement);
-					scrolled = true;
-				}
-			}
-
-			else if(scrollPosition <= (lastPositionTop))
-			{
-				if(scrolled == true)
-				{
-					scrolled = false;
-				}
-			}
-		}
-
-		else if(pageType == 'singleProjecten' || pageType == 'artikels')
-		{
-			if(scrollPosition >= (lastPositionTop - 1500))
-			{
-				if(scrolled == false)
-				{
-					loadPosts(containerElement);
-					scrolled = true;
-				}
-			}
-
-			else if(scrollPosition <= (lastPositionTop - 1500))
-			{
-				if(scrolled == true)
-				{
-					scrolled = false;
-				}
-			}
-		}
-
-		else if(pageType == 'events' || pageType == 'zoekertjes')
-		{
-			if(scrollPosition >= (lastPositionTop + 2000))
-			{
-				if(scrolled == false)
-				{
-					loadPosts(containerElement);
-					scrolled = true;
-				}
-			}
-
-			else if(scrollPosition <= (lastPositionTop + 2000))
-			{
-				if(scrolled == true)
-				{
-					scrolled = false;
-				}
-			}
-		}*/
 	});
 
 	function checkNumberOfPosts(containerElement, pageType)
 	{
 		if(pageType == 'singleProjecten')
 		{
-			if(((containerElement.children('section:not(.loadMorePostsWarning)').length) % 9) == 0 && containerElement.children('section:not(.loadMorePostsWarning)').length != 0)
+			if(((containerElement.children('section:not(loadMorePostsWarning)').length) % 9) == 0 && containerElement.children('section:not(loadMorePostsWarning)').length != 0)
 			{
 				if(moreElements == false)
 				{
@@ -684,6 +624,18 @@ $(document).ready(function()
 			}
 		}
 
+		else if(pageType == 'profiel')
+		{
+			if(((containerElement.children('section:not(loadMorePostsWarning)').length) % 9) == 0 && containerElement.children('section:not(loadMorePostsWarning)').length != 0)
+			{
+				if(moreElements == false)
+				{
+					containerElement.append('<section class="loadMorePostsWarning list-item normalize-text post" style="background-color:#FFFFFF;"><h2 class="normalize-text center">Meer posts worden geladen...</h2></section>');
+					moreElements = true;
+				}
+			}
+		}
+
 		else
 		{
 			$('.loadMorePostsWarning').remove();
@@ -711,9 +663,10 @@ $(document).ready(function()
 			containerElement.attr('data', tempPageType + ';' + tempPage);
 		}
 
-		if(tempPageType != 'singleProjecten' && res.length == 3)
+		if(tempPageType != 'singleProjecten' && tempPageType != 'profiel' && res.length == 3)
 		{
 			tempSearch = res[2];
+			containerElement.attr('data', tempPageType + ';' + tempPage + ';' + tempSearch);
 		}
 		
 		jQuery.ajax(
