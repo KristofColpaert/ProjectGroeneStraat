@@ -296,11 +296,7 @@ textarea.LV_invalid_field:active {
     width: 100%;
 }
 /* datepicker*/
-.date{
-    width: 98%;
-    background-color: #FFF;
-    padding-right: 1% !important;
-}
+
 .date input{
     padding-top: 2.5px;
     width: 70%;
@@ -845,3 +841,4 @@ footer{
 .red-text{
     color: #E74C3C !important;
 }
+

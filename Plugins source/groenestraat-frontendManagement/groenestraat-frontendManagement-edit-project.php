@@ -70,6 +70,12 @@
 						<input id="projectEdit" class="form-button" name="projectEdit" type="submit" value="Bewerk" />
 					</form>
 					<script>
+                        $(document).ready(function () {
+                            $("#projectFeaturedImage").on("change", function () {
+                                $("#upload").toggleClass("confirm-button");
+                                 $("#upload").toggleClass("confirm-button-green");
+                            });
+                        });
 						var nietLeeg = "Dit veld is verplicht!";
 
 						var title = new LiveValidation('projectTitle', {validMessage:" "});
@@ -87,6 +93,9 @@
 						zipcode.add(Validate.Presence,{failureMessage:nietLeeg});
 						zipcode.add(Validate.Length,{is:4, wrongLengthMessage: "Een postcode moet 4 cijfers bevatten!"});
 						zipcode.add(Validate.Numericality,{onlyInteger:true, notANumberMessage: "Een postcode moet een getal zijn!"});
+                        
+                        var description = new LiveValidation('projectDescription', {validMessage:" "});
+                        description.add(Validate.Presence,{failureMessage: nietLeeg});
 					</script>
 				<?php
 			}

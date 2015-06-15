@@ -132,7 +132,7 @@
 					<input class="textbox normalize-text" id="eventLocation" name="eventLocation" type="text" placeholder="Locatie" />
 
 					<label for="eventFeaturedImage" class="normalize-text">Afbeelding</label>
-                  	<div style="height:0px;overflow:hidden">
+                  	<div id="file" style="height:0px;overflow:hidden">
                         <input id="eventFeaturedImage" class="image-upload" name="eventFeaturedImage" type="file" accept="image/x-png, image/gif, image/jpeg" />
                     </div>
                   	<button type="button" class="confirm-button" id="upload" onclick="chooseFile();">Kies afbeelding</button>
@@ -140,6 +140,12 @@
 					<input id="eventPublish" name="eventPublish" class="form-button"  type="submit" value="Publiceer" />
 				</form>
          		<script>
+                    $(document).ready(function () {
+                        $("#eventFeaturedImage").on("change", function () {
+                            $("#upload").toggleClass("confirm-button");
+                             $("#upload").toggleClass("confirm-button-green");
+                        });
+                    });
          			var nietLeeg = "Dit veld is verplicht!";
 
 					var title = new LiveValidation('eventTitle', {validMessage:" "});
@@ -177,6 +183,21 @@
 					var featuredImage = new LiveValidation('eventFeaturedImage', {validMessage:" "});
 					featuredImage.add(Validate.Presence,{failureMessage:nietLeeg});
                     
+                    var description = new LiveValidation('eventDescription', {validMessage:" "});
+                    description.add(Validate.Presence,{failureMessage: nietLeeg});
+                    
+                    window.onload = imageValidationFix();
+                    function imageValidationFix(){
+                        id = "file";
+                        document.getElementById(id).addEventListener('DOMNodeInserted', function(ev){
+                            
+                            
+                            var span = $("#"+id+' span');
+                                if(span != null){
+                                    span.insertAfter("#upload");
+                                    $("#upload").css({"margin-right":($(".contentwrapper").width()-$("#upload").outerWidth()-5)+"px"});
+                                }
+                            });
                     /* fix */
                     
                     window.onload = fixSpan();
