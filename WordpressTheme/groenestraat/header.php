@@ -4,7 +4,6 @@
 <head>
     <meta charset="UTF-8">
     <title><?php wp_title('&laquo;', true, 'right'); ?> <?php bloginfo('name'); ?></title>
-    <title>Groene Straat</title>
     <meta name="viewport" content="width=device-width">
     <link rel="icon" href="<?php bloginfo('template_directory'); ?>/img/favicon.ico" type="image/x-icon" />
     <?php wp_head(); ?>
