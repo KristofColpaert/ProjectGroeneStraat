@@ -6,7 +6,7 @@
 	<section class="container">
 		<div id="primary" class="content-area">
 		<main id="main" class="site-main" role="main">
-		<div class="contentwrapper">
+		<div class="contentwrapper normalize-text">
 	<?php
 
 	while(have_posts()) : the_post();
@@ -16,7 +16,7 @@
 			<?php } ?>
 			<h1><?php the_title(); ?></h1><br/>
 			<p>
-				Auteur: <a style="color:black;" class="author-name" href="<?php echo home_url(); ?>/profiel/?userid=<?php echo the_author_meta('ID'); ?>"><?php echo the_author_meta('first_name'); ?> <?php echo the_author_meta('last_name'); ?></a> |
+				Auteur: <a class="author-name" href="<?php echo home_url(); ?>/profiel/?userid=<?php echo the_author_meta('ID'); ?>"><?php echo the_author_meta('first_name'); ?> <?php echo the_author_meta('last_name'); ?></a> |
 				Gebubliceerd op: <?php echo get_the_date(); ?> | 
 				Categorieën: 
 				<?php 
@@ -25,7 +25,7 @@
 					foreach($categories as $category)
 					{
 						?>
-							<a style="color:black;" class="author-name" href="<?php echo home_url(); ?>/artikels?categorie=<?php echo $category->term_id; ?>"><?php echo $category->name; ?></a> 
+							<a class="author-name" href="<?php echo home_url(); ?>/artikels?categorie=<?php echo $category->term_id; ?>"><?php echo $category->name; ?></a> 
 						<?php
 					} 
 				?>
@@ -40,7 +40,7 @@
 					{
 						foreach($tags as $tag)
 						{
-							echo $tag->name . ' ';
+							echo '<b class="tag">'.$tag->name . '</b>';
 						}
 					}
 				?>

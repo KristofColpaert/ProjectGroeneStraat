@@ -6,7 +6,7 @@ get_header();
 		<main id="main" class="site-main" role="main">
 <?php
 while ( have_posts() ) : the_post();
-?><div class="contentwrapper">
+?><div class="contentwrapper normalize-text">
             <h1 class="title"><?php
 the_title();
 ?></h1>

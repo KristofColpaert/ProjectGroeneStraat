@@ -67,7 +67,7 @@
 		}
 	</script>
 
-        <section class="zoekertjewrapper">
+        <section class="zoekertjewrapper normalize-text">
        
 		
 	<?php

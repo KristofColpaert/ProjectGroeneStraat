@@ -20,14 +20,14 @@
 	if($keyword != '')
 	{	
 		?>
-			<section class="container" data="projecten;1;<?php echo $keyword; ?>">
+			<section class="container normalize-text" data="projecten;1;<?php echo $keyword; ?>">
 		<?php
 	}
 
 	else
 	{
 		?>
-			<section class="container" data="projecten;1">
+			<section class="container normalize-text" data="projecten;1">
 		<?php
 	}
 

@@ -51,7 +51,7 @@ function getMonth($var)
 
 <?php get_header(); ?>
 
-	<section class="container">
+	<section class="container normalize-text">
 	<section class="sub-menu">
 		<ul>
 			<li><a href="<?php echo get_site_url(); ?>/nieuw-event">Nieuw event</a></li>

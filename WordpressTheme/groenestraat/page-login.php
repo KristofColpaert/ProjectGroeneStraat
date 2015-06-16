@@ -7,7 +7,7 @@ get_header();
 
 ?>
 <section class="header-image header-image-small"></section>
-<div class="centered-form">
+<div class="centered-form normalize-text">
 <?php
 if (!is_user_logged_in()) { 
    ?>

@@ -9,7 +9,7 @@ get_header();
 <section class="header-image header-image-small"></section>
 
 
-<div class="centered-form">
+<div class="centered-form normalize-text">
     <h3>Registreren</h3>
     <?php
        do_action( 'wordpress_social_login' );

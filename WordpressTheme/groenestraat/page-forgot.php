@@ -6,7 +6,7 @@ get_header();
 if(!is_user_logged_in()){
 ?>
 <section class="header-image header-image-small"></section>
-<section id="forgot" class="centered-form">
+<section id="forgot" class="centered-form normalize-text">
     <h3>Wachtwoord vergeten</h3>
 <form action="<?php echo wp_lostpassword_url(site_url()); ?>" method="post">
     <input class="textbox"  id="user_login" name="user_login" type="text" placeholder="Email"/>
