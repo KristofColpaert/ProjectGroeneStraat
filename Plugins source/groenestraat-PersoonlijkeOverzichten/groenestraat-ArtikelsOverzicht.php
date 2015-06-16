@@ -92,7 +92,7 @@ function prowpt_persoonlijkeArtikelsOverzicht()
 	else
 	{
 		?>
-			<p>U moet zich eerst aanmelden om deze pagina te bekijken. <a class="normalize-text" href="<?php echo home_url(); ?>/login">Aanmelden</a></p>
+			<p class="error-message">U moet zich eerst aanmelden om deze pagina te bekijken. <a class="normalize-text" href="<?php echo home_url(); ?>/login">Aanmelden</a></p>
 		<?php
 	}
 }
