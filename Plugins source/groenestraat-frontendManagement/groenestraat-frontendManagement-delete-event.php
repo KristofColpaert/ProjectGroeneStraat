@@ -18,7 +18,7 @@
 			$current_user = wp_get_current_user();
 			$event = get_post($_GET['event'], OBJECT);
 
-			if($event != null && ($current_user->ID == $event->event_author || current_user_can('manage_options')) && current_user_can('delete_published_events'))
+			if($event != null && ($current_user->ID == $event->post_author || current_user_can('manage_options')) && current_user_can('delete_published_events'))
 			{
 				?>
 					<p class="alert-message normalize-text">Bent u zeker dat u het event <strong><a href="<?php echo $event->guid; ?>"><?php echo $event->post_title; ?></a></strong> wilt verwijderen?</p>

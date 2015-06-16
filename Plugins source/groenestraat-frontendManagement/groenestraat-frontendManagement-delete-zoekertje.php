@@ -27,7 +27,7 @@
 				return;
 			}
 
-			if($zoekertje != null && ($current_user->ID == $zoekertje->zoekertje_author || current_user_can('manage_options')) && current_user_can('delete_published_zoekertjes'))
+			if($zoekertje != null && ($current_user->ID == $zoekertje->post_author || current_user_can('manage_options')) && current_user_can('delete_published_zoekertjes'))
 			{
 				?>
 					<p class="alert-message normalize-text">Bent u zeker dat u het zoekertje <strong><a href="<?php echo $zoekertje->guid; ?>"><?php echo $zoekertje->post_title; ?></a></strong> wilt verwijderen?</p>
@@ -53,7 +53,7 @@
 		else
 		{
 			?>
-				<p>Dit zoekertje bestaat niet, of u hebt geen toegang tot de gevraagde pagina. Ga terug naar <a href="<?php echo home_url(); ?>">Home</a>.</p>
+				<p class="error-message">Dit zoekertje bestaat niet, of u hebt geen toegang tot de gevraagde pagina. Ga terug naar <a href="<?php echo home_url(); ?>">Home</a>.</p>
 			<?php
 		}
 	}
