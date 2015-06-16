@@ -64,7 +64,7 @@
             <script>
                 document.getElementsByClassName('recent')[0].style.display = 'none';
                 document.getElementsByClassName('about')[0].style.display = 'none';
-                document.getElementsByClassName('header-image')[0].className = document.getElementsByClassName('header-image')[0].className + 'header-image-small';
+                document.getElementsByClassName('header-image')[0].className = document.getElementsByClassName('header-image')[0].className + ' header-image-small';
             </script>
         <?php
     }
