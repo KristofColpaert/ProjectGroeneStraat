@@ -145,7 +145,7 @@
 
 						$url = 'https://maps.googleapis.com/maps/api/geocode/json?address=' . $tempProjectStreet . '%20' . $tempProjectCity . '&key=' . $apiKey;
 
-						$output = file_get_contets($url);
+						$output = file_get_contents($url);
 
 						$json = json_decode($output, true);
 						$lat = $json['results'][0]['geometry']['location']['lat'];
