@@ -69,7 +69,19 @@
 				<p><strong>Aanbieder: </strong><?php echo the_author_meta('first_name'); ?> <?php echo the_author_meta('last_name'); ?></p>
 				<p><strong>Beschrijving: </strong><?php the_excerpt(); ?></p>
 				<p><strong>Location: </strong><?php echo $adLocation; ?></p>
-				<p><strong>Prijs: </strong><?php echo $adPrice; ?> euro</p>
+				<p><strong>Prijs: </strong>
+				<?php 
+
+				if($adPrice == 0)
+				{
+					echo "gratis";
+				}
+				else
+				{
+					echo $adPrice . " euro"; 
+				}
+
+				?></p>
 			</section>
 		</a>
 
