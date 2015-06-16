@@ -40,14 +40,7 @@
 function prowpt_persoonlijkeEventenOverzicht()
 {
 	?>
-	<script>
-        $(".contentwrapper").addClass("container");
-        $(".container").removeClass("contentwrapper");
-        $("#main").unwrap();
-        $(".container").unwrap();
-        $(".title").remove();
-        $(".container").append('<section class="sub-menu"><ul><li><a onClick="history.go(-1)">Terug</a></li></ul><section class="options"><form action="<?php $_SERVER['PHP_SELF']; ?>" method="GET"><input type="text" name="zoekveld" class="textbox" placeholder="Zoeken op event"><input type="submit" class="form-button" value="zoeken" name="zoeken"></form></section>');
-    </script>
+	
     <?php
 
 	global $post;
@@ -68,6 +61,16 @@ function prowpt_persoonlijkeEventenOverzicht()
 				);
 
 		if ($the_query->have_posts()) {
+					?> 
+						<script>
+						        $(".contentwrapper").addClass("container");
+						        $(".container").removeClass("contentwrapper");
+						        $("#main").unwrap();
+						        $(".container").unwrap();
+						        $(".title").remove();
+						        $(".container").append('<section class="sub-menu"><ul><li><a onClick="history.go(-1)">Terug</a></li></ul><section class="options"><form action="<?php $_SERVER['PHP_SELF']; ?>" method="GET"><input type="text" name="zoekveld" class="textbox" placeholder="Zoeken op event"><input type="submit" class="form-button" value="zoeken" name="zoeken"></form></section>');
+						    </script>
+					<?php
 					while ($the_query->have_posts() ) {
 						$the_query->the_post();	
 						$eventTime = get_post_meta($post->ID, "_eventTime")[0];
@@ -94,7 +97,7 @@ function prowpt_persoonlijkeEventenOverzicht()
 		else
 		{
 			?>
-				<p>Er werden geen events gevonden.</p>
+				<p class="error-message">Er werden geen events gevonden.</p>
 			<?php
 		}
 
@@ -102,7 +105,7 @@ function prowpt_persoonlijkeEventenOverzicht()
 	else
 	{
 			?>
-				<p>U moet zich aanmelden om deze pagina te bekijken.</p>
+				<p class="error-message">U moet zich aanmelden om deze pagina te bekijken.</p>
 			<?php
 	}
 
