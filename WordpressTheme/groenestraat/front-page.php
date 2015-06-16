@@ -8,16 +8,27 @@
 	<section class="recent">
         <section class="recent-item">
             <h1>Projecten</h1>
-            <p>Projecten brengen mensen samen die werken naar een speciefiek doel, zoals werken naar een specifiek doel, zoals bijvoorbeeld een gezamelijke moestijn op het einde van hun straat</p>
+            <section class="wrapper">
+                <p class="set-height">Projecten brengen mensen samen die werken naar een speciefiek doel, zoals werken naar een specifiek doel, zoals bijvoorbeeld een gezamelijke moestijn op het einde van hun straat</p>
+            </section>
             <a href="<?php echo get_site_url(); ?>/projecten" class="button">Projecten &#62;</a>
         </section>
         <section class="recent-item">
             <h1>Artikels</h1>
-            <p>Lees &amp; schrijf artikels (on)afhankelijk van een bepaald project. Deel eigen ervaringen &amp; help ons naar een groenere toekomst.</p>
-            <a href="<?php echo get_site_url(); ?>/artikels" class="button">Artikels &#62;</a>
+            <section class="wrapper">
+                <p class="set-height">Lees &amp; schrijf artikels (on)afhankelijk van een bepaald project. Deel eigen ervaringen &amp; help ons naar een groenere toekomst.</p>
             </section>
+            <a href="<?php echo get_site_url(); ?>/artikels" class="button">Artikels &#62;</a>
+        </section>
+        <script>
+            for(var i=0;i<document.getElementsByClassName('set-height').length;i++) {
+                document.getElementsByClassName('set-height')[i].style['position'] = 'relative';
+                document.getElementsByClassName('set-height')[i].style['top'] = '' + (220/2-(document.getElementsByClassName('set-height')[i].offsetHeight/2)-15) +'px';
+            }
+        </script>
         <section class="recent-item">
             <h1>Events</h1>
+            <section class="wrapper">
             <?php
                     $projectevents_id = get_cat_ID('projectevents');
                     $my_query = new WP_Query(array('post_type' => 'events', 'posts_per_page' => 3, 'cat' => '-' . $projectevents_id));
@@ -41,7 +52,7 @@
             <?php
                 endwhile;
             ?>
-            <br/><br/>
+            </section>
             <a href="<?php echo get_site_url(); ?>/events" class="button">Events &#62;</a>
         </section>
     </section>

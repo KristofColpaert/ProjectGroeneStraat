@@ -108,7 +108,6 @@ img
 
 .recent-item>.button, .about>.button
 {
-
     color: #a2a1a9;
     border: 1px solid #a2a1a9;
     background-color: #f8f7f7;
@@ -250,7 +249,13 @@ img
 .recent-item p
 {
     color: #a2a1a9;
-    margin-bottom: 40px;
+}
+
+.recent-item .wrapper
+{
+    height: 220px;   
+    text-align: center;
+    vertical-align: middle;
 }
 
 .calender
@@ -385,7 +390,7 @@ img
     position: relative;
     text-align: center;
     color: #ffffff;
-    background-color: red; /* #f8f7f7 */
+    background-color: #fff;
     overflow: hidden;
 }
 
