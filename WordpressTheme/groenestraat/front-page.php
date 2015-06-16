@@ -1,6 +1,10 @@
 <?php get_header(); ?>
-    
+
     <section class="header-image"></section>
+    <section class="about">
+        <h1>Wat is Groene Straat?</h1><br/><br/>
+        <a href="<?php echo get_site_url(); ?>/about" class="button">Over ons &#62;</a>
+    </section>
 	<section class="recent">
         <section class="recent-item">
             <h1>Projecten</h1>
@@ -42,12 +46,23 @@
         </section>
     </section>
     <section class="clear"></section>
+    <?php
+    if(is_user_logged_in()) 
+    {
+        ?>
+            <script>
+                document.getElementsByClassName('recent')[0].style.display = 'none';
+                document.getElementsByClassName('header-image')[0].className = document.getElementsByClassName('header-image')[0].className + 'header-image-small';
+            </script>
+        <?php
+    }
+    ?>
     <section class="home-title">
         <h1>Artikels</h1>
     </section>
     <section class="recent-artikel">
         <section class="artikel-side">
-            <h1></h1><p></p>
+            <h1 id="link"></h1><p></p>
         </section>
 	    <section class="artikel-info">
 	    	<section class="artikel-item" id="active">
@@ -145,6 +160,7 @@
                     var recentArtikel = document.getElementsByClassName('recent-artikel')[0];
                     recentArtikel.style["background-image"] = "url('" + data[newId].image + "')";
                     recentArtikel.style["background-size"] = "cover";
+                    document.getElementById('link').addEventListener('click', function(){ document.location = data[newId].url; });
                 }
             }
         }

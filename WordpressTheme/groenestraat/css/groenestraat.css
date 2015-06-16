@@ -106,7 +106,7 @@ img
     height:auto;
 }
 
-.recent-item>.button
+.recent-item>.button, .about>.button
 {
 
     color: #a2a1a9;
@@ -192,6 +192,30 @@ img
 {
     line-height: 175px;
     font-size: 5em;
+}
+
+.about
+{
+    width: 90%;
+    min-height: 100px;
+    padding:5%;
+    text-align: center;
+    /*background-color: #f8f7f7;*/
+    background-color: #ffffff;
+
+}
+
+.about a
+{
+    text-decoration: none;
+    font-size:1em;
+    font:#333;
+}
+
+.about h1
+{
+    color: #69686e;
+    margin-bottom: 10px;
 }
 
 /* RECENT */
@@ -308,14 +332,21 @@ img
     width: 88%;
     height: 25%;
     padding: 0 6%;
+    color: #fff;
     background-color:#a2a1a9;
     overflow: hidden;
+}
+
+.artikel-item:hover
+{
+    cursor: pointer;
 }
 
 .artikel-item:hover, #active
 {
     transition: background 0.25s ease;
     background-color:#ffffff;
+    color:#a2a1a9;
 }
 
 .artikel-side
@@ -331,7 +362,12 @@ img
     background: url("../img/blackfilter.png") repeat;
 }
 
-.artikel-side h1
+.artikel-side h1:hover
+{
+    cursor: pointer;
+}
+
+.artikel-side h1, .artikel-item h1
 {
     margin:1%;
 }
@@ -396,7 +432,7 @@ img
     width: 21.333333%;
     margin:0 4%;
     padding: 2%;
-    min-height: 175px;
+    min-height: 125px;
     background-color: #ffffff;
 }
 
@@ -456,7 +492,6 @@ footer
     margin:8% 4%;
     padding: 2%;
     min-height: 150px;
-    background-color: gray;
     text-transform: lowercase;
 }
 
@@ -944,4 +979,11 @@ ol>li
     width:96%;
     padding:2%;
     min-height: 50px;
+}
+
+/* ERROR MSG PLUGINS */
+
+.error-message
+{
+    color:red;
 }
