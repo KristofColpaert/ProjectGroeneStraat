@@ -35,7 +35,7 @@
 				?>
 					<p class="alert-message normalize-text">Bent u zeker dat u het artikel <strong><a href="<?php echo $article->guid; ?>"><?php echo $article->post_title; ?></a></strong> wilt verwijderen?</p>
 					<form class="createForm" action="<?php $_SERVER['REQUEST_URI']; ?>" method="POST" enctype="multipart/form-data">
-						<input id="projectId" name="projectId" type="hidden" value="<?php echo $project->ID; ?>" />
+						<input id="articleId" name="articleId" type="hidden" value="<?php echo $article->ID; ?>" />
 						<input class="confirm-button" id="articleDelete" name="articleDelete" type="submit" value="Verwijder" />
                         <a class="cancel-button" href="<?php echo $article->guid; ?>">Annuleer</a>
                         <div class="clear"></div>
@@ -81,7 +81,7 @@
 	            <h2 class="normalize-text center">Uw artikel wordt verwijderd</h2>
 			<?php
 
-			echo '<META HTTP-EQUIV="Refresh" Content="0; URL=' . esc_url(home_url()) . '">'; 
+			echo '<META HTTP-EQUIV="Refresh" Content="0; URL=' . esc_url(home_url()) . '/mijn-artikels">'; 
 			return;
 		}
 	}

@@ -77,7 +77,7 @@
 	            <h2 class="normalize-text center">Uw event wordt verwijderd</h2>
 			<?php
 
-			echo '<META HTTP-EQUIV="Refresh" Content="0; URL=' . esc_url(home_url()) . '">'; 
+			echo '<META HTTP-EQUIV="Refresh" Content="0; URL=' . esc_url(home_url()) . '/mijn-events">'; 
 			return;
 		}
 	}
