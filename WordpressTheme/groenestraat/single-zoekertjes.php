@@ -52,10 +52,17 @@
 			var coordinates;
 			geocoder.geocode({ address: address }, function (results, status)
 			{
-				coords_obj = results[0].geometry.location;
-				console.log(coords_obj);
-				coordinates = [coords_obj.A, coords_obj.F];
-				callback(coordinates);
+				if(results.length > 0)
+				{
+					coords_obj = results[0].geometry.location;
+					coordinates = [coords_obj.A, coords_obj.F];
+					callback(coordinates);
+				}
+
+				else
+				{
+					callback(null);
+				}
 			})
 		}
 	</script>
@@ -79,7 +86,7 @@
 			<p style="color:white;">Aanbieder: <a href="<?php echo home_url(); ?>/profiel/?userid=<?php echo the_author_meta('ID'); ?>"><?php echo the_author_meta('first_name'); ?> <?php echo the_author_meta('last_name');?></a></p>
 
             <section class="stack-3">
-                <p><img src="<?php echo get_template_directory_uri();?>/img/description.png"/><br/><?php echo the_content(); ?></p><br/><p class="green-text">
+                <p><img src="<?php echo get_template_directory_uri();?>/img/description.png"/></p><br/><?php echo the_content(); ?></p><br/><p class="green-text">
                 <?php 
                     if($adPrice == 0){
                         echo "gratis";
@@ -164,7 +171,10 @@ else{
 </section>
 
 	<script type="text/javascript">
-        
+        var containerElement = $('#location-canvas');
+		containerElement.append('<p><img src="<?php echo get_template_directory_uri();?>/img/location.png"/></p>');
+		containerElement.append('<p><?php echo $adLocation; ?></p>');
+		containerElement.css('height', '90px');
        
 		var map;
 		var myLatlng;
@@ -172,37 +182,41 @@ else{
 	    function initialize() {
 	    	getCoordinates('<?php echo $adLocation; ?>', function(coords) 
 	    	{
-	    		var mapOptions = {
-	    			zoom: 12,
-		          	center: new google.maps.LatLng(coords[0], coords[1]),
-		          	disableDefaultUI: true, 
-                    scrollwheel: false,
-		        };
+	    		if(coords != null)
+		       	{
+		    		var mapOptions = {
+		    			zoom: 12,
+			          	center: new google.maps.LatLng(coords[0], coords[1]),
+			          	disableDefaultUI: true, 
+	                    scrollwheel: false,
+			        };
 
-		        myLatlng = new google.maps.LatLng(coords[0], coords[1]);
+			        myLatlng = new google.maps.LatLng(coords[0], coords[1]);
 
-		        map = new google.maps.Map(document.getElementById('location-canvas'), mapOptions);
+			        map = new google.maps.Map(document.getElementById('location-canvas'), mapOptions);
 
-		        var contentString = '<div id="content">'+
-			      					'<div id="bodyContent" style="font-size:0.7em;text-align:center;padding:4px">'+
-			      					'<p style="font-size:2.4em"><b><?php echo $adLocation; ?></b></p>' +
-								    '</div>'+
-								    '</div>';
+			        var contentString = '<div id="content">'+
+				      					'<div id="bodyContent" style="font-size:0.7em;text-align:center;padding:4px">'+
+				      					'<p style="font-size:2.4em"><b><?php echo $adLocation; ?></b></p>' +
+									    '</div>'+
+									    '</div>';
 
-				var infowindow = new google.maps.InfoWindow({
-				    content: contentString,
-      				maxWidth: 250,
-      				maxHeight: 50
-				});
+					var infowindow = new google.maps.InfoWindow({
+					    content: contentString,
+	      				maxWidth: 250,
+	      				maxHeight: 50
+					});
 
-				var marker = new google.maps.Marker({
-			    	position: myLatlng,
-			    	map: map,
-			    	title: 'Meer info'
-  				});
+					var marker = new google.maps.Marker({
+				    	position: myLatlng,
+				    	map: map,
+				    	title: 'Meer info'
+	  				});
 
+					infowindow.open(map, marker);
 
-				infowindow.open(map, marker);
+					containerElement.css('height', '250px');
+				}
 	    	})
 	    }
 
