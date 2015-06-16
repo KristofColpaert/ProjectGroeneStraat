@@ -30,6 +30,7 @@
 
 
 		register_main_menu();
+        register_sub_menu();
 		activate_all_plugins();
 	}
 
@@ -100,6 +101,50 @@
 			));
 		}
 	}
+    
+    function register_sub_menu()
+        {
+            $menuExists = wp_get_nav_menu_object('Sub menu');
+
+            if(!$menuExists)
+            {
+                $menuId = wp_create_nav_menu('Sub menu');
+
+                wp_update_nav_menu_item($menuId, 0, array(
+                    'menu-item-title' => __('Profiel'),
+                    'menu-item-classes' => 'normalize-text',
+                    'menu-item-url' => home_url('/profiel'),
+                    'menu-item-status' => 'publish'
+                ));
+
+                wp_update_nav_menu_item($menuId, 0, array(
+                    'menu-item-title' => __('Bewerk profiel'),
+                    'menu-item-classes' => 'normalize-text',
+                    'menu-item-url' => home_url('/bewerk-profiel'),
+                    'menu-item-status' => 'publish'
+                ));
+
+                wp_update_nav_menu_item($menuId, 0, array(
+                    'menu-item-title' => __('Kalender'),
+                    'menu-item-classes' => 'normalize-text',
+                    'menu-item-url' => home_url('/kalender'),
+                    'menu-item-status' => 'publish'
+                ));
+
+                wp_update_nav_menu_item($menuId, 0, array(
+                    'menu-item-title' => __('Ledenoverzicht'),
+                    'menu-item-classes' => 'normalize-text',
+                    'menu-item-url' => home_url('/ledenoverzicht'),
+                    'menu-item-status' => 'publish'
+                ));
+                wp_update_nav_menu_item($menuId, 0, array(
+                    'menu-item-title' => __('Afmelden'),
+                    'menu-item-classes' => 'normalize-text red-text',
+                    'menu-item-url' => wp_logout_url(get_site_url()),
+                    'menu-item-status' => 'publish'
+                ));
+            }
+        }
 
 	function activate_all_plugins()
 	{

@@ -16,7 +16,7 @@ function script_enqueue(){
 
 add_action('wp_enqueue_scripts', 'script_enqueue');     
 
-register_nav_menu( 'primary', __( 'Main menu', 'groenestraat' ) );
+
 
 function excerpt($limit) 
 {

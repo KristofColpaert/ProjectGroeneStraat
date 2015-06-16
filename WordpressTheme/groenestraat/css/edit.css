@@ -784,7 +784,7 @@ footer{
     border-radius: 3px;
     color: #FFF;
     padding: 5px 15px 5px 15px;
-    font-size: 1.8em;
+    font-size: 1.8em !important;
 }
 .edit-button:hover{
     background-color: #FFF;
@@ -839,6 +839,9 @@ footer{
     padding: 10px;
 }
 .red-text{
+    color: #E74C3C !important;
+}
+.red-text a{
     color: #E74C3C !important;
 }
 
