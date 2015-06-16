@@ -200,6 +200,7 @@
                                 </section>
                                 <section class="event-content">
                                     <h1><?php the_title(); ?></h1>
+                                    <p><strong>Organisator: </strong><a style="color:black;" class="author-name" href="<?php echo home_url(); ?>/profiel/?userid=<?php echo the_author_meta('ID'); ?>"><?php echo the_author_meta('first_name'); ?> <?php echo the_author_meta('last_name'); ?></a></p>
                                     <p><strong>Tijdstip: </strong><?php echo $eventTime . " - " . $eventEndTime; ?></p>
                                     <p><strong>Locatie: </strong><?php echo $eventLocation; ?></p>
                                     <p><strong>Meer info: </strong><?php echo excerpt(50); ?></p>
@@ -221,6 +222,7 @@
                    
                         <section class="list-item normalize-text <?php echo $post->post_type;?>">
                             <h1><?php the_title(); ?></h1>
+                            <p><strong>Aanbieder: </strong><a style="color:black;" class="author-name" href="<?php echo home_url(); ?>/profiel/?userid=<?php echo the_author_meta('ID'); ?>"><?php echo the_author_meta('first_name'); ?> <?php echo the_author_meta('last_name'); ?></a></p>
                             <p><strong>Beschrijving: </strong><?php the_content(); ?></p>
                             <p><strong>Locatie: </strong><?php echo $adLocation; ?></p>
                             <p><strong>Prijs: </strong><?php echo $adPrice; ?></p>
@@ -235,6 +237,21 @@
                         ?>
                         <section class="list-item normalize-text <?php echo $post->post_type; ?>">
 					<h1><?php echo the_title();?></h1>
+					<p>
+	                    Auteur: <a style="color:black;" class="author-name" href="<?php echo home_url(); ?>/profiel/?userid=<?php echo the_author_meta('ID'); ?>"><?php echo the_author_meta('first_name'); ?> <?php echo the_author_meta('last_name'); ?></a> |
+	                    Gebubliceerd op: <?php echo get_the_date(); ?> | 
+	                    Categorieën: 
+	                    <?php 
+	                        $categories =  get_the_category();
+
+	                        foreach($categories as $category)
+	                        {
+	                            ?>
+	                                <a style="color:black;" class="author-name" href="<?php echo home_url(); ?>/artikels?categorie=<?php echo $category->term_id; ?>"><?php echo $category->name; ?></a> 
+	                            <?php
+	                        } 
+	                    ?>
+	                </p>
                     <?php echo the_excerpt();
 ?>				 <a class="view-item" href="<?php the_permalink(); ?>">Lees meer</a></section><?php
                     }break;
