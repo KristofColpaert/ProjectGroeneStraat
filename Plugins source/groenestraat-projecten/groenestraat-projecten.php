@@ -149,6 +149,12 @@
 		<?php
     	wp_enqueue_script('validation', get_stylesheet_directory_uri() . '/js/livevalidation_standalone.compressed.js', array( 'jquery' ));
     	wp_enqueue_script('my_validation', plugins_url() . '/groenestraat-projecten/my_validation.js', array( 'jquery' ));
+
+    	?>
+    		<style>
+				.LV_invalid { color:#f00; }
+    		</style>
+    	<?php
 	}
 
 	function save_projecten_metaboxes($post_id, $post)
