@@ -92,14 +92,14 @@ function prowpt_persoonlijkeZoekertjesOverzicht()
 		else
 		{
 			?>
-				<p class="error-message">Er werden geen zoekertjes gevonden.</p>
+				<p class="error-message">Er werden geen zoekertjes gevonden. <a class="normalize-text" href="<?php echo home_url(); ?>/zoekertjes">Terug</a></p>
 			<?php
 		}
 	}
 	else
 	{
 			?>
-				<p class="error-message">U moet zich aanmelden om deze pagina te bekijken.</p>
+				<p class="error-message">U moet zich aanmelden om deze pagina te bekijken. <a class="normalize-text" href="<?php echo home_url(); ?>/login">Aanmelden</a></p>
 			<?php
 	}
 

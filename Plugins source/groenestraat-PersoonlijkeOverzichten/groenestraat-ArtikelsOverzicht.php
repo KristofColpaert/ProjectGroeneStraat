@@ -39,17 +39,6 @@
 
 function prowpt_persoonlijkeArtikelsOverzicht()
 {
-	?>
-	<script>
-        $(".contentwrapper").addClass("container");
-        $(".container").removeClass("contentwrapper");
-        $("#main").unwrap();
-        $(".container").unwrap();
-        $(".title").remove();
-        $(".container").append('<section class="sub-menu"><ul><li><a onClick="history.go(-1)">Terug</a></li></ul><section class="options"><form action="<?php $_SERVER['PHP_SELF']; ?>" method="GET"><input type="text" name="zoekveld" class="textbox" placeholder="Zoeken op artikel"><input type="submit" class="form-button" value="zoeken" name="zoeken"></form></section>');
-    </script>
-    <?php
-
 	global $post;
 
 	$artikels = array();
@@ -70,6 +59,17 @@ function prowpt_persoonlijkeArtikelsOverzicht()
 				);
 
 		if ($the_query->have_posts()) {
+			?>
+				<script>
+			        $(".contentwrapper").addClass("container");
+			        $(".container").removeClass("contentwrapper");
+			        $("#main").unwrap();
+			        $(".container").unwrap();
+			        $(".title").remove();
+			        $(".container").append('<section class="sub-menu"><ul><li><a onClick="history.go(-1)">Terug</a></li></ul><section class="options"><form action="<?php $_SERVER['PHP_SELF']; ?>" method="GET"><input type="text" name="zoekveld" class="textbox" placeholder="Zoeken op artikel"><input type="submit" class="form-button" value="zoeken" name="zoeken"></form></section>');
+			 	</script>
+			<?php
+
 				while ($the_query->have_posts() ) {
 						$the_query->the_post();	
 						?> 
@@ -85,14 +85,14 @@ function prowpt_persoonlijkeArtikelsOverzicht()
 		else
 		{
 			?>
-				<p>Er werden geen artikels gevonden.</p>
+				<p class="error-message">Er werden geen artikels gevonden. <a class="normalize-text" href="<?php echo home_url(); ?>/artikels">Terug</a></p>
 			<?php
 		}
 	}
 	else
 	{
 		?>
-			<p>U moet zich eerst aanmelden om deze pagina te bekijken.</p>
+			<p>U moet zich eerst aanmelden om deze pagina te bekijken. <a class="normalize-text" href="<?php echo home_url(); ?>/login">Aanmelden</a></p>
 		<?php
 	}
 }

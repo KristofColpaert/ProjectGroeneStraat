@@ -40,18 +40,7 @@
 
 
 function prowpt_persoonlijkeProjectenOverzicht()
-{
-	?>
-	<script>
-        $(".contentwrapper").addClass("container");
-        $(".container").removeClass("contentwrapper");
-        $("#main").unwrap();
-        $(".container").unwrap();
-        $(".title").remove();
-        $(".container").append('<section class="sub-menu"><ul><li><a onClick="history.go(-1)">Terug</a></li></ul><section class="options"><form action="<?php $_SERVER['PHP_SELF']; ?>" method="GET"><input type="text" name="zoekveld" class="textbox" placeholder="Zoeken op project"><input type="submit" class="form-button" value="zoeken" name="zoeken"></form></section>');
-    </script>
-    <?php
-    
+{    
 	global $post;
 
 	$subscriber = "_subscriberId";
@@ -68,6 +57,16 @@ function prowpt_persoonlijkeProjectenOverzicht()
 
 		$the_query = new WP_Query($projectenAdmin);				
 		if ($the_query->have_posts()) {
+				?>
+					<script>
+				        $(".contentwrapper").addClass("container");
+				        $(".container").removeClass("contentwrapper");
+				        $("#main").unwrap();
+				        $(".container").unwrap();
+				        $(".title").remove();
+				        $(".container").append('<section class="sub-menu"><ul><li><a onClick="history.go(-1)">Terug</a></li></ul><section class="options"><form action="<?php $_SERVER['PHP_SELF']; ?>" method="GET"><input type="text" name="zoekveld" class="textbox" placeholder="Zoeken op project"><input type="submit" class="form-button" value="zoeken" name="zoeken"></form></section>');
+				    </script>
+				<?php
 				while ($the_query->have_posts() )
 				{
 							$the_query->the_post();	
@@ -122,14 +121,15 @@ function prowpt_persoonlijkeProjectenOverzicht()
 		else
 		{
 			?>	
-				<p>Er werden geen projecten gevonden.</p>
+				<p class="error-message">Er werden geen projecten gevonden. <a class="normalize-text" href="<?php echo home_url(); ?>/projecten">Terug</a></p>		
 			<?php
 		}
 	}
 	else
 	{
 		?>	
-			<p>U moet zich aanmelden om deze pagina te bekijken.</p>
+			<p class="error-message">U moet zich aanmelden om deze pagina te bekijken. <a class="normalize-text" href="<?php echo home_url(); ?>/login">Aanmelden</a></p>
+			
 		<?php
 	}
 

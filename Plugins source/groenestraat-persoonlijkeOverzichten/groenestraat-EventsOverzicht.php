@@ -97,7 +97,7 @@ function prowpt_persoonlijkeEventenOverzicht()
 		else
 		{
 			?>
-				<p class="error-message">Er werden geen events gevonden.</p>
+				<p class="error-message">Er werden geen events gevonden. <a class="normalize-text" href="<?php echo home_url(); ?>/events">Terug</a></p>
 			<?php
 		}
 
@@ -105,7 +105,7 @@ function prowpt_persoonlijkeEventenOverzicht()
 	else
 	{
 			?>
-				<p class="error-message">U moet zich aanmelden om deze pagina te bekijken.</p>
+				<p class="error-message">U moet zich aanmelden om deze pagina te bekijken. <a class="normalize-text" href="<?php echo home_url(); ?>/login">Aanmelden</a></p>
 			<?php
 	}
 
