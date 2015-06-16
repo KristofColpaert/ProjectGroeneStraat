@@ -116,11 +116,22 @@ get_header();
 
         if (!$my_query->have_posts())
         {
-            ?>
-                <section class="list-item">
-                    <h2>Geen zoekresultaten op: <?php echo $keyword; ?></h2>
-                </section>
-            <?php
+            if($keyword != "")
+            {
+                ?>
+                    <section class="list-item">
+                        <h2>Geen zoekresultaten op: <?php echo $keyword; ?></h2>
+                    </section>
+                <?php
+            }
+            else
+            {
+                ?>
+                    <section class="list-item">
+                        <h2>Er werden geen artikels gevonden.</h2>
+                    </section>
+                <?php
+            }
         }
         ?>
 
