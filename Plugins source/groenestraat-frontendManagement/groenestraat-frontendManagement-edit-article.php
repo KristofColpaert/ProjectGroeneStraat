@@ -169,11 +169,6 @@
 
 						var title = new LiveValidation('articleTitle', {validMessage:" "});
 						title.add(Validate.Presence,{failureMessage:nietLeeg});
-
-		
-                        
-                        var description = new LiveValidation('articleDescription', {validMessage:" "});
-                        description.add(Validate.Presence,{failureMessage: nietLeeg});
 					</script>
 				<?php
 			}

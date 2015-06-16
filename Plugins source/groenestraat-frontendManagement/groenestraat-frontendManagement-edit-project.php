@@ -60,8 +60,8 @@
 
 						<label for="projectFeaturedImage" class="normalize-text">Upload Hoofdigsafbeelding</label>
 						<div style="height:0px;overflow:hidden">
-                        <input id="projectFeaturedImage" class="image-upload" name="projectFeaturedImage" type="file" accept="image/x-png, image/gif, image/jpeg" />
-                    </div>
+                        	<input id="projectFeaturedImage" class="image-upload" name="projectFeaturedImage" type="file" accept="image/x-png, image/gif, image/jpeg" />
+                    	</div>
                   	<button type="button" class="confirm-button" id="upload" onclick="chooseFile();">Kies afbeelding</button>
 
 
@@ -93,9 +93,6 @@
 						zipcode.add(Validate.Presence,{failureMessage:nietLeeg});
 						zipcode.add(Validate.Length,{is:4, wrongLengthMessage: "Een postcode moet 4 cijfers bevatten!"});
 						zipcode.add(Validate.Numericality,{onlyInteger:true, notANumberMessage: "Een postcode moet een getal zijn!"});
-                        
-                        var description = new LiveValidation('projectDescription', {validMessage:" "});
-                        description.add(Validate.Presence,{failureMessage: nietLeeg});
 					</script>
 				<?php
 			}

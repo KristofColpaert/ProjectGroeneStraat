@@ -148,9 +148,6 @@
 					var featuredImage = new LiveValidation('articleFeaturedImage', {validMessage:" "});
 					featuredImage.add(Validate.Presence,{failureMessage:nietLeeg});
                     
-                    var description = new LiveValidation('articleDescription', {validMessage:" "});
-                    description.add(Validate.Presence,{failureMessage: nietLeeg});
-                    
                     window.onload = imageValidationFix();
                     function imageValidationFix(){
                         id = "file";
@@ -163,6 +160,7 @@
                                     $("#upload").css({"margin-right":($(".contentwrapper").width()-$("#upload").outerWidth()-5)+"px"});
                                 }
                             });
+                    }
 				</script>
 			<?php
 		}

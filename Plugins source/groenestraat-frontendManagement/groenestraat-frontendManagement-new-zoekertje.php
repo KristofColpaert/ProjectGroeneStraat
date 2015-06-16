@@ -116,16 +116,13 @@
 
 					var price = new LiveValidation('adPrice', {validMessage:" "});
 					price.add(Validate.Presence,{failureMessage:nietLeeg});
-					price.add(Validate.Numericality,{onlyInteger:true, notANumberMessage: "Een prijs moet een getal in euro zijn!"});
+					price.add(Validate.Numericality,{notANumberMessage: "Een prijs moet een getal in euro zijn!"});
 
 					var loc = new LiveValidation('adLocation', {validMessage:" "});
 					loc.add(Validate.Presence,{failureMessage:nietLeeg});
 
 					var featuredImage = new LiveValidation('adFeaturedImage', {validMessage:" "});
 					featuredImage.add(Validate.Presence,{failureMessage:nietLeeg});
-                    
-                    var description = new LiveValidation('adDescription', {validMessage:" "});
-                    description.add(Validate.Presence,{failureMessage: nietLeeg});
                     
                     window.onload = imageValidationFix();
                     function imageValidationFix(){

@@ -133,7 +133,7 @@
 						<label for="eventFeaturedImage" class="normalize-text">Afbeelding</label>
                   		<div style="height:0px;overflow:hidden">
                             <input id="eventFeaturedImage" class="image-upload" name="eventFeaturedImage" type="file" accept="image/x-png, image/gif, image/jpeg" />
-                    </div>
+                    	</div>
                   	<button type="button" class="confirm-button" id="upload" onclick="chooseFile();">Kies afbeelding</button>
 
 						<input id="eventId" name="eventId" type="hidden" value="<?php echo $event->ID; ?>" />

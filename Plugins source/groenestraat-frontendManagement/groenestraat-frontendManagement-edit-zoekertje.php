@@ -110,9 +110,7 @@
 
 						var price = new LiveValidation('adPrice', {validMessage:" "});
 						price.add(Validate.Presence,{failureMessage:nietLeeg});
-						price.add(Validate.Numericality,{onlyInteger:true, notANumberMessage: "Een prijs moet een getal in euro zijn!"});
-                        var description = new LiveValidation('adDescription', {validMessage:" "});
-                        description.add(Validate.Presence,{failureMessage: nietLeeg});
+						price.add(Validate.Numericality,{notANumberMessage: "Een prijs moet een getal in euro zijn!"});
                         
 						var loc = new LiveValidation('adLocation', {validMessage:" "});
 						loc.add(Validate.Presence,{failureMessage:nietLeeg});
