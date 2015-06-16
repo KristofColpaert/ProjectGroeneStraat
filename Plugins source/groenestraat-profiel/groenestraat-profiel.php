@@ -96,112 +96,120 @@
                             $(".title").remove();
                 </script>
             <?php
-			if(isset($_GET["userid"]))
-			{
-                ?>
-                <section class="sub-menu">
-                <?php
-				$userid = $_GET["userid"];
-				$user = get_userdata($userid);
-				$usermeta = get_user_meta($userid);
-                $firstname = $usermeta["first_name"][0];
-				$name =  $usermeta["last_name"][0];
-				
-				
-            
+                $userid = '';
 
-				echo get_avatar($userid, 60); 
-                echo "<h1 class='name'>".$firstname." ".$name;
-				?>
-				
-				<?php
-				global $post;
-				$the_query = new WP_Query(
-				array(
-                    'posts_per_page' => 9,
-					'author' => $userid,
-                    'paged' => 1,
-					'post_type' => array('events', 'post', 'zoekertjes'),
-					'order' => 'ASC',
-					'orderby' => 'date')
-				);
-                ?> 
+                if(isset($_GET['userid']))
+                {
+                    $userid = $_GET['userid'];
+                }
+
+                else
+                {
+                    $userid = get_current_user_id();
+                }
+
+    			if($userid != '');
+    			{
+                    ?>
+                    <section class="sub-menu">
+                    <?php
+        				$user = get_userdata($userid);
+        				$usermeta = get_user_meta($userid);
+                        $firstname = $usermeta["first_name"][0];
+        				$name =  $usermeta["last_name"][0];
+
+        				echo get_avatar($userid, 60); 
+                        echo "<h1 class='name'>".$firstname." ".$name;
+    				?>
+    				
+    				<?php
+        				global $post;
+        				$the_query = new WP_Query(
+        				array(
+                            'posts_per_page' => 9,
+        					'author' => $userid,
+                            'paged' => 1,
+        					'post_type' => array('events', 'post', 'zoekertjes'),
+        					'order' => 'ASC',
+        					'orderby' => 'date')
+        				);
+                    ?> 
                     </section>
                     <section class="main" data="profiel;1">
-                <?php
-				if ($the_query->have_posts()) {
-					while ($the_query->have_posts()) : $the_query->the_post();
-						switch($post->post_type)
-                        {
-                            case "events":{
-                                $meta = get_post_meta($post->ID);
-                                $eventTime = $meta['_eventTime'][0];
-                                $eventLocation = $meta['_eventLocation'][0];
-                                $eventEndTime = $meta['_eventEndTime'][0];
+                    <?php
+    				if ($the_query->have_posts()) {
+    					while ($the_query->have_posts()) : $the_query->the_post();
+    						switch($post->post_type)
+                            {
+                                case "events":{
+                                    $meta = get_post_meta($post->ID);
+                                    $eventTime = $meta['_eventTime'][0];
+                                    $eventLocation = $meta['_eventLocation'][0];
+                                    $eventEndTime = $meta['_eventEndTime'][0];
 
-                                $day = explode("/", $eventTime)[1];
-                                $monthNumber = explode("/", $eventTime)[0];
-                                $month = getProfileMonth($monthNumber);
-        		                
-                                ?>
-                                    <section class="list-item normalize-text <?php echo $post->post_type;?>">
-                                        <section class="event-calendar">
-                                            <h1><?php echo $day; ?></h1>
-                                            <h2><?php echo $month; ?></h2>
+                                    $day = explode("/", $eventTime)[1];
+                                    $monthNumber = explode("/", $eventTime)[0];
+                                    $month = getProfileMonth($monthNumber);
+            		                
+                                    ?>
+                                        <section class="list-item normalize-text <?php echo $post->post_type;?>">
+                                            <section class="event-calendar">
+                                                <h1><?php echo $day; ?></h1>
+                                                <h2><?php echo $month; ?></h2>
+                                            </section>
+                                            <section class="event-content">
+                                                <h1><?php the_title(); ?></h1>
+                                                <p><strong>Tijdstip: </strong><?php echo $eventTime . " - " . $eventEndTime; ?></p>
+                                                <p><strong>Locatie: </strong><?php echo $eventLocation; ?></p>
+                                                <p><strong>Meer info: </strong><?php echo excerpt(50); ?></p>
+                                                 
+                                            </section>
+                                            <a class="view-item" href="<?php the_permalink(); ?>">Bekijk event</a>
                                         </section>
-                                        <section class="event-content">
+                            		<?php
+                                }
+                                break;
+
+                                case "zoekertjes":{
+                                    $meta = get_post_meta($post->ID);
+                                    $adLocation = $meta['_adLocation'][0];
+                                    $adPrice = $meta['_adPrice'][0];
+                                    ?>
+                                        <section class="list-item normalize-text <?php echo $post->post_type;?>">
                                             <h1><?php the_title(); ?></h1>
-                                            <p><strong>Tijdstip: </strong><?php echo $eventTime . " - " . $eventEndTime; ?></p>
-                                            <p><strong>Locatie: </strong><?php echo $eventLocation; ?></p>
-                                            <p><strong>Meer info: </strong><?php echo excerpt(50); ?></p>
-                                             
+                                            <p><strong>Beschrijving: </strong><?php the_content(); ?></p>
+                                            <p><strong>Locatie: </strong><?php echo $adLocation; ?></p>
+                                            <p><strong>Prijs: </strong><?php echo $adPrice; ?></p>
+                                             <a class="view-item" href="<?php the_permalink(); ?>">Bekijk zoekertje</a>
                                         </section>
-                                        <a class="view-item" href="<?php the_permalink(); ?>">Bekijk event</a>
-                                    </section>
-                        		<?php
-                            }
-                            break;
+            		                <?php
+                                
+                                }
+                                break;
 
-                            case "zoekertjes":{
-                                $meta = get_post_meta($post->ID);
-                                $adLocation = $meta['_adLocation'][0];
-                                $adPrice = $meta['_adPrice'][0];
-                                ?>
-                                    <section class="list-item normalize-text <?php echo $post->post_type;?>">
-                                        <h1><?php the_title(); ?></h1>
-                                        <p><strong>Beschrijving: </strong><?php the_content(); ?></p>
-                                        <p><strong>Locatie: </strong><?php echo $adLocation; ?></p>
-                                        <p><strong>Prijs: </strong><?php echo $adPrice; ?></p>
-                                         <a class="view-item" href="<?php the_permalink(); ?>">Bekijk zoekertje</a>
-                                    </section>
-        		                <?php
-                            
-                            }
-                            break;
+                                case "post":{
+                                    ?>
+                                        <section class="list-item normalize-text <?php echo $post->post_type; ?>">
+            					        <h1><?php echo the_title();?></h1>
+                                        <?php echo the_excerpt(); ?>
+                        				<a class="view-item" href="<?php the_permalink(); ?>">Lees meer</a></section><?php
+                                }
+                                break;
 
-                            case "post":{
-                                ?>
-                                    <section class="list-item normalize-text <?php echo $post->post_type; ?>">
-        					        <h1><?php echo the_title();?></h1>
-                                    <?php echo the_excerpt(); ?>
-                    				<a class="view-item" href="<?php the_permalink(); ?>">Lees meer</a></section><?php
+                                default: break;
                             }
-                            break;
-
-                            default: break;
-                        }
-                    
-					endwhile;
-				} 
-                else {
-					?> 
-                        <section class="list-item">
-                            <h2 class="normalize-text">Er werden geen activiteiten gevonden.</h2>s
-                        </section>
-					<?php
-				}
-                    
-				?>
+                        
+    					endwhile;
+    				} 
+                    else 
+                    {
+    					?> 
+                            <section class="list-item">
+                                <h2 class="normalize-text">Er werden geen activiteiten gevonden.</h2>s
+                            </section>
+    					<?php
+    				}    
+    			?>
         </section>
             <section class="sidebar">
                 <section class="search normalize-text">
@@ -256,12 +264,6 @@
                     
             </section>
 					
-				<?php
-			}
-			else
-			{
-				?>
-					<p>De URL die u hebt meegegeven is niet geldig.</p>
 				<?php
 			}
 		}
