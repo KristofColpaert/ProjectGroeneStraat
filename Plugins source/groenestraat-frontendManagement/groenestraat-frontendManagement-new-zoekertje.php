@@ -167,7 +167,7 @@
 			{
 				$adTitle = sanitize_text_field($_POST['adTitle']);
 				$adDescription = $_POST['adDescription'];
-				$parentProjectId = sanitize_text_field($_POST['parentProjectId']);
+				$parentProjectId = $_POST['parentProjectId'];
 				$adPrice = sanitize_text_field($_POST['adPrice']);
 				$adLocation = sanitize_text_field($_POST['adLocation']);
 
