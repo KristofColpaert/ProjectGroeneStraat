@@ -39,17 +39,6 @@
 
 function prowpt_persoonlijkeZoekertjesOverzicht()
 {
-	?>
-	<script>
-        $(".contentwrapper").addClass("container");
-        $(".container").removeClass("contentwrapper");
-        $("#main").unwrap();
-        $(".container").unwrap();
-        $(".title").remove();
-        $(".container").append('<section class="sub-menu"><ul><li><a onClick="history.go(-1)">Terug</a></li></ul><section class="options"><form action="<?php $_SERVER['PHP_SELF']; ?>" method="GET"><input type="text" name="zoekveld" class="textbox" placeholder="Zoeken op zoekertje"><input type="submit" class="form-button" value="zoeken" name="zoeken"></form></section>');
-    </script>
-    <?php
-
 	global $post;
 
 	$zoekertjes = array();
@@ -70,12 +59,23 @@ function prowpt_persoonlijkeZoekertjesOverzicht()
 				);
 
 		if ($the_query->have_posts()) {
+				?>
+				<script>
+			        $(".contentwrapper").addClass("container");
+			        $(".container").removeClass("contentwrapper");
+			        $("#main").unwrap();
+			        $(".container").unwrap();
+			        $(".title").remove();
+			        $(".container").append('<section class="sub-menu"><ul><li><a onClick="history.go(-1)">Terug</a></li></ul><section class="options"><form action="<?php $_SERVER['PHP_SELF']; ?>" method="GET"><input type="text" name="zoekveld" class="textbox" placeholder="Zoeken op zoekertje"><input type="submit" class="form-button" value="zoeken" name="zoeken"></form></section>');
+			    </script>
+			    <?php
+
 				while ($the_query->have_posts() ) {
 						$the_query->the_post();	
 						$adPrice = get_post_meta($post->ID, "_adPrice")[0];
 						$adLocation = get_post_meta($post->ID, "_adLocation")[0];
 
-						if(!empty($adPrice) && !empty($adLocation))
+						if(!empty($adLocation))
 						{
 							?>
 								<section class="list-item" style="margin-top:3%;margin-bottom:1.5%">
@@ -92,14 +92,14 @@ function prowpt_persoonlijkeZoekertjesOverzicht()
 		else
 		{
 			?>
-				<p>Er werden geen zoekertjes gevonden.</p>
+				<p class="error-message">Er werden geen zoekertjes gevonden.</p>
 			<?php
 		}
 	}
 	else
 	{
 			?>
-				<p>U moet zich aanmelden om deze pagina te bekijken.</p>
+				<p class="error-message">U moet zich aanmelden om deze pagina te bekijken.</p>
 			<?php
 	}
 
