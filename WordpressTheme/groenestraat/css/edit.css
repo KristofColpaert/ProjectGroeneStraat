@@ -150,7 +150,6 @@
 }
 .form-line{
     margin: 10px 0 10px 0;
-    height: 30px;
 }
 .center-radio label{
     font-size: 1em !important;
@@ -185,7 +184,7 @@
     display: none;
     color:#00cd00;
 }
-	
+    
 .LV_invalid {
     color:#E74C3C;
 }
