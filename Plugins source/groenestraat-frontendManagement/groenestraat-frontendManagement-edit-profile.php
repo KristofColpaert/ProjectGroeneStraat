@@ -182,10 +182,21 @@
 						'last_name' => $name
 					);
 
-					if(isset($_POST['profilePassword1']) && isset($_POST['profilePassword2']))
+					if(isset($_POST['profilePassword1']) && !empty($_POST['profilePassword1']) && 
+						isset($_POST['profilePassword2']) && !empty($_POST['profilePassword2'])
+					)
 					{
 						$password1 = $_POST['profilePassword1'];
 						$password2 = $_POST['profilePassword2'];
+
+						if($password1 == '' || $password1 == ' ')
+						{
+							?>
+								<p class="error-message">Gelieve alle vereiste gegevens correct in te voeren.</p>
+							<?php
+							return;
+						}
+
 
 						if($password1 == $password2)
 						{
@@ -218,7 +229,7 @@
 		                <h2 class="normalize-text center">Uw profiel wordt bewerkt</h2>
 					<?php
 
-					echo '<META HTTP-EQUIV="Refresh" Content="0; URL=' . esc_url(home_url() . '/member-informatie/?userid=' . $current_user->ID) . '">'; 
+					echo '<META HTTP-EQUIV="Refresh" Content="0; URL=' . esc_url(home_url() . '/profiel/?userid=' . $current_user->ID) . '">'; 
 					return;	
 				}
 				else
