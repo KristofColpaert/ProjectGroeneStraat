@@ -165,11 +165,11 @@
 				!empty($_POST['adLocation'])
 				)
 			{
-				$adTitle = $_POST['adTitle'];
+				$adTitle = sanitize_text_field($_POST['adTitle']);
 				$adDescription = $_POST['adDescription'];
-				$parentProjectId = $_POST['parentProjectId'];
-				$adPrice = $_POST['adPrice'];
-				$adLocation = $_POST['adLocation'];
+				$parentProjectId = sanitize_text_field($_POST['parentProjectId']);
+				$adPrice = sanitize_text_field($_POST['adPrice']);
+				$adLocation = sanitize_text_field($_POST['adLocation']);
 
 				if(null == get_page_by_title($adTitle))
 				{

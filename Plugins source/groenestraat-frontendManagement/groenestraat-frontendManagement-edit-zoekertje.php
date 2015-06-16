@@ -149,11 +149,11 @@
 				!empty($_POST['zoekertjeId'])
 				)
 			{
-				$zoekertjeId = $_POST['zoekertjeId'];
-				$adTitle = $_POST['adTitle'];
+				$zoekertjeId = sanitize_text_field($_POST['zoekertjeId']);
+				$adTitle = sanitize_text_field($_POST['adTitle']);
 				$adDescription = $_POST['adDescription'];
-				$adPrice = $_POST['adPrice'];
-				$adLocation = $_POST['adLocation'];
+				$adPrice = sanitize_text_field($_POST['adPrice']);
+				$adLocation = sanitize_text_field($_POST['adLocation']);
 				$parentProjectId = $_POST['parentProjectId'];
 
 				if(null == get_page_by_title($adTitle))

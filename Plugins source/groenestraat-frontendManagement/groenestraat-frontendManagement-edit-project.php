@@ -131,12 +131,12 @@
 				!empty($_POST['projectZipcode'])
 			)
 			{
-				$projectId = $_POST['projectId'];
-				$projectTitle = $_POST['projectTitle'];
+				$projectId = sanitize_text_field($_POST['projectId']);
+				$projectTitle = sanitize_text_field($_POST['projectTitle']);
 				$projectDescription = $_POST['projectDescription'];
-				$projectStreet = $_POST['projectStreet'];
-				$projectCity = $_POST['projectCity'];
-				$projectZipcode = $_POST['projectZipcode'];
+				$projectStreet = sanitize_text_field($_POST['projectStreet']);
+				$projectCity = sanitize_text_field($_POST['projectCity']);
+				$projectZipcode = sanitize_text_field($_POST['projectZipcode']);
 
 				if(null == get_page_by_title($projectTitle))
 				{

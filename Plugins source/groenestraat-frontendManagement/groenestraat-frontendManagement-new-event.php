@@ -246,14 +246,14 @@
 				!empty($_POST['eventEndHour'])
 				)
 			{
-				$eventTitle = $_POST['eventTitle'];
+				$eventTitle = sanitize_text_field($_POST['eventTitle']);
 				$eventDescription = $_POST['eventDescription'];
-				$parentProjectId = $_POST['parentProjectId'];
-				$eventTime = $_POST['eventTime'];
-				$eventEndTime = $_POST['eventEndTime'];
-				$eventLocation = $_POST['eventLocation'];
-				$eventStartHour = $_POST['eventStartHour'];
-				$eventEndHour = $_POST['eventEndHour'];
+				$parentProjectId = sanitize_text_field($_POST['parentProjectId']);
+				$eventTime = sanitize_text_field($_POST['eventTime']);
+				$eventEndTime = sanitize_text_field($_POST['eventEndTime']);
+				$eventLocation = sanitize_text_field($_POST['eventLocation']);
+				$eventStartHour = sanitize_text_field($_POST['eventStartHour']);
+				$eventEndHour = sanitize_text_field($_POST['eventEndHour']);
 
 				$date1 = strtotime($eventTime);
 				$date2 = strtotime($eventEndTime);

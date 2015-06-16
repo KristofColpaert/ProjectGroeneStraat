@@ -205,10 +205,10 @@
 				!empty($_POST['articleDescription'])
 				)
 			{
-				$articleId = $_POST['articleId'];
-				$articleTitle = $_POST['articleTitle'];
+				$articleId = sanitize_text_field($_POST['articleId']);
+				$articleTitle = sanitize_text_field($_POST['articleTitle']);
 				$articleDescription = $_POST['articleDescription'];
-				$articleTags = $_POST['articleTags'];
+				$articleTags = sanitize_text_field($_POST['articleTags']);
 				$articleCategories = $_POST['articleCategories'];
 				$parentProjectId = $_POST['parentProjectId'];
 

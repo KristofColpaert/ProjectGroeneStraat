@@ -162,14 +162,14 @@
 				)
 				{	
 					$current_user = wp_get_current_user();
-					$firstname = $_POST['profileFirstname'];
-					$name = $_POST['profileName'];
-					$email = $_POST['profileEmail'];
-					$website = $_POST['profileWebsite'];
-					$street = $_POST['profileStreet'];
-					$city = $_POST['profileCity'];
-					$zipcode = $_POST['profileZipcode'];
-					$telephone = $_POST['profileTelephone'];
+					$firstname = sanitize_text_field($_POST['profileFirstname']);
+					$name = sanitize_text_field($_POST['profileName']);
+					$email = sanitize_text_field($_POST['profileEmail']);
+					$website = sanitize_text_field($_POST['profileWebsite']);
+					$street = sanitize_text_field($_POST['profileStreet']);
+					$city = sanitize_text_field($_POST['profileCity']);
+					$zipcode = sanitize_text_field($_POST['profileZipcode']);
+					$telephone = sanitize_text_field($_POST['profileTelephone']);
 					$sex = $_POST['profileSex'];
 					$newsletter = $_POST['profileNewsletter'];
 					$identity = $_POST['profileIdentity'];

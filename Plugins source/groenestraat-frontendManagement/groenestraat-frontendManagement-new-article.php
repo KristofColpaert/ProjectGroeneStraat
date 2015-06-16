@@ -187,11 +187,11 @@
 				$_FILES['articleFeaturedImage']['size'] > 0
 				)
 			{
-				$articleTitle = $_POST['articleTitle'];
+				$articleTitle = sanitize_text_field($_POST['articleTitle']);
 				$articleDescription = $_POST['articleDescription'];
-				$parentProjectId = $_POST['parentProjectId'];
-				$articleTags = $_POST['articleTags'];
-				$articleCategories = $_POST['articleCategories'];
+				$parentProjectId = sanitize_text_field($_POST['parentProjectId']);
+				$articleTags = sanitize_text_field($_POST['articleTags']);
+				$articleCategories = sanitize_text_field($_POST['articleCategories']);
 
 				if(null == get_page_by_title($articleTitle))
 				{
