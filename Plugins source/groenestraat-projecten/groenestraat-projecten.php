@@ -224,10 +224,7 @@
 			$url = 'https://maps.googleapis.com/maps/api/geocode/json?address=Grote%20Markt%20Kortrijk&key=' . $apiKey;
 		}
 
-		$ch = curl_init();
-		curl_setopt($ch, CURLOPT_URL, $url); 
-		curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1); 
-		$output = curl_exec($ch);   
+		$output = file_get_contets($url);
 
 		$json = json_decode($output, true);
 		$lat = $json['results'][0]['geometry']['location']['lat'];
@@ -236,7 +233,5 @@
 		$imageUrl = 'https://maps.googleapis.com/maps/api/streetview?key=' . $apiKey . '&size=800x800&location=' . $lat . ',' . $lng . '&fov=90&heading=235&pitch=10';
 
 		add_post_meta($post->ID, '_projectStreetViewThumbnail', $imageUrl);
-
-		curl_close($ch);
 	}
 ?>
