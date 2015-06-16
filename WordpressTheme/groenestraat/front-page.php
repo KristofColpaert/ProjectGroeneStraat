@@ -250,4 +250,27 @@
         ?>
         <section class="clear"></section>
     </section>
+    <script>
+        $(document).ready(function() 
+        { 
+          $("#recent-projects-slider").owlCarousel({
+                items : 5,
+                itemsDesktop : [1199,3],
+                itemsDesktopSmall : [979,3],
+                navigation : false,
+                responsive: true,
+                autoHeight : false,
+                pagination : false,
+                paginationNumbers: false,
+                stopOnHover: true,
+                mouseDrag: true,
+                touchDrag: true
+          });
+        });
+            
+        $('#recent-projects-slider .item').hover(
+                function () { $(this).find('.overlay').fadeIn(300); },
+                function () { $(this).find('.overlay').fadeOut(200); }
+        );  
+    </script>
 <?php get_footer(); ?>
