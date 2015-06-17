@@ -111,7 +111,7 @@
 		else
 		{
 			?>
-				<p class="error-message">Dit project bestaat niet, of u hebt geen toegang tot de gevraagde pagina. Ga <a href="javascript:history.back()-1">terug.</a></p>
+				<p class="error-message">Dit project bestaat niet, of u bent niet aangemeld om deze pagina te bekijken. Ga <a href="javascript:history.back()-1">terug.</a></p>
 			<?php
 		}
 	}

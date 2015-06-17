@@ -57,7 +57,7 @@
 		else
 		{
 			?>
-				<p class="error-message">U moet zich aanmelden om deze pagina te bekijken. Ga <a href="javascript:history.back()-1">terug.</a></p>
+				<p class="error-message">U bent niet ingelogd of u hebt de rechten niet om deze pagina te bekijken. Ga <a href="javascript:history.back()-1">terug.</a></p>
 			<?php
 		}
 	}
