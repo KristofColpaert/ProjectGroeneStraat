@@ -192,7 +192,7 @@
 						if($password1 == '' || $password1 == ' ')
 						{
 							?>
-								<p class="error-message">Gelieve alle vereiste gegevens correct in te voeren.</p>
+								<p class="error-message">Gelieve alle vereiste gegevens correct in te voeren. Ga <a href="javascript:history.back()-1">terug.</a></p>
 							<?php
 							return;
 						}
@@ -206,7 +206,7 @@
 						else
 						{
 							?>
-								<p class="error-message">Gelieve alle vereiste gegevens correct in te voeren.</p>
+								<p class="error-message">Gelieve alle vereiste gegevens correct in te voeren. Ga <a href="javascript:history.back()-1">terug.</a></p>
 							<?php
 							return;
 						}
@@ -235,7 +235,7 @@
 				else
 				{
 					?>
-						<p class="error-message">Gelieve alle vereiste gegevens correct in te voeren.</p>
+						<p class="error-message">Gelieve alle vereiste gegevens correct in te voeren. Ga <a href="javascript:history.back()-1">terug.</a></p>
 					<?php
 				}
 			}

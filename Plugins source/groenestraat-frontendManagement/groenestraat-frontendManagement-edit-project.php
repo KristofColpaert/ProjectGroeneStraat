@@ -24,7 +24,7 @@
 			if($project->post_type != 'projecten')
 			{
 				?>
-					<p class="error-message">Dit project bestaat niet, of u hebt geen toegang tot de gevraagde pagina. Ga terug naar <a href="<?php echo home_url(); ?>">Home</a>.</p>
+					<p class="error-message">Dit project bestaat niet, of u hebt geen toegang tot de gevraagde pagina. Ga <a href="javascript:history.back()-1">terug.</a></p>
 				<?php
 				return;
 			}
@@ -100,7 +100,7 @@
 			else
 			{
 				?>
-					<p class="error-message">Dit project bestaat niet, of u hebt geen toegang tot de gevraagde pagina. Ga terug naar <a href="<?php echo home_url(); ?>">Home</a>.</p>
+					<p class="error-message">Dit project bestaat niet, of u hebt geen toegang tot de gevraagde pagina. Ga <a href="javascript:history.back()-1">terug.</a></p>
 				<?php
 			}
 		}
@@ -111,7 +111,7 @@
 		else
 		{
 			?>
-				<p class="error-message">Dit project bestaat niet, of u hebt geen toegang tot de gevraagde pagina. Ga terug naar <a href="<?php echo home_url(); ?>">Home</a>.</p>
+				<p class="error-message">Dit project bestaat niet, of u hebt geen toegang tot de gevraagde pagina. Ga <a href="javascript:history.back()-1">terug.</a></p>
 			<?php
 		}
 	}
@@ -176,7 +176,7 @@
 				else
 				{
 					?>
-						<p class="error-message">Helaas, er bestaat reeds een project met deze titel.</p>
+						<p class="error-message">Helaas, er bestaat reeds een project met deze titel. Ga <a href="javascript:history.back()-1">terug.</a></p>
 					<?php
 				}
 			}
@@ -184,7 +184,7 @@
 			else
 			{
 				?>
-					<p class="error-message">Gelieve alle gegevens correct in te voeren.</p>
+					<p class="error-message">Gelieve alle gegevens correct in te voeren. Ga <a href="javascript:history.back()-1">terug.</a></p>
 				<?php
 			}
 		}

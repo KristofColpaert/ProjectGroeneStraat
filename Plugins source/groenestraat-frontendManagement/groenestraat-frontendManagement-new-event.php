@@ -50,7 +50,7 @@
 				if(!in_array($current_user->ID, $meta))
 				{
 					?>
-						<p class="error-message">U hebt geen toegang tot de gevraagde pagina. Ga terug naar <a href="<?php echo home_url(); ?>">Home</a>.</p>
+						<p class="error-message">U hebt geen toegang tot de gevraagde pagina. Ga <a href="javascript:history.back()-1">terug.</a></p>
 					<?php
 					return;
 				}
@@ -225,7 +225,7 @@
 		else 
 		{
 			?>
-				<p class="error-message">U hebt geen toegang tot de gevraagde pagina. Ga terug naar <a href="<?php echo home_url(); ?>">Home</a>.</p>
+				<p class="error-message">U moet zich aanmelden om deze pagina te bekijken. <a class="normalize-text" href="<?php echo home_url(); ?>/login">Aanmelden</a></p>
 			<?php
 		}
 	}
@@ -259,7 +259,7 @@
 				if($date1 > $date2)
 				{
 					?>
-						<p class="error-message">Gelieve een startdatum in te voeren die vroeger valt dan de einddatum. Ga <a href="<?php echo home_url() . '/nieuw-event'; ?>">terug</a>.</p>
+						<p class="error-message">Gelieve een startdatum in te voeren die vroeger valt dan de einddatum. Ga <a class="normalize-text" href="javascript:history.back()-1">terug</a></p>
 					<?php
 					return;
 				}
@@ -272,7 +272,7 @@
 					if($start[0] > $end[0])
 					{
 						?>
-							<p class="error-message">Gelieve een aanvangstijd in te voeren die vroeger valt dan de eindtijd. Ga <a href="<?php echo home_url() . '/nieuw-event'; ?>">terug</a>.</p>
+							<p class="error-message">Gelieve een aanvangstijd in te voeren die vroeger valt dan de eindtijd. Ga <a class="normalize-text" href="javascript:history.back()-1">terug.</a></p>
 						<?php
 						return;
 					}
@@ -280,7 +280,7 @@
 					if($start[0] == $end[0] && $start[1] > $end[1])
 					{
 						?>
-							<p class="error-message">Gelieve een aanvangstijd in te voeren die vroeger valt dan de eindtijd. Ga <a href="<?php echo home_url() . '/nieuw-event'; ?>">terug</a>.</p>
+							<p class="error-message">Gelieve een aanvangstijd in te voeren die vroeger valt dan de eindtijd. Ga <a class="normalize-text" href="javascript:history.back()-1">terug.</a></p>
 						<?php
 						return;
 					}
@@ -339,7 +339,7 @@
 				else
 				{
 					?>
-						<p class="error-message">Helaas, er bestaat reeds een event met deze titel.</p>
+						<p class="error-message">Helaas, er bestaat reeds een event met deze titel. <a class="normalize-text" href="javascript:history.back()-1">Terug</a></p>
 					<?php
 				}
 			}
@@ -347,7 +347,7 @@
 			else
 			{
 				?>
-					<p class="error-message">Gelieve alle gegevens correct in te voeren.</p>
+					<p class="error-message">Gelieve alle gegevens correct in te voeren. <a class="normalize-text" href="javascript:history.back()-1">Terug</a></p>
 				<?php
 			}
 		}

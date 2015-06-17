@@ -24,7 +24,7 @@
 			if($zoekertje->post_type != 'zoekertjes')
 			{
 				?>
-					<p class="error-message">Dit zoekertje bestaat niet, of u hebt geen toegang tot de gevraagde pagina. Ga terug naar <a href="<?php echo home_url(); ?>">Home</a>.</p>
+					<p class="error-message">Dit zoekertje bestaat niet, of u hebt geen toegang tot de gevraagde pagina. Ga <a href="javascript:history.back()-1">terug.</a></p>
 				<?php
 				return;
 			}
@@ -121,7 +121,7 @@
 			else
 			{
 				?>
-					<p class="error-message">Dit zoekertje bestaat niet, of u hebt geen toegang tot de gevraagde pagina. Ga terug naar <a href="<?php echo home_url(); ?>">Home</a>.</p>
+					<p class="error-message">Dit zoekertje bestaat niet, of u hebt geen toegang tot de gevraagde pagina. Ga <a href="javascript:history.back()-1">terug.</a></p>
 				<?php
 			}
 		}
@@ -132,7 +132,7 @@
 		else
 		{
 			?>
-				<p class="error-message">Dit event bestaat niet, of u hebt geen toegang tot de gevraagde pagina. Ga terug naar <a href="<?php echo home_url(); ?>">Home</a>.</p>
+				<p class="error-message">Dit event bestaat niet, of u hebt geen toegang tot de gevraagde pagina. Ga <a href="javascript:history.back()-1">terug.</a></p>
 			<?php
 		}
 	}
@@ -208,7 +208,7 @@
 				else
 				{
 					?>
-						<p class="error-message">Helaas, er bestaat reeds een zoekertje met deze titel.</p>
+						<p class="error-message">Helaas, er bestaat reeds een zoekertje met deze titel. Ga <a href="javascript:history.back()-1">terug.</a></p>
 					<?php
 				}
 			}
@@ -216,7 +216,7 @@
 			else
 			{
 				?>
-					<p class="error-message">Gelieve alle gegevens correct in te voeren.</p>
+					<p class="error-message">Gelieve alle gegevens correct in te voeren. Ga <a href="javascript:history.back()-1">terug.</a></p>
 				<?php
 			}
 		}

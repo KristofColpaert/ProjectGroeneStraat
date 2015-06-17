@@ -25,7 +25,7 @@
 			if($article->post_type!= 'post' || get_post_status($article->ID) != 'publish')
 			{
 				?>
-					<p class="error-message">Dit artikel bestaat (nog) niet, of u hebt geen toegang tot de gevraagde pagina. Ga terug naar <a href="<?php echo home_url(); ?>">Home</a>.</p>
+					<p class="error-message">Dit artikel bestaat (nog) niet, of u hebt geen toegang tot de gevraagde pagina. Ga <a href="javascript:history.back()-1">terug.</a></p>
 				<?php
 				return;
 			}
@@ -46,7 +46,7 @@
 			else
 			{
 				?>
-					<p class="error-message">Dit project bestaat niet, of u hebt geen toegang tot de gevraagde pagina. Ga terug naar <a href="<?php echo home_url(); ?>">Home</a>.</p>
+					<p class="error-message">Dit project bestaat niet, of u hebt geen toegang tot de gevraagde pagina. Ga <a href="javascript:history.back()-1">terug.</a></p>
 				<?php
 			}
 		}
@@ -57,7 +57,7 @@
 		else
 		{
 			?>
-				<p class="error-message">Dit project bestaat niet, of u hebt geen toegang tot de gevraagde pagina. Ga terug naar <a href="<?php echo home_url(); ?>">Home</a>.</p>
+				<p class="error-message">U moet zich aanmelden om deze pagina te bekijken. Ga <a href="javascript:history.back()-1">terug.</a></p>
 			<?php
 		}
 	}
