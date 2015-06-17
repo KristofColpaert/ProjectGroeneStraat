@@ -101,11 +101,12 @@
 </div>
 </body>
 </html>';
-
-		$headers  = 'MIME-Version: 1.0' . "\r\n";
-		$headers .= 'Content-type: text/html; charset=UTF-8' . "\r\n";
-		$headers .= 'From: Het groenestraat.be team' . "\r\n";
-		$headers .= 'Reply-To: wordpress@groenestraat.be' . "\r\n";
+		
+		$headers = array();
+		$headers[] = 'MIME-Version: 1.0';
+		$headers[] = 'Content-type: text/html; charset=UTF-8';
+		$headers[] = 'From: Het Groene Straat Team <groenestraat@groenestraat.be>';
+		$headers[] = 'Reply-To: wordpress@groenestraat.be';
 
 		foreach($users as $user)
 		{
@@ -119,11 +120,11 @@
 		//eventueel feedback geven
 		if(wp_mail($ontvangers, $onderwerp, $completeBijlage, $headers))
 		{
-			//
+			echo 'Lucky';
 		}
 		else
 		{
-			//
+			echo 'Unlucky';
 		}
 	}
 
