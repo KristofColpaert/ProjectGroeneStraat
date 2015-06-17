@@ -63,9 +63,6 @@ $args = array(
     email.add(Validate.Email, {failureMessage: "Moet een geldig emailadres zijn!"});
     var pass = new LiveValidation('user_pass', {validMessage:" "});
     pass.add(Validate.Presence,{failureMessage:nietLeeg});
-    $("#user_login").focusout(function(){
-        checkValidEmail($("#user_login").val(),true,"user_login");
-    });
     
 </script>
     
