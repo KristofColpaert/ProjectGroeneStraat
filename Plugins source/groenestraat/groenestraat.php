@@ -311,6 +311,11 @@
 			{
 				activate_plugin('groenestraat-projectNieuwsbrief/groenestraat-projectNieuwsbrief.php');
 			}
+
+			if(is_plugin_inactive('wordpress-seo/wp-seo.php'))
+			{
+				activate_plugin('wordpress-seo/wp-seo.php');
+			}
 		});
 	}
 ?>
