@@ -18,8 +18,11 @@
 				$title = $_POST["Title"];
 				$onderwerp = "Reactie " . $name . " op zoekertje: '" . $title . "'";
 
-				$headers  = 'MIME-Version: 1.0' . "\r\n";
-				$headers .= 'Content-type: text/html; charset=UTF-8' . "\r\n";
+				$headers = array();
+				$headers[] = 'MIME-Version: 1.0';
+				$headers[] = 'Content-type: text/html; charset=UTF-8';
+				$headers[] = 'From: Het Groene Straat Team <' . $userEmail . '>';
+				$headers[] = 'Reply-To: ' . $userEmail;
 
 				if(wp_mail($adminEmail, $onderwerp, $reactie, $headers))
 				{
