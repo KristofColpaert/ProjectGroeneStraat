@@ -10,7 +10,7 @@
 green = #00cd00;
 lightgray = #f8f7f7;
 gray = #a2a1a9;
-darkgray = #69686e
+darkgray = #69686e;
 */
 
 body
@@ -496,6 +496,11 @@ footer
     padding: 2%;
     min-height: 150px;
     text-transform: lowercase;
+}
+
+.footer-logo
+{
+    text-align: center;
 }
 
 .footer-logo img
@@ -990,4 +995,16 @@ ol>li
 .error-message
 {
     color:red;
+}
+
+#menu-footer-menu li ul a
+{
+    background-color: #69686e;
+    padding-left: 40px;
+    font-weight: 300;
+}
+
+#menu-footer-menu li ul a:hover
+{
+    color: #FFFFFF;
 }
