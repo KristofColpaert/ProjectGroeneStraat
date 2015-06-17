@@ -217,7 +217,7 @@
                     <?php
                         if($userid == get_current_user_id()){
                         ?>
-                            <a class="wide-button" href="<?php echo site_url().'/leden-overzicht'; ?>">Bewerk profiel</a>
+                            <a class="wide-button" href="<?php echo site_url().'/bewerk-profiel'; ?>">Bewerk profiel</a>
                         <?php
                         }
                     ?>
