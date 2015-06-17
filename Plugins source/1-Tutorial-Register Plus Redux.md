@@ -15,7 +15,7 @@
 * Klik op "Voeg een nieuwe gebruikersveld toe. 
 * Toevoegen velden.
     * Geslacht
-          * Tonen: Tekstbox veld
+          * Tonen: Radiobutton veld
           * Opties: Man,Vrouw
           * Laat op registratie zien: true
           * Verplicht veld: true
