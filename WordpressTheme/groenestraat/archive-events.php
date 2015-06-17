@@ -70,6 +70,7 @@ function getMonth($var)
 	<?php
 
 	global $post;
+
 	$keyword = '';
 
 		if(isset($_GET['zoeken']))

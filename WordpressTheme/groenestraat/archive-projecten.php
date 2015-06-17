@@ -2,6 +2,7 @@
 	get_header();
 	
 	global $post;
+
 	$index = 0;
 	$keyword = '';
 

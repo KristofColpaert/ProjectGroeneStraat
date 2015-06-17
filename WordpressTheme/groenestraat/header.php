@@ -39,6 +39,9 @@
     </script>
 </head>
 <body>
+    <!-- Toevoegingen AddThis -->
+    <div class="addthis_sharing_toolbox" data-url="<?php the_permalink(); ?>" data-title="<?php the_title_attribute(); ?>"></div>
+    
     <header>
         <nav>
            	<img src="<?php bloginfo('template_directory'); ?>/img/logo.png" class="logo" width="400" height="65" alt="" title="" />

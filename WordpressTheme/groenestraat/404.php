@@ -16,18 +16,19 @@ best een plantje dat geen bladeren heeft.. dus iemand die tijd heeft? -->
 		width: 20%;
 		height: auto;
 		margin:0 auto;
+		margin-bottom: 40px;
 	}
 	.not-found h1
 	{
-	    font-size:15em;
+	    font-size:7em;
 	    font-weight: bold;
 	    line-height: 2em;
 	}
 </style>
 <section class="container">
 	<section class="not-found">
-		<h1>404 NOT FOUND!</h1>
-		<img src="http://images2.wikia.nocookie.net/__cb20130221235215/adventuretimesuperfans/images/e/ed/Render_-_Laugh_Face_Pfftch_Troll_Face_BaixeRenders.png">
+		<h1>404 - Pagina niet gevonden</h1>
+		<img src="<?php echo get_template_directory_uri() . '/img/logo_dor.png'; ?>">
 	</section>
 </section>
 

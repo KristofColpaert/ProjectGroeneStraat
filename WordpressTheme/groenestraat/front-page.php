@@ -1,4 +1,6 @@
-<?php get_header(); ?>
+<?php 
+    get_header(); 
+?>
 
     <section class="header-image"></section>
     <section class="about">
