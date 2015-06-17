@@ -29,6 +29,9 @@
 		makeInitialShortcodePage('Cookiesbeleid', '', 'cookiesbeleid', 'publish', 'page', 'closed', 'page.php');
         makeInitialShortcodePage('About', '', 'about', 'publish', 'page', 'closed', 'page.php');
 
+        //contact formulier
+        makeInitialShortcodePage('Contact', '[contact-form-7 id="364" title="Contact"]', 'contact', 'publish', 'page', 'closed', 'page.php');
+
 		register_main_menu();
         register_sub_menu();
 		activate_all_plugins();
@@ -302,6 +305,11 @@
 			if(is_plugin_inactive('groenestraat-loadPosts/groenestraat-loadPosts.php'))
 			{
 				activate_plugin('groenestraat-loadPosts/groenestraat-loadPosts.php');
+			}
+
+			if(is_plugin_inactive('groenestraat-projectNieuwsbrief/groenestraat-projectNieuwsbrief.php'))
+			{
+				activate_plugin('groenestraat-projectNieuwsbrief/groenestraat-projectNieuwsbrief.php');
 			}
 		});
 	}
