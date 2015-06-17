@@ -130,7 +130,7 @@
         					'author' => $userid,
                             'paged' => 1,
         					'post_type' => array('events', 'post', 'zoekertjes'),
-        					'order' => 'ASC',
+        					'order' => 'DESC',
         					'orderby' => 'date')
         				);
                     ?> 
