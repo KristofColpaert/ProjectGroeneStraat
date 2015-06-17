@@ -84,8 +84,9 @@ function prowpt_persoonlijkeProjectenOverzicht()
 											<section class="list-item" style="margin-top:3%;margin-bottom:1.5%">
 												<h1><?php echo get_the_title(); ?></h1>
 												<p><?php echo the_content(); ?></p><br/>
+                                                <a class="view-item" href="<?php the_permalink(); ?>">Bekijk project</a>
 												<a class="confirm-button-green" href="<?php echo site_url() . '/bewerk-project?project=' .  $post->ID ?>">Bewerk project</a>
-												<a class="confirm-button-green" href="<?php echo site_url() . '/verwijder-project?project=' .  $post->ID ?>">Verwijder project</a>
+												<a class="confirm-button" href="<?php echo site_url() . '/verwijder-project?project=' .  $post->ID ?>">Verwijder project</a>
 											</section>
 										<?php
 								}
@@ -107,8 +108,7 @@ function prowpt_persoonlijkeProjectenOverzicht()
 												<section class="list-item" style="margin-top:3%;margin-bottom:1.5%">
 													<h1><?php echo get_the_title(); ?></h1>
 													<p><?php echo the_content(); ?></p><br/>
-													<a class="confirm-button-green" href="<?php echo site_url() . '/bewerk-project?project=' .  $post->ID ?>">Bewerk project</a>
-													<a class="confirm-button-green" href="<?php echo site_url() . '/verwijder-project?project=' .  $post->ID ?>">Verwijder project</a>
+													<a class="view-item" href="<?php the_permalink(); ?>">Bekijk project</a>
 												</section>
 											<?php
 										}	

@@ -86,8 +86,9 @@ function prowpt_persoonlijkeEventenOverzicht()
 									<h1><?php echo get_the_title(); ?></h1>
 									<p><?php echo the_content(); ?></p><br/><br/>
 									<p>Van <strong><?php echo $eventTime . ' (' . $eventStartHour . ')' . '</strong> tot <strong>' . $eventEndTime . ' (' . $eventEndHour . ')' . '</strong> te <strong>' . $eventLocation; ?></strong></p><br/>
+                                    <a class="view-item" href="<?php the_permalink(); ?>">Bekijk event</a>
 									<a class="confirm-button-green" href="<?php echo site_url().'/bewerk-event?event='. $post->ID; ?>">Bewerk event</a>
-									<a class="confirm-button-green" href="<?php echo site_url().'/verwijder-event?event='. $post->ID; ?>">Verwijder event</a>
+									<a class="confirm-button" href="<?php echo site_url().'/verwijder-event?event='. $post->ID; ?>">Verwijder event</a>
 								</section>
 							<?php
 						}

@@ -81,8 +81,9 @@ function prowpt_persoonlijkeZoekertjesOverzicht()
 								<section class="list-item" style="margin-top:3%;margin-bottom:1.5%">
 									<h1><?php echo get_the_title(); ?></h1>
 									<p><?php echo the_content(); ?></p><br/><br/>
+                                    <a class="view-item" href="<?php the_permalink(); ?>">Bekijk zoekertje</a>
 									<a class="confirm-button-green" href="<?php echo site_url().'/bewerk-zoekertje?zoekertje='. $post->ID; ?>">Bewerk zoekertje</a>
-									<a class="confirm-button-green" href="<?php echo site_url().'/verwijder-zoekertje?zoekertje='. $post->ID; ?>">Verwijder zoekertje</a>
+									<a class="confirm-button" href="<?php echo site_url().'/verwijder-zoekertje?zoekertje='. $post->ID; ?>">Verwijder zoekertje</a>
 								</section>
 							<?php
 						}

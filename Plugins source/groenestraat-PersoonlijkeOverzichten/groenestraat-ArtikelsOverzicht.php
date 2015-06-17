@@ -76,8 +76,9 @@ function prowpt_persoonlijkeArtikelsOverzicht()
 							<section class="list-item" style="margin-top:3%;margin-bottom:1.5%">
 								<h1><?php echo get_the_title(); ?></h1>
 								<p><?php echo the_content(); ?></p><br/>
+                                <a class="view-item" href="<?php the_permalink(); ?>">Bekijk artikel</a>
 								<a class="confirm-button-green" href="<?php echo site_url().'/bewerk-artikel?artikel='. $post->ID; ?>">Bewerk artikel</a>
-								<a class="confirm-button-green" href="<?php echo site_url().'/verwijder-artikel?artikel='. $post->ID; ?>">Verwijder artikel</a>
+								<a class="confirm-button" href="<?php echo site_url().'/verwijder-artikel?artikel='. $post->ID; ?>">Verwijder artikel</a>
 							</section>
 						<?php
 				}
