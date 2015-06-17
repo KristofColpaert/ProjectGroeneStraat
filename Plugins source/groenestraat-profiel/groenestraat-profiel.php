@@ -213,7 +213,7 @@
         </section>
             <section class="sidebar">
                 <section class="search normalize-text">
-                    <a class="wide-button" href="<?php echo site_url().'/leden-overzicht'; ?>">Terug naar ledenoverzicht</a>
+                    <a class="wide-button" href="<?php echo site_url().'/leden-overzicht'; ?>">Ledenoverzicht</a>
                     <?php
                         if($userid == get_current_user_id()){
                         ?>
