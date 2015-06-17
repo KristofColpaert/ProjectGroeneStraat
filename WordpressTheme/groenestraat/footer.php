@@ -24,7 +24,7 @@
             </section>
             <section class="footer-logo">
                 <img src="<?php bloginfo('template_directory'); ?>/img/logo_large.png" width="500" height="500" alt="" title="" />
-                <p>© Copyright 2015. Meer info komt hier terecht.</p>
+                <p>© Copyright Groene Straat <?php echo date('Y'); ?></p>
             </section>
             <section class="footer-links">
             <h1>Social</h1><br/><br/>
