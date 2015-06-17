@@ -223,7 +223,7 @@
                         <section class="list-item normalize-text <?php echo $post->post_type;?>">
                             <h1><?php the_title(); ?></h1>
                             <p><strong>Aanbieder: </strong><a style="color:black;" class="author-name" href="<?php echo home_url(); ?>/profiel/?userid=<?php echo the_author_meta('ID'); ?>"><?php echo the_author_meta('first_name'); ?> <?php echo the_author_meta('last_name'); ?></a></p>
-                            <p><strong>Beschrijving: </strong><?php the_content(); ?></p>
+                            <p><strong>Beschrijving: </strong><?php the_excerpt(); ?></p>
                             <p><strong>Locatie: </strong><?php echo $adLocation; ?></p>
                             <p><strong>Prijs: </strong><?php echo $adPrice; ?></p>
                              <a class="view-item" href="<?php the_permalink(); ?>">Bekijk zoekertje</a>
