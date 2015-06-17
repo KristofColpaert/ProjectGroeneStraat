@@ -205,7 +205,7 @@
                     {
     					?> 
                             <section class="list-item">
-                                <h2 class="normalize-text">Er werden geen activiteiten gevonden.</h2>s
+                                <h2 class="normalize-text">Er werden geen activiteiten gevonden.</h2>
                             </section>
     					<?php
     				}    
