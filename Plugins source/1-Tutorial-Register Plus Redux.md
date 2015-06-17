@@ -3,6 +3,7 @@
 ## Configuratie
 
 * Vink Autologin gebruiker aan.
+* Vink bij Registratieformulier "Gebruik het e-mail adres als gebruikersnaam" aan.
 * Vink bij Profiel velden volgende waarden aan. 
      * Voornaam
      * Achternaam
