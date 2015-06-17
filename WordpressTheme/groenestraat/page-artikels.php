@@ -7,10 +7,12 @@ get_header();
 ?>
     <section class="container normalize-text">
     <section class="sub-menu">
+         <?php if(is_user_logged_in()){ ?>
         <ul>
             <li><a href="<?php echo get_site_url(); ?>/nieuw-artikel">Nieuw artikel</a></li>
             <li><a href="<?php echo get_site_url(); ?>/mijn-artikels">Mijn artikels</a></li>
         </ul>
+        <?php } ?>
         <section class="options">
             <form action="<?php $_SERVER['PHP_SELF']; ?>" method="GET">
                 <input type="text" name="zoekveld" class="textbox" placeholder="Zoeken op artikel">
@@ -143,7 +145,7 @@ get_header();
             <form action="<?php $_SERVER['PHP_SELF']; ?>" method="GET">
                 <p>
                     <input type="text" name="zoekveld" class="textbox" placeholder="Zoeken op artikel">
-                    <select class="textbox combobox" id="articleCategories" name="categorie[]" multiple size="5">
+                    <select class="listbox" id="articleCategories" name="categorie[]" multiple size="5">
                         <?php
                             $categories = get_categories(
                                 array(

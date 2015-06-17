@@ -2,10 +2,12 @@
 
 	<section class="container normalize-text">
 	<section class="sub-menu">
+         <?php if(is_user_logged_in()){ ?>
 		<ul>
 			<li><a href="<?php echo get_site_url(); ?>/nieuw-zoekertje">Nieuw zoekertje</a></li>
 			<li><a href="<?php echo get_site_url(); ?>/mijn-zoekertjes">Mijn zoekertjes</a></li>
 		</ul>
+        <?php } ?>
 		<section class="options">
 			<form action="<?php $_SERVER['PHP_SELF']; ?>" method="GET">
 				<input type="text" name="zoekveld" class="textbox" placeholder="Zoeken op zoekertje"><input type="submit" class="form-button" value="zoeken" name="zoeken">

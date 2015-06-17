@@ -42,12 +42,8 @@
 		*/
 
 		
-         if($current_user->ID > 0 && $post->post_author == $current_user->ID)
-			{
-		?>
-           
-            <a class="edit-button" href="<?php echo get_site_url();?>/bewerk-event?event=<?php echo $post->ID ?>">Bewerken</a><?php  } ?>
-            <?php if(has_post_thumbnail($post->ID)) { 
+       
+             if(has_post_thumbnail($post->ID)) { 
 			 $url = wp_get_attachment_url( get_post_thumbnail_id($post->ID) );?>
 			<section class="image-wrapper">
 				
@@ -57,6 +53,11 @@
         </script>
 		<?php } ?>
             <div class="eventwrapper normalize-text">
+                  <?php if($current_user->ID > 0 && $post->post_author == $current_user->ID)
+			         {
+		              ?>
+           
+                            <a class="edit-button" href="<?php echo get_site_url();?>/bewerk-event?event=<?php echo $post->ID ?>">Bewerken</a><?php  } ?>
 		<h1><?php the_title(); ?></h1><br/>
 				<p style="color:white;">Organisator: <a href="<?php echo home_url(); ?>/profiel/?userid=<?php echo the_author_meta('ID'); ?>"><?php echo the_author_meta('first_name'); ?> <?php echo the_author_meta('last_name');?></a></p>
 				<br/><br/>

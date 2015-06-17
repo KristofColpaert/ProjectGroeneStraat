@@ -13,7 +13,15 @@
 		?>
 			<?php if(has_post_thumbnail($post->ID)) { ?>
 				<div class="center"><?php echo get_the_post_thumbnail(); ?></div>
-			<?php } ?>
+			<?php } 
+            
+             if($current_user->ID > 0 && $post->post_author == $current_user->ID)
+			{
+		?>
+           
+            <a class="edit-button" href="<?php echo get_site_url();?>/bewerk-artikel?artikel=<?php echo $post->ID ?>">Bewerken</a><?php  } ?>
+            ?>
+            
 			<h1><?php the_title(); ?></h1><br/>
 			<p>
 				Auteur: <a class="author-name" href="<?php echo home_url(); ?>/profiel/?userid=<?php echo the_author_meta('ID'); ?>"><?php echo the_author_meta('first_name'); ?> <?php echo the_author_meta('last_name'); ?></a> |
@@ -46,23 +54,18 @@
 				?>
 			</p>
 			<br/><br/><br/>
-			<?php comments_template(); ?>
+			<?php 
+                if (is_user_logged_in())
+		        {
+                    comments_template();
+                }
+                 ?>
 			<?php endwhile; ?>
 				</div>
 			</main>
 		</div>
 	</section>
-	<?php
-		if (!is_user_logged_in())
-		{
-			?> 
-				<script>
-					document.getElementById('respond').style['display'] = 'none';
-					$('.comment-reply-link').css({'display':'none'});
-				</script>
-			<?php
-		}
-	?>
+	
 	<script>
 		var form = document.getElementById('commentform');
 		form.getElementsByTagName('p')[0].style.display = 'none';

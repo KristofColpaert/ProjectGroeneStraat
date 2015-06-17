@@ -237,7 +237,7 @@
                 $adLocation = $meta['_adLocation'][0];
                 $adPrice = $meta['_adPrice'][0];
         ?>
-            <section class="zoekertje-item">
+            <section class="normalize-text zoekertje-item">
                 <h3><?php the_title(); ?></h3><br/><br/>
                 <p><?php echo excerpt(20); ?></p>
                 <div>

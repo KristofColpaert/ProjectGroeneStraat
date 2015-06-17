@@ -43,7 +43,7 @@
     text-transform: uppercase;
     font-weight: 600;
     display: block;
-    margin: 15px auto;
+    margin: 15px auto !important;
     background-color: #00cd00;
     border: 1px solid transparent;
     border-radius: 3px;
@@ -57,6 +57,14 @@
     border-radius: 3px;
     color: #00cd00;
     cursor: pointer;
+}
+.red-button{
+    background-color: #E74C3C !important;
+}
+.red-button:hover{
+    color: #E74C3C !important;
+    border: 1px solid #E74C3C !important;
+    background-color: transparent !important;
 }
 .button-grey{
     background-color: #a2a1a9;
@@ -149,7 +157,11 @@
     color: #69686e;
 }
 .form-line{
+    text-align: center;
     margin: 10px 0 10px 0;
+}
+.form-line label{
+    text-align: left;
 }
 .center-radio label{
     font-size: 1em !important;
@@ -165,6 +177,7 @@
     font-size: 1.5em;
     font-weight: 600;
     color: #69686e;
+    padding: 0 !important;
 }
 
 /********FORMVALIDATION ************/
@@ -279,6 +292,7 @@ textarea.LV_invalid_field:active {
     max-width: 80vw;
     padding: 2vw;
     background-color: #FFF;
+    position: relative;
 }
 
 .createForm label{
@@ -436,7 +450,6 @@ textarea.LV_invalid_field:active {
     border: 1px solid transparent;
     border-radius: 3px;
     color: #FFF;
-    height: 25px;
     padding: 5px 15px 5px 15px;
     font-size: 1.2em;
 }
@@ -495,6 +508,7 @@ textarea.LV_invalid_field:active {
     background-color: #E74C3C;
     margin: 0 !important;
     color: #FFF;
+    padding: 10px;
 }
 .fc .fc-toolbar > * > :first-child{
     margin-left: .75em !important;
@@ -506,7 +520,7 @@ fc-right{
     box-shadow: none !important;
 }
 .fc-today-button, .fc-prev-button, .fc-next-button{
-    top: 1em !important;
+    
     right: 1em !important;
     background-image: none !important;
     background-color: transparent !important;
@@ -545,7 +559,11 @@ fc-right{
     text-align: center;
 }
 
-
+.fc-event{
+    background-color: #00CD00 !important;
+    border: transparent !important;
+    font-size: 1.5em !important;
+}
 /* DROPDOWN HEADER */
 
 .click-nav {
@@ -691,6 +709,7 @@ fc-right{
 .eventwrapper{
     background-color: #69686e;
     text-align: center;
+    position: relative;
 }
 .eventwrapper h1{
     padding: 30px 10px 5px 10px;
@@ -872,4 +891,17 @@ footer{
 }
 .author-name{
     color: rgba(0, 205, 0, 0.7) !important;
+}
+.listbox{
+    width: 100%;
+    border-radius: 3px;
+    margin: 15px auto;
+    font-family: "lane";
+    font-size: 1.3em;
+    font-weight: 600;
+    color: #69686e; 
+}
+
+header img:hover{
+    cursor: pointer;
 }

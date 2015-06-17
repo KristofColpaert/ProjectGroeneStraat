@@ -105,6 +105,7 @@ $(document).ready(function()
 		        success : function(response)
 		        {
 		        	$('#projectMemberSubmit').val("Uitschrijven");
+                    $('#projectMemberSubmit').toggleClass("red-button");
 		            return response;
 		        },
 		        error : function(error)
@@ -130,6 +131,7 @@ $(document).ready(function()
 		        success : function(response)
 		        {
 		        	$('#projectMemberSubmit').val("Inschrijven");
+                    $('#projectMemberSubmit').toggleClass("red-button");
 		            return response;
 		        },
 		        error : function(error)
@@ -160,6 +162,7 @@ $(document).ready(function()
 	            if(response == 'true')
 	            {
 	            	$('#projectMemberSubmit').attr('value', 'Uitschrijven');
+                     $('#projectMemberSubmit').toggleClass("red-button");
 	            }
 	            $('#projectMemberSubmit').css('visibility', 'visible');
 	        },

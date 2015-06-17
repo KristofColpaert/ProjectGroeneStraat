@@ -53,10 +53,13 @@ function getMonth($var)
 
 	<section class="container normalize-text">
 	<section class="sub-menu">
-		<ul>
+        <?php if(is_user_logged_in()){ ?>
+            <ul>
 			<li><a href="<?php echo get_site_url(); ?>/nieuw-event">Nieuw event</a></li>
 			<li><a href="<?php echo get_site_url(); ?>/mijn-events">Mijn events</a></li>
 		</ul>
+        <?php } ?>
+		
 		<section class="options">
 			<form action="<?php $_SERVER['PHP_SELF']; ?>" method="GET">
 				<input type="text" name="zoekveld" class="textbox" placeholder="Zoeken op eventnaam"><input type="submit" class="form-button" value="zoeken" name="zoeken">

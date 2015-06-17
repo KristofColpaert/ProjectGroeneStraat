@@ -660,6 +660,7 @@ footer
 {
     background-color: #ffffff;
     color:#333333;
+    cursor: pointer;
 }
 
 .navigate-menu
@@ -784,7 +785,7 @@ footer
     background-color: #ffffff;
 }
 
-.list-item .confirm-button-green
+.list-item .confirm-button-green, .list-item .confirm-button
 {
     font-size:1.5em;
     margin-right: 15px;
