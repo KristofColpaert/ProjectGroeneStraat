@@ -172,7 +172,16 @@
                     var info = document.getElementsByClassName('artikel-side')[0];
                     info.getElementsByTagName('h1')[0].innerHTML = splitter(data[newId].titel, 250);
                     var recentArtikel = document.getElementsByClassName('recent-artikel')[0];
-                    recentArtikel.style["background-image"] = "url('" + data[newId].image + "')";
+                    if(!data[newId].image)
+                    {
+                        recentArtikel.style["background-image"] = "url(" + <?php echo "'" . get_template_directory_uri() . '/img/placeholder1.jpg' . "'"; ?> + ")";
+                    }
+
+                    else
+                    {
+                        recentArtikel.style["background-image"] = "url('" + data[newId].image + "')";
+                    }
+                
                     recentArtikel.style["background-size"] = "cover";
                     document.getElementById('link').addEventListener('click', function(){ document.location = data[newId].url; });
                 }
