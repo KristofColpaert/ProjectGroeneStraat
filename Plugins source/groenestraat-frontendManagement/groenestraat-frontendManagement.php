@@ -4,7 +4,7 @@
 		Plugin URI: http://www.groenestraat.be
 		Description: Deze plugin zorgt ervoor dat gebruikers de content front-end kunnen beheren.
 		Version: 1.0
-		Author: Rodric Degroote, Kristof Colpaert
+		Author: Kristof Colpaert, Rodric Degroote, Koen Van Crombrugge en Vincent De Ridder
 		Author URI: http://www.groenestraat.be
 		Text Domain: prowp-plugin
 		License: GPLv2		

@@ -47,6 +47,9 @@ We have developed a [Pro Version](http://www.flippercode.com/product/wp-user-ava
 <li>Multi-lingual, Multi-Site, BBPRESS and Buddypress Supported.</li>
 </ul>
 
+Innovative Way to Setup User Avatar : 
+[youtube https://www.youtube.com/watch?v=Ee2K7YpsAnM]
+
 
 == Installation ==
 

@@ -4,7 +4,7 @@
 		Plugin URI: http://www.groenestraat.be
 		Description: Deze plugin zorgt ervoor dat u een partner kunt toevoegen of verwijderen. 
 		Version: 1.0
-		Author: Rodric Degroote
+		Author: Rodric Degroote, Kristof Colpaert, Koen Van Crombrugge en Vincent De Ridder
 		Author URI: http://www.groenestraat.be
 		Text Domain: prowp-plugin
 		License: GPLv2		

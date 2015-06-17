@@ -22,7 +22,7 @@
 /**
  * Class for managing AddThis script includes across all its plugins.
  */
-Class AddThis_addjs{
+Class AddThis_addjs_sharing_button_plugin{
     /**
     * var bool check to see if we have added our JS already.  Ensures that we don't add it twice
     */
@@ -48,7 +48,7 @@ Class AddThis_addjs{
         $this->cmsConnector = $cmsConnector;
 
         if ( did_action('addthis_addjs_created') !== 0){
-            _doing_it_wrong( 'addthis_addjs', 'Only one instance of this class should be initialized.  Look for the $addthis_addjs global first',1 );
+            //_doing_it_wrong( 'addthis_addjs', 'Only one instance of this class should be initialized.  Look for the $addthis_addjs global first',1 );
         }
 
         // We haven't added our JS yet. Or at least better not have.
@@ -57,9 +57,7 @@ Class AddThis_addjs{
         $this->_options = $addThisConfigs->getConfigs();
 
         // Version of AddThis code to use
-        if (is_array($this->_options)) {
-            $this->atversion = array_key_exists('atversion_update_status', $this->_options) && $this->_options['atversion_update_status'] == ADDTHIS_ATVERSION_REVERTED ? $this->_options['atversion'] : ADDTHIS_ATVERSION;
-        }
+        $this->atversion = $this->_options['atversion'];
 
         // If the footer option isn't set, check for it
         if (! isset($this->_options['wpfooter']) && current_user_can('manage_options'))
@@ -85,7 +83,7 @@ Class AddThis_addjs{
         else
             add_filter('the_content', array($this, 'output_script_filter') );
 
-        do_action('addthis_addjs_created');
+        //do_action('addthis_addjs_created');
     }
 
     function switch_theme(){
@@ -123,7 +121,7 @@ Class AddThis_addjs{
     }
 
     function wrapJs(){
-        $this->jsToAdd = '<script type="text/javascript">' . $this->jsToAdd . '</script>';
+        $this->jsToAdd = '<script data-cfasync="false" type="text/javascript">' . $this->jsToAdd . '</script>';
     }
 
     /* testing for wp_footer in a theme stuff */
@@ -166,49 +164,67 @@ Class AddThis_addjs{
     function addWidgetToJs(){
         if (!is_404()) {
             //Load addthis script only if the page is not 404
-            $addthis_settings_options = get_option('addthis_settings');
+            $addthis_settings_options = $this->addThisConfigs->getConfigs();
 
             $async = '';
-            if(   isset($addthis_settings_options['addthis_asynchronous_loading'])
-               && $addthis_settings_options['addthis_asynchronous_loading']
-            ) {
-              $async = 'async="async"';
+            if (!empty($addthis_settings_options['addthis_asynchronous_loading'])) {
+                $async = 'async="async"';
             }
 
             /**
              * Load client script based on the enviornment variable
              * Admin can enable debug mode in adv settings by adding url param debug=true
              */
-            $at_env = (isset($addthis_settings_options['addthis_environment']))?$addthis_settings_options['addthis_environment']:false;
-            $firstScriptHalf = '<script type="text/javascript" src="//s7.addthis.com/js/';
-
-            if(isset($at_env) &&  $at_env != ""){
-                $firstScriptHalf = '<script type="text/javascript" src="//cache-'.$at_env.'.addthis.com/cachefly/js/';
+            $script_domain = '//s7.addthis.com/js/';
+            if (!empty($addthis_settings_options['addthis_environment'])) {
+                $at_env = $addthis_settings_options['addthis_environment'];
+                $script_domain = '//cache-'.$at_env.'.addthis.com/cachefly/js/';
             }
 
+            $url = $script_domain .
+                $this->atversion .
+                '/addthis_widget.js#pubid=' .
+                urlencode($this->addThisConfigs->getUsableProfileId());
+
+            $addthis_share = $this->addThisConfigs->createAddThisShareVariable();
             $addthis_share_js = '';
-            if (   isset($addthis_settings_options['addthis_plugin_controls'])
-                && $addthis_settings_options['addthis_plugin_controls'] == "AddThis"
-            ) {
-                $addthis_share['url_transforms']['shorten']['twitter'] = 'bitly';
-                $addthis_share['shorteners']['bitly'] = new stdClass();
-                $addthis_share_js = 'var addthis_share = ' . json_encode($addthis_share) . ';';
+            if (!empty($addthis_share)) {
+                $addthis_share_js = 'var addthis_share = '. json_encode($addthis_share) .';';
+            }
+
+            $addthis_config = $this->addThisConfigs->createAddThisConfigVariable();
+            $addthis_config_js = '';
+            if (!empty($addthis_config)) {
+                $addthis_config_js = 'var addthis_config = '. json_encode($addthis_config) .';';
             }
 
             $this->jsToAdd .= '
-                <script>
+                <!-- AddThis Settings Begin -->
+                <script data-cfasync="false" type="text/javascript">
+                    var addthis_product = "'. $this->cmsConnector->getProductVersion() . '";
                     var wp_product_version = "' . $this->cmsConnector->getProductVersion() . '";
                     var wp_blog_version = "' . $this->cmsConnector->getCmsVersion() . '";
-                    ' . $addthis_share_js . '
+                    var addthis_plugin_info = ' . $this->addThisConfigs->getAddThisPluginInfoJson() . ';
+                    if (typeof(addthis_config) == "undefined") {
+                        ' . $addthis_config_js . '
+                    }
+                    if (typeof(addthis_share) == "undefined") {
+                        ' . $addthis_share_js . '
+                    }
+                </script>
+                <script
+                    data-cfasync="false"
+                    type="text/javascript"
+                    src="' . $url . ' "
+                    ' . $async . '
+                >
                 </script>';
-
-            $this->jsToAdd .= $firstScriptHalf . $this->atversion.'/addthis_widget.js#pubid='. urlencode( $this->addThisConfigs->getUsableProfileId() ).'" ' . $async. '></script>';
         }
     }
 
     function addAfterToJs(){
         if (! empty($this->jsAfterAdd)) {
-            $this->jsToAdd .= '<script type="text/javascript">' . $this->jsAfterAdd . '</script>';
+            $this->jsToAdd .= '<script data-cfasync="false" type="text/javascript">' . $this->jsAfterAdd . '</script>';
             $this->jsAfterAdd = NULL;
         }
     }

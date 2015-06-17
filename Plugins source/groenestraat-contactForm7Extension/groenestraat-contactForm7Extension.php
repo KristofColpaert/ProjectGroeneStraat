@@ -3,7 +3,7 @@
 Plugin Name: Groenestraat Contact Form 7 Extension
 Plugin URI: http://www.groenestraat.be
 Description: Contact form plugin, based on Contact Form 7.
-Author: Takayuki Miyoshi, Kristof Colpaert
+Author: Takayuki Miyoshi, Kristof Colpaert, Rodric Degroote, Koen Van Crombrugge en Vincent De Ridder
 Author URI: http://www.groenestraat.be
 Text Domain: prowp-plugin
 Domain Path: /languages/

@@ -4,7 +4,7 @@
 		Plugin URI: http://www.groenestraat.be
 		Description: Deze plugin toont de artikels die de ingelogde gebruiker aangemaakt heeft. 
 		Version: 1.0
-		Author: Rodric Degroote, Koen Van Crombrugge
+		Author: Rodric Degroote, Kristof Colpaert, Koen Van Crombrugge en Vincent De Ridder
 		Author URI: http://www.groenestraat.be
 		Text Domain: prowp-plugin
 		License: GPLv2		

@@ -4,15 +4,13 @@ Tags: better, font, awesome, icon, icons, bootstrap, fontstrap, cdn, shortcode
 Donate link: http://mightyminnow.com
 Requires at least: 3.0
 Tested up to: 4.3
-Stable tag: 1.2.1
+Stable tag: 1.3.2
 License: GPLv2+
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
 The Better Font Awesome plugin for WordPress. Shortcodes, HTML, TinyMCE, various Font Awesome versions, backwards compatibility, CDN speeds, and more.
 
 == Description ==
-
-**Do you find this plugin helpful? Please consider [leaving a 5-star review](https://wordpress.org/support/view/plugin-reviews/better-font-awesome).**
 
 Better Font Awesome allows you to automatically integrate the latest available version of [Font Awesome](http://fontawesome.io/) into your WordPress project, along with accompanying CSS, shortcodes, and TinyMCE icon shortcode generator.
 
@@ -103,12 +101,21 @@ Better Font Awesome does it's best to load after any existing Font Awesome CSS, 
 
 
 == Screenshots ==
-
-1. Better Font Awesome settings, accessed via Settings &rarr; Better Font Awesome
-2. Using Better Font Awesome via TinyMCE
+1. The icon shortcode dropdown selector
+2. Better Font Awesome settings, accessed via Settings &rarr; Better Font Awesome
 
 
 == Changelog ==
+
+= 1.3.2 =
+* Update Better Font Awesome Library with better prefix removal method for filtered icons.
+
+= 1.3.1 =
+* Update admin JS to trigger icon picker on ALL TinyMCE initializations (e.g. Visual Composer and AJAX)
+
+= 1.3.0 =
+* Replace outdated TinyMCE shortcode selector brand new jQuery dropdown selector that works in both the visual and text editor
+* Clean up CSS and JS
 
 = 1.2.1 =
 * Update get_instance() call to work for older versions of PHP (< 5.3)
@@ -189,6 +196,16 @@ Better Font Awesome does it's best to load after any existing Font Awesome CSS, 
 
 
 == Upgrade Notice ==
+
+= 1.3.2 =
+* Update Better Font Awesome Library with better prefix removal method.
+
+= 1.3.1 =
+* Update admin JS to trigger icon picker on ALL TinyMCE initializations (e.g. Visual Composer and AJAX)
+
+= 1.3.0 =
+* Replace outdated TinyMCE shortcode selector brand new jQuery dropdown selector that works in both the visual and text editor
+* Clean up CSS and JS
 
 = 1.2.1 =
 * Update get_instance() call to work for older versions of PHP (< 5.3)

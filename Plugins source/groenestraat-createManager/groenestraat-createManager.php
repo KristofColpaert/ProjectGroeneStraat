@@ -4,7 +4,7 @@
 		Plugin URI: http://www.groenestraat.be
 		Description: Deze plugin zorgt ervoor dat wanneer events en projecten aangemaakt worden, de eigenaar ervan automatisch ook subscriber wordt.
 		Version: 1.0
-		Author: Rodric Degroote, Kristof Colpaert
+		Author: Rodric Degroote, Kristof Colpaert, Koen Van Crombrugge en Vincent De Ridder
 		Author URI: http://www.groenestraat.be
 		Text Domain: prowp-plugin
 		License: GPLv2		

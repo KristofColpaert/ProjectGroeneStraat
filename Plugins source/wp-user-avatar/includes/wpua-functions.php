@@ -185,12 +185,9 @@ function wpua_donation_message() {
  * @since 1.6.6
  */
 function wpua_do_donation_message() { ?>
-   <div class="updated">
-    <p><?php _e('Introducing WP USER AVATAR PRO for storage options and interactive upload avatar utility. ', 'wp-user-avatar'); ?> <a href="http://www.flippercode.com/product/wp-user-avatar/" target="_blank"><?php _e('Upgrade now', 'wp-user-avatar'); ?></a></p> 
-  </div>
  <?php 
 }
-add_action('wpua_donation_message', 'wpua_do_donation_message');
+//add_action('wpua_donation_message', 'wpua_do_donation_message');
 
 /**
  * Register widget
