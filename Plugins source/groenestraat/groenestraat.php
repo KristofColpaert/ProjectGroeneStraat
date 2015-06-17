@@ -382,24 +382,24 @@
 				activate_plugin('groenestraat-partners/groenestraat-partners.php');
 			}
 
-			if(is_plugin_inactive('groenestraat-PersoonlijkeOverzichten/groenestraat-ArtikelsOverzicht.php'))
+			if(is_plugin_inactive('groenestraat-persoonlijkeOverzichten/groenestraat-ArtikelsOverzicht.php'))
 			{
-				activate_plugin('groenestraat-PersoonlijkeOverzichten/groenestraat-ArtikelsOverzicht.php');
+				activate_plugin('groenestraat-persoonlijkeOverzichten/groenestraat-ArtikelsOverzicht.php');
 			}
 
-			if(is_plugin_inactive('groenestraat-PersoonlijkeOverzichten/groenestraat-EventsOverzicht.php'))
+			if(is_plugin_inactive('groenestraat-persoonlijkeOverzichten/groenestraat-EventsOverzicht.php'))
 			{
-				activate_plugin('groenestraat-PersoonlijkeOverzichten/groenestraat-EventsOverzicht.php');
+				activate_plugin('groenestraat-persoonlijkeOverzichten/groenestraat-EventsOverzicht.php');
 			}
 
-			if(is_plugin_inactive('groenestraat-PersoonlijkeOverzichten/groenestraat-ProjectenOverzicht.php'))
+			if(is_plugin_inactive('groenestraat-persoonlijkeOverzichten/groenestraat-ProjectenOverzicht.php'))
 			{
-				activate_plugin('groenestraat-PersoonlijkeOverzichten/groenestraat-ProjectenOverzicht.php');
+				activate_plugin('groenestraat-persoonlijkeOverzichten/groenestraat-ProjectenOverzicht.php');
 			}
 
-			if(is_plugin_inactive('groenestraat-PersoonlijkeOverzichten/groenestraat-ZoekertjesOverzicht.php'))
+			if(is_plugin_inactive('groenestraat-persoonlijkeOverzichten/groenestraat-ZoekertjesOverzicht.php'))
 			{
-				activate_plugin('groenestraat-PersoonlijkeOverzichten/groenestraat-ZoekertjesOverzicht.php');
+				activate_plugin('groenestraat-persoonlijkeOverzichten/groenestraat-ZoekertjesOverzicht.php');
 			}
 
 			if(is_plugin_inactive('groenestraat-projectArticleManagement/groenestraat-projectArticleManagement.php'))
