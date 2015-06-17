@@ -20,15 +20,7 @@
         <section class="footer-content">
             <section class="footer-sitemap">
                 <h1>Sitemap</h1><br/><br/>
-                <ul>
-                    <?php
-                        $pages = get_pages(); 
-                        foreach($pages as $page) 
-                        {
-                            echo '<li><a href="' . get_page_link( $page->ID ) . '">' . $page->post_title . '</a></li>';
-                        }
-                    ?>
-                </ul>
+                <?php wp_nav_menu(array('menu' => 'Footer menu')); ?>   
             </section>
             <section class="footer-logo">
                 <img src="<?php bloginfo('template_directory'); ?>/img/logo_large.png" width="500" height="500" alt="" title="" />

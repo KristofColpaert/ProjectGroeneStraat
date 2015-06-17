@@ -34,6 +34,7 @@
 
 		register_main_menu();
         register_sub_menu();
+        register_footer_menu();
 		activate_all_plugins();
 	}
 
@@ -106,48 +107,206 @@
 	}
     
     function register_sub_menu()
+    {
+        $menuExists = wp_get_nav_menu_object('Sub menu');
+
+        if(!$menuExists)
         {
-            $menuExists = wp_get_nav_menu_object('Sub menu');
+            $menuId = wp_create_nav_menu('Sub menu');
 
-            if(!$menuExists)
-            {
-                $menuId = wp_create_nav_menu('Sub menu');
+            wp_update_nav_menu_item($menuId, 0, array(
+                'menu-item-title' => __('Profiel'),
+                'menu-item-classes' => 'normalize-text',
+                'menu-item-url' => home_url('/profiel'),
+                'menu-item-status' => 'publish'
+            ));
 
-                wp_update_nav_menu_item($menuId, 0, array(
-                    'menu-item-title' => __('Profiel'),
-                    'menu-item-classes' => 'normalize-text',
-                    'menu-item-url' => home_url('/profiel'),
-                    'menu-item-status' => 'publish'
-                ));
+            wp_update_nav_menu_item($menuId, 0, array(
+                'menu-item-title' => __('Bewerk profiel'),
+                'menu-item-classes' => 'normalize-text',
+                'menu-item-url' => home_url('/bewerk-profiel'),
+                'menu-item-status' => 'publish'
+            ));
 
-                wp_update_nav_menu_item($menuId, 0, array(
-                    'menu-item-title' => __('Bewerk profiel'),
-                    'menu-item-classes' => 'normalize-text',
-                    'menu-item-url' => home_url('/bewerk-profiel'),
-                    'menu-item-status' => 'publish'
-                ));
+            wp_update_nav_menu_item($menuId, 0, array(
+                'menu-item-title' => __('Kalender'),
+                'menu-item-classes' => 'normalize-text',
+                'menu-item-url' => home_url('/kalender'),
+                'menu-item-status' => 'publish'
+            ));
 
-                wp_update_nav_menu_item($menuId, 0, array(
-                    'menu-item-title' => __('Kalender'),
-                    'menu-item-classes' => 'normalize-text',
-                    'menu-item-url' => home_url('/kalender'),
-                    'menu-item-status' => 'publish'
-                ));
+            wp_update_nav_menu_item($menuId, 0, array(
+                'menu-item-title' => __('Ledenoverzicht'),
+                'menu-item-classes' => 'normalize-text',
+                'menu-item-url' => home_url('/leden-overzicht'),
+                'menu-item-status' => 'publish'
+            ));
 
-                wp_update_nav_menu_item($menuId, 0, array(
-                    'menu-item-title' => __('Ledenoverzicht'),
-                    'menu-item-classes' => 'normalize-text',
-                    'menu-item-url' => home_url('/leden-overzicht'),
-                    'menu-item-status' => 'publish'
-                ));
-                wp_update_nav_menu_item($menuId, 0, array(
-                    'menu-item-title' => __('Afmelden'),
-                    'menu-item-classes' => 'normalize-text red-text',
-                    'menu-item-url' => wp_logout_url(get_site_url()),
-                    'menu-item-status' => 'publish'
-                ));
-            }
+            wp_update_nav_menu_item($menuId, 0, array(
+                'menu-item-title' => __('Contact'),
+                'menu-item-classes' => 'normalize-text',
+                'menu-item-url' => home_url('/contact'),
+                'menu-item-status' => 'publish'
+            ));
+
+            wp_update_nav_menu_item($menuId, 0, array(
+                'menu-item-title' => __('Afmelden'),
+                'menu-item-classes' => 'normalize-text red-text',
+                'menu-item-url' => wp_logout_url(get_site_url()),
+                'menu-item-status' => 'publish'
+            ));
         }
+    }
+
+    function register_footer_menu()
+    {
+    	$menuExists = wp_get_nav_menu_object('Footer menu');
+
+        if(!$menuExists)
+        {
+            $menuId = wp_create_nav_menu('Footer menu');
+
+            wp_update_nav_menu_item($menuId, 0, array(
+                'menu-item-title' => __('About'),
+                'menu-item-url' => home_url('/about'),
+                'menu-item-status' => 'publish',
+                'menu-item-parent-id' => 0
+            ));
+
+            $artikelsMenu = wp_update_nav_menu_item($menuId, 0, array(
+                'menu-item-title' => __('Artikels'),
+                'menu-item-url' => home_url('/artikels'),
+                'menu-item-status' => 'publish',
+                'menu-item-parent-id' => 0
+            ));
+
+            wp_update_nav_menu_item($menuId, 0, array(
+                'menu-item-title' => __('Mijn artikels'),
+                'menu-item-url' => home_url('/mijn-artikels'),
+                'menu-item-status' => 'publish',
+                'menu-item-parent-id' => $artikelsMenu
+            ));
+
+            wp_update_nav_menu_item($menuId, 0, array(
+            	'menu-item-title' => __('Nieuw artikel'),
+                'menu-item-url' => home_url('/nieuw-artikel'),
+                'menu-item-status' => 'publish',
+                'menu-item-parent-id' => $artikelsMenu
+            ));
+
+            wp_update_nav_menu_item($menuId, 0, array(
+            	'menu-item-title' => __('Contact'),
+                'menu-item-url' => home_url('/contact'),
+                'menu-item-status' => 'publish',
+                'menu-item-parent-id' => 0
+            ));
+
+            wp_update_nav_menu_item($menuId, 0, array(
+            	'menu-item-title' => __('Cookiesbeleid'),
+                'menu-item-url' => home_url('/cookiesbeleid'),
+                'menu-item-status' => 'publish',
+                'menu-item-parent-id' => 0
+            ));
+
+            $eventsMenu = wp_update_nav_menu_item($menuId, 0, array(
+                'menu-item-title' => __('Events'),
+                'menu-item-url' => home_url('/events'),
+                'menu-item-status' => 'publish',
+                'menu-item-parent-id' => 0
+            ));
+
+            wp_update_nav_menu_item($menuId, 0, array(
+            	'menu-item-title' => __('Mijn events'),
+                'menu-item-url' => home_url('/mijn-events'),
+                'menu-item-status' => 'publish',
+                'menu-item-parent-id' => $eventsMenu
+            ));
+
+            wp_update_nav_menu_item($menuId, 0, array(
+            	'menu-item-title' => __('Nieuw event'),
+                'menu-item-url' => home_url('/nieuw-event'),
+                'menu-item-status' => 'publish',
+                'menu-item-parent-id' => $eventsMenu
+            ));
+
+            wp_update_nav_menu_item($menuId, 0, array(
+            	'menu-item-title' => __('Gebruikersvoorwaarden'),
+                'menu-item-url' => home_url('/gebruikersvoorwaarden'),
+                'menu-item-status' => 'publish',
+                'menu-item-parent-id' => 0
+            ));
+
+            wp_update_nav_menu_item($menuId, 0, array(
+            	'menu-item-title' => __('Kalender'),
+                'menu-item-url' => home_url('/kalender'),
+                'menu-item-status' => 'publish',
+                'menu-item-parent-id' => 0
+            ));
+
+            wp_update_nav_menu_item($menuId, 0, array(
+            	'menu-item-title' => __('Ledenoverzicht'),
+                'menu-item-url' => home_url('/leden-overzicht'),
+                'menu-item-status' => 'publish',
+                'menu-item-parent-id' => 0
+            ));
+
+            wp_update_nav_menu_item($menuId, 0, array(
+            	'menu-item-title' => __('Profiel'),
+                'menu-item-url' => home_url('/profiel'),
+                'menu-item-status' => 'publish',
+                'menu-item-parent-id' => 0
+            ));
+
+            $projectenMenu = wp_update_nav_menu_item($menuId, 0, array(
+            	'menu-item-title' => __('Projecten'),
+                'menu-item-url' => home_url('/projecten'),
+                'menu-item-status' => 'publish',
+                'menu-item-parent-id' => 0
+            ));
+
+            wp_update_nav_menu_item($menuId, 0, array(
+            	'menu-item-title' => __('Mijn projecten'),
+                'menu-item-url' => home_url('/mijn-projecten'),
+                'menu-item-status' => 'publish',
+                'menu-item-parent-id' => $projectenMenu
+            ));
+
+            wp_update_nav_menu_item($menuId, 0, array(
+            	'menu-item-title' => __('Nieuw project'),
+                'menu-item-url' => home_url('/nieuw-project'),
+                'menu-item-status' => 'publish',
+                'menu-item-parent-id' => $projectenMenu
+            ));
+
+            wp_update_nav_menu_item($menuId, 0, array(
+            	'menu-item-title' => __('Projectnieuwsbrief'),
+                'menu-item-url' => home_url('/project-nieuwsbrief'),
+                'menu-item-status' => 'publish',
+                'menu-item-parent-id' => $projectenMenu
+            ));
+
+            wp_update_nav_menu_item($menuId, 0, array(
+            	'menu-item-title' => __('Projectartikels'),
+                'menu-item-url' => home_url('/projectartikels'),
+                'menu-item-status' => 'publish',
+                'menu-item-parent-id' => $projectenMenu
+            ));
+
+            wp_update_nav_menu_item($menuId, 0, array(
+            	'menu-item-title' => __('Projectleden'),
+                'menu-item-url' => home_url('/projectleden'),
+                'menu-item-status' => 'publish',
+                'menu-item-parent-id' => $projectenMenu
+            ));
+
+            wp_update_nav_menu_item($menuId, 0, array(
+            	'menu-item-title' => __('Verkoopvoorwaarden'),
+                'menu-item-url' => home_url('/verkoopvoorwaarden'),
+                'menu-item-status' => 'publish',
+                'menu-item-parent-id' => 0
+            ));
+        }
+    }
 
 	function activate_all_plugins()
 	{

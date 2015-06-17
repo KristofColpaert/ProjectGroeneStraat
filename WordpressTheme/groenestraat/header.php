@@ -135,7 +135,9 @@
                           });
                         });
                      </script>
-                     <?php wp_nav_menu(array('Main menu' => 'header-menu')); ?>
+
+                     <?php //wp_nav_menu(array('Main menu' => 'header-menu')); ?>
+                     <?php wp_nav_menu(array('menu' => 'Main menu')); ?>   
                 <?php
                 }
                 else{
