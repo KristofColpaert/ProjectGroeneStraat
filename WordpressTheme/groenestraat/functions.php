@@ -16,7 +16,13 @@ function script_enqueue(){
 
 add_action('wp_enqueue_scripts', 'script_enqueue');     
 
-
+if(function_exists('register_nav_menus')){
+  register_nav_menus(
+    array(
+      'main_nav' => 'Main Navigation Menu'
+      )
+  );
+}
 
 function excerpt($limit) 
 {

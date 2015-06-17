@@ -36,6 +36,39 @@
             li.appendChild(a);
             menu.appendChild(li);
         }
+
+        $(document).ready(function()
+        {
+	        var pathArray = window.location.pathname.split( '/' );
+
+	        var inArrayArtikels = $.inArray('artikels', pathArray);
+	        if($.inArray('artikels', pathArray) > -1)
+	        {
+	        	markAsActive(0);
+	        }
+	        
+	        else if($.inArray('projecten', pathArray) > -1)
+	        {
+	        	markAsActive(1);
+	        }
+
+	        else if($.inArray('events', pathArray) > -1)
+	        {
+	        	markAsActive(2);
+	        }
+
+	        else if($.inArray('zoekertjes', pathArray) > -1)
+	        {
+	        	markAsActive(3);
+	        }
+
+	        function markAsActive(item)
+	        {
+	        	var element = $('#menu-main-menu-1').children('li').eq(item);
+	        	element.css('background-color', '#00CD00');
+	        	element.children('a').eq(0).css('color', '#f8f7f7');
+	        }
+        });
     </script>
 </head>
 <body>
