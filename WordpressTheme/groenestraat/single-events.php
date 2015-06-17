@@ -35,13 +35,7 @@
 		$eventStartHour = $meta['_eventStartHour'][0];
 		$eventEndHour = $meta['_eventEndHour'][0];
 		$eventLocation = $meta['_eventLocation'][0];
-		$eventID = $post->ID;
-
-		/*
-			Form to add event to personal calendar.
-		*/
-
-		
+		$eventID = $post->ID;		
        
              if(has_post_thumbnail($post->ID)) { 
 			 $url = wp_get_attachment_url( get_post_thumbnail_id($post->ID) );?>
@@ -84,16 +78,52 @@
 			
 			<?php
 
+			/*
+				Form to add event to personal calendar.
+			*/
+
+
 			if($post->post_author != get_current_user_id() && is_user_logged_in())
 			{
-				?>
-					<p><strong>Plaatsen op kalender?</strong></p><br/>
-					<form method="POST" id="eventMemberForm">
-						<input id="eventMemberId" name="eventMemberId" type="hidden" value="<?php echo get_current_user_id(); ?>" />
-						<input id="eventMemberProjectId" name="eventMemberProjectId" type="hidden" value="<?php echo $post->ID; ?>" />
-						<input id="eventMemberSubmit" name="eventMemberSubmit" type="submit" value="Toevoegen aan kalender" class="edit-button" style="margin:0" />
-					</form>
-				<?php
+				$categories = get_the_category();
+				$inProject = false;
+				foreach($categories as $category)
+				{
+					if($category->slug == 'projectevents' )
+					{
+						$inProject = true;
+					}
+				}
+
+				$parentProjectId = get_post_meta($post->ID, '_parentProjectId', true);
+				$subscribers = get_post_meta($parentProjectId, '_subscriberId');
+
+				if($inProject)
+				{
+					if(in_array($current_user->ID, $subscribers))
+					{
+						?>
+							<p><strong>Plaatsen op kalender?</strong></p><br/>
+							<form method="POST" id="eventMemberForm">
+								<input id="eventMemberId" name="eventMemberId" type="hidden" value="<?php echo get_current_user_id(); ?>" />
+								<input id="eventMemberProjectId" name="eventMemberProjectId" type="hidden" value="<?php echo $post->ID; ?>" />
+								<input id="eventMemberSubmit" name="eventMemberSubmit" type="submit" value="Toevoegen aan kalender" class="edit-button" style="margin:0" />
+							</form>
+						<?php
+					}
+				}
+
+				else
+				{
+					?>
+						<p><strong>Plaatsen op kalender?</strong></p><br/>
+						<form method="POST" id="eventMemberForm">
+							<input id="eventMemberId" name="eventMemberId" type="hidden" value="<?php echo get_current_user_id(); ?>" />
+							<input id="eventMemberProjectId" name="eventMemberProjectId" type="hidden" value="<?php echo $post->ID; ?>" />
+							<input id="eventMemberSubmit" name="eventMemberSubmit" type="submit" value="Toevoegen aan kalender" class="edit-button" style="margin:0" />
+						</form>
+					<?php
+				}
 			}
 
 			?>
