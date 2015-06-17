@@ -126,7 +126,7 @@
 	function prowp_mailProjectmembers_install()
 	{
 		//mail pagina aanmaken users
-		makeMailUserPage('Project Nieuwsbrief','[project_nieuwsbrief]','project nieuwsbrief','publish','page','closed');
+		makeMailUserPage('Project Nieuwsbrief','[project_nieuwsbrief]','project-nieuwsbrief','publish','page','closed');
 	}
 
 	function makeMailUserPage($title,$content,$post_name,$post_status,$post_type,$ping_status)
