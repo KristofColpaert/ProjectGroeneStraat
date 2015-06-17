@@ -79,7 +79,7 @@
 
 						<label for="parentProjectId" class="normalize-text">Project waartoe het artikel behoort</label>
 						<br />
-						<select class="listbox" id="parentProjectId" name="parentProjectId">
+						<select class="textbox combobox" id="parentProjectId" name="parentProjectId">
 							<option value="0">Geen project</option>
 							<?php
 								$current_user = wp_get_current_user();
@@ -110,7 +110,7 @@
 
 						<label for="articleCategories" class="normalize-text">Categorieën waartoe het artikel behoort</label>
 						<br />
-						<select class="textbox combobox" id="articleCategories" name="articleCategories[]" multiple size="5">
+						<select class="listbox" id="articleCategories" name="articleCategories[]" multiple size="5">
 							<?php
 								$categories = get_categories(
 									array(
