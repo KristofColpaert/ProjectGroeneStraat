@@ -1,0 +1,1010 @@
+@import url("reset.css");
+
+@font-face 
+{
+    font-family: 'Lane';
+    src:url('../font/LANENAR_.ttf') format('truetype');
+}
+
+/*
+green = #00cd00;
+lightgray = #f8f7f7;
+gray = #a2a1a9;
+darkgray = #69686e;
+*/
+
+body
+{
+    background-color: #f8f7f7;
+    font-size:0.625em;
+    font-family: "Lane", "Arial", sans-serif;
+}
+
+h1
+{
+    font-size:3.8em;
+    text-transform: uppercase;
+    font-weight: lighter;
+    line-height: 1.3em;
+}
+
+h2
+{
+    font-size:2.4em;
+    text-transform: uppercase;
+    font-weight: lighter;
+    line-height: 1.em;
+}
+
+h3
+{
+    font-size:2em;
+    text-transform: uppercase;
+    font-weight: 600;
+    line-height: 2em;
+    color: #69686e;
+}
+
+p
+{
+    font-size:1.7em;
+    line-height: 1.35em;
+}
+
+a
+{
+    transition: background-color 0.25s ease;
+    font-size:1.6em;
+}
+
+.fleft
+{
+    float:left;
+}
+
+.fright
+{
+    float:right;
+}
+
+header
+{
+    width:100%;
+    background-color: #cccccc;
+}
+
+.header-image
+{
+    background-image: url("../img/header.jpg");
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 420px;
+}
+
+header nav
+{
+    border-top:2px solid #00cd00;
+    width: 100%;
+    height: 65px;
+    background-color: #f8f7f7;
+}
+
+header img
+{
+    float: left;
+}
+
+header .menu
+{
+    float:right;
+}
+
+img
+{
+    max-width:100%;
+    height:auto;
+}
+
+.recent-item>.button, .about>.button
+{
+    color: #a2a1a9;
+    border: 1px solid #a2a1a9;
+    background-color: #f8f7f7;
+    text-decoration: none;
+    font-size:1.7em;
+    padding:10px 20px;
+    text-transform: uppercase;
+}
+
+.button:hover
+{
+    color: #f8f7f7;
+    background-color: #a2a1a9;
+}
+
+.menu ul 
+{
+    height: 100%;
+    
+}
+.basic-menu-item
+{
+    list-style-type: none;
+    display: inline;
+    float:left;
+}
+
+.basic-menu-item a 
+{
+    display: block;
+    color: #a2a1a9;;
+    text-decoration: none;
+    font-size:1.7em;
+    padding:24px 20px;
+}
+
+.basic-menu-item a:hover
+{
+    color:#f8f7f7;
+    background-color: #00cd00;
+}
+
+.aanmelden
+{
+    list-style: none;
+    float:left;
+    display: inline;
+    border: 1px solid #00cd00;
+    text-transform: uppercase;
+    margin: 19px;
+}
+
+.aanmelden a{
+     display: block;
+    color: #a2a1a9;;
+    text-decoration: none;
+    font-size:1.7em;
+    padding:5px 25px 3px 25px;
+}
+
+.aanmelden a:hover{
+     color:#f8f7f7;
+    background-color: #00cd00;
+}
+
+.clear
+{
+    clear:both;
+}
+
+.home-title
+{
+    width: 100%;
+    height: 175px;
+    text-align: center;
+    vertical-align: middle;
+    background-color: #f8f7f7;
+}
+
+.home-title h1
+{
+    line-height: 175px;
+    font-size: 5em;
+}
+
+.about
+{
+    width: 90%;
+    min-height: 100px;
+    padding:5%;
+    text-align: center;
+    background-color: #ffffff;
+}
+
+.about a
+{
+    text-decoration: none;
+    font-size:1em;
+    font:#333;
+}
+
+.about h1
+{
+    color: #69686e;
+    margin-bottom: 10px;
+}
+
+/* RECENT */
+
+.recent
+{
+    width: 100%;
+    min-height: 325px;
+}
+
+.recent-item
+{
+    float:left;
+    width:23.33333%;
+    padding:5%;
+    min-height: 320px;
+    text-align: center;
+    background-color: #f8f7f7;
+}
+
+.recent-item a
+{
+    text-decoration: none;
+    font-size:1em;
+    font:#333;
+}
+
+.recent-item h1
+{
+    color: #69686e;
+    margin-bottom: 10px;
+}
+
+.recent-item p
+{
+    color: #a2a1a9;
+}
+
+.recent-item .wrapper
+{
+    height: 220px;   
+    text-align: center;
+    vertical-align: middle;
+}
+
+.calender
+{
+    font-size:0.85em;
+    width: 94%;
+    padding:2%;
+    height: 40px;
+    background-color: #ffffff;
+    margin-bottom: 2%;
+}
+
+.calender .calender-image
+{
+    position: relative;
+    text-align: left;
+}
+.calender .calender-image img
+{
+    position: absolute;
+    top:0;
+    z-index: 1;
+}
+.calender .calender-image em
+{
+    color:#333;
+    position: absolute;
+    top:10px;
+    z-index: 2;
+    font-size:3em;
+}
+
+.calender strong
+{
+    font-size:0.9em;
+}
+
+.calender img
+{
+    display: block;
+    float:left;
+    width: 50px;
+    height: 40px;
+}
+
+/* ARTIKELS */
+
+.recent-artikel
+{
+    width:100%;
+    height: 100vh;
+    background-color: #f8f7f7;
+    background-image: url("../img/artikel-example1.png");
+    background-size: cover;
+    background-position: center center;
+    transition: background 0.25s ease;
+    position: relative;
+}
+
+.recent-artikel h1
+{
+    line-height: 1.5em;
+}
+
+.artikel-info
+{
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 35%;
+    height: 100%;
+    background-color: black;
+}
+
+.artikel-item
+{
+    width: 88%;
+    height: 25%;
+    padding: 0 6%;
+    color: #fff;
+    background-color:#a2a1a9;
+    overflow: hidden;
+}
+
+.artikel-item:hover
+{
+    cursor: pointer;
+}
+
+.artikel-item:hover, #active
+{
+    transition: background 0.25s ease;
+    background-color:#ffffff;
+    color:#a2a1a9;
+}
+
+.artikel-side
+{
+    text-align: center;
+    color:#fff;
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    padding:0 2%;
+    width: 61%;
+    height: 10%;
+    background: url("../img/blackfilter.png") repeat;
+}
+
+.artikel-side h1:hover
+{
+    cursor: pointer;
+}
+
+.artikel-side h1, .artikel-item h1
+{
+    margin:1%;
+}
+
+/* PROJECTS */
+
+.recent-projects
+{
+    background-color: #fff;
+    width: 100%;
+    background-color: #a2a1a9;
+    word-wrap: break-word;
+}
+
+#recent-projects-slider .item
+{
+    position: relative;
+    text-align: center;
+    color: #ffffff;
+    background-color: #fff;
+    overflow: hidden;
+}
+
+#recent-projects-slider .item h1
+{
+    line-height: 100%;
+    font-size: 2.5em;
+    text-transform: lowercase;
+}
+
+#recent-projects-slider .item .overlay
+{
+    position: absolute;
+    top: 0;
+    left: 0;
+    padding: 6% 3%;
+    width: 94%;
+    height: 88%;
+    display: none;
+    background: url("../img/greenfilter.png") repeat;
+}
+
+#recent-projects-slider .item img
+{
+    width: 100%;
+    height: auto;
+}
+
+/* ZOEKERTJES */
+
+.recent-zoekertjes
+{
+    width:100%;
+    min-height: 200px;
+    padding-bottom: 100px;
+    background-color: #f8f7f7;
+}
+
+.recent-zoekertjes .zoekertje-item
+{
+    float:left;
+    width: 21.333333%;
+    margin:0 4%;
+    padding: 2%;
+    min-height: 125px;
+    background-color: #ffffff;
+}
+
+.zoekertje-item div p
+{
+    float:left;
+}
+
+.zoekertje-item div a
+{
+    text-decoration: none;
+    color: #00cd00;
+    float:right;
+}
+
+.zoekertje-item div
+{
+    margin-top:15px;
+}
+
+/* FOOTER */
+
+footer
+{
+    width: 100%;
+    height: 100%;
+}
+
+.footer-partners
+{
+    background-color: #fff;
+    width:100%;
+    min-height: 100px;
+}
+
+#partners-slider .item img
+{
+    display: block;
+    width: 100%;
+    height: auto;
+    -webkit-filter: grayscale(1);
+    filter: grayscale(1);
+}
+
+.footer-content
+{
+    background-color: #69686e;
+    width:100%;
+    min-height: 500px;
+}
+
+.footer-sitemap, .footer-logo, .footer-links
+{
+    color:#ffffff;
+    float:left;
+    width: 21.333333%;
+    margin:8% 4%;
+    padding: 2%;
+    min-height: 150px;
+    text-transform: lowercase;
+}
+
+.footer-logo
+{
+    text-align: center;
+}
+
+.footer-logo img
+{
+    width: 225px;
+    margin: auto auto;
+    display: block;
+}
+
+.footer-sitemap ul li, .footer-links ul li
+{
+    list-style-type: none;
+    width: 100%;
+}
+
+.footer-sitemap ul li a, .footer-links ul li a
+{
+    display: block;
+    color: #ffffff;
+    font-size:1.8em;
+    padding:2px 0;
+    text-decoration: none;
+}
+
+.footer-sitemap ul li a:hover, .footer-links ul li a:hover
+{
+    text-decoration: underline;
+}
+
+/* MEDIA QUERIES */
+
+@media (max-width: 375px)
+{
+    nav .logo
+    {
+        margin-top:3%;
+    }
+}
+@media (max-width: 530px) 
+{
+    .recent-item
+    {
+        float:left;
+        width: 90%;
+        height: 100%;
+        padding: 5%;
+    }
+}
+@media (max-width: 910px) 
+{
+    .recent-item
+    {
+        float:left;
+        width: 90%;
+        height: 90%;
+        min-height: 100%;
+        padding: 5%;
+    }
+    .recent-zoekertjes .zoekertje-item
+    {
+        float:left;
+        width: 70%;
+        margin:0 10% 5% 10%;
+        padding:5%;
+        min-height: 150px;
+        background-color: #ffffff;
+        text-align: center;
+    }
+    .zoekertje-item div a, .zoekertje-item div p
+    {
+        text-align: center;
+        float:none;
+    }
+    .zoekertje-item div p
+    {
+        margin-bottom: 15px;
+    }
+    .artikel-info
+    {
+        display: none;
+    }
+    .artikel-side
+    {
+        width:96%;
+    }
+}
+@media (max-width: 1150px) 
+{
+    header>nav>.menu
+    {
+        display: none;
+    }
+}
+@media (max-width: 1165px) 
+{
+    .calender
+    {
+        text-align: right;
+    }
+    .footer-sitemap, .footer-logo, .footer-links
+    {
+        text-align: center;
+        float:left;
+        width: 70%;
+        margin:10% 10%;
+        padding:5%;
+        min-height: 250px;
+    }
+}
+
+/* OVERZICHTEN */
+
+.container
+{
+    width: 100%;
+    background-color: #69686e;
+}
+
+.sub-menu
+{
+    width: 100%;
+    height: 60px;
+    background-color: #333333;
+    text-transform: lowercase;
+    overflow: hidden;
+    transition: all 2s;
+}
+
+.options input
+{
+    width: 200px;
+    margin: 15px 0 15px 5px;
+    height: 30px;
+}
+
+.sub-menu .options
+{
+    float:left;
+    margin-left: 15px;
+}
+
+.sub-menu ul
+{
+    padding:22px;
+    float:right;
+}
+
+.sub-menu ul li
+{
+    display: block;
+    float: left;
+}
+
+.sub-menu li a
+{
+    padding: 24px;
+    font-size:1.6em;
+    font-weight: bolder;
+}
+
+.sub-menu li a:hover
+{
+    background-color: #ffffff;
+    color:#333333;
+    cursor: pointer;
+}
+
+.navigate-menu
+{
+    width: 100%;
+    height: 100px;
+    background-color: #333333;
+}
+
+.navigate-menu a
+{
+    position: relative;
+    top:43px;
+    left:43px;
+    text-transform: uppercase;
+    font-weight: bold;
+    margin-top:25px;
+    text-decoration: none;
+    padding:10px 20px;
+    background-color: #ffffff;
+    color:#333333;
+}
+
+.container a
+{
+    font-size:none;
+    text-decoration: none;
+    color: #ffffff;
+    font-size:1em;
+}
+
+/* OVERZICHT PROJECTEN */
+
+.no-post
+{
+    width:92%;
+    min-height: 150px;
+    padding:2%;
+    margin:2%;
+    background-color: #ffffff;
+}
+
+.project-item
+{
+    position: relative;
+    word-wrap: break-word;
+    float: left;
+    width: 29.33333333%;
+    height: 40vh;
+    padding: 2%;
+    background-color: #cccccc;
+    text-align: left;
+    opacity: 0.9;
+}
+
+.project-item .info
+{
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 15vh;
+    background-color: #fff;
+    background: url("../img/blackfilter.png") repeat;
+}
+.info h1{
+    font-size: 3em;
+    line-height: 1em;
+    padding: 3% 3% 0% 3%;
+}
+.info p{
+    padding-left: 3%;
+}
+.project-item:hover
+{
+    opacity: 1.0;
+}
+
+@media (max-width: 1000px) 
+{
+    .project-item
+    {
+        width: 46%;
+    }
+}
+
+@media (max-width: 650px) 
+{
+    .project-item
+    {
+        width: 96%;
+    }
+}
+
+/* OVERZICHT EVENTS */
+
+.single-item
+{
+    margin:5%;
+    padding:5%;
+    width:80%;
+    background-color: #f8f7f7;
+    min-height: 150px;
+}
+
+.main
+{
+    float:left;
+    width:70%;
+    min-height: 750px;
+    background-color: #f8f7f7;
+    padding-bottom: 5%;
+}
+
+.list-item
+{
+    float:left; 
+    color: #333; 
+    width: 86%; 
+    margin: 5% 3%; 
+    padding: 4%; 
+    background-color: #ffffff;
+}
+
+.list-item .confirm-button-green, .list-item .confirm-button
+{
+    font-size:1.5em;
+    margin-right: 15px;
+}
+
+.list-item>h1>a
+{
+    color:#333;
+}
+
+.list-item img
+{
+    margin:15px 0;
+}
+
+.list-item
+{
+    /*margin-bottom: 15px;*/
+}
+
+.list-item a.more-link
+{
+    border-radius: 5px;
+    background-color: red;
+    padding:10px 20px;
+    color: #00cd00;
+}
+
+.sidebar
+{
+    float: right;
+    width: 30%;
+    min-height: 100vh;
+}
+
+.sidebar .search
+{
+    width: 68%;
+    margin: 12%;
+    padding: 5%;
+    min-height: 100vh;
+    background-color: #ffffff;
+}
+
+.sidebar input
+{
+    font-size:1.2em;
+    font-family: "Lane", "Arial", sans-serif;
+    margin:3px 0;
+}
+
+.event-calendar
+{
+    float:left;
+    width:20%;
+    margin-right: 5%;
+    text-align: center;
+    min-height: 175px;
+    background-size: cover;
+    background-image: url("../img/calendar.png");
+    background-position: center center;
+    color: #a2a1a9;
+}
+
+.event-calendar>h1
+{
+    position: relative;
+    top:45px;
+    font-size:6em;
+    line-height: 1.35em;
+}
+
+.event-calendar>h2
+{
+    position: relative;
+    top:35px;
+}
+
+.event-content
+{
+    float:right;
+    min-height: 150px;
+    width:75%;
+}
+
+@media (max-width: 1100px) 
+{
+    .main
+    {
+        width:100%;
+    }
+    .sidebar
+    {
+        display: none;
+    }       
+}
+
+@media (max-width: 775px) 
+{
+    .event-item
+    {
+        float:left;
+        color: #333;
+        width: 80%;
+        margin: 5% 5% 0 5%;
+        padding: 5%;
+        min-height: 150px;
+        background-color: #ffffff;
+    }
+    .event-calendar
+    {
+        display: none;
+    }
+    .event-content
+    {
+        float:none;
+        min-height: 150px;
+        width:100%;
+    }
+}
+
+/* GOOGLE MAPS API */
+#map-canvas { height: 50vh; margin: 0; padding: 0;}
+
+/* MOBILE MENU */
+.mobile-menu
+{
+    position: absolute;
+    display: block;
+    width:100%;
+    min-height: 65px;
+    background-color: #333;
+    z-index: 9999999999;
+    text-align: center;
+    text-transform: uppercase;
+}
+.mobile-menu ul
+{
+    width:100%;
+}
+.mobile-menu ul li
+{
+    display: block;
+    width: 100%;
+}
+
+/* OVERRIDE COMMENT SYSTEM */
+
+#respond
+{
+    margin-top: 50px;
+    display: block;
+    min-height: 275px;
+}
+#comments span,.comment-author .vcard  small, .comment-author .vcard small, .says, .comment-meta .comment-edit-link, .comment-meta, .reply
+{
+    display: none;
+}
+.commentlist
+{
+    list-style-type: none;
+    margin: 50px 0;
+}
+#submit
+{
+    font-size:1.1em;
+}
+#comment
+{
+    padding-top:10px;
+    height: 150px;
+}
+ol>li
+{
+    background-color: #f1f0f0;
+    margin-bottom: 25px;
+    border-radius: 10px;
+}
+.comment-author
+{
+    margin-bottom: 30px;
+}
+.comment-author .fn
+{
+    font-style:normal;
+    margin:20px 0 0 0;
+    font-size:1.5em;
+}
+.comment-author img
+{
+    margin-left:0;
+}
+.comment-body
+{
+    width:96%;
+    padding:2%;
+    min-height: 50px;
+}
+
+/* ERROR MSG PLUGINS */
+
+.error-message
+{
+    color:red;
+}
+
+#menu-footer-menu li ul a
+{
+    background-color: #69686e;
+    padding-left: 40px;
+    font-weight: 300;
+}
+
+#menu-footer-menu li ul a:hover
+{
+    color: #FFFFFF;
+}

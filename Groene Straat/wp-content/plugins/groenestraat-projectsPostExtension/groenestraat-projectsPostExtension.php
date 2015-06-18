@@ -1,0 +1,134 @@
+<?php
+	/*
+	Plugin Name: Groenestraat Projecten Uitbreiding
+	Plugin URI: http://www.groenestraat.be
+	Description: Deze plugin zorgt ervoor dat berichten, events en zoekertjes kunnen toegekend worden aan een project (of aan de algemene site).
+	Version: 1.0
+	Author: Rodric Degroote, Kristof Colpaert, Koen Van Crombrugge en Vincent De Ridder
+	Author URI: http://www.groenestraat.be
+	Text Domain: prowp-plugin
+	License: GPLv2
+	*/
+
+	/*
+		Add actions
+	*/
+	add_action('load-post.php', 'parentproject_metaboxes_setup');
+	add_action('load-post-new.php', 'parentproject_metaboxes_setup');
+	add_action('save_post', 'parentproject_metaboxes_save', 1, 2);
+
+	/*
+		Set up parent project metaboxes
+	*/
+
+	function parentproject_metaboxes_setup() 
+	{
+	  add_action('add_meta_boxes', 'parentproject_metaboxes_add');
+	}
+
+	function parentproject_metaboxes_add() 
+	{
+		global $post; 
+
+	  	add_meta_box('parentproject', 'Project', 'parentproject_metaboxes_callback', 'post', 'normal', 'high');
+	}
+
+	function parentproject_metaboxes_callback( $object, $box ) 
+	{ 
+		global $post; 
+
+		$current_user = wp_get_current_user();
+		$parents = get_posts(
+			array(
+				'post_type' => 'projecten',
+				'orderby' => 'title',
+				'order' => 'ASC',
+				'numberposts' => -1,
+				'meta_key' => '_subscriberId',
+				'meta_value' => $current_user->ID,
+				'meta_operator' => '='
+			)
+		);
+
+		$postParentId = get_post_meta($post->ID, '_parentProjectId', true);
+		echo '<select name="_parentProjectId" class="widefat">';
+		echo '<option value="0">Geen Project</option>';
+		if(!empty($parents))
+		{
+			foreach($parents as $parent)
+			{
+				printf('<option value="%s"%s>%s</option>', esc_attr($parent->ID), selected($parent->ID, $postParentId, false), esc_html($parent->post_title));
+			}
+		}
+		echo '</select>';
+
+   		echo '<input type="hidden" name="eventmeta_noncename" id="eventmeta_noncename" value="' . wp_create_nonce(plugin_basename(__FILE__)) . '" />';
+	}
+
+	function parentproject_metaboxes_save($post_id, $post)
+	{
+		//echo 'sdkldslkdslmflmkfmdkmdskdmfskmdfmkldfsdkmlklmdfdklmfdfklmfmkldflmkdflmdffdklmfdkmldfmdflmdflmkdf';
+		if(!isset( $_POST['eventmeta_noncename'] ) || !wp_verify_nonce($_POST['eventmeta_noncename'], plugin_basename(__FILE__)))
+		{
+			return $post->ID;
+		}
+
+		if(!current_user_can('edit_post', $post->ID))
+		{
+			return $post->ID;
+		}
+
+		$events_meta['_parentProjectId'] = $_POST['_parentProjectId'];
+
+		if($events_meta['_parentProjectId'] != 0)
+		{
+			$category = get_category_by_slug('projectartikels'); 
+  			$categoryId = $category->term_id;
+
+  			wp_set_post_categories($post->ID, array($categoryId), true);
+		}
+
+		else 
+		{
+			wp_set_post_categories($post->ID, null, false);
+
+			$category = get_category_by_slug('projectartikels'); 
+  			$categoryId = $category->term_id;
+			if(isset($_POST['post_category']))
+			{
+				$cats = array();
+				foreach($_POST['post_category'] as $value)
+				{
+					if($value != $categoryId)
+					{
+						$cats[] = $value;
+					}
+				}
+				wp_set_post_categories($post->ID, $cats, false);
+			}
+		}
+
+		foreach($events_meta as $key => $value)
+		{
+			if($post->post_type == 'revision')
+			{
+				return;
+			}
+
+			if(get_post_meta($post->ID, $key, FALSE))
+			{
+				update_post_meta($post->ID, $key, $value);
+			}
+
+			else
+			{
+				add_post_meta($post->ID, $key, $value);
+			}
+
+			if(!$value)
+			{
+				delete_post_meta($post->ID, $key);
+			}
+		}
+	}
+?>
