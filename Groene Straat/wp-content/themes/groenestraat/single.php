@@ -32,7 +32,7 @@
 					foreach($categories as $category)
 					{
 						?>
-							<a class="author-name" href="<?php echo home_url(); ?>/artikels?categorie=%5B%5D<?php echo $category->term_id; ?>"><?php echo $category->name; ?></a> 
+							<a class="author-name" href="<?php echo home_url(); ?>/artikels?zoekveld=&categorie=%5B%5D<?php echo $category->term_id; ?>"><?php echo $category->name; ?></a> 
 						<?php
 					} 
 				?>
