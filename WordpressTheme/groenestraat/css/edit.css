@@ -294,7 +294,9 @@ textarea.LV_invalid_field:active {
     background-color: #FFF;
     position: relative;
 }
-
+.contentwrapper a{
+    color: #00CD00 !important;
+}
 .createForm label{
     display: block;
     font-size: 2em;
