@@ -59,7 +59,6 @@ $args = array(
     var nietLeeg = "Dit veld is verplicht!";
     var email = new LiveValidation('user_login', {validMessage:" "});
     email.add(Validate.Presence,{failureMessage:nietLeeg});
-    email.add(Validate.Length, {maximum:50, tooLongMessage: "Maximum 50 tekens lang!"});
     email.add(Validate.Email, {failureMessage: "Moet een geldig emailadres zijn!"});
     var pass = new LiveValidation('user_pass', {validMessage:" "});
     pass.add(Validate.Presence,{failureMessage:nietLeeg});

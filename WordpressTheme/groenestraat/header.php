@@ -183,6 +183,7 @@
                   	 logo.addEventListener('click', function() { window.stop(); });
                       logo.setAttribute('width', '500px');
                       logo.setAttribute('src', '<?php bloginfo("template_directory"); ?>/img/logo-mobile.png');
+                      logo.setAttribute('id', 'mobile-icon');
                       
                   }
                   if(window.innerWidth > 1150)

@@ -59,23 +59,23 @@ get_header();
     var nietLeeg = "Dit veld is verplicht!";
     var firstName = new LiveValidation('first_name', {validMessage:" "});
     firstName.add(Validate.Presence,{failureMessage:nietLeeg});
-    firstName.add(Validate.Length, {maximum:15, tooLongMessage: "Maximum 15 tekens lang!"});
+    firstName.add(Validate.Length, {maximum:50, tooLongMessage: "Maximum 15 tekens lang!"});
     
     var lastName = new LiveValidation('last_name', {validMessage:" "});
     lastName.add(Validate.Presence,{failureMessage:nietLeeg});
-    lastName.add(Validate.Length, {maximum:25, tooLongMessage: "Maximum 25 tekens lang!"});
+    lastName.add(Validate.Length, {maximum:50, tooLongMessage: "Maximum 25 tekens lang!"});
     
     var email = new LiveValidation('user_email', {validMessage:" "});
     email.add(Validate.Presence,{failureMessage:nietLeeg});
-    email.add(Validate.Length, {maximum:50, tooLongMessage: "Maximum 50 tekens lang!"});
+    email.add(Validate.Length, {maximum:70, tooLongMessage: "Maximum 50 tekens lang!"});
     email.add(Validate.Email, {failureMessage: "Moet een geldig emailadres zijn!"});
     
     
     var straat = new LiveValidation('rpr_straat', {validMessage:" "});
-    straat.add(Validate.Length, {maximum:30, tooLongMessage: "Maximum 30 tekens lang!"});
+    straat.add(Validate.Length, {maximum:50, tooLongMessage: "Maximum 30 tekens lang!"});
     
     var gemeente = new LiveValidation('rpr_gemeente', {validMessage:" "});
-    gemeente.add(Validate.Length, {maximum:20, tooLongMessage: "Maximum 20 tekens lang!"});
+    gemeente.add(Validate.Length, {maximum:50, tooLongMessage: "Maximum 20 tekens lang!"});
     
     var postcode = new LiveValidation('rpr_postcode', {validMessage:" "});
     postcode.add(Validate.Length, {is:4, wrongLengthMessage:"Een postcode moet 4 cijfers bevatten!"});
@@ -83,7 +83,7 @@ get_header();
     
     var telefoon = new LiveValidation('rpr_telefoon', {validMessage:" "});
     telefoon.add(Validate.Length, {maximum:13, tooLongMessage: "Maximum 13 tekens lang!"});
-    telefoon.add(Validate.Numericality, {onlyInteger:true});
+    telefoon.add(Validate.Numericality, {onlyInteger:true, notAnIntegerMessage:"Enkel cijfers invullen aub."});
     
     var w1 = new LiveValidation('pass1', {validMessage:" "});
     w1.add(Validate.Presence,{failureMessage:nietLeeg});
