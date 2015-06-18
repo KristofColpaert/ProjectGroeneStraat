@@ -176,7 +176,6 @@
                     {
                         recentArtikel.style["background-image"] = "url(" + <?php echo "'" . get_template_directory_uri() . '/img/placeholder1.jpg' . "'"; ?> + ")";
                     }
-
                     else
                     {
                         recentArtikel.style["background-image"] = "url('" + data[newId].image + "')";
@@ -188,10 +187,10 @@
             }
         }
 
-        document.getElementsByClassName('artikel-item')[0].addEventListener('click', function() { replace(0); });
-        document.getElementsByClassName('artikel-item')[1].addEventListener('click', function() { replace(1); });
-        document.getElementsByClassName('artikel-item')[2].addEventListener('click', function() { replace(2); });
-        document.getElementsByClassName('artikel-item')[3].addEventListener('click', function() { replace(3); });
+        document.getElementsByClassName('artikel-item')[0].addEventListener('click', function() { document.location = data[0].url; });
+        document.getElementsByClassName('artikel-item')[1].addEventListener('click', function() { document.location = data[1].url; });
+        document.getElementsByClassName('artikel-item')[2].addEventListener('click', function() { document.location = data[2].url; });
+        document.getElementsByClassName('artikel-item')[3].addEventListener('click', function() { document.location = data[3].url; });
 
     </script>
     <section class="home-title">
