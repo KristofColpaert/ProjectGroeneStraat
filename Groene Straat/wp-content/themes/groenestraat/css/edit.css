@@ -22,7 +22,7 @@
     text-align: center;
     padding: 2vh 0vh 2vh 0vh;
 }
-#user_login,#user_pass, .textbox, .input{
+#user_login,#user_pass, .textbox, .input, .wpcf7-text, .wpcf7-textarea{
     font-family: "lane";
     margin: 10px auto;
     width: 96%;
@@ -38,7 +38,7 @@
 #loginform #wp-submit{
     font-size: 1.3em;
 }
-.form-button, #wp-submit{
+.form-button, #wp-submit, .wpcf7-submit {
     font-family: "lane";
     text-transform: uppercase;
     font-weight: 600;
@@ -51,7 +51,7 @@
     padding: 5px 15px 5px 15px;
     font-size: 2em;
 }
-.form-button:hover, #wp-submit:hover{
+.form-button:hover, #wp-submit:hover, .wpcf7-submit:hover{
     background-color: transparent;
     border: 1px solid #00cd00;
     border-radius: 3px;
@@ -864,7 +864,7 @@ footer{
 .newProjectMember{
     width: 98%;
 }
-.textarea-large{
+.textarea-large, .wpcf7-textarea{
     height: 400px;
     width: 96%;
 }
@@ -914,4 +914,9 @@ header img:hover{
 .url
 {
     color: #69686e !important;
+}
+
+.wpcf7-form
+{
+    margin-top: 20px;
 }
