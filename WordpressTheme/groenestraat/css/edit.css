@@ -907,3 +907,8 @@ footer{
 header img:hover{
     cursor: pointer;
 }
+
+.url
+{
+    color: #69686e;
+}
