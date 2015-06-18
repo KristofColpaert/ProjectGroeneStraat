@@ -295,7 +295,7 @@ textarea.LV_invalid_field:active {
     position: relative;
 }
 .contentwrapper p a{
-    color: #00CD00 !important;
+    color: #00CD00;
 }
 .createForm label{
     display: block;
@@ -428,7 +428,7 @@ textarea.LV_invalid_field:active {
 .error-message a{
     text-transform: uppercase;
     font-size: 1em;
-    color: #69686e;
+    color: #69686e !important;
 }
 .labeldate{
     width: 47.5%;
