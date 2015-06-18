@@ -37,6 +37,23 @@
             menu.appendChild(li);
         }
 
+        function addFirstMenuLink(linkSrc, linkName)
+        {
+          var menu = document.getElementById('menu-main-menu');
+            var a = document.createElement('a');
+            a.setAttribute('href', linkSrc);
+            a.innerHTML = linkName;
+            var li = document.createElement('li');
+            li.setAttribute('class', 'basic-menu-item normalize-text');
+            li.appendChild(a);
+
+            jQueryMenu = $('#menu-main-menu');
+
+            jQueryMenu.prepend(li);
+
+            //menu.prependChild(li);
+        }
+
         $(document).ready(function()
         {
 	        var pathArray = window.location.pathname.split( '/' );
@@ -85,6 +102,7 @@
                   {
                   ?>
                   <script>
+                        addFirstMenuLink('<?php echo home_url(); ?>', 'Home');
                         addMenuLink('<?php echo get_site_url(); ?>/profiel?userid=<?php echo $current_user->ID ?>', 'mijn profiel (<?php echo $current_user->user_firstname ?>)');
                         addMenuLink('<?php echo wp_logout_url(get_site_url()); ?>', 'afmelden');
                   </script>
