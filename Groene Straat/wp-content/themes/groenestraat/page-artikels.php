@@ -103,7 +103,7 @@ get_header();
                         foreach($categories as $category)
                         {
                             ?>
-                                <a style="color:black;" class="author-name" href="<?php echo home_url(); ?>/artikels?categorie=<?php echo $category->term_id; ?>"><?php echo $category->name; ?></a> 
+                                <a style="color:black;" class="author-name" href="<?php echo home_url(); ?>/artikels?categorie%5B%5D=<?php echo $category->term_id; ?>"><?php echo $category->name; ?></a> 
                             <?php
                         } 
                     ?>

@@ -920,3 +920,9 @@ header img:hover{
 {
     margin-top: 20px;
 }
+
+.wpcf7-submit
+{
+    width: 100%;
+    font-size: 1em;
+}
