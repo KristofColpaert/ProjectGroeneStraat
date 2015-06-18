@@ -203,7 +203,7 @@
                                     <p><strong>Organisator: </strong><a style="color:black;" class="author-name" href="<?php echo home_url(); ?>/profiel/?userid=<?php echo the_author_meta('ID'); ?>"><?php echo the_author_meta('first_name'); ?> <?php echo the_author_meta('last_name'); ?></a></p>
                                     <p><strong>Tijdstip: </strong><?php echo $eventTime . " - " . $eventEndTime; ?></p>
                                     <p><strong>Locatie: </strong><?php echo $eventLocation; ?></p>
-                                    <p><strong>Meer info: </strong><?php echo excerpt(40); ?></p>
+                                    <p><strong>Meer info: </strong><?php echo the_excerpt(); ?></p>
                                      
                                 </section>
                                 <a class="view-item" href="<?php the_permalink(); ?>">Bekijk event</a>
@@ -223,7 +223,7 @@
                         <section class="list-item normalize-text <?php echo $post->post_type;?>">
                             <h1><?php the_title(); ?></h1>
                             <p><strong>Aanbieder: </strong><a style="color:black;" class="author-name" href="<?php echo home_url(); ?>/profiel/?userid=<?php echo the_author_meta('ID'); ?>"><?php echo the_author_meta('first_name'); ?> <?php echo the_author_meta('last_name'); ?></a></p>
-                            <p><strong>Beschrijving: </strong><?php excerpt(40); ?></p>
+                            <p><strong>Beschrijving: </strong><?php the_excerpt(); ?></p>
                             <p><strong>Locatie: </strong><?php echo $adLocation; ?></p>
                             <p><strong>Prijs: </strong><?php echo $adPrice; ?></p>
                              <a class="view-item" href="<?php the_permalink(); ?>">Bekijk zoekertje</a>
@@ -252,7 +252,7 @@
 	                        } 
 	                    ?>
 	                </p>
-                    <?php echo excerpt(40);
+                    <?php echo the_excerpt();
 ?>				 <a class="view-item" href="<?php the_permalink(); ?>">Lees meer</a></section><?php
                     }break;
                     default: break;

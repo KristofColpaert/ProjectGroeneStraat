@@ -648,6 +648,7 @@ fc-right{
 }
 
 .view-item{
+    clear: both;
     display: block;
     color: #00cd00 !important;
     float: right;
