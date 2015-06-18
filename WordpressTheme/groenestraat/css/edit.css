@@ -832,6 +832,8 @@ footer{
 .box section{
     width: 80%;
     float:left;
+    padding: 20px;
+    margin: 20px;
 }
 .box form{
     width: 20%
@@ -910,5 +912,5 @@ header img:hover{
 
 .url
 {
-    color: #69686e;
+    color: #69686e !important;
 }
