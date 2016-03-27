@@ -1,26 +1,5 @@
 # Project Groene Straat
 
-De basic connection settings voor de website.
+Click to edit project descriptionGroene Straat is a WordPress web development project we worked on in 2015. The main purpose of this project was to develop a social platform for people that are passionate about gardening.
 
-## Webserver
-
-* Link: http://groenestraat.azurewebsites.net
-* Eigenlijke site: http://groenestraat.azurewebsites.net/abcdefghij
-* Hostname (FTP): ftp://waws-prod-am2-025.ftp.azurewebsites.windows.net
-* Username (FTP): groenestraat\groenestraat
-* Password (FTP): Groenestraat123
-* HTTP-folder: /site/wwwroot/
-
-## MySQL-server
-
-* Host: http://groenestraat.cloudapp.net/
-* Root user: root
-* Root password: Groenestraat123
-* PHPMyAdmin: http://groenestraat.cloudapp.net/phpmyadmin/
-
-**Problemen met MySQL: in file */etc/mysql.conf.d/mysqld.cnf* binding doen naar het private interne IP-adres van de server via: *100.113.10.50*.**
-
-## Logingegevens
-
-* Login admin: admin / Groenestraat123
-* Login gebruiker: rodric / Groenestraat123
+The result can be seen on http://groenestraat.kristofcolpaert.com
